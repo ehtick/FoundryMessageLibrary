@@ -9,6 +9,10 @@ public class UDTO_Sensor : UDTO_Base
     public string extra { get; set; }
     public string container { get; set; }
 
+    public UDTO_Sensor():base()
+    {
+    }
+
     public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{this.name}{d}{this.type}{d}{this.active}{d}{this.extra}{d}{this.container}";

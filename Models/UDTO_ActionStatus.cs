@@ -2,6 +2,10 @@ namespace IoBTMessage.Models;
 
 public class UDTO_ActionStatus : UDTO_Base
 {
+    public UDTO_ActionStatus():base()
+    {
+    }
+
     public string status { get; set; }
     public string message { get; set; }
 

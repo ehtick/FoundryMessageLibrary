@@ -16,6 +16,10 @@ public interface ILocation
 
 public partial class Location : UDTO_Base, ILocation
 {
+    public Location():base()
+    {
+    }
+
     public double lat { get; set; }
     public double lng { get; set; }
     public double alt { get; set; }

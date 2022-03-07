@@ -7,6 +7,9 @@ public class UDTO_ChatMessage : UDTO_Base
     public string fromUser { get; set; }
     public string message { get; set; }
 
+    public UDTO_ChatMessage(): base()
+    {
+    }
     public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{toUser}{d}{fromUser}{d}{message}";
