@@ -4,9 +4,64 @@ using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
 using IoBTMessage.Models;
 
+public static class IoBTMath
+{
+    public static IPosition asCoord(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates;
+    }
+
+    public static double asLat(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates.Latitude;
+    }
+
+
+    public static double asLng(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates.Longitude;
+    }
+
+    public static double toDouble(string Value)
+    {
+        if (Value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            double OutVal;
+            double.TryParse(Value, out OutVal);
+
+            if (double.IsNaN(OutVal) || double.IsInfinity(OutVal))
+            {
+                return 0;
+            }
+            return OutVal;
+        }
+    }
+
+    public static int toInteger(string Value)
+    {
+        if (Value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            int OutVal;
+            if ( int.TryParse(Value, out OutVal) ) {
+                return OutVal;
+            }
+            return 0;
+        }
+    }
+}
+
+
 static public class GeoMath
 {
-        public static double toDouble(this string Value)
+    public static double toDouble(this string Value)
     {
         if (Value == null)
         {
@@ -34,7 +89,8 @@ static public class GeoMath
         else
         {
             int OutVal;
-            if ( int.TryParse(Value, out OutVal) ) {
+            if (int.TryParse(Value, out OutVal))
+            {
                 return OutVal;
             }
             return 0;
@@ -81,7 +137,7 @@ static public class GeoMath
         return Turf.Destination(obj.point(), distance, bearing);
     }
 
-    static public List<Feature> intersection(this  UDTO_Observation obj, UDTO_Observation target)
+    static public List<Feature> intersection(this UDTO_Observation obj, UDTO_Observation target)
     {
 
         var list = new List<Feature>();
