@@ -1,4 +1,52 @@
 namespace IoBTMessage.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+public static class UDTO
+{
+    public static string asTopic<T>() where T : UDTO_Base
+    {
+        return UDTO_Base.asTopic(typeof(T).Name);
+    }
+
+    public static bool matchTopic<T>(UDTO_Base obj) where T : UDTO_Base
+    {
+        return obj.udtoTopic == asTopic<T>();
+    }
+
+    public static bool matchTopic<T>(string topic) where T : UDTO_Base
+    {
+        return topic == asTopic<T>();
+    }
+
+    public static T decodePayload<T>(UDTO_ServerSync transport) where T : UDTO_Base
+    {
+        T obj = Activator.CreateInstance(typeof(T)) as T;
+        transport.decodePayload<T>(obj);
+        //use sync to fix any shorthand issues with guid or timedate
+        return obj.sync<T>();
+    }
+
+    public static UDTO_Base HydrateObject(object target)
+    {
+        var assembly = typeof(UDTO_Base).Assembly;
+        var nameSpace = assembly.GetName().Name;
+        var targetObject = JsonConvert.DeserializeObject(target.ToString()) as JObject;
+        var topicJson = targetObject.GetValue("udtoTopic");
+
+        var topic = topicJson.Value<string>();
+        Type type = assembly.GetType($"{nameSpace}.Models.UDTO_{topic}");
+        var result = Activator.CreateInstance(type) as UDTO_Base;
+
+        foreach (var property in result.GetType().GetProperties())
+        {
+            var json = targetObject.GetValue(property.Name);
+            var value = json.Value<string>();
+            property.SetValue(result, value);
+        }
+        return result;
+    }
+}
 
 [System.Serializable]
 public class UDTO_Base
@@ -81,4 +129,6 @@ public class UDTO_Base
     {
         return this.getUniqueCode() == other.getUniqueCode();
     }
+
+
 }
