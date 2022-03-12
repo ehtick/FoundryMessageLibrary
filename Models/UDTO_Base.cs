@@ -29,20 +29,30 @@ public static class UDTO
 
     public static UDTO_Base HydrateObject(object target)
     {
+        var data = target.ToString();
+        //Console.WriteLine($"HydrateObject: {data}" );
+
         var assembly = typeof(UDTO_Base).Assembly;
         var nameSpace = assembly.GetName().Name;
-        var targetObject = JsonConvert.DeserializeObject(target.ToString()) as JObject;
+         
+        var rules = new JsonSerializerSettings { DateParseHandling = DateParseHandling.None };
+        var targetObject = JsonConvert.DeserializeObject(data, rules) as JObject;
         var topicJson = targetObject.GetValue("udtoTopic");
 
         var topic = topicJson.Value<string>();
-        Type type = assembly.GetType($"{nameSpace}.Models.UDTO_{topic}");
+        //var className = $"{nameSpace}.Models.UDTO_{topic}";
+        var className = $"IoBTMessage.Models.UDTO_{topic}";
+        //Console.WriteLine($"HydrateObject: {className}" );
+
+        Type type = assembly.GetType(className);
         var result = Activator.CreateInstance(type) as UDTO_Base;
 
-        foreach (var property in result.GetType().GetProperties())
+        foreach (var property in type.GetProperties())
         {
             var json = targetObject.GetValue(property.Name);
             var value = json.Value<string>();
             property.SetValue(result, value);
+            //Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
         }
         return result;
     }
@@ -62,12 +72,28 @@ public class UDTO_Base
         this.initialize(null);
     }
 
-    public virtual string compress(char d = ',')
+    public T Duplicate<T>() where T: UDTO_Base
     {
-        string g = sourceGuid;
-        string t = timeStamp;
-        string p = panID;
-        string key = udtoTopic;
+        var dupe = Activator.CreateInstance<T>();
+        dupe.decompress(this.compress().Split(','));
+        return dupe;
+    }
+
+    public string compareHash()
+    {
+        var hash = this.compress();
+        var list = hash.Split('\u002C');
+        list[2] = "NOTIME";
+        var key = string.Join('\u002C', list);
+        return key;
+    }
+
+    public virtual string compress(char d = '\u002C')
+    {
+        var g = sourceGuid;
+        var t = timeStamp;
+        var p = panID;
+        var key = udtoTopic;
         return $"{key}{d}{g}{d}{t}{d}{p}";
     }
 

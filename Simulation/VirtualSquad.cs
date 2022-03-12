@@ -1,11 +1,20 @@
 namespace IoBTMessage.Models;
 
-public class VirtualSquad
+public class VirtualSquad : VirtualSquire
 {
-    public string SquadID { get; set; }
 
-    public Dictionary<string,VirtualSquire> members { get; set; } = new Dictionary<string,VirtualSquire>();
+    public Dictionary<string, VirtualSquire> members { get; set; } = new Dictionary<string, VirtualSquire>();
 
+    public VirtualSquad()
+    {
+    }
+
+    public VirtualSquad(VirtualSquad source)
+    {
+        this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
+        this.Speed(source.speed);
+        this.speed = source.speed;
+    }
 
     public VirtualSquire EstablishVirtualSquire(string panID)
     {
