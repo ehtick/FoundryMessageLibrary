@@ -74,9 +74,12 @@ public class VirtualSquire
 
     public VirtualSquire ComputeStep(double delta, int frameID)
     {
+        //if you assume speed is  ft/sec  
+        //the distance is computed in km  so
+        var dist = delta / 1000 * this.speed / 3280.84;  
         if ( !this.isPaused ) {
             var pos = this.CurrentPosition;
-            var feature = pos.destination(delta * this.speed, this.heading);
+            var feature = pos.destination(dist, this.heading);
             var loc = feature.toLatLng();
 
             this.CurrentPosition.lat = loc[1];
@@ -87,8 +90,8 @@ public class VirtualSquire
 
     public VirtualSquire TimeStep(double delta, int frameID)
     {
+        this.ComputeStep(delta, frameID);
         if ( !this.isPaused ) {
-            this.ComputeStep(delta, frameID);
         }
         return this;
     }

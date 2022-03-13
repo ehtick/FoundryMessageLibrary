@@ -51,8 +51,16 @@ public static class UDTO
         {
             var json = targetObject.GetValue(property.Name);
             var value = json.Value<string>();
-            property.SetValue(result, value);
-            //Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
+            Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
+            try
+            {
+                property.SetValue(result, value);
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error HydrateObject: {property.Name} = {value}  {json}");
+                Console.WriteLine(ex.ToString());
+            }
         }
         return result;
     }
