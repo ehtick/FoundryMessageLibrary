@@ -1,4 +1,5 @@
 namespace IoBTMessage.Models;
+using TurfCS;
 
 public class VirtualSquire
 {
@@ -13,6 +14,8 @@ public class VirtualSquire
     protected double speed { get; set; } = 0;
     protected double heading { get; set; } = 0;
     protected double faceing { get; set; } = 0;
+
+    protected bool isPaused { get; set; } = false;
     public VirtualSquire()
     {
     }
@@ -41,6 +44,12 @@ public class VirtualSquire
         });
     }
 
+    public VirtualSquire Pause(bool pause)
+    {
+        this.isPaused = pause;
+        return this;
+    }
+
     public VirtualSquire Speed(double speed)
     {
         this.speed = speed;
@@ -63,8 +72,24 @@ public class VirtualSquire
         return this;
     }
 
+    public VirtualSquire ComputeStep(double delta, int frameID)
+    {
+        if ( !this.isPaused ) {
+            var pos = this.CurrentPosition;
+            var feature = pos.destination(delta * this.speed, this.heading);
+            var loc = feature.toLatLng();
+
+            this.CurrentPosition.lat = loc[1];
+            this.CurrentPosition.lng = loc[0];
+        }
+        return this;
+    }
+
     public VirtualSquire TimeStep(double delta, int frameID)
     {
+        if ( !this.isPaused ) {
+            this.ComputeStep(delta, frameID);
+        }
         return this;
     }
 }

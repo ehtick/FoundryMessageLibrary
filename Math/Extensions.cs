@@ -84,6 +84,12 @@ static public class GeoMath
         return Turf.Destination(obj.point(), distance, bearing);
     }
 
+    static public List<double> toLatLng(this Feature obj)
+    {
+        var coord = Turf.GetCoord(obj);
+        return coord;
+    }
+
     static public List<Feature> intersection(this UDTO_Observation obj, UDTO_Observation target)
     {
 
