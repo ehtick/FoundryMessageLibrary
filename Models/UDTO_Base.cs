@@ -40,7 +40,6 @@ public static class UDTO
         var topicJson = targetObject.GetValue("udtoTopic");
 
         var topic = topicJson.Value<string>();
-        //var className = $"{nameSpace}.Models.UDTO_{topic}";
         var className = $"IoBTMessage.Models.UDTO_{topic}";
         //Console.WriteLine($"HydrateObject: {className}" );
 
@@ -51,10 +50,18 @@ public static class UDTO
         {
             var json = targetObject.GetValue(property.Name);
             var value = json.Value<string>();
-            Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
+            //Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
             try
             {
-                property.SetValue(result, value);
+                if ( property.PropertyType == typeof(string) )
+                {
+                    property.SetValue(result, value);
+                } 
+                else  // let assume it is a double number 
+                {
+                    var number = IoBTMath.toDouble(value);
+                    property.SetValue(result, number);
+                }
             } 
             catch (Exception ex)
             {
