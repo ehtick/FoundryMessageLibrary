@@ -9,11 +9,11 @@ public class VirtualSquad : VirtualSquire
     {
     }
 
-    public VirtualSquad(VirtualSquad source)
+    public VirtualSquad(VirtualSquad source):base(source)
     {
-        this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
-        this.Speed(source.speed);
-        this.speed = source.speed;
+        //this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
+        //this.Speed(source.speed);
+        //this.speed = source.speed;
     }
 
     public VirtualSquire EstablishVirtualSquire(string panID)

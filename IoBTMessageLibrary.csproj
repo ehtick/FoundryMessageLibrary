@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="UnitSystem\MeasuredDouble.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GeoJSON.Net" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>

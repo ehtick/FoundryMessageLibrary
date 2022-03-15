@@ -1,6 +1,7 @@
 namespace IoBTMessage.Models;
 using TurfCS;
 
+
 public class VirtualSquire
 {
     public string PanID { get; set; }
@@ -11,9 +12,9 @@ public class VirtualSquire
     public UDTO_Observation LastObservation { get; set; }
     public UDTO_Biometric LastBiometric { get; set; }
 
-    protected double speed { get; set; } = 0;
-    protected double heading { get; set; } = 0;
-    protected double faceing { get; set; } = 0;
+    protected Speed speed { get; set; } = new Speed();
+    protected Angle heading { get; set; } = new Angle();
+    protected Angle faceing { get; set; } = new Angle();
 
     protected bool isPaused { get; set; } = false;
     public VirtualSquire()
@@ -22,9 +23,9 @@ public class VirtualSquire
     public VirtualSquire(VirtualSquire source)
     {
         this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
-        this.Speed(source.speed);
-        this.Faceing(source.faceing);
-        this.Heading(source.heading);
+        this.Speed_MetersPerSecond(source.speed.MetersPerSecond());
+        this.Faceing_Degrees(source.faceing.Degrees());
+        this.Heading_Degrees(source.heading.Degrees());
     }
 
 
@@ -50,36 +51,55 @@ public class VirtualSquire
         return this;
     }
 
-    public VirtualSquire Speed(double speed)
+    public VirtualSquire Speed_MetersPerSecond(double value)
     {
-        this.speed = speed;
-        return this;
-    }
-    public VirtualSquire Faceing(double faceing)
-    {
-        this.faceing = faceing;
-        return this;
-    }
-    public VirtualSquire Heading(double heading)
-    {
-        this.heading = heading;
+        speed.MetersPerSecond(value);
         return this;
     }
 
-    public VirtualSquire Turn(double angle)
+    public VirtualSquire Speed_MilesPerHour(double value)
     {
-        this.heading += angle;
+        speed.MilesPerHour(value);
         return this;
     }
 
-    public VirtualSquire ComputeStep(double delta, int frameID)
+    public VirtualSquire Speed_KilometersPerHour(double value)
     {
-        //if you assume speed is  ft/sec  
+        speed.KilometersPerHour(value);
+        return this;
+    }
+    public VirtualSquire Faceing_Degrees(double faceing)
+    {
+        this.faceing.Degrees(faceing);
+        return this;
+    }
+    public VirtualSquire Heading_Degrees(double heading)
+    {
+        this.heading.Degrees(heading);
+        return this;
+    }
+
+    public VirtualSquire Heading_Direction(string dir)
+    {
+        if ( dir == "N") {
+            this.heading.Degrees(0.0);
+        }
+        return this;
+    }
+
+    public VirtualSquire Turn_Degrees(double angle)
+    {
+        this.heading.Degrees(this.heading.Degrees() + angle);
+        return this;
+    }
+
+    public VirtualSquire ComputeStep(double delta_seconds, int frameID)
+    {
         //the distance is computed in km  so
-        var dist = delta / 1000 * this.speed / 3280.84;  
+        var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;  
         if ( !this.isPaused ) {
             var pos = this.CurrentPosition;
-            var feature = pos.destination(dist, this.heading);
+            var feature = pos.destination(dist_km, this.heading.Degrees());
             var loc = feature.toLatLng();
 
             this.CurrentPosition.lat = loc[1];
@@ -88,9 +108,9 @@ public class VirtualSquire
         return this;
     }
 
-    public VirtualSquire TimeStep(double delta, int frameID)
+    public VirtualSquire TimeStep(double delta_seconds, int frameID)
     {
-        this.ComputeStep(delta, frameID);
+        this.ComputeStep(delta_seconds, frameID);
         if ( !this.isPaused ) {
         }
         return this;
