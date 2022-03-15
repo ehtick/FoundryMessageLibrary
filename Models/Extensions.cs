@@ -1,7 +1,26 @@
+
 namespace IoBTMessage.Models;
+using GeoJSON.Net.Feature;
+using GeoJSON.Net.Geometry;
 
 public static class IoBTMath
 {
+
+    public static IPosition asCoord(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates;
+    }
+
+    public static double asLat(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates.Latitude;
+    }
+
+
+    public static double asLng(Feature<Point> point)
+    {
+        return point.Geometry.Coordinates.Longitude;
+    }
 
     public static double toDouble(string Value)
     {
@@ -38,3 +57,4 @@ public static class IoBTMath
         }
     }
 }
+

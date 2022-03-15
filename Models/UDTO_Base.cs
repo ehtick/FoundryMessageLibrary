@@ -1,4 +1,77 @@
 namespace IoBTMessage.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+public static class UDTO
+{
+    public static string asTopic<T>() where T : UDTO_Base
+    {
+        return UDTO_Base.asTopic(typeof(T).Name);
+    }
+
+    public static bool matchTopic<T>(UDTO_Base obj) where T : UDTO_Base
+    {
+        return obj.udtoTopic == asTopic<T>();
+    }
+
+    public static bool matchTopic<T>(string topic) where T : UDTO_Base
+    {
+        return topic == asTopic<T>();
+    }
+
+    public static T decodePayload<T>(UDTO_ServerSync transport) where T : UDTO_Base
+    {
+        T obj = Activator.CreateInstance(typeof(T)) as T;
+        transport.decodePayload<T>(obj);
+        //use sync to fix any shorthand issues with guid or timedate
+        return obj.sync<T>();
+    }
+
+    public static UDTO_Base HydrateObject(object target)
+    {
+        var data = target.ToString();
+        //Console.WriteLine($"HydrateObject: {data}" );
+
+        var assembly = typeof(UDTO_Base).Assembly;
+        var nameSpace = assembly.GetName().Name;
+         
+        var rules = new JsonSerializerSettings { DateParseHandling = DateParseHandling.None };
+        var targetObject = JsonConvert.DeserializeObject(data, rules) as JObject;
+        var topicJson = targetObject.GetValue("udtoTopic");
+
+        var topic = topicJson.Value<string>();
+        var className = $"IoBTMessage.Models.UDTO_{topic}";
+        //Console.WriteLine($"HydrateObject: {className}" );
+
+        Type type = assembly.GetType(className);
+        var result = Activator.CreateInstance(type) as UDTO_Base;
+
+        foreach (var property in type.GetProperties())
+        {
+            var json = targetObject.GetValue(property.Name);
+            var value = json.Value<string>();
+            //Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
+            try
+            {
+                if ( property.PropertyType == typeof(string) )
+                {
+                    property.SetValue(result, value);
+                } 
+                else  // let assume it is a double number 
+                {
+                    var number = IoBTMath.toDouble(value);
+                    property.SetValue(result, number);
+                }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error HydrateObject: {property.Name} = {value}  {json}");
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        return result;
+    }
+}
 
 [System.Serializable]
 public class UDTO_Base
@@ -14,12 +87,28 @@ public class UDTO_Base
         this.initialize(null);
     }
 
-    public virtual string compress(char d = ',')
+    public T Duplicate<T>() where T: UDTO_Base
     {
-        string g = sourceGuid;
-        string t = timeStamp;
-        string p = panID;
-        string key = udtoTopic;
+        var dupe = Activator.CreateInstance<T>();
+        dupe.decompress(this.compress().Split(','));
+        return dupe;
+    }
+
+    public string compareHash()
+    {
+        var hash = this.compress();
+        var list = hash.Split('\u002C');
+        list[2] = "NOTIME";
+        var key = string.Join('\u002C', list);
+        return key;
+    }
+
+    public virtual string compress(char d = '\u002C')
+    {
+        var g = sourceGuid;
+        var t = timeStamp;
+        var p = panID;
+        var key = udtoTopic;
         return $"{key}{d}{g}{d}{t}{d}{p}";
     }
 
@@ -81,4 +170,6 @@ public class UDTO_Base
     {
         return this.getUniqueCode() == other.getUniqueCode();
     }
+
+
 }
