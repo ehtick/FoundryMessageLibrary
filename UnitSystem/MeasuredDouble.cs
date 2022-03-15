@@ -35,6 +35,27 @@ public class Distance: MeasuredValue<double>
         BaseUnits = new Units("m"); //meters
         UnitCategory = new UnitFamily(this.GetType().Name);
     }
+
+    
+    public Distance Feet(double value){
+        this.Value = value / 3.28084;
+        return this;
+    }
+
+    public Distance Miles(double value){
+        this.Value = value * 1609.34;
+        return this;
+    }
+    
+    public Distance MilliMeters(double value){
+        this.Value = value / 1000.0;
+        return this;
+    }
+
+    public Distance KiloMeters(double value){
+        this.Value = value * 1000.0;
+        return this;
+    }
 }
 
 public class Time: MeasuredValue<double>
@@ -43,6 +64,11 @@ public class Time: MeasuredValue<double>
     {
         BaseUnits = new Units("sec"); //seconds
         UnitCategory = new UnitFamily(this.GetType().Name);
+    }
+
+    public Time Days(double value){
+        this.Value = value * 86400.0;
+        return this;
     }
 
     public Time Hours(double value){
