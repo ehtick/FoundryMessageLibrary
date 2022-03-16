@@ -79,11 +79,9 @@ public class VirtualSquire
         return this;
     }
 
-    public VirtualSquire Heading_Direction(string dir)
+    public VirtualSquire Heading_Direction(Direction dir)
     {
-        if ( dir == "N") {
-            this.heading.Degrees(0.0);
-        }
+        this.heading.Degrees((double)dir);
         return this;
     }
 

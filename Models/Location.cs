@@ -20,6 +20,13 @@ public partial class Location : UDTO_Base, ILocation
     {
     }
 
+    public Location(Location obj):base()
+    {
+        lat = obj.lat;
+        lng = obj.lng;
+        alt = obj.alt;
+    }
+
     public double lat { get; set; }
     public double lng { get; set; }
     public double alt { get; set; }

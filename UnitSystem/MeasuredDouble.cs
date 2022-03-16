@@ -1,5 +1,13 @@
 namespace IoBTMessage.Models;
 
+public enum Direction
+{
+    N = 0,
+    S = 180,
+    E = 90,
+    W = 270
+}
+
 public class UnitFamily
 {
     private string Name { get; set; }
@@ -26,6 +34,14 @@ public class MeasuredValue<T>
     protected T Value { get; set; }
     protected Units BaseUnits { get; set; }
     protected UnitFamily UnitCategory { get; set; }
+}
+
+public enum DistanceUnits
+{
+    miles,
+    meters,
+    feet,
+    inches
 }
 
 public class Distance: MeasuredValue<double>
@@ -58,6 +74,15 @@ public class Distance: MeasuredValue<double>
     }
 }
 
+public enum TimeUnits
+{
+    ms,
+    sec,
+    min,
+    hrs,
+    days
+}
+
 public class Time: MeasuredValue<double>
 {
     public Time()
@@ -66,6 +91,15 @@ public class Time: MeasuredValue<double>
         UnitCategory = new UnitFamily(this.GetType().Name);
     }
 
+
+
+    public Time SetValue(double value, TimeUnits units){
+    
+        if ( units == TimeUnits.days)
+            return Days(value);
+
+        return this;
+    }
     public Time Days(double value){
         this.Value = value * 86400.0;
         return this;

@@ -8,6 +8,7 @@ using IoBTMessage.Models;
 
 static public class GeoMath
 {
+
     public static double toDouble(this string Value)
     {
         if (Value == null)
