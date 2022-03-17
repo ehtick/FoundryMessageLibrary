@@ -1,4 +1,4 @@
-namespace TurfCS;
+namespace IoBTMessage.Models;
 
 using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;

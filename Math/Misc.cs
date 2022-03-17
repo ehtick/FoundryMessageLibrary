@@ -2,8 +2,7 @@
 using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
 
-namespace TurfCS
-{
+namespace IoBTMessage.Models;
     public partial class Turf
 	{
 		/**
@@ -47,4 +46,4 @@ namespace TurfCS
 			return new FeatureCollection(points);
 		}
 	}
-}
+
