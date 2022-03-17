@@ -35,11 +35,7 @@ public partial class Location : UDTO_Base, ILocation
 
     public Location AsLocation()
     {
-        return new Location() {
-            lat = this.lat,
-            lng = this.lng,
-            alt = this.alt,
-        };
+        return new Location(this);
     }
 
     public override string compress(char d = ',')

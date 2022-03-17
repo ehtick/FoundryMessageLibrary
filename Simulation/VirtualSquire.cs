@@ -51,6 +51,12 @@ public class VirtualSquire
         return this;
     }
 
+    public VirtualSquire Speed(Speed value)
+    {
+        speed.MetersPerSecond(value.MetersPerSecond());
+        return this;
+    }
+
     public VirtualSquire Speed_MetersPerSecond(double value)
     {
         speed.MetersPerSecond(value);
@@ -95,6 +101,7 @@ public class VirtualSquire
     {
         //the distance is computed in km  so
         var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;  
+        
         if ( !this.isPaused ) {
             var pos = this.CurrentPosition;
             var feature = pos.destination(dist_km, this.heading.Degrees());

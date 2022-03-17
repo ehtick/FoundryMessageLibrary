@@ -147,6 +147,7 @@ public class Angle: MeasuredValue<double>
 
 public class Speed: MeasuredValue<double>
 {
+
     public Speed()
     {
         BaseUnits = new Units("m/s"); //meters per second
