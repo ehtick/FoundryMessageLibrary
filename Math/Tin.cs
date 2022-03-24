@@ -1,8 +1,6 @@
 ﻿using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
-
-namespace TurfCS
-{
+namespace IoBTMessage.Models;
     public partial class Turf
 	{
 		internal class Vertix {
@@ -272,4 +270,4 @@ namespace TurfCS
 			return closed;
 		}
 	}
-}
+

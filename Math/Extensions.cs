@@ -1,13 +1,14 @@
-namespace TurfCS;
+namespace IoBTMessage.Models;
 
 using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
-using IoBTMessage.Models;
+
 
 
 
 static public class GeoMath
 {
+
     public static double toDouble(this string Value)
     {
         if (Value == null)
@@ -43,6 +44,8 @@ static public class GeoMath
             return 0;
         }
     }
+
+
     static public IPosition asCoord(this Feature<Point> point)
     {
         return point.Geometry.Coordinates;
@@ -124,5 +127,45 @@ static public class GeoMath
         list.Add(pt2);
 
         return list;
+    }
+
+    static public Location computeGeoLocation(this HighResPosition pos, Location source)
+    {
+        var dist = Math.Sqrt(pos.xLoc * pos.xLoc + pos.zLoc * pos.zLoc);
+        var brg = Math.Atan2(pos.xLoc, pos.zLoc);
+        var feature = source.destination(dist, source.toDeg(brg));
+        var loc = Turf.GetCoord(feature.Geometry);
+
+        var result = new Location()
+        {
+            lat = loc[1],
+            lng = loc[0],
+            alt = source.alt + pos.yLoc,
+        };
+
+        return result;
+    }
+
+    static public HighResPosition computeHiresLocation(this Location source, Location target, string units = "kilometers")
+    {
+        var dist = source.distance(target);
+        var brg = source.bearing(target);
+        var rad = brg * Math.PI / 180;
+        var result = new HighResPosition()
+        {
+            units = units,
+            xLoc = dist * Math.Sin(rad),
+            yLoc = target.alt - source.alt,
+            zLoc = dist * Math.Cos(rad),
+            yAng = brg
+        };
+
+        return result;
+    }
+
+    static public Location computeGeoLocation(this Location source, HighResPosition target)
+    {
+        var result = target.computeGeoLocation(source);
+        return result;
     }
 }

@@ -16,14 +16,27 @@ public interface ILocation
 
 public partial class Location : UDTO_Base, ILocation
 {
-    public Location():base()
-    {
-    }
+
 
     public double lat { get; set; }
     public double lng { get; set; }
     public double alt { get; set; }
 
+    public Location():base()
+    {
+    }
+
+    public Location(Location obj):base()
+    {
+        lat = obj.lat;
+        lng = obj.lng;
+        alt = obj.alt;
+    }
+
+    public Location AsLocation()
+    {
+        return new Location(this);
+    }
 
     public override string compress(char d = ',')
     {

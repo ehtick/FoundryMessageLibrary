@@ -1,7 +1,6 @@
 ﻿using GeoJSON.Net.Feature;
 
-namespace TurfCS
-{
+namespace IoBTMessage.Models;
     public partial class Turf
 	{
 
@@ -81,4 +80,4 @@ namespace TurfCS
 			return nearestPoint;
 		}
 	}
-}
+
