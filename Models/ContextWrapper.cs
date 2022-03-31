@@ -62,15 +62,17 @@ public class ContextWrapper<T>
             Message = message,
             Status = true
         });
+        wrap.hasError = false;
         return wrap;
     }
-    public static ContextWrapper<Success> exception(string message = "")
+    public static ContextWrapper<Failure> exception(string message = "")
     {
-        var wrap = new ContextWrapper<Success>(new Success()
+        var wrap = new ContextWrapper<Failure>(new Failure()
         {
             Message = message,
             Status = false
         });
+        wrap.hasError = true;
         return wrap;
     }
 
