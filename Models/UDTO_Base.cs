@@ -149,6 +149,11 @@ public class UDTO_Base
         return UDTO_Base.asTopic(typeof(T).Name);
     }
 
+    public static string asTopicLower<T>() where T : UDTO_Base
+    {
+        return UDTO_Base.asTopic(typeof(T).Name).ToLower();
+    }
+
     public T sync<T>() where T : UDTO_Base
     {
         if (String.IsNullOrEmpty(udtoTopic))
