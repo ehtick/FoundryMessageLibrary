@@ -49,22 +49,34 @@ public static class UDTO
         foreach (var property in type.GetProperties())
         {
             var json = targetObject.GetValue(property.Name);
-            var value = json.Value<string>();
-            //Console.WriteLine($"HydrateObject: {property.Name} = {value}  {json}" );
+            Console.WriteLine($"HydrateObject: {property.Name} =   {json}" );
             try
             {
                 if ( property.PropertyType == typeof(string) )
                 {
+                    var value = json.Value<string>();
                     property.SetValue(result, value);
-                } 
+                }
+                else if (property.PropertyType == typeof(List<string>))
+                {
+                    //var target = property.GetValue(result) as IEnumerable<string>;
+                    //var list = json.AsEnumerable<string>();
+                    //foreach(var value in list)
+                    //{
+                    //    //target.ou
+                    //    //property.SetValue(result, value);
+                    //}
+                }
                 else  // let assume it is a double number 
                 {
+                    var value = json.Value<string>();
                     var number = IoBTMath.toDouble(value);
                     property.SetValue(result, number);
                 }
             } 
             catch (Exception ex)
             {
+                var value = json.Value<string>();
                 Console.WriteLine($"Error HydrateObject: {property.Name} = {value}  {json}");
                 Console.WriteLine(ex.ToString());
             }
@@ -131,6 +143,12 @@ public class UDTO_Base
     {
         return name.Replace("UDTO_", "");
     }
+
+    public static string asTopic<T>() where T : UDTO_Base
+    {
+        return UDTO_Base.asTopic(typeof(T).Name);
+    }
+
     public T sync<T>() where T : UDTO_Base
     {
         if (String.IsNullOrEmpty(udtoTopic))
