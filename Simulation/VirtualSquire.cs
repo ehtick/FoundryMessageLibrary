@@ -15,6 +15,7 @@ public class VirtualSquire
     protected Speed speed { get; set; } = new Speed();
     protected Angle heading { get; set; } = new Angle();
     protected Angle faceing { get; set; } = new Angle();
+    protected Angle turnAngle { get; set; } = new Angle();
 
     protected bool isPaused { get; set; } = false;
     public VirtualSquire()
@@ -109,6 +110,12 @@ public class VirtualSquire
         return this;
     }
 
+    public VirtualSquire Turn_Angle(Angle angle)
+    {
+        this.turnAngle.Degrees(angle.Degrees());
+        return this;
+    }
+
     public VirtualSquire ComputeStep(double delta_seconds, int frameID)
     {
         //the distance is computed in km  so
@@ -117,6 +124,7 @@ public class VirtualSquire
         if (!this.isPaused)
         {
             var pos = this.CurrentPosition;
+            this.heading.IncrementDegrees(this.turnAngle.Degrees());
             var feature = pos.destination(dist_km, this.heading.Degrees());
             var loc = feature.toLatLng();
 
