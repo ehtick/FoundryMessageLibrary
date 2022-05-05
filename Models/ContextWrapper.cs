@@ -51,8 +51,28 @@ public class ContextWrapper<T>
 
         this.hasError = error != string.Empty ? true : false;
         this.message = error != string.Empty ? error : string.Empty;
+    }
 
+    public ContextWrapper(ICollection<T> list, string error = "") : this(list.FirstOrDefault(), error)
+    {
+        this.payload = list;
+        this.length = payload.Count;
+    }
 
+    public ContextWrapper(IEnumerable<T> list, string error = "") : this(list.FirstOrDefault(), error)
+    {
+        this.payload = list.ToArray();
+        this.length = payload.Count;
+    }
+
+    public ContextWrapper(string error)
+    {
+        this.length = 0;
+        this.dateTime = DateTime.UtcNow;
+        this.payloadType = typeof(T).Name;
+        this.payload = new List<T>() { };
+        this.hasError = true;
+        this.message = error;
     }
 
     public static ContextWrapper<Success> success(string message = "")
@@ -74,29 +94,6 @@ public class ContextWrapper<T>
         });
         wrap.hasError = true;
         return wrap;
-    }
-
-    public ContextWrapper(ICollection<T> list, string error = "") : this(list.FirstOrDefault(), error)
-    {
-        this.payload = list;
-        this.length = payload.Count;
-    }
-
-
-    public ContextWrapper(IEnumerable<T> list, string error = "") : this(list.FirstOrDefault(), error)
-    {
-        this.payload = list.ToArray();
-        this.length = payload.Count;
-    }
-
-    public ContextWrapper(string error)
-    {
-        this.length = 0;
-        this.dateTime = DateTime.UtcNow;
-        this.payloadType = typeof(T).Name;
-        this.payload = new List<T>() { };
-        this.hasError = true;
-        this.message = error;
     }
 
 }
