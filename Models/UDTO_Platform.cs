@@ -158,8 +158,7 @@ public class UDTO_Platform : UDTO_Base
 
     public UDTO_Body EstablishBody(UDTO_Body body, bool delete = false)
     {
-        UDTO_Body found;
-        if (_bodyLookup.TryGetValue(body.bodyName, out found))
+        if (_bodyLookup.TryGetValue(body.bodyName, out UDTO_Body found))
         {
             found.bodyType = body.bodyType;
             found.data = body.data;
@@ -198,8 +197,7 @@ public class UDTO_Platform : UDTO_Base
 
     public UDTO_Label FindOrCreateLabel(string labelName, bool create)
     {
-        UDTO_Label found;
-        if (!_labelLookup.TryGetValue(labelName, out found) && create)
+        if (!_labelLookup.TryGetValue(labelName, out UDTO_Label found) && create)
         {
             found = new UDTO_Label()
             {
@@ -215,8 +213,7 @@ public class UDTO_Platform : UDTO_Base
 
     public UDTO_Label EstablishLabel(UDTO_Label label, bool delete = false)
     {
-        UDTO_Label found;
-        if (_labelLookup.TryGetValue(label.labelName, out found))
+        if (_labelLookup.TryGetValue(label.labelName, out UDTO_Label found))
         {
             found.type = label.type;
             found.data = label.data;
