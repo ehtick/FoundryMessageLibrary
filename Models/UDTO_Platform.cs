@@ -1,14 +1,45 @@
 namespace IoBTMessage.Models;
 
+
 [System.Serializable]
-public class UDTO_Platform : UDTO_Base
+public class UDTO_3D : UDTO_Base
 {
-    public string platformName { get; set; }
+	public string platformName { get; set; }
+	public string uniqueGuid { get; set; }
+	public string type { get; set; }
+	public string name { get; set; }
+
+	public bool isDelete()
+	{
+		return this.type == "Command:DELETE" ? true : false;
+	}
+
+	public override string compress(char d = ',')
+	{
+		return $"{base.compress(d)}{d}{platformName}{d}{uniqueGuid}{d}{type}{d}{name}{d}";
+	}
+
+	public override int decompress(string[] inputData)
+	{
+		var counter = base.decompress(inputData);
+
+		platformName = inputData[counter++];
+		uniqueGuid = inputData[counter++];
+		type = inputData[counter++];
+		name = inputData[counter++];
+		return counter;
+	}
+
+}
+
+[System.Serializable]
+public class UDTO_Platform : UDTO_3D
+{
     public UDTO_Position position { get; set; }
     public BoundingBox boundingBox { get; set; }
 
  
-    private Dictionary<string, UDTO_Body> _bodyLookup = new Dictionary<string, UDTO_Body>();
+    private readonly Dictionary<string, UDTO_Body> _bodyLookup = new();
 
     public List<UDTO_Body> bodies
     {
@@ -29,7 +60,7 @@ public class UDTO_Platform : UDTO_Base
         }
     }
 
-    private Dictionary<string, UDTO_Label> _labelLookup = new Dictionary<string, UDTO_Label>();
+    private readonly Dictionary<string, UDTO_Label> _labelLookup = new();
 
     public List<UDTO_Label> labels
     {
@@ -80,8 +111,8 @@ public class UDTO_Platform : UDTO_Base
     {
         // Optional param in body compress function lets us use a semicolon instead of a comma as a delimeter 
         var bodies = this.bodies.Select(item => item.compress('!')).ToList();
-        var bodycount = bodies.Count();
-        var platform = $"{base.compress(d)}{d}{platformName}{d}{position?.compress(d)}{d}{boundingBox?.compress(d)}";
+        var bodycount = bodies.Count;
+        var platform = $"{base.compress(d)}{d}{position?.compress(d)}{d}{boundingBox?.compress(d)}";
         if (bodycount > 0)
         {
             var body = bodies.First();
@@ -139,29 +170,28 @@ public class UDTO_Platform : UDTO_Base
         position = loc;
         return this;
     }
-    public UDTO_Body FindOrCreateBody(string bodyName, bool create)
+    public UDTO_Body FindOrCreateBody(string name, bool create)
     {
-        UDTO_Body found;
-        if (!_bodyLookup.TryGetValue(bodyName, out found) && create)
+
+        if (!_bodyLookup.TryGetValue(name, out UDTO_Body found) && create)
         {
             found = new UDTO_Body()
             {
                 panID = panID,
-                bodyName = bodyName,
+                name = name,
                 platformName = platformName,
                 uniqueGuid = Guid.NewGuid().ToString()
             };
-            _bodyLookup[bodyName] = found;
+            _bodyLookup[name] = found;
         }
         return found;
     }
 
     public UDTO_Body EstablishBody(UDTO_Body body, bool delete = false)
     {
-        if (_bodyLookup.TryGetValue(body.bodyName, out UDTO_Body found))
+        if (_bodyLookup.TryGetValue(body.name, out UDTO_Body found))
         {
-            found.bodyType = body.bodyType;
-            found.data = body.data;
+            found.type = body.type;
 
             if (found.position == null)
             {
@@ -183,40 +213,40 @@ public class UDTO_Platform : UDTO_Base
 
             if (delete)
             {
-                _bodyLookup.Remove(body.bodyName);
+                _bodyLookup.Remove(body.name);
             }
 
         }
         else if (!delete)
         {
-            _bodyLookup[body.bodyName] = body;
+            _bodyLookup[body.name] = body;
             found = body;
         }
         return found;
     }
 
-    public UDTO_Label FindOrCreateLabel(string labelName, bool create)
+    public UDTO_Label FindOrCreateLabel(string name, bool create)
     {
-        if (!_labelLookup.TryGetValue(labelName, out UDTO_Label found) && create)
+        if (!_labelLookup.TryGetValue(name, out UDTO_Label found) && create)
         {
             found = new UDTO_Label()
             {
                 panID = panID,
-                labelName = labelName,
+                name = name,
                 platformName = platformName,
                 uniqueGuid = Guid.NewGuid().ToString()
             };
-            _labelLookup[labelName] = found;
+            _labelLookup[name] = found;
         }
         return found;
     }
 
     public UDTO_Label EstablishLabel(UDTO_Label label, bool delete = false)
     {
-        if (_labelLookup.TryGetValue(label.labelName, out UDTO_Label found))
+        if (_labelLookup.TryGetValue(label.name, out UDTO_Label found))
         {
             found.type = label.type;
-            found.data = label.data;
+            found.text = label.text;
 
             if (found.position == null)
             {
@@ -227,24 +257,15 @@ public class UDTO_Platform : UDTO_Base
                 found.position.copyFrom(label.position);
             }
 
-            // if (found.boundingBox == null)
-            // {
-            //     found.boundingBox = label.boundingBox;
-            // }
-            // else if (label.boundingBox != null)
-            // {
-            //     found.boundingBox.copyFrom(label.boundingBox);
-            // }
-
             if (delete)
             {
-                _labelLookup.Remove(label.labelName);
+                _labelLookup.Remove(label.name);
             }
 
         }
         else if (!delete)
         {
-            _labelLookup[label.labelName] = label;
+            _labelLookup[label.name] = label;
             found = label;
         }
         return found;
