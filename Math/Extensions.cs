@@ -11,6 +11,13 @@ static public class GeoMath
 
     public static HighResOffset HighResOffset { get; set; } = new HighResOffset();
 
+    public static T[] SubArray<T>(this T[] array, int offset, int length)
+    {
+        T[] result = new T[length];
+        Array.Copy(array, offset, result, 0, length);
+        return result;
+    }
+    
     public static double toDouble(this string Value)
     {
         if (Value == null)

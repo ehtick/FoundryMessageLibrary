@@ -8,6 +8,13 @@ public class UDTO_3D : UDTO_Base
 	public string type { get; set; }
 	public string name { get; set; }
 
+	public virtual UDTO_3D CopyFrom(UDTO_3D obj)
+	{
+		type = obj.type;
+		name = obj.name;
+		return this;
+	}
+
 	public bool isDelete()
 	{
 		return this.type == "Command:DELETE" ? true : false;

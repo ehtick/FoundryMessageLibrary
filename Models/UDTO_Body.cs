@@ -11,7 +11,32 @@ public class UDTO_Body : UDTO_3D
     {
     }
 
-    public override string compress(char d = ',')
+	public override UDTO_3D CopyFrom(UDTO_3D obj)
+	{
+		base.CopyFrom(obj);
+
+		var body = obj as UDTO_Body;
+		if (this.position == null)
+		{
+			this.position = body.position;
+		}
+		else if (body.position != null)
+		{
+			this.position.copyFrom(body.position);
+		}
+
+		if (this.boundingBox == null)
+		{
+			this.boundingBox = body.boundingBox;
+		}
+		else if (body.boundingBox != null)
+		{
+			this.boundingBox.copyFrom(body.boundingBox);
+		}
+		return this;
+	}
+
+	public override string compress(char d = ',')
     {
         // 23 Fields
         // base (0, 1, 2, 3) uniqueGuid (4) bodyName (5) bodyType (6) symbol (7) platformName (8) position (9, 10, 11, 12, 13, 14, 15) boundingBox (16, 17, 18, 19, 20, 21, 22) 

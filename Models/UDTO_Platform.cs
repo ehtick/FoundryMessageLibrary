@@ -3,242 +3,226 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Platform : UDTO_3D
 {
-    public UDTO_Position position { get; set; }
-    public BoundingBox boundingBox { get; set; }
+	public UDTO_Position position { get; set; }
+	public BoundingBox boundingBox { get; set; }
 
- 
-    private readonly Dictionary<string, UDTO_Body> _bodyLookup = new();
-
-    public List<UDTO_Body> bodies
-    {
-        get
-        {
-            return _bodyLookup.Select(pair => pair.Value).ToList();
-        }
-        set
-        {
-            if (value != null)
-            {
-                value.ForEach(item => EstablishBody(item, false));
-            }
-            else
-            {
-                _bodyLookup.Clear();
-            }
-        }
-    }
-
-    private readonly Dictionary<string, UDTO_Label> _labelLookup = new();
-
-    public List<UDTO_Label> labels
-    {
-        get
-        {
-            return _labelLookup.Select(pair => pair.Value).ToList();
-        }
-        set
-        {
-            if (value != null)
-            {
-                value.ForEach(item => EstablishLabel(item, false));
-            }
-            else
-            {
-                _labelLookup.Clear();
-            }
-        }
-    }
+	private readonly Dictionary<string, object> _lookup = new();
 
 
-    public void Merge(UDTO_Platform platform)
-    {
-        if (platform.position != null)
-        {
-            this.position = platform.position;
-        }
-        if (platform.boundingBox != null)
-        {
-            this.boundingBox = platform.boundingBox;
-        }
+	public List<UDTO_Body> bodies
+	{
+		get
+		{
+			var lookup = FindLookup<UDTO_Body>();
+			return lookup.Values.ToList();
+		}
+		set
+		{
+			if (value != null)
+			{
+				value.ForEach(item => Establish<UDTO_Body>(item, false));
+			}
+			else
+			{
+				var lookup = FindLookup<UDTO_Body>();
+				lookup.Clear();
+			}
+		}
+	}
 
-        platform.bodies.ForEach(body =>
-        {
-            EstablishBody(body);
-        });
-        platform.bodies = null;
+	public List<UDTO_Label> labels
+	{
+		get
+		{
+			var lookup = FindLookup<UDTO_Label>();
+			return lookup.Values.ToList();
+		}
+		set
+		{
+			if (value != null)
+			{
+				value.ForEach(item => Establish<UDTO_Label>(item, false));
+			}
+			else
+			{
+				var lookup = FindLookup<UDTO_Label>();
+				lookup.Clear();
+			}
+		}
+	}
 
-        platform.labels.ForEach(label =>
-        {
-            EstablishLabel(label);
-        });
-        platform.labels = null;
-    }
+
+	public List<UDTO_Relationship> relationships
+	{
+		get
+		{
+			var lookup = FindLookup<UDTO_Relationship>();
+			return lookup.Values.ToList();
+		}
+		set
+		{
+			if (value != null)
+			{
+				value.ForEach(item => Establish<UDTO_Relationship>(item, false));
+			}
+			else
+			{
+				var lookup = FindLookup<UDTO_Relationship>();
+				lookup.Clear();
+			}
+		}
+	}
 
 
-    public override string compress(char d = ',')
-    {
-        // Optional param in body compress function lets us use a semicolon instead of a comma as a delimeter 
-        var bodies = this.bodies.Select(item => item.compress('!')).ToList();
-        var bodycount = bodies.Count;
-        var platform = $"{base.compress(d)}{d}{position?.compress(d)}{d}{boundingBox?.compress(d)}";
-        if (bodycount > 0)
-        {
-            var body = bodies.First();
-            var rest = String.Join(",", bodies);
-            return $"{platform},{rest}";
-        }
+	public void Merge(UDTO_Platform platform)
+	{
+		if (platform.position != null)
+		{
+			this.position = platform.position;
+		}
+		if (platform.boundingBox != null)
+		{
+			this.boundingBox = platform.boundingBox;
+		}
 
-        return platform;
-    }
-    public override int decompress(string[] data)
-    {
-        var counter = base.decompress(data);
+		platform.bodies.ForEach(body =>
+		{
+			Establish<UDTO_Body>(body);
+		});
+		platform.bodies = null;
 
-        platformName = data[counter++];
+		platform.labels.ForEach(label =>
+		{
+			Establish<UDTO_Label>(label);
+		});
+		platform.labels = null;
 
-        if (data[counter] != String.Empty)
-        {
-            position = new UDTO_Position();
-            var seg = new ArraySegment<string>(data, counter, data.Length - counter);
-            counter += position.decompress(seg.ToArray());
-        }
-        else
-        {
-            counter++;
-        }
+		platform.relationships.ForEach(relationship =>
+		{
+			Establish<UDTO_Relationship>(relationship);
+		});
+		platform.relationships = null;
+	}
 
-        if (data[counter] != String.Empty)
-        {
-            boundingBox = new BoundingBox();
-            var seg = new ArraySegment<string>(data, counter, data.Length - counter);
-            counter += boundingBox.decompress(seg.ToArray());
-        }
-        else
-        {
-            counter++;
-        }
 
-        // Now rehydrate all the bodies 
-        // Bodies are separated by commas, but internal fields are separated by semicolons
-        // At this point counter is pointing to the first body in the data array, every element following it is also a body up to data.Length-1
-        while (counter != data.Length)
-        {
-            var body = new UDTO_Body();
-            var segment = data[counter];
-            var rest = segment.Split('!');
-            body.decompress(rest);
-            EstablishBody(body);
-            counter++;
-        }
-        return counter;
-    }
+	public override string compress(char d = ',')
+	{
+		// Optional param in body compress function lets us use a semicolon instead of a comma as a delimeter 
+		var bodies = this.bodies.Select(item => item.compress('!')).ToList();
+		var bodycount = bodies.Count;
+		var platform = $"{base.compress(d)}{d}{position?.compress(d)}{d}{boundingBox?.compress(d)}";
+		if (bodycount > 0)
+		{
+			var body = bodies.First();
+			var rest = String.Join(",", bodies);
+			return $"{platform},{rest}";
+		}
 
-    public UDTO_Platform SetPositionTo(UDTO_Position loc)
-    {
-        position = loc;
-        return this;
-    }
-    public UDTO_Body FindOrCreateBody(string name, bool create)
-    {
+		return platform;
+	}
+	public override int decompress(string[] data)
+	{
+		var counter = base.decompress(data);
 
-        if (!_bodyLookup.TryGetValue(name, out UDTO_Body found) && create)
-        {
-            found = new UDTO_Body()
-            {
-                panID = panID,
-                name = name,
-                platformName = platformName,
-                uniqueGuid = Guid.NewGuid().ToString()
-            };
-            _bodyLookup[name] = found;
-        }
-        return found;
-    }
+		platformName = data[counter++];
 
-    public UDTO_Body EstablishBody(UDTO_Body body, bool delete = false)
-    {
-        if (_bodyLookup.TryGetValue(body.name, out UDTO_Body found))
-        {
-            found.type = body.type;
+		if (data[counter] != String.Empty)
+		{
+			position = new UDTO_Position();
+			var seg = new ArraySegment<string>(data, counter, data.Length - counter);
+			counter += position.decompress(seg.ToArray());
+		}
+		else
+		{
+			counter++;
+		}
 
-            if (found.position == null)
-            {
-                found.position = body.position;
-            }
-            else if (body.position != null)
-            {
-                found.position.copyFrom(body.position);
-            }
+		if (data[counter] != String.Empty)
+		{
+			boundingBox = new BoundingBox();
+			var seg = new ArraySegment<string>(data, counter, data.Length - counter);
+			counter += boundingBox.decompress(seg.ToArray());
+		}
+		else
+		{
+			counter++;
+		}
 
-            if (found.boundingBox == null)
-            {
-                found.boundingBox = body.boundingBox;
-            }
-            else if (body.boundingBox != null)
-            {
-                found.boundingBox.copyFrom(body.boundingBox);
-            }
+		// Now rehydrate all the bodies 
+		// Bodies are separated by commas, but internal fields are separated by semicolons
+		// At this point counter is pointing to the first body in the data array, every element following it is also a body up to data.Length-1
+		while (counter != data.Length)
+		{
+			var body = new UDTO_Body();
+			var segment = data[counter];
+			var rest = segment.Split('!');
+			body.decompress(rest);
+			Establish<UDTO_Body>(body);
+			counter++;
+		}
+		return counter;
+	}
 
-            if (delete)
-            {
-                _bodyLookup.Remove(body.name);
-            }
+	public UDTO_Platform SetPositionTo(UDTO_Position loc)
+	{
+		position = loc;
+		return this;
+	}
 
-        }
-        else if (!delete)
-        {
-            _bodyLookup[body.name] = body;
-            found = body;
-        }
-        return found;
-    }
+	public UDTO_Platform()
+	{
+		CreateLookup<UDTO_Body>();
+		CreateLookup<UDTO_Label>();
+		CreateLookup<UDTO_Relationship>();
+	}
 
-    public UDTO_Label FindOrCreateLabel(string name, bool create)
-    {
-        if (!_labelLookup.TryGetValue(name, out UDTO_Label found) && create)
-        {
-            found = new UDTO_Label()
-            {
-                panID = panID,
-                name = name,
-                platformName = platformName,
-                uniqueGuid = Guid.NewGuid().ToString()
-            };
-            _labelLookup[name] = found;
-        }
-        return found;
-    }
+	private Dictionary<string,T> CreateLookup<T>() where T:UDTO_3D 
+	{
+		var result = new Dictionary<string, T>();
+		_lookup.Add(typeof(T).Name, result);
+		return result;
+	}
+	private Dictionary<string, T> FindLookup<T>() where T : UDTO_3D
+	{
+		var result = _lookup[typeof(T).Name] as Dictionary<string, T>;
+		return result;
+	}
 
-    public UDTO_Label EstablishLabel(UDTO_Label label, bool delete = false)
-    {
-        if (_labelLookup.TryGetValue(label.name, out UDTO_Label found))
-        {
-            found.type = label.type;
-            found.text = label.text;
+	public T FindOrCreate<T>(string name, bool create) where T: UDTO_3D
+	{
+		var dict = FindLookup<T>();
+		if (!dict.TryGetValue(name, out T found) && create)
+		{
+			found = Activator.CreateInstance<T>();
+			found.name = name;
+			found.panID = panID;
+			found.platformName = platformName;
+			uniqueGuid = Guid.NewGuid().ToString();
+			dict[name] = found;
+		}
+		return found;
+	}
 
-            if (found.position == null)
-            {
-                found.position = label.position;
-            }
-            else if (label.position != null)
-            {
-                found.position.copyFrom(label.position);
-            }
+	public T Establish<T>(T obj, bool delete = false) where T : UDTO_3D
+	{
+		var key = obj.name;
+		var dict = FindLookup<T>();
+		if (dict.TryGetValue(key, out T found))
+		{
+			found.CopyFrom(obj);
 
-            if (delete)
-            {
-                _labelLookup.Remove(label.name);
-            }
-
-        }
-        else if (!delete)
-        {
-            _labelLookup[label.name] = label;
-            found = label;
-        }
-        return found;
-    }
-
+			if (delete)
+			{
+				dict.Remove(key);
+			}
+		}
+		else if (!delete)
+		{
+			dict[key] = obj;
+			found = obj;
+		}
+		return found;
+	}
 
 }
 
