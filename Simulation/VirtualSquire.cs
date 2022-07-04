@@ -119,7 +119,7 @@ public class VirtualSquire
     public VirtualSquire ComputeStep(double delta_seconds, int frameID)
     {
         //the distance is computed in km  so
-        var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
+        //var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
 
         // if (!this.isPaused)
         // {
