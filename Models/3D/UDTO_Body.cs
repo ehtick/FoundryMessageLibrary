@@ -36,10 +36,9 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateBox(string type, double width=1.0, double height = 1.0, double depth = 1.0, string units="m")
+	public UDTO_Body CreateBox(double width=1.0, double height = 1.0, double depth = 1.0, string units="m")
 	{
-		symbol = "Box";
-		this.type = type;
+		this.type = "Box";
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -51,10 +50,9 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateCylinder(string type, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+	public UDTO_Body CreateCylinder(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 	{
-		symbol = "Cylinder";
-		this.type = type;
+		this.type = "Cylinder";
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -66,10 +64,9 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateSphere(string type, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+	public UDTO_Body CreateSphere(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 	{
-		symbol = "Sphere";
-		this.type = type;
+		this.type = "Sphere";
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -81,10 +78,10 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateOBJ(string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+	public UDTO_Body CreateGlb(string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 	{
-		symbol = "Obj";
-		this.type = url;
+		symbol = url;
+		this.type = "Glb";
 		boundingBox = new BoundingBox()
 		{
 			units = units,
