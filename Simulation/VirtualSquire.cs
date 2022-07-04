@@ -121,21 +121,21 @@ public class VirtualSquire
         //the distance is computed in km  so
         var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
 
-        if (!this.isPaused)
-        {
-            var pos = this.CurrentPosition;
-            this.heading.IncrementDegrees(this.turnAngle.Degrees());
-            var feature = pos.destination(dist_km, this.heading.Degrees());
-            var loc = feature.toLatLng();
+        // if (!this.isPaused)
+        // {
+        //     var pos = this.CurrentPosition;
+        //     this.heading.IncrementDegrees(this.turnAngle.Degrees());
+        //     var feature = pos.destination(dist_km, this.heading.Degrees());
+        //     var loc = feature.toLatLng();
 
-            this.CurrentPosition.lat = loc[1];
-            this.CurrentPosition.lng = loc[0];
+        //     this.CurrentPosition.lat = loc[1];
+        //     this.CurrentPosition.lng = loc[0];
 
-            Random rand = new Random();
-            this.LastBiometric.panID = PanID;
-            this.LastBiometric.heartRate = rand.Next(60, 90);
-            this.LastBiometric.stepCount += 5;
-        }
+        //     var rand = new Random();
+        //     this.LastBiometric.panID = PanID;
+        //     this.LastBiometric.heartRate = rand.Next(60, 90);
+        //     this.LastBiometric.stepCount += 5;
+        // }
         return this;
     }
 
