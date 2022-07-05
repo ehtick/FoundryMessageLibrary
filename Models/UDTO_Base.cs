@@ -1,8 +1,8 @@
 namespace IoBTMessage.Models;
 // using Newtonsoft.Json;
 // using Newtonsoft.Json.Linq;
-using System.Text.Json;
-using System.Text.Json.Nodes;
+//using System.Text.Json;
+//using System.Text.Json.Nodes;
 public static class UDTO
 {
     private static readonly Dictionary<string, Type> udtoTypes = new();
@@ -47,26 +47,26 @@ public static class UDTO
         }
         return found;
     }
-    public static UDTO_Base Hydrate(string target)
-    {
-        using var stream = new MemoryStream();
-        using var writer = new Utf8JsonWriter(stream);
-        var node = JsonNode.Parse(target);
-        node.WriteTo(writer);
-        writer.Flush();
+    // public static UDTO_Base Hydrate(string target)
+    // {
+    //     using var stream = new MemoryStream();
+    //     using var writer = new Utf8JsonWriter(stream);
+    //     var node = JsonNode.Parse(target);
+    //     node.WriteTo(writer);
+    //     writer.Flush();
 
-        var topic = node["udtoTopic"].ToString();
-        Type type = LookupType(topic);
-        var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
+    //     var topic = node["udtoTopic"].ToString();
+    //     Type type = LookupType(topic);
+    //     var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
 
-        return result;
-    }
+    //     return result;
+    // }
 
-    public static string Dehydrate(UDTO_Base target)
-    {
-        var result = JsonSerializer.Serialize(target, target.GetType());
-        return result;
-    }
+    // public static string Dehydrate(UDTO_Base target)
+    // {
+    //     var result = JsonSerializer.Serialize(target, target.GetType());
+    //     return result;
+    // }
 }
 
 [System.Serializable]
