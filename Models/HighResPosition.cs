@@ -63,8 +63,3 @@ public class HighResPosition
 #endif
 }
 
-[System.Serializable]
-public class HighResOffset : HighResPosition
-{
-}
-
