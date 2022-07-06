@@ -2,10 +2,11 @@ namespace IoBTMessage.Models;
 
 public class UDTO_Direction : UDTO_Base
 {
-    public double speed { get; set; }
-    public double heading { get; set; }
+	public double speed;
+	public double heading;
 
-    public override string compress(char d = ',')
+#if !UNITY
+	public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{speed}{d}{heading}";
     }
@@ -22,5 +23,6 @@ public class UDTO_Direction : UDTO_Base
     {
         return $"{udtoTopic}{sourceGuid}{panID}";
     }
+#endif
 }
 

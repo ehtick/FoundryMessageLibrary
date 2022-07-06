@@ -3,11 +3,12 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_ChatMessage : UDTO_Base
 {
-    public string toUser { get; set; }
-    public string fromUser { get; set; }
-    public string message { get; set; }
+	public string toUser;
+	public string fromUser;
+	public string message;
 
-    public UDTO_ChatMessage(): base()
+#if !UNITY
+	public UDTO_ChatMessage(): base()
     {
     }
     public override string compress(char d = ',')
@@ -23,5 +24,6 @@ public class UDTO_ChatMessage : UDTO_Base
         message = data[count++];
         return count;
     }
+#endif
 }
 

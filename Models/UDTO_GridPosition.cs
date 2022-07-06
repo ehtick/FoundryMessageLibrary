@@ -13,5 +13,5 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_GridPosition : UDTO_Position
 {
-    public string gridCoordinates { get; set; }
+	public string gridCoordinates;
 }

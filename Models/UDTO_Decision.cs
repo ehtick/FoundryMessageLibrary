@@ -8,7 +8,7 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Decision : UDTO_Base
 {
-    public string targetGuid { get; set; }
-    public string command { get; set; }
-    public string message { get; set; }
+	public string targetGuid;
+	public string command;
+	public string message;
 }

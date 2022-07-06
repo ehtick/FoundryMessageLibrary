@@ -10,6 +10,7 @@ namespace IoBTMessageLibrary.Models;
 
 public class PlatformGenerator
 {
+	#if !UNITY
 	public UDTO_Platform AllPrimitives(string PanID)
 	{
 		var platform = new UDTO_Platform()
@@ -35,4 +36,5 @@ public class PlatformGenerator
 
 		return platform;
 	}
+#endif
 }

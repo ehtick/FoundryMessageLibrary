@@ -3,14 +3,15 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Sensor : UDTO_Base
 {
-    public string type { get; set; }
-    public string name { get; set; }
-    public string active { get; set; }
-    public string extra { get; set; }
-    public string container { get; set; }
-    public string source { get; set; }
+	public string type;
+	public string name;
+	public string active;
+	public string extra;
+	public string container;
+	public string source;
 
-    public UDTO_Sensor():base()
+#if !UNITY
+	public UDTO_Sensor():base()
     {
     }
 
@@ -35,4 +36,5 @@ public class UDTO_Sensor : UDTO_Base
     {
         return $"{this.udtoTopic}{this.sourceGuid}{this.panID}{this.name}{this.type}{this.container}{this.source}";
     }
+#endif
 }

@@ -21,45 +21,45 @@ namespace IoBTMessage.Models;
 
 public class IMUPoint
 {
-    public double x { get; set; }
-    public double y { get; set; }
-    public double z { get; set; }
+	public double x;
+	public double y;
+	public double z;
 }
 public class IMU
 {
-    public IMUPoint acceleratomer { get; set; }
-    public IMUPoint gyroscope { get; set; }
-    public IMUPoint magitometer { get; set; }
+	public IMUPoint acceleratomer;
+	public IMUPoint gyroscope;
+	public IMUPoint magitometer;
 }
 
 [System.Serializable]
 public class UDTO_WeaponStatus : UDTO_Base
 {
-    public int currentAmmoCount { get; set; }
-    public string type { get; set; }
-    public IMUPoint IMU { get; set; }
-    public double targetDistance { get; set; }  //assume meters
+	public int currentAmmoCount;
+	public string type;
+	public IMUPoint IMU;
+	public double targetDistance; //assume meters
 }
 
 [System.Serializable]
 public class UDTO_WeaponEvent : UDTO_Base
 {
-    public string gesture { get; set; }  //up , down , fired , aim
-    public string message { get; set; }
+	public string gesture;  //up , down , fired , aim
+	public string message;
 }
 
 public class UDTO_WeaponDefinition : UDTO_Base
 {
-    public string uniqueGuid { get; set; }
-    public int ammoCapacity { get; set; }
-    public string type { get; set; }
-    public string ammoType { get; set; }
+	public string uniqueGuid;
+	public int ammoCapacity;
+	public string type;
+	public string ammoType;
 }
 
 public class UDTO_VictorStatus : UDTO_Base
 {
-    public double batteryCharge { get; set; }
-    public string WeaponStatusCalculation { get; set; }
-    public int shotCount { get; set; }  // 240 is standard load  so 0 < X < 240 
-    public double lethalityScoreCalculation { get; set; }
+	public double batteryCharge;
+	public string WeaponStatusCalculation;
+	public int shotCount;  // 240 is standard load  so 0 < X < 240 
+	public double lethalityScoreCalculation;
 }

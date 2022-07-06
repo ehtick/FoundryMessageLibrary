@@ -34,12 +34,12 @@ public class Failure : ISuccessOrFailure
 public class ContextWrapper<T>
 {
 
-    public DateTime dateTime { get; set; }
-    public int length { get; set; }
-    public String payloadType { get; set; }
-    public ICollection<T> payload { get; set; }
-    public bool hasError { get; set; }
-    public string message { get; set; }
+	public DateTime dateTime;
+	public int length;
+	public String payloadType;
+	public ICollection<T> payload;
+	public bool hasError;
+	public string message;
 
     public ContextWrapper(T obj, string error = "")
     {

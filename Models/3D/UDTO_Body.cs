@@ -3,11 +3,12 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Body : UDTO_3D
 {
-    public string symbol { get; set; }
-    public HighResPosition position { get; set; }
-    public BoundingBox boundingBox { get; set; }
+	public string symbol;
+	public HighResPosition position;
+	public BoundingBox boundingBox;
 
-    public UDTO_Body() : base()
+#if !UNITY
+	public UDTO_Body() : base()
     {
     }
 
@@ -95,6 +96,6 @@ public class UDTO_Body : UDTO_3D
 		position = new HighResPosition();
 		return this;
 	}
-
+#endif
 }
 

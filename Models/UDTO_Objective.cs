@@ -3,12 +3,13 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public partial class UDTO_Objective : UniqueLocation
 {
-    public string name { get; set; }
-    public string type { get; set; }
-    public string symbol { get; set; }
-    public string note { get; set; }
+	public string name;
+	public string type;
+	public string symbol;
+	public string note;
 
-    public override string compress(char d = ',')
+#if !UNITY
+	public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{name}{d}{type}{d}{symbol}{d}{note}";
     }
@@ -22,5 +23,6 @@ public partial class UDTO_Objective : UniqueLocation
         note = data[counter++];
         return counter;
     }
+#endif
 }
 

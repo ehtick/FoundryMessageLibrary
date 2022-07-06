@@ -3,13 +3,14 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Camera : UDTO_Base
 {
-    public Dictionary<string,object> attributes { get; set; }
-    public string name { get; set; }
-    public string active { get; set; }
-    public string codec { get; set; }
-    public string url { get; set; }
+	public Dictionary<string, object> attributes;
+	public string name;
+	public string active;
+	public string codec;
+	public string url;
 
-    public UDTO_Camera():base()
+#if !UNITY
+	public UDTO_Camera():base()
     {
     }
 
@@ -32,4 +33,5 @@ public class UDTO_Camera : UDTO_Base
     {
         return $"{this.udtoTopic}{this.sourceGuid}{this.panID}{this.name}{this.codec}{this.url}";
     }
+#endif
 }

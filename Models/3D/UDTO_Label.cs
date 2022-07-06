@@ -3,12 +3,12 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Label : UDTO_3D
 {
-    public string text { get; set; }
-    public string targetGuid { get; set; }
-    public HighResPosition position { get; set; }
+	public string text;
+	public string targetGuid;
+	public HighResPosition position;
 
-
-    public UDTO_Label() : base()
+#if !UNITY
+	public UDTO_Label() : base()
     {
     }
 
@@ -42,6 +42,6 @@ public class UDTO_Label : UDTO_3D
 		};
 		return this;
 	}
-
+#endif
 }
 

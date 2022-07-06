@@ -3,11 +3,11 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public partial class UDTO_Observation : UniqueLocation
 {
-    public string target { get; set; }
-    public double range { get; set; }
+	public string target;
+	public double range;
 
-
-    public override string compress(char d = ',')
+#if !UNITY
+	public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{target}{d}{range}";
     }
@@ -19,5 +19,6 @@ public partial class UDTO_Observation : UniqueLocation
         range = IoBTMath.toDouble(data[counter++]);
         return counter;
     }
+#endif
 }
 

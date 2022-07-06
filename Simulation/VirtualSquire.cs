@@ -18,6 +18,7 @@ public class VirtualSquire
     protected Angle turnAngle { get; set; } = new Angle();
 
     protected bool isPaused { get; set; } = false;
+
     public VirtualSquire()
     {
         LastBiometric = new UDTO_Biometric()
@@ -30,6 +31,7 @@ public class VirtualSquire
     }
     public VirtualSquire(VirtualSquire source)
     {
+#if !UNITY
         this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
         this.CurrentPosition.panID = PanID;
 
@@ -39,13 +41,16 @@ public class VirtualSquire
 
         this.LastBiometric = source.LastBiometric.Duplicate<UDTO_Biometric>();
         this.LastBiometric.panID = PanID;
+#endif
     }
 
 
     public VirtualSquire Position(UDTO_Position pos)
     {
-        this.CurrentPosition = pos.Duplicate<UDTO_Position>();
-        return this;
+#if !UNITY
+		this.CurrentPosition = pos.Duplicate<UDTO_Position>();
+#endif
+		return this;
     }
 
     public VirtualSquire Position(double lat, double lng, double alt = 0)
