@@ -51,7 +51,7 @@ public class DT_ProcessPlan : DT_Base
 
 
 
-    internal DT_ProcessPlan ShallowCopy()
+    public DT_ProcessPlan ShallowCopy()
     {
         var result = (DT_ProcessPlan)this.MemberwiseClone();
         result.steps = new List<DT_ProcessStep>();
