@@ -3,11 +3,12 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_3D : UDTO_Base
 {
-	public string platformName { get; set; }
-	public string uniqueGuid { get; set; }
-	public string type { get; set; }
-	public string name { get; set; }
+	public string platformName;
+	public string uniqueGuid;
+	public string type;
+	public string name;
 
+#if !UNITY
 	public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 	{
 		type = obj.type;
@@ -35,6 +36,6 @@ public class UDTO_3D : UDTO_Base
 		name = inputData[counter++];
 		return counter;
 	}
-
+#endif
 }
 

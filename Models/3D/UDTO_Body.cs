@@ -3,11 +3,12 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Body : UDTO_3D
 {
-    public string symbol { get; set; }
-    public HighResPosition position { get; set; }
-    public BoundingBox boundingBox { get; set; }
+	public string symbol;
+	public HighResPosition position;
+	public BoundingBox boundingBox;
 
-    public UDTO_Body() : base()
+#if !UNITY
+	public UDTO_Body() : base()
     {
     }
 
@@ -36,9 +37,10 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateBox(double width=1.0, double height = 1.0, double depth = 1.0, string units="m")
+	public UDTO_Body CreateBox(string name, double width=1.0, double height = 1.0, double depth = 1.0, string units="m")
 	{
 		this.type = "Box";
+		this.name = name;
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -50,9 +52,10 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateCylinder(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+	public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 	{
 		this.type = "Cylinder";
+		this.name = name;
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -64,9 +67,10 @@ public class UDTO_Body : UDTO_3D
 		return this;
 	}
 
-	public UDTO_Body CreateSphere(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+	public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 	{
 		this.type = "Sphere";
+		this.name = name;
 		boundingBox = new BoundingBox()
 		{
 			units = units,
@@ -92,6 +96,6 @@ public class UDTO_Body : UDTO_3D
 		position = new HighResPosition();
 		return this;
 	}
-
+#endif
 }
 

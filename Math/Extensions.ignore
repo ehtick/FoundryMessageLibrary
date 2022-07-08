@@ -9,6 +9,7 @@ using GeoJSON.Net.Geometry;
 static public class GeoMath
 {
 
+
     public static HighResOffset HighResOffset { get; set; } = new HighResOffset();
 
     public static T[] SubArray<T>(this T[] array, int offset, int length)

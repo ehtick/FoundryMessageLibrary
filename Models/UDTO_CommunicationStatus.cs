@@ -13,10 +13,10 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_CommunicationStatus : UDTO_Base
 {
-    public string comType { get; set; }  //  None, Ethernet, WiFi, Lora
-    public double strength { get; set; }
-    public double bandwidthUp { get; set; }
-    public double bandwidthDown { get; set; }
-    public bool inUse { get; set; }
-    public string lastConnectionTime { get; set; }
+	public string comType;  //  None, Ethernet, WiFi, Lora
+	public double strength;
+	public double bandwidthUp;
+	public double bandwidthDown;
+	public bool inUse;
+	public string lastConnectionTime;
 }

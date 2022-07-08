@@ -3,12 +3,19 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Platform : UDTO_3D
 {
-	public UDTO_Position position { get; set; }
-	public BoundingBox boundingBox { get; set; }
+	public UDTO_Position position;
+	public BoundingBox boundingBox;
 
 	private readonly Dictionary<string, object> _lookup = new();
 	private readonly Dictionary<string, UDTO_3D> _guids = new();
 
+#if UNITY
+	public List<UDTO_Body> bodies;
+	public List<UDTO_Label> labels;
+	public List<UDTO_Relationship> relationships;
+#endif
+
+#if !UNITY
 	public List<UDTO_Body> bodies
 	{
 		get
@@ -227,6 +234,6 @@ public class UDTO_Platform : UDTO_3D
 		}
 		return found;
 	}
-
+#endif
 }
 

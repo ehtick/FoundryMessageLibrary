@@ -12,10 +12,18 @@
     <Title>IoBT Message Library</Title>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
 
-  <ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+
+  <!-- <ItemGroup>
     <PackageReference Include="GeoJSON.Net" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup>
+  </ItemGroup> -->
 
 </Project>

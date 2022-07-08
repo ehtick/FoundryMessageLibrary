@@ -2,6 +2,6 @@ namespace IoBTMessage.Models;
 
 [System.Serializable]
 public class KafkaMessage {
-    public string topic { get; set; }
-    public object data { get; set; }
+	public string topic;
+	public object data;
 }

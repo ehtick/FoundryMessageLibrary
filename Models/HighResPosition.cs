@@ -3,16 +3,17 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class HighResPosition
 {
-    public string units { get; set; } = "m";
-    public double xLoc { get; set; } = 0;
-    public double yLoc { get; set; } = 0;
-    public double zLoc { get; set; } = 0;
+    public string units = "m";
+    public double xLoc = 0;
+    public double yLoc = 0;
+    public double zLoc = 0;
 
-    public double xAng { get; set; } = 0;
-    public double yAng { get; set; } = 0;
-    public double zAng { get; set; } = 0;
+    public double xAng = 0;
+    public double yAng = 0;
+    public double zAng = 0;
 
-    public HighResPosition()
+#if !UNITY
+	public HighResPosition()
     {
     }
 
@@ -59,10 +60,6 @@ public class HighResPosition
         this.zAng = pos.zAng;
         return this;
     }
-}
-
-[System.Serializable]
-public class HighResOffset : HighResPosition
-{
+#endif
 }
 

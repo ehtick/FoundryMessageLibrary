@@ -14,15 +14,16 @@ public interface ILocation
 }
 
 
-public partial class Location : UDTO_Base, ILocation
+public partial class Location : UDTO_Base
 {
 
 
-    public double lat { get; set; }
-    public double lng { get; set; }
-    public double alt { get; set; }
+	public double lat;
+	public double lng;
+	public double alt;
 
-    public Location():base()
+#if !UNITY
+	public Location():base()
     {
     }
 
@@ -69,6 +70,6 @@ public partial class Location : UDTO_Base, ILocation
     {
         return ang * 180 / Math.PI;
     }
-
+#endif
 }
 

@@ -21,14 +21,16 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Biometric : UDTO_Base
 {
-    public double heartRate { get; set; }
-    public double temperature { get; set; }
-    public double stepCount { get; set; }
-    public double sleepScore { get; set; }
-    public double stressCalculation { get; set; }
-    public double fitnessScore { get; set; }
+	public double heartRate;
+	public double temperature;
+	public double stepCount;
+	public double sleepScore;
+	public double stressCalculation;
+	public double fitnessScore;
 
-    public override string getUniqueCode() {
+#if !UNITY
+	public override string getUniqueCode() {
         return $"{this.udtoTopic}{this.sourceGuid}{this.panID}";
     }
+#endif
 }

@@ -13,8 +13,8 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Environment : UDTO_Base
 {
-    public double temperature { get; set; }
-    public double humidity { get; set; }
-    public UDTO_Direction wind { get; set; }
+	public double temperature;
+	public double humidity;
+	public UDTO_Direction wind;
 
 }

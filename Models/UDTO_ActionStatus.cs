@@ -2,14 +2,15 @@ namespace IoBTMessage.Models;
 
 public class UDTO_ActionStatus : UDTO_Base
 {
-    public UDTO_ActionStatus():base()
-    {
-    }
+	public string status;
+	public string message;
 
-    public string status { get; set; }
-    public string message { get; set; }
+#if !UNITY
+	public UDTO_ActionStatus() : base()
+	{
+	}
 
-    public override string compress(char d = ',')
+	public override string compress(char d = ',')
     {
         return $"{base.compress(d)}{d}{this.status}{d}{this.message}";
     }
@@ -21,8 +22,9 @@ public class UDTO_ActionStatus : UDTO_Base
         this.message = data[counter++];
         return counter;
     }
+#endif
 
-    public static UDTO_ActionStatus info(string message)
+	public static UDTO_ActionStatus info(string message)
     {
         return new UDTO_ActionStatus()
         {

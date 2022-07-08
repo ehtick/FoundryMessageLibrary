@@ -3,10 +3,11 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Relationship : UDTO_3D
 {
-	public string relationship { get; set; }
-	public string source { get; set; }
-	public List<string> sink { get; set; } = new List<string>();
+	public string relationship;
+	public string source;
+	public List<string> sink = new List<string>();
 
+#if !UNITY
 	public UDTO_Relationship() : base()
     {
     }
@@ -36,6 +37,6 @@ public class UDTO_Relationship : UDTO_3D
 		base.CopyFrom(obj);
 		return this;
 	}
-
+#endif
 }
 

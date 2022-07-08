@@ -13,10 +13,10 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_SquireStatus : UDTO_Base
 {
-    public string hostname { get; set; }
-    public string username { get; set; }
-    public string ipAddress { get; set; }
-    public UDTO_CommunicationStatus comStatus { get; set; }
-    public UDTO_GridPosition gridPosition { get; set; }
-    public UDTO_Biometric userBiometrics { get; set; }
+	public string hostname;
+	public string username;
+	public string ipAddress;
+	public UDTO_CommunicationStatus comStatus;
+	public UDTO_GridPosition gridPosition;
+	public UDTO_Biometric userBiometrics;
 }

@@ -3,15 +3,16 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class BoundingBox
 {
-    public string units { get; set; } = "m";
-    public double width { get; set; }
-    public double height { get; set; }
-    public double depth { get; set; }
-    public double pinX { get; set; }
-    public double pinY { get; set; }
-    public double pinZ { get; set; }
+    public string units = "m";
+	public double width;
+	public double height;
+	public double depth;
+	public double pinX;
+	public double pinY;
+	public double pinZ;
 
-    public BoundingBox()
+#if !UNITY
+	public BoundingBox()
     {
     }
 
@@ -46,5 +47,6 @@ public class BoundingBox
         this.pinZ = pos.pinZ;
         return this;
     }
+#endif
 }
 

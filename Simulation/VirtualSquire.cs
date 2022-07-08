@@ -18,6 +18,7 @@ public class VirtualSquire
     protected Angle turnAngle { get; set; } = new Angle();
 
     protected bool isPaused { get; set; } = false;
+
     public VirtualSquire()
     {
         LastBiometric = new UDTO_Biometric()
@@ -30,6 +31,7 @@ public class VirtualSquire
     }
     public VirtualSquire(VirtualSquire source)
     {
+#if !UNITY
         this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
         this.CurrentPosition.panID = PanID;
 
@@ -39,13 +41,16 @@ public class VirtualSquire
 
         this.LastBiometric = source.LastBiometric.Duplicate<UDTO_Biometric>();
         this.LastBiometric.panID = PanID;
+#endif
     }
 
 
     public VirtualSquire Position(UDTO_Position pos)
     {
-        this.CurrentPosition = pos.Duplicate<UDTO_Position>();
-        return this;
+#if !UNITY
+		this.CurrentPosition = pos.Duplicate<UDTO_Position>();
+#endif
+		return this;
     }
 
     public VirtualSquire Position(double lat, double lng, double alt = 0)
@@ -119,23 +124,23 @@ public class VirtualSquire
     public VirtualSquire ComputeStep(double delta_seconds, int frameID)
     {
         //the distance is computed in km  so
-        var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
+        //var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
 
-        if (!this.isPaused)
-        {
-            var pos = this.CurrentPosition;
-            this.heading.IncrementDegrees(this.turnAngle.Degrees());
-            var feature = pos.destination(dist_km, this.heading.Degrees());
-            var loc = feature.toLatLng();
+        // if (!this.isPaused)
+        // {
+        //     var pos = this.CurrentPosition;
+        //     this.heading.IncrementDegrees(this.turnAngle.Degrees());
+        //     var feature = pos.destination(dist_km, this.heading.Degrees());
+        //     var loc = feature.toLatLng();
 
-            this.CurrentPosition.lat = loc[1];
-            this.CurrentPosition.lng = loc[0];
+        //     this.CurrentPosition.lat = loc[1];
+        //     this.CurrentPosition.lng = loc[0];
 
-            Random rand = new Random();
-            this.LastBiometric.panID = PanID;
-            this.LastBiometric.heartRate = rand.Next(60, 90);
-            this.LastBiometric.stepCount += 5;
-        }
+        //     var rand = new Random();
+        //     this.LastBiometric.panID = PanID;
+        //     this.LastBiometric.heartRate = rand.Next(60, 90);
+        //     this.LastBiometric.stepCount += 5;
+        // }
         return this;
     }
 

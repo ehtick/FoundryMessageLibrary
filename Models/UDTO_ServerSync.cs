@@ -3,13 +3,12 @@
 [System.Serializable]
 public class UDTO_ServerSync
 {
-    public string payload { set; get; }  //payload
+	public string payload;  //payload
+	public string command;  //command
+    public string history = "";  //history
 
-    public string command { set; get; }  //command
-
-    public string history { set; get; } = "";  //history
-
-    public UDTO_ServerSync()
+#if !UNITY
+	public UDTO_ServerSync()
     {
     }
 
@@ -59,15 +58,17 @@ public class UDTO_ServerSync
         }
         return true;
     }
-
+#endif
 }
 [System.Serializable]
 public class UDTO_PubSubSync: UDTO_ServerSync
 {
-    public string topic { set; get; }  = ""; //topic
+    public string topic = ""; //topic
 
-    public UDTO_PubSubSync(): base()
+#if !UNITY
+	public UDTO_PubSubSync(): base()
     {
     }
+#endif
 }
 

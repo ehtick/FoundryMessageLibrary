@@ -3,7 +3,8 @@ namespace IoBTMessage.Models;
 [System.Serializable]
 public class UDTO_Position : Location
 {
-    public UDTO_Position(): base()
+#if !UNITY
+	public UDTO_Position(): base()
     {
     }
     public UDTO_Position(Location loc): base(loc)
@@ -13,6 +14,6 @@ public class UDTO_Position : Location
     {
         return $"{udtoTopic}{sourceGuid}{panID}";
     }
-
+#endif
 }
 

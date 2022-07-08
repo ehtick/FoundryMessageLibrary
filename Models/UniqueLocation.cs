@@ -2,9 +2,10 @@ namespace IoBTMessage.Models;
 
 public class UniqueLocation : Location
 {
-    public string uniqueGuid { get; set; }
+	public string uniqueGuid;
 
-    public override string getUniqueCode()
+#if !UNITY
+	public override string getUniqueCode()
     {
         return $"{this.uniqueGuid}";
     }
@@ -20,5 +21,6 @@ public class UniqueLocation : Location
         this.uniqueGuid = data[counter++];
         return counter;
     }
+#endif
 }
 
