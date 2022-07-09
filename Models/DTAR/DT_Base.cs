@@ -86,7 +86,8 @@ public class DT_Hero : DT_Base
 {
 	public string title;
 	public string description;
-	public DT_Image heroImage;
+	public string parentKey;
+	public DT_Document heroImage;
 
 #if !UNITY
 	public DT_Hero() : base()

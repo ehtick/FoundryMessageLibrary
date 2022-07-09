@@ -12,13 +12,15 @@ public class DT_ProcessPlan : DT_Hero
     {
     }
 
-    public T AddStep<T>(T step) where T : DT_ProcessStep
+    public DT_ProcessStep AddProcessStep(DT_ProcessStep step)
     {
         if (steps == null)
         {
             steps = new List<DT_ProcessStep>();
         }
-        steps.Add(step);
+		step.parentKey = this.key;
+
+		steps.Add(step);
 		steps = steps.OrderBy(x => x.sortKey).ToList();
 
 		return step;

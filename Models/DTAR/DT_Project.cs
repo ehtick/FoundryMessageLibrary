@@ -19,7 +19,9 @@ public class DT_Project : DT_Hero
         {
             processPlans = new List<DT_ProcessPlan>();
         }
-        processPlans.Add(plan);
+		plan.parentKey = this.key;
+
+		processPlans.Add(plan);
         return plan;
     }
 

@@ -24,11 +24,7 @@ public class DT_ProcessStep : DT_Hero
         return doc;
     }
 
-    public DT_ProcessStep AddToPlan(DT_ProcessPlan plan)
-    {
-        plan.AddStep(this);
-        return this;
-    }
+
 
 	public DT_ProcessStep ShallowCopy()
 	{
