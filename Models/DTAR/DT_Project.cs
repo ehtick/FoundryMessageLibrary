@@ -2,15 +2,14 @@
 namespace DTARServer.Models;
 
 [System.Serializable]
-public class DT_Project : DT_Base
+public class DT_Project : DT_Hero
 {
-
-    public string title;
-    public string system;
+	public string system;
     public List<DT_ProcessPlan> processPlans;
+	public List<DT_AssetReference> assetReferences;
 
 #if !UNITY
-    public DT_Project() : base()
+	public DT_Project() : base()
     {
     }
 
@@ -24,28 +23,24 @@ public class DT_Project : DT_Base
         return plan;
     }
 
-    public DT_Project CreateRandomPlans(int i)
-    {
-        var r = new Random();
-        foreach (var j in Enumerable.Range(0, i))
-        {
-            int rInt = r.Next(10000, 99000); //for ints
-            var plan = new DT_ProcessPlan()
-            {
-                name = $"process plan {rInt}",
-                title = $"Process Plan {rInt}"
-            };
-            this.AddProcessPlan(plan);
-            plan.CreateRandomStep(7);
-        };
-        return this;
-    }
+	public T AddReference<T>(T doc) where T : DT_AssetReference
+	{
+		if (assetReferences == null)
+		{
+			assetReferences = new List<DT_AssetReference>();
+		}
+		assetReferences.Add(doc);
+		return doc;
+	}
+
+
 
     public DT_Project ShallowCopy()
     {
         var result = (DT_Project)this.MemberwiseClone();
         result.processPlans = new List<DT_ProcessPlan>();
-        return result;
+		result.assetReferences = new List<DT_AssetReference>();
+		return result;
     }
 #endif
 }

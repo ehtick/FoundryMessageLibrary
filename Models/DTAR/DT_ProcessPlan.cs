@@ -1,13 +1,10 @@
 ﻿namespace DTARServer.Models;
 
 [System.Serializable]
-public class DT_ProcessPlan : DT_Base
+public class DT_ProcessPlan : DT_Hero
 {
-    public string title;
-
-    public List<DT_AssetReference> assetReferences;
+	public List<DT_AssetReference> assetReferences;
     public List<DT_ProcessStep> steps;
-
 
 
 #if !UNITY
@@ -22,7 +19,9 @@ public class DT_ProcessPlan : DT_Base
             steps = new List<DT_ProcessStep>();
         }
         steps.Add(step);
-        return step;
+		steps = steps.OrderBy(x => x.sortKey).ToList();
+
+		return step;
     }
 
     public T AddReference<T>(T doc) where T : DT_AssetReference
@@ -33,20 +32,6 @@ public class DT_ProcessPlan : DT_Base
         }
         assetReferences.Add(doc);
         return doc;
-    }
-
-    public DT_ProcessPlan CreateRandomStep(int i)
-    {
-        foreach (var j in Enumerable.Range(1, i + 1))
-        {
-            var plan = new DT_ProcessStep()
-            {
-                name = $"Step  {j}",
-                number = $"j"
-            };
-            this.AddStep(plan);
-        };
-        return this;
     }
 
 
