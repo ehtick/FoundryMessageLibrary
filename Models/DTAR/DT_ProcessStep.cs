@@ -4,9 +4,8 @@
 public class DT_ProcessStep : DT_Hero
 {
 	public int stepNumber;
-	public int itemNumber;
-	public double sortKey;
 
+	public List<DT_StepDetail> details;
 	public List<DT_AssetReference> assetReferences;
 
 #if !UNITY
@@ -14,15 +13,27 @@ public class DT_ProcessStep : DT_Hero
     {
     }
 
-    public T AddReference<T>(T doc) where T : DT_AssetReference
-    {
-        if (assetReferences == null)
+    public T AddStepDetail<T>(T doc) where T : DT_StepDetail
+	{
+        if (details == null)
         {
-            assetReferences = new List<DT_AssetReference>();
+			details = new List<DT_StepDetail>();
         }
-        assetReferences.Add(doc);
+		details.Add(doc);
+
+		details = details.OrderBy(x => x.itemNumber).ToList();
         return doc;
     }
+
+	public T AddReference<T>(T doc) where T : DT_AssetReference
+	{
+		if (assetReferences == null)
+		{
+			assetReferences = new List<DT_AssetReference>();
+		}
+		assetReferences.Add(doc);
+		return doc;
+	}
 
 
 
@@ -34,26 +45,4 @@ public class DT_ProcessStep : DT_Hero
 	}
 
 #endif
-}
-
-
-[System.Serializable]
-public class DT_Note : DT_ProcessStep
-{
-
-}
-
-[System.Serializable]
-public class DT_Caution : DT_ProcessStep
-{
-}
-
-[System.Serializable]
-public class DT_Warning : DT_ProcessStep
-{
-}
-
-[System.Serializable]
-public class DT_Step : DT_ProcessStep
-{
 }

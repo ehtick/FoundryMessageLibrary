@@ -21,7 +21,7 @@ public class DT_ProcessPlan : DT_Hero
 		step.parentKey = this.key;
 
 		steps.Add(step);
-		steps = steps.OrderBy(x => x.sortKey).ToList();
+
 
 		return step;
     }
