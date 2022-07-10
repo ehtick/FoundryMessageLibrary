@@ -19,6 +19,8 @@ public class DT_ProcessStep : DT_Hero
         {
 			details = new List<DT_StepDetail>();
         }
+		doc.parentKey = this.key;
+
 		details.Add(doc);
 
 		details = details.OrderBy(x => x.itemNumber).ToList();
