@@ -82,12 +82,24 @@ public class DT_Error : DT_Base
 }
 
 [System.Serializable]
-public class DT_Hero : DT_Base
+public class DT_Title : DT_Base
 {
 	public string title;
 	public string description;
 	public string parentKey;
+
+#if !UNITY
+	public DT_Title() : base()
+	{
+	}
+#endif
+}
+
+[System.Serializable]
+public class DT_Hero : DT_Title
+{
 	public DT_Document heroImage;
+	public DT_AssetReference primaryAsset;
 
 #if !UNITY
 	public DT_Hero() : base()

@@ -55,3 +55,13 @@ public class DT_Warning : DT_StepDetail
 public class DT_StepAction : DT_StepDetail
 {
 }
+
+[System.Serializable]
+public class DT_CAD : DT_StepDetail
+{
+}
+
+[System.Serializable]
+public class DT_Media : DT_StepDetail
+{
+}
