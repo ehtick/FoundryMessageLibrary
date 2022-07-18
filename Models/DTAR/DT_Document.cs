@@ -2,10 +2,8 @@
 
 
 [System.Serializable]
-public class DT_Document : DT_Base
+public class DT_Document : DT_Title
 {
-	public string title;
-	public string description;
 	public string filename;
 	public string url;
 	public string docType;
