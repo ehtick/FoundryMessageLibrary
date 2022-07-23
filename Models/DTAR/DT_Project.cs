@@ -6,7 +6,7 @@ public class DT_Project : DT_Hero
 {
 	public string system;
     public List<DT_ProcessPlan> processPlans;
-	public List<DT_AssetReference> assetReferences;
+
 
 #if !UNITY
 	public DT_Project() : base()
@@ -19,31 +19,34 @@ public class DT_Project : DT_Hero
         {
             processPlans = new List<DT_ProcessPlan>();
         }
-		plan.parentKey = this.key;
+		plan.parentGuid = this.guid;
 
 		processPlans.Add(plan);
         return plan;
     }
 
-	public T AddReference<T>(T doc) where T : DT_AssetReference
+
+
+	public override List<DT_Document> CollectDocuments(List<DT_Document> list)
 	{
-		if (assetReferences == null)
-		{
-			assetReferences = new List<DT_AssetReference>();
-		}
-		assetReferences.Add(doc);
-		return doc;
+		base.CollectDocuments(list);
+
+		processPlans?.ForEach(plan => {
+			plan.CollectDocuments(list);
+		});
+		return list;
 	}
 
-
-
-    public DT_Project ShallowCopy()
+	public DT_Project ShallowCopy()
     {
         var result = (DT_Project)this.MemberwiseClone();
-        result.processPlans = new List<DT_ProcessPlan>();
-		result.assetReferences = new List<DT_AssetReference>();
+		result.processPlans = null;
+		result.assetReferences = null;
+		result.ClearKeys();
+		result.DeReference();
 		return result;
     }
+
 #endif
 }
 

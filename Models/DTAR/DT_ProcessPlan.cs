@@ -1,14 +1,14 @@
 ﻿namespace DTARServer.Models;
+using DTARServer;
 
 [System.Serializable]
 public class DT_ProcessPlan : DT_Hero
 {
-	public List<DT_AssetReference> assetReferences;
     public List<DT_ProcessStep> steps;
 
 
 #if !UNITY
-    public DT_ProcessPlan()
+	public DT_ProcessPlan()
     {
     }
 
@@ -18,33 +18,40 @@ public class DT_ProcessPlan : DT_Hero
         {
             steps = new List<DT_ProcessStep>();
         }
-		step.parentKey = this.key;
+		step.parentGuid = this.guid;
 
 		steps.Add(step);
-
-
 		return step;
     }
 
-    public T AddReference<T>(T doc) where T : DT_AssetReference
-    {
-        if (assetReferences == null)
-        {
-            assetReferences = new List<DT_AssetReference>();
-        }
-        assetReferences.Add(doc);
-        return doc;
-    }
+
+	public override List<DT_Document> CollectDocuments(List<DT_Document> list)
+	{
+		base.CollectDocuments(list);
 
 
+		steps?.ForEach(step => {
+			step.CollectDocuments(list);
+		});
+		return list;
+	}
 
-    public DT_ProcessPlan ShallowCopy()
+	public DT_ProcessPlan ShallowCopy()
     {
         var result = (DT_ProcessPlan)this.MemberwiseClone();
-        result.steps = new List<DT_ProcessStep>();
-        result.assetReferences = new List<DT_AssetReference>();
-        return result;
+        result.steps = null;
+		result.assetReferences = null;
+		result.ClearKeys();
+		result.DeReference();
+		return result;
     }
+
+	public List<DT_ProcessStep> ShallowSteps()
+	{
+		var result = steps?.Select(obj => obj.ShallowCopy()).ToList();
+		return result;
+	}
+
 #endif
 }
 
