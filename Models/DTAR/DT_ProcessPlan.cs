@@ -41,7 +41,6 @@ public class DT_ProcessPlan : DT_Hero
         var result = (DT_ProcessPlan)this.MemberwiseClone();
         result.steps = null;
 		result.assetReferences = null;
-		result.ClearKeys();
 		result.DeReference();
 		return result;
     }

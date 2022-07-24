@@ -42,7 +42,6 @@ public class DT_Project : DT_Hero
         var result = (DT_Project)this.MemberwiseClone();
 		result.processPlans = null;
 		result.assetReferences = null;
-		result.ClearKeys();
 		result.DeReference();
 		return result;
     }

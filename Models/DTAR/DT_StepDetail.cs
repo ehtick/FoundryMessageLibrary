@@ -23,7 +23,6 @@ public class DT_StepDetail : DT_Hero
 	{
 		var result = (DT_StepDetail)this.MemberwiseClone();
 		result.assetReferences = null;
-		result.ClearKeys();
 		result.DeReference();
 		return result;
 	}

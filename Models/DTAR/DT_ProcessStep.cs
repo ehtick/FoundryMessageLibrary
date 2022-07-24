@@ -22,7 +22,7 @@ public class DT_ProcessStep : DT_Hero
         }
 		detail.parentGuid = this.guid;
 
-		details.Add(doc);
+		details.Add(detail);
 
 		details = details.OrderBy(x => x.itemNumber).ToList();
         return detail;
@@ -45,7 +45,6 @@ public class DT_ProcessStep : DT_Hero
 		var result = (DT_ProcessStep)this.MemberwiseClone();
 		result.assetReferences = null;
 		result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
-		result.ClearKeys();
 		result.DeReference();
 		return result;
 	}
