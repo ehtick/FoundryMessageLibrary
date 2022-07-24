@@ -5,29 +5,25 @@ public class DT_StepDetail : DT_Hero
 {
 	public int itemNumber;
 
-	public List<DT_AssetReference> assetReferences;
+	public DT_QualityAssurance check;
 
 #if !UNITY
-    public DT_StepDetail() : base()
+	public DT_StepDetail() : base()
     {
     }
 
-    public T AddReference<T>(T doc) where T : DT_AssetReference
-    {
-        if (assetReferences == null)
-        {
-            assetReferences = new List<DT_AssetReference>();
-        }
-        assetReferences.Add(doc);
-        return doc;
-    }
+	public override List<DT_Document> CollectDocuments(List<DT_Document> list)
+	{
+		base.CollectDocuments(list);
 
-
+		return list;
+	}
 
 	public DT_StepDetail ShallowCopy()
 	{
 		var result = (DT_StepDetail)this.MemberwiseClone();
-		result.assetReferences = new List<DT_AssetReference>();
+		result.assetReferences = null;
+		result.DeReference();
 		return result;
 	}
 
