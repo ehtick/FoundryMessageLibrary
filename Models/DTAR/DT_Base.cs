@@ -153,10 +153,12 @@ public class DT_Hero : DT_Title
 	public DT_Document heroImage;
 	public DT_AssetReference primaryAsset;
 	public List<DT_AssetReference> assetReferences;
+	public int memberCount;
 
 #if !UNITY
 	public DT_Hero() : base()
 	{
+		memberCount = 0;
 	}
 
 	public virtual void DeReference()
