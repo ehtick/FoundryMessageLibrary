@@ -21,6 +21,7 @@ public class DT_ProcessPlan : DT_Hero
 		step.parentGuid = this.guid;
 
 		steps.Add(step);
+		this.memberCount = steps.Count;
 		return step;
     }
 

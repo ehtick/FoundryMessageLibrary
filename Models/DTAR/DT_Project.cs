@@ -22,7 +22,9 @@ public class DT_Project : DT_Hero
 		plan.parentGuid = this.guid;
 
 		processPlans.Add(plan);
-        return plan;
+		this.memberCount = processPlans.Count;
+
+		return plan;
     }
 
 

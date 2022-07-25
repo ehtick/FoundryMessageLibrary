@@ -23,6 +23,7 @@ public class DT_ProcessStep : DT_Hero
 		detail.parentGuid = this.guid;
 
 		details.Add(detail);
+		this.memberCount = details.Count;
 
 		details = details.OrderBy(x => x.itemNumber).ToList();
         return detail;
