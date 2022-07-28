@@ -5,8 +5,6 @@ public class DT_StepDetail : DT_Hero
 {
 	public int itemNumber;
 
-	public DT_QualityAssurance check;
-
 #if !UNITY
 	public DT_StepDetail() : base()
     {
@@ -23,7 +21,8 @@ public class DT_StepDetail : DT_Hero
 	{
 		var result = (DT_StepDetail)this.MemberwiseClone();
 		result.assetReferences = null;
-		result.DeReference();
+		result.DeReference(this.primaryAsset);
+
 		return result;
 	}
 

@@ -45,8 +45,9 @@ public class DT_ProcessStep : DT_Hero
 	{
 		var result = (DT_ProcessStep)this.MemberwiseClone();
 		result.assetReferences = null;
+		result.DeReference(this.primaryAsset);
 		result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
-		result.DeReference();
+
 		return result;
 	}
 

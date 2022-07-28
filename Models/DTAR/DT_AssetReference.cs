@@ -11,15 +11,12 @@ public class DT_AssetReference : DT_Base
 	public DT_AssetReference() : base()
 	{
 	}
-	public virtual void DeReference()
-	{
-		assetGUID = document?.guid ?? assetGUID;
-		document = null;
-	}
+
 	public DT_AssetReference ShallowCopy()
 	{
 		var result = (DT_AssetReference)this.MemberwiseClone();
-		result.DeReference();
+		result.assetGUID = document?.guid ?? assetGUID;
+		result.document = null;
 		return result;
 	}
 #endif
