@@ -4,6 +4,8 @@ using System.Linq;
 [System.Serializable]
 public class DT_ProcessStep : DT_Hero
 {
+
+	public int memberCount;
 	public int stepNumber;
 
 	public List<DT_StepDetail> details;

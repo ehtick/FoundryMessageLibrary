@@ -166,15 +166,15 @@ public class DT_Title : DT_Base
 [System.Serializable]
 public class DT_Hero : DT_Title
 {
+
 	public DT_Document heroImage;
 	public DT_AssetReference primaryAsset;
 	public List<DT_AssetReference> assetReferences;
-	public int memberCount;
+	public List<DT_ComponentReference>componentReferences;
 
 #if !UNITY
 	public DT_Hero() : base()
 	{
-		memberCount = 0;
 	}
 
 	public void DeReference(DT_AssetReference assetRef)
@@ -184,14 +184,24 @@ public class DT_Hero : DT_Title
 		}
 	}
 
-	public T AddReference<T>(T doc) where T : DT_AssetReference
+	public T AddAssetReference<T>(T item) where T : DT_AssetReference
 	{
 		if (assetReferences == null)
 		{
 			assetReferences = new List<DT_AssetReference>();
 		}
-		assetReferences.Add(doc);
-		return doc;
+		assetReferences.Add(item);
+		return item;
+	}
+
+		public T AddComponentReference<T>(T item) where T : DT_ComponentReference
+	{
+		if (componentReferences == null)
+		{
+			componentReferences = new List<DT_ComponentReference>();
+		}
+		componentReferences.Add(item);
+		return item;
 	}
 
 	public virtual List<DT_Document> CollectDocuments(List<DT_Document> list)

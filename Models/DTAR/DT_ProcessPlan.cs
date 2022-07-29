@@ -4,6 +4,8 @@ using DTARServer;
 [System.Serializable]
 public class DT_ProcessPlan : DT_Hero
 {
+	
+	public int memberCount;
     public List<DT_ProcessStep> steps;
 
 

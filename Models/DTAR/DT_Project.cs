@@ -4,7 +4,7 @@ namespace DTARServer.Models;
 [System.Serializable]
 public class DT_Project : DT_Hero
 {
-	public string system;
+	public int memberCount;
     public List<DT_ProcessPlan> processPlans;
 
 

@@ -15,7 +15,17 @@ public class DT_Component : DT_Hero
 }
 
 
+[System.Serializable]
+public class DT_ComponentReference : DT_Base
+{
+	public string componentGUID;
+	public DT_Component component;
 
-
+#if !UNITY
+	public DT_ComponentReference() : base()
+	{
+	}
+#endif
+}
 
 
