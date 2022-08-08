@@ -170,7 +170,7 @@ public class DT_Hero : DT_Title
 	public DT_Document heroImage;
 	public DT_AssetReference primaryAsset;
 	public List<DT_AssetReference> assetReferences;
-	public List<DT_ComponentReference>componentReferences;
+	public List<DT_ComponentReference> componentReferences;
 
 #if !UNITY
 	public DT_Hero() : base()
