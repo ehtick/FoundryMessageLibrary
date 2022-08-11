@@ -6,6 +6,7 @@ public class DT_Component : DT_Hero
 {
 	public string serialNumber;
 	public string partID;
+	public string revision;
 	public string hsc { get; set; }
 	public string structureLevel { get; set; }
 
@@ -15,7 +16,7 @@ public class DT_Component : DT_Hero
 
     }
 	public string serialName() {
-		return $"{serialNumber}@{partID}";
+		return $"{partID}-{revision}@{serialNumber}";
 	}
 #endif
 }
