@@ -6,18 +6,10 @@ using System.Linq;
 namespace IoBTMessage.Models;
 
 
-public interface ILocation
-{
-    public double lat { get; set; }
-    public double lng { get; set; }
-    public double alt { get; set; }
-}
-
 
 public partial class Location : UDTO_Base
+
 {
-
-
 	public double lat;
 	public double lng;
 	public double alt;
@@ -60,16 +52,6 @@ public partial class Location : UDTO_Base
         return this;
     }
 
-    // Converts numeric degrees to radians
-    public double toRad(double ang)
-    {
-        return ang * Math.PI / 180;
-    }
-
-    public double toDeg(double ang)
-    {
-        return ang * 180 / Math.PI;
-    }
 #endif
 }
 

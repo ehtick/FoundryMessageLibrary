@@ -101,6 +101,11 @@ public class DT_Comment : DT_Base
 	public DT_Comment() : base()
 	{
 	}
+	public DT_Comment OK() 
+	{
+		severity = "OK";
+		return this;
+	}
 	public DT_Comment Error() 
 	{
 		severity = "Error";
@@ -128,21 +133,32 @@ public class DT_Title : DT_Base
 	public string description;
 	public List<DT_Comment> comments;
 
+	public List<DT_QualityAssurance> qualityChecks;
 
 #if !UNITY
 	public DT_Title() : base()
 	{
 	}
 
-	public DT_Comment AddComment(DT_Comment comment)
+	public DT_Comment AddComment(DT_Comment item)
 	{
-		if (comment == null)
+		if (comments == null)
 		{
 			comments = new List<DT_Comment>();
 		}
 
-		comments.Add(comment);
-		return comment;
+		comments.Add(item);
+		return item;
+	}
+	public DT_QualityAssurance AddQualityCheck(DT_QualityAssurance item)
+	{
+		if (qualityChecks == null)
+		{
+			qualityChecks = new List<DT_QualityAssurance>();
+		}
+
+		qualityChecks.Add(item);
+		return item;
 	}
 #endif
 }
@@ -150,30 +166,42 @@ public class DT_Title : DT_Base
 [System.Serializable]
 public class DT_Hero : DT_Title
 {
+
 	public DT_Document heroImage;
 	public DT_AssetReference primaryAsset;
 	public List<DT_AssetReference> assetReferences;
-	public int memberCount;
+	public List<DT_ComponentReference> componentReferences;
 
 #if !UNITY
 	public DT_Hero() : base()
 	{
-		memberCount = 0;
 	}
 
-	public virtual void DeReference()
+	public void DeReference(DT_AssetReference assetRef)
 	{
-		primaryAsset?.DeReference();
+		if ( assetRef != null) {
+			this.primaryAsset = (DT_AssetReference)assetRef.ShallowCopy();
+		}
 	}
 
-	public T AddReference<T>(T doc) where T : DT_AssetReference
+	public T AddAssetReference<T>(T item) where T : DT_AssetReference
 	{
 		if (assetReferences == null)
 		{
 			assetReferences = new List<DT_AssetReference>();
 		}
-		assetReferences.Add(doc);
-		return doc;
+		assetReferences.Add(item);
+		return item;
+	}
+
+		public T AddComponentReference<T>(T item) where T : DT_ComponentReference
+	{
+		if (componentReferences == null)
+		{
+			componentReferences = new List<DT_ComponentReference>();
+		}
+		componentReferences.Add(item);
+		return item;
 	}
 
 	public virtual List<DT_Document> CollectDocuments(List<DT_Document> list)

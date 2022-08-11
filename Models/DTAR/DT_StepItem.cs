@@ -1,14 +1,12 @@
 ﻿namespace DTARServer.Models;
 
 [System.Serializable]
-public class DT_StepDetail : DT_Hero
+public class DT_StepItem : DT_Hero
 {
 	public int itemNumber;
 
-	public DT_QualityAssurance check;
-
 #if !UNITY
-	public DT_StepDetail() : base()
+	public DT_StepItem() : base()
     {
     }
 
@@ -19,11 +17,12 @@ public class DT_StepDetail : DT_Hero
 		return list;
 	}
 
-	public DT_StepDetail ShallowCopy()
+	public DT_StepItem ShallowCopy()
 	{
-		var result = (DT_StepDetail)this.MemberwiseClone();
+		var result = (DT_StepItem)this.MemberwiseClone();
 		result.assetReferences = null;
-		result.DeReference();
+		result.DeReference(this.primaryAsset);
+
 		return result;
 	}
 
@@ -32,32 +31,32 @@ public class DT_StepDetail : DT_Hero
 
 
 [System.Serializable]
-public class DT_Note : DT_StepDetail
+public class DT_Note : DT_StepItem
 {
 
 }
 
 [System.Serializable]
-public class DT_Caution : DT_StepDetail
+public class DT_Caution : DT_StepItem
 {
 }
 
 [System.Serializable]
-public class DT_Warning : DT_StepDetail
+public class DT_Warning : DT_StepItem
 {
 }
 
 [System.Serializable]
-public class DT_StepAction : DT_StepDetail
+public class DT_StepAction : DT_StepItem
 {
 }
 
 [System.Serializable]
-public class DT_CAD : DT_StepDetail
+public class DT_CAD : DT_StepItem
 {
 }
 
 [System.Serializable]
-public class DT_Media : DT_StepDetail
+public class DT_Media : DT_StepItem
 {
 }

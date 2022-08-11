@@ -4,9 +4,11 @@ using System.Linq;
 [System.Serializable]
 public class DT_ProcessStep : DT_Hero
 {
+
+	public int memberCount;
 	public int stepNumber;
 
-	public List<DT_StepDetail> details;
+	public List<DT_StepItem> details;
 
 
 #if !UNITY
@@ -14,11 +16,11 @@ public class DT_ProcessStep : DT_Hero
     {
     }
 
-    public T AddStepDetail<T>(T detail) where T : DT_StepDetail
+    public T AddStepDetail<T>(T detail) where T : DT_StepItem
 	{
         if (details == null)
         {
-			details = new List<DT_StepDetail>();
+			details = new List<DT_StepItem>();
         }
 		detail.parentGuid = this.guid;
 
@@ -45,8 +47,9 @@ public class DT_ProcessStep : DT_Hero
 	{
 		var result = (DT_ProcessStep)this.MemberwiseClone();
 		result.assetReferences = null;
+		result.DeReference(this.primaryAsset);
 		result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
-		result.DeReference();
+
 		return result;
 	}
 

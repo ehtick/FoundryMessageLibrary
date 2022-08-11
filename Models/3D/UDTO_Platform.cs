@@ -16,6 +16,21 @@ public class UDTO_Platform : UDTO_3D
 #endif
 
 #if !UNITY
+
+	public UDTO_Platform CreateBox(string name, double width=1.0, double height = 1.0, double depth = 1.0, string units="m")
+	{
+		this.name = name;
+		boundingBox = new BoundingBox()
+		{
+			units = units,
+			width = width,
+			height = height,
+			depth = depth,
+		};
+		position = new UDTO_Position();
+		return this;
+	}
+
 	public List<UDTO_Body> bodies
 	{
 		get

@@ -7,6 +7,7 @@ public class UDTO_3D : UDTO_Base
 	public string uniqueGuid;
 	public string type;
 	public string name;
+	public bool visible = true;
 
 #if !UNITY
 	public virtual UDTO_3D CopyFrom(UDTO_3D obj)
@@ -19,6 +20,17 @@ public class UDTO_3D : UDTO_Base
 	public bool isDelete()
 	{
 		return this.type == "Command:DELETE" ? true : false;
+	}
+
+	public bool isVisible()
+	{
+		return this.visible;
+	}
+
+	public UDTO_3D setVisible(bool visible)
+	{
+		this.visible = visible;
+		return this;
 	}
 
 	public override string compress(char d = ',')

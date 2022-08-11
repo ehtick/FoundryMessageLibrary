@@ -4,7 +4,7 @@ namespace DTARServer.Models;
 [System.Serializable]
 public class DT_Project : DT_Hero
 {
-	public string system;
+	public int memberCount;
     public List<DT_ProcessPlan> processPlans;
 
 
@@ -44,7 +44,8 @@ public class DT_Project : DT_Hero
         var result = (DT_Project)this.MemberwiseClone();
 		result.processPlans = null;
 		result.assetReferences = null;
-		result.DeReference();
+		result.DeReference(this.primaryAsset);
+
 		return result;
     }
 
