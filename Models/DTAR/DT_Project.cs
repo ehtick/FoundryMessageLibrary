@@ -5,7 +5,6 @@ namespace DTARServer.Models;
 public class DT_Project : DT_Hero
 {
 	public int memberCount;
-	public string distro;
     public List<DT_ProcessPlan> processPlans;
 
 
