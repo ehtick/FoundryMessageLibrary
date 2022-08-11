@@ -4,13 +4,19 @@
 [System.Serializable]
 public class DT_Component : DT_Hero
 {
-	public string serialNo;
-	public string url;
+	public string serialNumber;
+	public string partID;
+	public string hsc { get; set; }
+	public string structureLevel { get; set; }
 
 #if !UNITY
 	public DT_Component() : base()
     {
+
     }
+	public string serialName() {
+		return $"{serialNumber}@{partID}";
+	}
 #endif
 }
 
