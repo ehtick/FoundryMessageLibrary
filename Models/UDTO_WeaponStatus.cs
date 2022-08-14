@@ -16,50 +16,51 @@ using System.Threading.Tasks;
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-namespace IoBTMessage.Models;
-
-
-public class IMUPoint
+namespace IoBTMessage.Models
 {
-	public double x;
-	public double y;
-	public double z;
-}
-public class IMU
-{
-	public IMUPoint acceleratomer;
-	public IMUPoint gyroscope;
-	public IMUPoint magitometer;
-}
 
-[System.Serializable]
-public class UDTO_WeaponStatus : UDTO_Base
-{
-	public int currentAmmoCount;
-	public string type;
-	public IMUPoint IMU;
-	public double targetDistance; //assume meters
-}
+	public class IMUPoint
+	{
+		public double x;
+		public double y;
+		public double z;
+	}
+	public class IMU
+	{
+		public IMUPoint acceleratomer;
+		public IMUPoint gyroscope;
+		public IMUPoint magitometer;
+	}
 
-[System.Serializable]
-public class UDTO_WeaponEvent : UDTO_Base
-{
-	public string gesture;  //up , down , fired , aim
-	public string message;
-}
+	[System.Serializable]
+	public class UDTO_WeaponStatus : UDTO_Base
+	{
+		public int currentAmmoCount;
+		public string type;
+		public IMUPoint IMU;
+		public double targetDistance; //assume meters
+	}
 
-public class UDTO_WeaponDefinition : UDTO_Base
-{
-	public string uniqueGuid;
-	public int ammoCapacity;
-	public string type;
-	public string ammoType;
-}
+	[System.Serializable]
+	public class UDTO_WeaponEvent : UDTO_Base
+	{
+		public string gesture;  //up , down , fired , aim
+		public string message;
+	}
 
-public class UDTO_VictorStatus : UDTO_Base
-{
-	public double batteryCharge;
-	public string WeaponStatusCalculation;
-	public int shotCount;  // 240 is standard load  so 0 < X < 240 
-	public double lethalityScoreCalculation;
+	public class UDTO_WeaponDefinition : UDTO_Base
+	{
+		public string uniqueGuid;
+		public int ammoCapacity;
+		public string type;
+		public string ammoType;
+	}
+
+	public class UDTO_VictorStatus : UDTO_Base
+	{
+		public double batteryCharge;
+		public string WeaponStatusCalculation;
+		public int shotCount;  // 240 is standard load  so 0 < X < 240 
+		public double lethalityScoreCalculation;
+	}
 }
