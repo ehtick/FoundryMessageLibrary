@@ -9,7 +9,7 @@ namespace IoBTMessage.Models
 
 	public static class UDTO
 	{
-		private static readonly Dictionary<string, Type> udtoTypes = new();
+		private static readonly Dictionary<string, Type> udtoTypes = new Dictionary<string, Type>();
 
 		public static string asTopic<T>() where T : UDTO_Base
 		{
