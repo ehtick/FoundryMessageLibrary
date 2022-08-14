@@ -1,4 +1,6 @@
-﻿namespace DTARServer.Models
+﻿using System.Collections.Generic;
+
+namespace DTARServer.Models
 {
 	[System.Serializable]
 	public class DT_StepItem : DT_Hero

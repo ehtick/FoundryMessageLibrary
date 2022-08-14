@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace IoBTMessage.Models
 {
 	public class VirtualSquad : VirtualSquire

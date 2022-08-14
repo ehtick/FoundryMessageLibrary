@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace DTARServer.Models
 {
 	public class DT_Base
