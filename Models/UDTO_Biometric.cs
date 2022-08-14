@@ -16,21 +16,24 @@ using System.Threading.Tasks;
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-namespace IoBTMessage.Models;
-
-[System.Serializable]
-public class UDTO_Biometric : UDTO_Base
+namespace IoBTMessage.Models
 {
-	public double heartRate;
-	public double temperature;
-	public double stepCount;
-	public double sleepScore;
-	public double stressCalculation;
-	public double fitnessScore;
+
+	[System.Serializable]
+	public class UDTO_Biometric : UDTO_Base
+	{
+		public double heartRate;
+		public double temperature;
+		public double stepCount;
+		public double sleepScore;
+		public double stressCalculation;
+		public double fitnessScore;
 
 #if !UNITY
-	public override string getUniqueCode() {
-        return $"{this.udtoTopic}{this.sourceGuid}{this.panID}";
-    }
+		public override string getUniqueCode()
+		{
+			return $"{this.udtoTopic}{this.sourceGuid}{this.panID}";
+		}
 #endif
+	}
 }

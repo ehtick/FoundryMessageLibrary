@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IoBTMessage;
-
+namespace IoBTMessage
+{
 static public class BasicMath
 {
 	public static double toDouble(this string Value)
@@ -68,3 +68,4 @@ static public class IoBTMath
 	}
 }
 
+}

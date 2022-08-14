@@ -1,7 +1,8 @@
-namespace IoBTMessage.Models;
-
-[System.Serializable]
-public class HighResOffset : HighResPosition
+namespace IoBTMessage.Models
 {
+	[System.Serializable]
+	public class HighResOffset : HighResPosition
+	{
+	}
 }
 
