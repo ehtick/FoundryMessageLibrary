@@ -6,8 +6,8 @@ namespace IoBTMessage.Models
 		public UDTO_Position position;
 		public BoundingBox boundingBox;
 
-		private readonly Dictionary<string, object> _lookup = new();
-		private readonly Dictionary<string, UDTO_3D> _guids = new();
+		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
+		private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
 
 #if UNITY
 	public List<UDTO_Body> bodies;

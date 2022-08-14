@@ -6,7 +6,7 @@
 	{
 		public string assetGUID;
 		public string docGuid;
-		public List<string> parameters = new();
+		public List<string> parameters = new List<string>();
 		public DT_Document document;
 
 #if !UNITY

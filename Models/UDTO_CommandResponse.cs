@@ -1,6 +1,8 @@
-namespace IoBTMessage.Models;
-
-public class UDTO_CommandResponse : UDTO_Command
+namespace IoBTMessage.Models
 {
-	public string response;
+
+	public class UDTO_CommandResponse : UDTO_Command
+	{
+		public string response;
+	}
 }
