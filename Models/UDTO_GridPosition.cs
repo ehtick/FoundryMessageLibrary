@@ -8,10 +8,11 @@
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-namespace IoBTMessage.Models;
-
-[System.Serializable]
-public class UDTO_GridPosition : UDTO_Position
+namespace IoBTMessage.Models
 {
-	public string gridCoordinates;
+	[System.Serializable]
+	public class UDTO_GridPosition : UDTO_Position
+	{
+		public string gridCoordinates;
+	}
 }

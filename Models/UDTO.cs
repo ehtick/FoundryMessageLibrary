@@ -1,77 +1,84 @@
 
 #if !UNITY
-using System.Text.Json;
-using System.Text.Json.Nodes;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace IoBTMessage.Models;
+using System.Linq;
 
 
-public static class UDTO
+
+namespace IoBTMessage.Models
 {
-	private static readonly Dictionary<string, Type> udtoTypes = new();
 
-	public static string asTopic<T>() where T : UDTO_Base
+
+	public static class UDTO
 	{
-		return UDTO_Base.asTopic(typeof(T).Name);
-	}
+		private static readonly Dictionary<string, Type> udtoTypes = new Dictionary<string, Type>();
 
-	public static bool matchTopic<T>(UDTO_Base obj) where T : UDTO_Base
-	{
-		return obj.udtoTopic == asTopic<T>();
-	}
-
-	public static bool matchTopic<T>(string topic) where T : UDTO_Base
-	{
-		return topic == asTopic<T>();
-	}
-
-	public static T decodePayload<T>(UDTO_ServerSync transport) where T : UDTO_Base
-	{
-		T obj = Activator.CreateInstance(typeof(T)) as T;
-		transport.decodePayload<T>(obj);
-		//use sync to fix any shorthand issues with guid or timedate
-		return obj.sync<T>();
-	}
-
-
-	public static Type LookupType(string name)
-	{
-		if (udtoTypes.Keys.Count == 0)
+		public static string asTopic<T>() where T : UDTO_Base
 		{
-			var assembly = typeof(UDTO_Base).Assembly;
-			foreach (var type in assembly.DefinedTypes.Where(item => item.Name.StartsWith("UDTO_")))
+			return UDTO_Base.asTopic(typeof(T).Name);
+		}
+
+		public static bool matchTopic<T>(UDTO_Base obj) where T : UDTO_Base
+		{
+			return obj.udtoTopic == asTopic<T>();
+		}
+
+		public static bool matchTopic<T>(string topic) where T : UDTO_Base
+		{
+			return topic == asTopic<T>();
+		}
+
+		public static T decodePayload<T>(UDTO_ServerSync transport) where T : UDTO_Base
+		{
+			T obj = Activator.CreateInstance(typeof(T)) as T;
+			transport.decodePayload<T>(obj);
+			//use sync to fix any shorthand issues with guid or timedate
+			return obj.sync<T>();
+		}
+
+
+		public static Type LookupType(string name)
+		{
+			if (udtoTypes.Keys.Count == 0)
 			{
-				udtoTypes.Add(type.Name, type);
-				var shortname = type.Name.Replace("UDTO_", "");
-				udtoTypes.Add(shortname, type);
+				var assembly = typeof(UDTO_Base).Assembly;
+				foreach (var type in assembly.DefinedTypes.Where(item => item.Name.StartsWith("UDTO_")))
+				{
+					udtoTypes.Add(type.Name, type);
+					var shortname = type.Name.Replace("UDTO_", "");
+					udtoTypes.Add(shortname, type);
+				}
 			}
+
+			if (udtoTypes.TryGetValue(name, out Type found))
+			{
+				throw new ArgumentException(@"type not found {name}");
+			}
+			return found;
 		}
+		//public static UDTO_Base Hydrate(string target)
+		//{
+		//	using var stream = new MemoryStream();
+		//	using var writer = new Utf8JsonWriter(stream);
+		//	var node = JsonNode.Parse(target);
+		//	node.WriteTo(writer);
+		//	writer.Flush();
 
-		if (udtoTypes.TryGetValue(name, out Type found))
-		{
-			throw new ArgumentException(@"type not found {name}");
-		}
-		return found;
-	}
-	public static UDTO_Base Hydrate(string target)
-	{
-		using var stream = new MemoryStream();
-		using var writer = new Utf8JsonWriter(stream);
-		var node = JsonNode.Parse(target);
-		node.WriteTo(writer);
-		writer.Flush();
+		//	var topic = node["udtoTopic"].ToString();
+		//	Type type = LookupType(topic);
+		//	var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
 
-		var topic = node["udtoTopic"].ToString();
-		Type type = LookupType(topic);
-		var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
+		//	return result;
+		//}
 
-		return result;
-	}
-
-	public static string Dehydrate(UDTO_Base target)
-	{
-		var result = JsonSerializer.Serialize(target, target.GetType());
-		return result;
-	}
+		//public static string Dehydrate(UDTO_Base target)
+		//{
+		//	var result = JsonSerializer.Serialize(target, target.GetType());
+		//	return result;
+		//}
 #endif
+	}
 }

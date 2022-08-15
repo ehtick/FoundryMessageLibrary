@@ -6,35 +6,37 @@ using System.Threading.Tasks;
 
 using IoBTMessage.Models;
 
-namespace IoBTMessageLibrary.Models;
-
-public class PlatformGenerator
+namespace IoBTMessageLibrary.Models
 {
-	#if !UNITY
-	public UDTO_Platform AllPrimitives(string PanID)
+
+	public class PlatformGenerator
 	{
-		var platform = new UDTO_Platform()
+#if !UNITY
+		public UDTO_Platform AllPrimitives(string PanID)
 		{
-			platformName = "AllPrimitives",
-			panID = PanID
-		};
+			var platform = new UDTO_Platform()
+			{
+				platformName = "AllPrimitives",
+				panID = PanID
+			};
 
-		var footer = platform.FindOrCreate<UDTO_Body>("Cube_01",true);
-		footer.CreateBox("base", 20, 40, 90);
+			var footer = platform.FindOrCreate<UDTO_Body>("Cube_01", true);
+			footer.CreateBox("base", 20, 40, 90);
 
-		var post = platform.FindOrCreate<UDTO_Body>("Post_01", true);
-		post.CreateCylinder("post", 10, 90, 10);
+			var post = platform.FindOrCreate<UDTO_Body>("Post_01", true);
+			post.CreateCylinder("post", 10, 90, 10);
 
-		var label = platform.FindOrCreate<UDTO_Label>("Cube_01", true);
-		label.CreateTextAt("Hello 3D, World");
+			var label = platform.FindOrCreate<UDTO_Label>("Cube_01", true);
+			label.CreateTextAt("Hello 3D, World");
 
-		label = platform.FindOrCreate<UDTO_Label>("Cube_02", true);
-		label.CreateTextAt("Top of the World", 5, post.boundingBox.height+2, 10);
+			label = platform.FindOrCreate<UDTO_Label>("Cube_02", true);
+			label.CreateTextAt("Top of the World", 5, post.boundingBox.height + 2, 10);
 
-		//platform.RelateMembers<UDTO_Relationship>(post, "MountsTo", footer);
-		platform.RelateMembers<UDTO_Relationship>(footer, "Supports", post);
+			//platform.RelateMembers<UDTO_Relationship>(post, "MountsTo", footer);
+			platform.RelateMembers<UDTO_Relationship>(footer, "Supports", post);
 
-		return platform;
-	}
+			return platform;
+		}
 #endif
+	}
 }

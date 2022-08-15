@@ -1,57 +1,61 @@
-﻿namespace DTARServer.Models;
+﻿using System.Collections.Generic;
 using System.Linq;
-
-[System.Serializable]
-public class DT_ProcessStep : DT_Hero
+namespace DTARServer.Models
 {
 
-	public int memberCount;
-	public int stepNumber;
+	[System.Serializable]
+	public class DT_ProcessStep : DT_Hero
+	{
 
-	public List<DT_StepItem> details;
+		public int memberCount;
+		public int stepNumber;
+
+		public List<DT_StepItem> details;
 
 
 #if !UNITY
-    public DT_ProcessStep() : base()
-    {
-    }
+		public DT_ProcessStep() : base()
+		{
+		}
 
-    public T AddStepDetail<T>(T detail) where T : DT_StepItem
-	{
-        if (details == null)
-        {
-			details = new List<DT_StepItem>();
-        }
-		detail.parentGuid = this.guid;
+		public T AddStepDetail<T>(T detail) where T : DT_StepItem
+		{
+			if (details == null)
+			{
+				details = new List<DT_StepItem>();
+			}
+			detail.parentGuid = this.guid;
 
-		details.Add(detail);
-		this.memberCount = details.Count;
+			details.Add(detail);
+			this.memberCount = details.Count;
 
-		details = details.OrderBy(x => x.itemNumber).ToList();
-        return detail;
-    }
+			details = details.OrderBy(x => x.itemNumber).ToList();
+			return detail;
+		}
 
 
 
-	public override List<DT_Document> CollectDocuments(List<DT_Document> list)
-	{
-		base.CollectDocuments(list);
+		public override List<DT_Document> CollectDocuments(List<DT_Document> list)
+		{
+			base.CollectDocuments(list);
 
-		details?.ForEach(step => {
-			step.CollectDocuments(list);
-		});
-		return list;
-	}
+			details?.ForEach(step =>
+			{
+				step.CollectDocuments(list);
+			});
+			return list;
+		}
 
-	public DT_ProcessStep ShallowCopy()
-	{
-		var result = (DT_ProcessStep)this.MemberwiseClone();
-		result.assetReferences = null;
-		result.DeReference(this.primaryAsset);
-		result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
+		public DT_ProcessStep ShallowCopy()
+		{
+			var result = (DT_ProcessStep)this.MemberwiseClone();
+			result.assetReferences = null;
+			result.DeReference(this.primaryAsset);
+			result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
 
-		return result;
-	}
+			return result;
+		}
 
 #endif
+	}
 }

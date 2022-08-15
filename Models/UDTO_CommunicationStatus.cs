@@ -8,15 +8,17 @@
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-namespace IoBTMessage.Models;
-
-[System.Serializable]
-public class UDTO_CommunicationStatus : UDTO_Base
+namespace IoBTMessage.Models
 {
-	public string comType;  //  None, Ethernet, WiFi, Lora
-	public double strength;
-	public double bandwidthUp;
-	public double bandwidthDown;
-	public bool inUse;
-	public string lastConnectionTime;
+
+	[System.Serializable]
+	public class UDTO_CommunicationStatus : UDTO_Base
+	{
+		public string comType;  //  None, Ethernet, WiFi, Lora
+		public double strength;
+		public double bandwidthUp;
+		public double bandwidthDown;
+		public bool inUse;
+		public string lastConnectionTime;
+	}
 }

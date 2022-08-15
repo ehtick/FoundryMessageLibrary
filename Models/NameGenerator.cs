@@ -1,47 +1,49 @@
 using System;
 using System.Collections.Generic;
 
-namespace IoBTMessage.Models;
-
-/// <summary>
-/// RandomName class, used to generate a random name.
-/// </summary>
-public class RandomName
+namespace IoBTMessage.Models
 {
-    class NameList
-    {
-        public string[] first { get; set; }
-        public string[] last { get; set; }
 
-        public NameList()
-        {
-            first = new string[] {
-                    "Thomas", "Casen", "Eric","Steve","Greg", "Sherman","Jason","Nathan","Matt","Mark","JB"
-                };
-            last = new string[] {
-                    "North", "South", "East","West","Earth","Wind","Fire","Water"
-                };
-        }
-    }
+	/// <summary>
+	/// RandomName class, used to generate a random name.
+	/// </summary>
+	public class RandomName
+	{
+		class NameList
+		{
+			public string[] first { get; set; }
+			public string[] last { get; set; }
 
-    Random rand;
-    readonly List<string> First;
-    readonly List<string> Last;
+			public NameList()
+			{
+				first = new string[] {
+					"Thomas", "Casen", "Eric","Steve","Greg", "Sherman","Jason","Nathan","Matt","Mark","JB"
+				};
+				last = new string[] {
+					"North", "South", "East","West","Earth","Wind","Fire","Water"
+				};
+			}
+		}
 
-    public RandomName()
-    {
-        this.rand = new Random();
-        var list = new NameList();
+		Random rand;
+		readonly List<string> First;
+		readonly List<string> Last;
 
-        First = new List<string>(list.first);
-        Last = new List<string>(list.last);
-    }
+		public RandomName()
+		{
+			this.rand = new Random();
+			var list = new NameList();
 
-    public string GenerateName()
-    {
-        string first = First[rand.Next(First.Count)];
-        string last = Last[rand.Next(Last.Count)];
+			First = new List<string>(list.first);
+			Last = new List<string>(list.last);
+		}
 
-        return $"{first}_{last}";
-    }
+		public string GenerateName()
+		{
+			string first = First[rand.Next(First.Count)];
+			string last = Last[rand.Next(Last.Count)];
+
+			return $"{first}_{last}";
+		}
+	}
 }

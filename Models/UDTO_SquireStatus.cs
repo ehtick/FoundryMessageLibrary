@@ -8,15 +8,17 @@
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-namespace IoBTMessage.Models;
-
-[System.Serializable]
-public class UDTO_SquireStatus : UDTO_Base
+namespace IoBTMessage.Models
 {
-	public string hostname;
-	public string username;
-	public string ipAddress;
-	public UDTO_CommunicationStatus comStatus;
-	public UDTO_GridPosition gridPosition;
-	public UDTO_Biometric userBiometrics;
+
+	[System.Serializable]
+	public class UDTO_SquireStatus : UDTO_Base
+	{
+		public string hostname;
+		public string username;
+		public string ipAddress;
+		public UDTO_CommunicationStatus comStatus;
+		public UDTO_GridPosition gridPosition;
+		public UDTO_Biometric userBiometrics;
+	}
 }

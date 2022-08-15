@@ -1,25 +1,25 @@
-﻿namespace DTARServer.Models;
-
-
-[System.Serializable]
-public class DT_Document : DT_Title
+﻿namespace DTARServer.Models
 {
-	public string docType;
-	public string filename;
-	public string url;
+
+	[System.Serializable]
+	public class DT_Document : DT_Title
+	{
+		public string docType;
+		public string filename;
+		public string url;
 
 #if !UNITY
-	public DT_Document() : base()
-    {
-    }
+		public DT_Document() : base()
+		{
+		}
 #endif
+	}
+
+
+	public class DT_Image : DT_Document
+	{
+	}
+
 }
-
-
-public class DT_Image : DT_Document
-{
-}
-
-
 
 
