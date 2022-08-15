@@ -15,6 +15,7 @@ namespace IoBTMessage.Models
 	{
 		public double temperature;
 		public double humidity;
+		public double pressure;
 		public UDTO_Direction wind;
 
 	}
