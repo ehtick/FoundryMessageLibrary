@@ -1,3 +1,5 @@
+using System;
+
 namespace IoBTMessage.Models
 {
 	public enum Direction

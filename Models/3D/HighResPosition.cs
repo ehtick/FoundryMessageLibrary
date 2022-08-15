@@ -1,3 +1,4 @@
+using System;
 namespace IoBTMessage.Models
 {
 	[System.Serializable]

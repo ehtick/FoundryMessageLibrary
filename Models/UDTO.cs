@@ -3,9 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Nodes;
+
+
 
 namespace IoBTMessage.Models
 {
@@ -58,26 +59,26 @@ namespace IoBTMessage.Models
 			}
 			return found;
 		}
-		public static UDTO_Base Hydrate(string target)
-		{
-			using var stream = new MemoryStream();
-			using var writer = new Utf8JsonWriter(stream);
-			var node = JsonNode.Parse(target);
-			node.WriteTo(writer);
-			writer.Flush();
+		//public static UDTO_Base Hydrate(string target)
+		//{
+		//	using var stream = new MemoryStream();
+		//	using var writer = new Utf8JsonWriter(stream);
+		//	var node = JsonNode.Parse(target);
+		//	node.WriteTo(writer);
+		//	writer.Flush();
 
-			var topic = node["udtoTopic"].ToString();
-			Type type = LookupType(topic);
-			var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
+		//	var topic = node["udtoTopic"].ToString();
+		//	Type type = LookupType(topic);
+		//	var result = JsonSerializer.Deserialize(stream.ToArray(), type) as UDTO_Base;
 
-			return result;
-		}
+		//	return result;
+		//}
 
-		public static string Dehydrate(UDTO_Base target)
-		{
-			var result = JsonSerializer.Serialize(target, target.GetType());
-			return result;
-		}
+		//public static string Dehydrate(UDTO_Base target)
+		//{
+		//	var result = JsonSerializer.Serialize(target, target.GetType());
+		//	return result;
+		//}
 #endif
 	}
 }
