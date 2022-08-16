@@ -36,6 +36,7 @@ namespace IoBTMessage.Models
 	}
 
 
+	[System.Serializable]
 	public class ContextWrapper<T>
 	{
 

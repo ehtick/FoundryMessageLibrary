@@ -48,7 +48,6 @@ namespace IoBTMessage.Models
 				height = height,
 				depth = depth,
 			};
-			position = new HighResPosition();
 			return this;
 		}
 
@@ -63,7 +62,6 @@ namespace IoBTMessage.Models
 				height = height,
 				depth = depth,
 			};
-			position = new HighResPosition();
 			return this;
 		}
 
@@ -78,7 +76,6 @@ namespace IoBTMessage.Models
 				height = height,
 				depth = depth,
 			};
-			position = new HighResPosition();
 			return this;
 		}
 
@@ -93,7 +90,6 @@ namespace IoBTMessage.Models
 				height = height,
 				depth = depth,
 			};
-			position = new HighResPosition();
 			return this;
 		}
 #endif
