@@ -47,6 +47,18 @@ namespace IoBTMessage.Models
 		public bool hasError;
 		public string message;
 
+		//public ContextWrapper()
+		//{
+		//	this.dateTime = DateTime.UtcNow;
+
+		//	this.payloadType = typeof(T).Name;
+		//	this.payload = new List<T>() { };
+		//	this.length = this.payload.Count;
+
+		//	this.hasError = false;
+		//	this.message = string.Empty;
+		//}
+
 		public ContextWrapper(T obj, string error = "")
 		{
 			this.dateTime = DateTime.UtcNow;

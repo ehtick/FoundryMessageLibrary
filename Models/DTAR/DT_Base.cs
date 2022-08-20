@@ -23,6 +23,13 @@ namespace DTARServer.Models
 			this.name = name;
 			this.initialize();
 		}
+		public virtual T merge<T>(T obj) where T: DT_Base 
+		{
+			if ( this.timeStamp.CompareTo(obj.timeStamp) < 0) {
+				this.timeStamp = obj.timeStamp;
+			}
+			return this as T;
+		}
 
 		public string resetTimeStamp()
 		{
@@ -61,6 +68,7 @@ namespace DTARServer.Models
 			}
 			return this;
 		}
+
 
 #endif
 	}
