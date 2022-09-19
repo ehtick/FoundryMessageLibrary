@@ -6,6 +6,7 @@
 	{
 		public string docType;
 		public string filename;
+		public bool isCashed;
 		public string url;
 
 #if !UNITY

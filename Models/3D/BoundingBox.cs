@@ -47,6 +47,23 @@ namespace IoBTMessage.Models
 			this.pinZ = pos.pinZ;
 			return this;
 		}
+
+		public BoundingBox Box(double width, double height, double depth, string units="m")
+		{
+			this.units = units;
+			this.width = width;
+			this.height = height;
+			this.depth = depth;
+			return this;
+		}
+		public BoundingBox Pin(double pinX, double pinY, double pinZ, string units = "m")
+		{
+			this.units = units;
+			this.pinX = pinX;
+			this.pinY = pinY;
+			this.pinZ = pinZ;
+			return this;
+		}
 #endif
 	}
 }

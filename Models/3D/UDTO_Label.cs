@@ -17,6 +17,8 @@ namespace IoBTMessage.Models
 			base.CopyFrom(obj);
 
 			var label = obj as UDTO_Label;
+			this.text = label.text;
+			this.targetGuid = label.targetGuid;			
 			if (this.position == null)
 			{
 				this.position = label.position;

@@ -61,6 +61,22 @@ namespace IoBTMessage.Models
 			this.zAng = pos.zAng;
 			return this;
 		}
+		public HighResPosition Loc(double xLoc, double yLoc, double zLoc, string units = "m")
+		{
+			this.units = units;
+			this.xLoc = xLoc;
+			this.yLoc = yLoc;
+			this.zLoc = zLoc;
+			return this;
+		}
+		public HighResPosition Ang(double xAng, double yAng, double zAng, string units = "m")
+		{
+			this.units = units;
+			this.xAng = xAng;
+			this.yAng = yAng;
+			this.zAng = zAng;
+			return this;
+		}
 #endif
 	}
 }
