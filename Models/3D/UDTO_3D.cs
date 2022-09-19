@@ -12,6 +12,8 @@ namespace IoBTMessage.Models
 #if !UNITY
 		public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 		{
+			platformName = obj.platformName;
+			uniqueGuid = obj.uniqueGuid;
 			type = obj.type;
 			name = obj.name;
 			return this;

@@ -14,6 +14,14 @@ namespace IoBTMessage.Models
 		public UDTO_Relationship() : base()
 		{
 		}
+		public override UDTO_3D CopyFrom(UDTO_3D obj)
+		{
+			base.CopyFrom(obj);
+			var rel = obj as UDTO_Relationship;
+			this.source = rel.source;
+			this.relationship = rel.relationship;
+			return this;
+		}
 
 		public UDTO_Relationship Build(string source, string relationship, string target)
 		{
@@ -35,11 +43,6 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public override UDTO_3D CopyFrom(UDTO_3D obj)
-		{
-			base.CopyFrom(obj);
-			return this;
-		}
 #endif
 	}
 

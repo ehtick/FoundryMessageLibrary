@@ -18,7 +18,8 @@ namespace IoBTMessage.Models
 
 			var label = obj as UDTO_Label;
 			this.text = label.text;
-			this.targetGuid = label.targetGuid;			
+			this.targetGuid = label.targetGuid;	
+					
 			if (this.position == null)
 			{
 				this.position = label.position;
