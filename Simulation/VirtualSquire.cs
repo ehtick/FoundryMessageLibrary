@@ -32,15 +32,20 @@ namespace IoBTMessage.Models
 		public VirtualSquire(VirtualSquire source)
 		{
 #if !UNITY
-			this.CurrentPosition = source.CurrentPosition.Duplicate<UDTO_Position>();
-			this.CurrentPosition.panID = PanID;
+			if ( source.CurrentPosition != null) {
+				this.CurrentPosition = source.CurrentPosition?.Duplicate<UDTO_Position>();
+				this.CurrentPosition.panID = PanID;
+			}
 
 			this.Speed_MetersPerSecond(source.speed.MetersPerSecond());
 			this.Faceing_Degrees(source.faceing.Degrees());
 			this.Heading_Degrees(source.heading.Degrees());
 
-			this.LastBiometric = source.LastBiometric.Duplicate<UDTO_Biometric>();
-			this.LastBiometric.panID = PanID;
+			if (source.LastBiometric != null)
+			{
+				this.LastBiometric = source.LastBiometric?.Duplicate<UDTO_Biometric>();
+				this.LastBiometric.panID = PanID;
+			}
 #endif
 		}
 
@@ -121,7 +126,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public VirtualSquire ComputeStep(double delta_seconds, int frameID)
+		public virtual VirtualSquire ComputeStep(double delta_seconds, int frameID)
 		{
 			//the distance is computed in km  so
 			//var dist_km = this.speed.KiloMetersPerSecond() * delta_seconds;
@@ -144,7 +149,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public VirtualSquire TimeStep(double delta_seconds, int frameID)
+		public virtual VirtualSquire TimeStep(double delta_seconds, int frameID)
 		{
 			this.ComputeStep(delta_seconds, frameID);
 			if (!this.isPaused)
