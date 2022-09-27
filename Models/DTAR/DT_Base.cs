@@ -159,8 +159,19 @@ namespace DTARServer.Models
 			}
 
 			comments.Add(item);
+			item.parentGuid = this.guid;
 			return item;
 		}
+
+		public virtual List<DT_Comment> CollectComments(List<DT_Comment> list)
+		{
+			if (comments != null)
+			{
+				list.AddRange(comments);
+			}
+			return list;
+		}
+
 		public DT_QualityAssurance AddQualityCheck(DT_QualityAssurance item)
 		{
 			if (qualityChecks == null)
@@ -169,6 +180,7 @@ namespace DTARServer.Models
 			}
 
 			qualityChecks.Add(item);
+			item.parentGuid = this.guid;
 			return item;
 		}
 #endif
@@ -227,6 +239,7 @@ namespace DTARServer.Models
 			});
 			return list;
 		}
+
 #endif
 	}
 }

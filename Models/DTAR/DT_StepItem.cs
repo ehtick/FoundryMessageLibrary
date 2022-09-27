@@ -19,6 +19,13 @@ namespace DTARServer.Models
 			return list;
 		}
 
+		public override List<DT_Comment> CollectComments(List<DT_Comment> list)
+		{
+			base.CollectComments(list);
+
+			return list;
+		}
+
 		public DT_StepItem ShallowCopy()
 		{
 			var result = (DT_StepItem)this.MemberwiseClone();

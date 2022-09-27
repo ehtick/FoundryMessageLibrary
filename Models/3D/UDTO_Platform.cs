@@ -10,14 +10,14 @@ namespace IoBTMessage.Models
 		public UDTO_Position position;
 		public BoundingBox boundingBox;
 
+#if UNITY
+		public List<UDTO_Body> bodies;
+		public List<UDTO_Label> labels;
+		public List<UDTO_Relationship> relationships;
+#endif
+
 		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
 		private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
-
-#if UNITY
-	public List<UDTO_Body> bodies;
-	public List<UDTO_Label> labels;
-	public List<UDTO_Relationship> relationships;
-#endif
 
 #if !UNITY
 

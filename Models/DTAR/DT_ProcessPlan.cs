@@ -46,6 +46,17 @@ namespace DTARServer.Models
 			return list;
 		}
 
+		public override List<DT_Comment> CollectComments(List<DT_Comment> list)
+		{
+			base.CollectComments(list);
+
+			steps?.ForEach(step =>
+			{
+				step.CollectComments(list);
+			});
+			return list;
+		}
+
 		public DT_ProcessPlan ShallowCopy()
 		{
 			var result = (DT_ProcessPlan)this.MemberwiseClone();
