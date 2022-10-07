@@ -127,6 +127,11 @@ namespace DTARServer.Models
 			severity = "Bug";
 			return this;
 		}
+		public DT_Comment Comment()
+		{
+			severity = "Comment";
+			return this;
+		}
 		public DT_Comment MissingReference()
 		{
 			severity = "Missing";
@@ -143,7 +148,6 @@ namespace DTARServer.Models
 		public string title;
 		public string description;
 		public List<DT_Comment> comments;
-
 		public List<DT_QualityAssurance> qualityChecks;
 
 #if !UNITY
@@ -194,6 +198,7 @@ namespace DTARServer.Models
 		public DT_AssetReference primaryAsset;
 		public List<DT_AssetReference> assetReferences;
 		public List<DT_ComponentReference> componentReferences;
+		public DT_ControlNumbers controlNumbers = new DT_ControlNumbers();
 
 #if !UNITY
 		public DT_Hero() : base()
@@ -220,7 +225,7 @@ namespace DTARServer.Models
 
 		public T AddComponentReference<T>(T item) where T : DT_ComponentReference
 		{
-			if (componentReferences == null)
+			if ( componentReferences == null)
 			{
 				componentReferences = new List<DT_ComponentReference>();
 			}
