@@ -8,7 +8,7 @@ namespace DTARServer.Models
 	{
 		public string assetGUID;
 		public string docGuid;
-		public DT_ControlNumbers parameters = new DT_ControlNumbers();
+		public DT_ControlNumbers lookups = new DT_ControlNumbers();
 		public DT_Document document;
 
 #if !UNITY
