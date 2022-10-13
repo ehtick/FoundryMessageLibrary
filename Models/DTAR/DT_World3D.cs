@@ -40,15 +40,15 @@ namespace IoBTMessage.Models
 		public DT_World3D RemoveDuplicates()
 		{
 
-			// platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
-			// bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
-			// labels = labels.DistinctBy(i => i.uniqueGuid).ToList();
-			// relationships = relationships.DistinctBy(i => i.uniqueGuid).ToList();
+			platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
+			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
+			labels = labels.DistinctBy(i => i.uniqueGuid).ToList();
+			relationships = relationships.DistinctBy(i => i.uniqueGuid).ToList();
 
-            platforms = platforms.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
-            bodies = bodies.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
-            labels = labels.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
-            relationships = relationships.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
+            // platforms = platforms.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
+            // bodies = bodies.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
+            // labels = labels.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
+            // relationships = relationships.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
 			return this;
 		}
 	}
