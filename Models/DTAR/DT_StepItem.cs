@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DTARServer.Models
+namespace IoBTMessage.Models
 {
 	[System.Serializable]
 	public class DT_StepItem : DT_Hero

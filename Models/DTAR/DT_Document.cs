@@ -1,4 +1,4 @@
-﻿namespace DTARServer.Models
+﻿namespace IoBTMessage.Models
 {
 
 	[System.Serializable]

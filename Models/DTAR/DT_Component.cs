@@ -1,14 +1,14 @@
-﻿namespace DTARServer.Models
+﻿namespace IoBTMessage.Models
 {
 
 	[System.Serializable]
 	public class DT_Component : DT_Hero
 	{
 		public string serialNumber;
-		public string partID;
+		public string partNumber;
 		public string revision;
-		public string hsc { get; set; }
-		public string structureLevel { get; set; }
+		public string nha;
+		public string assemblyNumber;
 
 #if !UNITY
 		public DT_Component() : base()
@@ -17,7 +17,11 @@
 		}
 		public string serialName()
 		{
-			return $"{partID}-{revision}@{serialNumber}";
+			return $"{partName()}@{serialNumber}";
+		}
+		public string partName()
+		{
+			return $"{partNumber}-{revision}";
 		}
 #endif
 	}

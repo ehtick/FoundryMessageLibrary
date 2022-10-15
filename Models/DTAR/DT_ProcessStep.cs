@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-namespace DTARServer.Models
+namespace IoBTMessage.Models
 {
 
 	[System.Serializable]
