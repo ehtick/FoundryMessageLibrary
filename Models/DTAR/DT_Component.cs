@@ -9,6 +9,7 @@
 		public string revision;
 		public string nha;
 		public string assemblyNumber;
+		public string configuration;
 
 #if !UNITY
 		public DT_Component() : base()
