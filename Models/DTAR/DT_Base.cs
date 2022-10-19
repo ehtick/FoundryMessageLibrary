@@ -87,9 +87,8 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class DT_QualityAssurance : DT_Base
+	public class DT_QualityAssurance : DT_Title
 	{
-		public string comment;
 		public string action;
 		public string author;
 		public string componentGuid;
@@ -102,9 +101,8 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class DT_Comment : DT_Base
+	public class DT_Comment : DT_Title
 	{
-		public string comment;
 		public string severity;
 		public string author;
 

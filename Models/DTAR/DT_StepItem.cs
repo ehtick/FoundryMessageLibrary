@@ -38,35 +38,4 @@ namespace IoBTMessage.Models
 #endif
 	}
 
-
-	[System.Serializable]
-	public class DT_Note : DT_StepItem
-	{
-
-	}
-
-	[System.Serializable]
-	public class DT_Caution : DT_StepItem
-	{
-	}
-
-	[System.Serializable]
-	public class DT_Warning : DT_StepItem
-	{
-	}
-
-	[System.Serializable]
-	public class DT_StepAction : DT_StepItem
-	{
-	}
-
-	[System.Serializable]
-	public class DT_CAD : DT_StepItem
-	{
-	}
-
-	[System.Serializable]
-	public class DT_Media : DT_StepItem
-	{
-	}
 }
