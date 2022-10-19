@@ -26,6 +26,12 @@ namespace IoBTMessage.Models
 		{
 			return $"{partNumber}-{revision}";
 		}
+
+		public DT_Component ShallowCopy()
+		{
+			var result = (DT_Component)this.MemberwiseClone();
+			return result;
+		}
 #endif
 	}
 
