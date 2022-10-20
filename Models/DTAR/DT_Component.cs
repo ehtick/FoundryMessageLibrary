@@ -20,10 +20,16 @@ namespace IoBTMessage.Models
 		}
 		public string serialName()
 		{
+			if ( string.IsNullOrEmpty(serialNumber))
+				return partName();
+
 			return $"{partName()}@{serialNumber}";
 		}
 		public string partName()
 		{
+			if ( string.IsNullOrEmpty(revision))
+				return partNumber;
+
 			return $"{partNumber}-{revision}";
 		}
 

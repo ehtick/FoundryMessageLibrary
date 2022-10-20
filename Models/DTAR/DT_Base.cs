@@ -147,10 +147,21 @@ namespace IoBTMessage.Models
 		public string description;
 		public List<DT_Comment> comments;
 		public List<DT_QualityAssurance> qualityChecks;
+		public DT_ControlNumbers metadata;
 
 #if !UNITY
 		public DT_Title() : base()
 		{
+		}
+
+		public void AddMetaData(string key, string value)
+		{
+			if (metadata == null)
+			{
+				metadata = new DT_ControlNumbers();
+			}
+
+			metadata.Establish(key,value);
 		}
 
 		public DT_Comment AddComment(DT_Comment item)
@@ -196,7 +207,7 @@ namespace IoBTMessage.Models
 		public DT_AssetReference primaryAsset;
 		public List<DT_AssetReference> assetReferences;
 		public List<DT_ComponentReference> componentReferences;
-		public DT_ControlNumbers controlNumbers = new DT_ControlNumbers();
+
 
 #if !UNITY
 		public DT_Hero() : base()

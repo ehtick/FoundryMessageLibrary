@@ -14,8 +14,6 @@ namespace IoBTMessage.Models
 		public List<UDTO_Label> labels = new List<UDTO_Label>();
 		public List<UDTO_Relationship> relationships = new List<UDTO_Relationship>();
 
-		public List<DT_Component> components = new List<DT_Component>();
-
 		public DT_World3D()
 		{
 		}
@@ -27,19 +25,12 @@ namespace IoBTMessage.Models
 			result.bodies = null;
 			result.labels = null;
 			result.relationships = null;
-			result.components = null;
 			result.assetReferences = null;
 			result.DeReference(this.primaryAsset);
 
 			return result;
 		}
 
-		public DT_Component AddComponent(DT_Component component)
-		{
-			components ??= new List<DT_Component>();
-			components.Add(component);
-			return component;
-		}
 
 		public DT_World3D FillWorldFromPlatform(UDTO_Platform platform)
 		{
@@ -56,7 +47,6 @@ namespace IoBTMessage.Models
 			bodies.AddRange(world.bodies);
 			labels.AddRange(world.labels);
 			relationships.AddRange(world.relationships);
-			components.AddRange(world.components);
 			return RemoveDuplicates();
 		}
 
@@ -67,7 +57,6 @@ namespace IoBTMessage.Models
 			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
 			labels = labels.DistinctBy(i => i.uniqueGuid).ToList();
 			relationships = relationships.DistinctBy(i => i.uniqueGuid).ToList();
-			components = components.DistinctBy(i => i.serialName()).ToList();
 
 			// platforms = platforms.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
 			// bodies = bodies.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();

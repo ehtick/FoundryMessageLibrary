@@ -8,6 +8,8 @@
 		public string filename;
 		public bool isCashed;
 		public string url;
+		public BoundingBox boundingbox;
+
 
 #if !UNITY
 		public DT_Document() : base()
@@ -16,10 +18,6 @@
 #endif
 	}
 
-
-	public class DT_Image : DT_Document
-	{
-	}
 
 }
 

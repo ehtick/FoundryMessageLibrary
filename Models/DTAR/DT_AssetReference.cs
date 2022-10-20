@@ -4,12 +4,12 @@ namespace IoBTMessage.Models
 {
 
 	[System.Serializable]
-	public class DT_AssetReference : DT_Base
+	public class DT_AssetReference : DT_Title
 	{
 		public string assetGUID;
 		public string docGuid;
-		public DT_ControlNumbers lookups = new DT_ControlNumbers();
 		public DT_Document document;
+		public HighResPosition position;
 
 #if !UNITY
 		public DT_AssetReference() : base()
