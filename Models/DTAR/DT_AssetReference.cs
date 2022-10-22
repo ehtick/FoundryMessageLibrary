@@ -2,12 +2,16 @@
 
 namespace IoBTMessage.Models
 {
+	public interface IDT_Reference 
+	{
+		//string targetGuid;
+	}
 
 	[System.Serializable]
-	public class DT_AssetReference : DT_Title
+	public class DT_AssetReference : DT_Title, IDT_Reference
 	{
-		public string assetGUID;
-		public string docGuid;
+		public string assetGuid;
+		public string targetGuid;
 		public DT_Document document;
 		public HighResPosition position;
 
@@ -19,7 +23,7 @@ namespace IoBTMessage.Models
 		public DT_AssetReference ShallowCopy()
 		{
 			var result = (DT_AssetReference)this.MemberwiseClone();
-			result.assetGUID = document?.guid ?? assetGUID;
+			result.assetGuid = document?.guid ?? assetGuid;
 			result.document = null;
 			return result;
 		}
