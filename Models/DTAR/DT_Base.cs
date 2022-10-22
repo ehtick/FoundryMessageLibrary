@@ -12,6 +12,8 @@ namespace IoBTMessage.Models
 
 		public string timeStamp;
 
+		public DT_ControlNumbers metadata;
+
 
 #if !UNITY
 		public DT_Base()
@@ -52,6 +54,16 @@ namespace IoBTMessage.Models
 			return DT_Base.asTopic(typeof(T).Name).ToLower();
 		}
 
+		public void AddMetaData(string key, string value)
+		{
+			if (metadata == null)
+			{
+				metadata = new DT_ControlNumbers();
+			}
+
+			metadata.Establish(key,value);
+		}
+		
 		public DT_Base initialize()
 		{
 			if (String.IsNullOrEmpty(type))
@@ -147,22 +159,14 @@ namespace IoBTMessage.Models
 		public string description;
 		public List<DT_Comment> comments;
 		public List<DT_QualityAssurance> qualityChecks;
-		public DT_ControlNumbers metadata;
+
 
 #if !UNITY
 		public DT_Title() : base()
 		{
 		}
 
-		public void AddMetaData(string key, string value)
-		{
-			if (metadata == null)
-			{
-				metadata = new DT_ControlNumbers();
-			}
 
-			metadata.Establish(key,value);
-		}
 
 		public DT_Comment AddComment(DT_Comment item)
 		{

@@ -6,7 +6,6 @@
 	{
 		public string docType;
 		public string filename;
-		public bool isCashed;
 		public string url;
 		public BoundingBox boundingbox;
 

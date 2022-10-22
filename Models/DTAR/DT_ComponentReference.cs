@@ -1,10 +1,10 @@
 namespace IoBTMessage.Models
 {
 	[System.Serializable]
-	public class DT_ComponentReference : DT_Title
+	public class DT_ComponentReference : DT_Title, IDT_Reference
 	{
 		public string partNumber;
-		public string componentGuid;
+		public string targetGuid;
 		public DT_Component component;
 
 #if !UNITY
@@ -14,7 +14,7 @@ namespace IoBTMessage.Models
 		public DT_ComponentReference ShallowCopy()
 		{
 			var result = (DT_ComponentReference)this.MemberwiseClone();
-			result.componentGuid = component?.guid ?? componentGuid;
+			result.targetGuid = component?.guid ?? targetGuid;
 			result.partNumber = component?.partNumber ?? partNumber;
 			result.component = null;
 			return result;
