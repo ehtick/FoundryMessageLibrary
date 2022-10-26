@@ -17,7 +17,7 @@ namespace IoBTMessage.Models
 #endif
 
 		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
-		private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
+		//private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
 
 #if !UNITY
 
@@ -35,28 +35,11 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public T CreateUsing<T>(string name, string guid) where T : UDTO_3D
-		{
-			var dict = FindLookup<T>();
 
-			var found = CreateItem<T>(name);
-			found.uniqueGuid = guid;
-			found.platformName = this.platformName;
-			dict[found.uniqueGuid] = found;
-			
-			return found;
-		}
 
 		public T CreateUsingDTBASE<T>(DT_Base obj) where T : UDTO_3D
 		{
-			var dict = FindLookup<T>();
-
-			var found = CreateItem<T>(obj.name);
-			found.uniqueGuid = obj.guid;
-			found.platformName = this.platformName;
-			dict[found.uniqueGuid] = found;
-			
-			return found;
+			return CreateUsing<T>(obj.name, obj.guid);
 		}
 
 		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
@@ -249,7 +232,7 @@ namespace IoBTMessage.Models
 
 		private void ClearLookup<T>() where T : UDTO_3D
 		{
-			var result = _lookup[typeof(T).Name] as Dictionary<string, T>;
+			var result = FindLookup<T>();
 			result.Clear();
 		}
 
@@ -260,7 +243,7 @@ namespace IoBTMessage.Models
 			found.panID = panID;
 			found.platformName = platformName;
 			found.uniqueGuid = Guid.NewGuid().ToString();
-			_guids[found.uniqueGuid] = found;
+			//_guids[found.uniqueGuid] = found;
 			return found;
 		}
 
@@ -268,6 +251,18 @@ namespace IoBTMessage.Models
 		{
 			var dict = FindLookup<T>();
 			dict.TryGetValue(name, out T found);
+			return found;
+		}
+
+		public T CreateUsing<T>(string name, string guid = null) where T : UDTO_3D
+		{
+
+			var found = FindOrCreate<T>(name,true);
+			if ( guid != null) 
+			{
+				found.uniqueGuid = guid;
+			}
+			
 			return found;
 		}
 
@@ -291,19 +286,19 @@ namespace IoBTMessage.Models
 				if (delete)
 				{
 					dict.Remove(key);
-					_guids.Remove(found.uniqueGuid);
+					//_guids.Remove(found.uniqueGuid);
 				}
 				else
 				{
 					found.CopyFrom(obj);
-					_guids[found.uniqueGuid] = found;
+					//_guids[found.uniqueGuid] = found;
 				}
 			}
 			else if (!delete)
 			{
 				dict[key] = obj;
 				found = obj;
-				_guids[found.uniqueGuid] = found;
+				//_guids[found.uniqueGuid] = found;
 			}
 			return found;
 		}
