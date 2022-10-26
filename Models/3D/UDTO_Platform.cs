@@ -35,44 +35,44 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public T CreateUsingGUID<T>(string name) where T : UDTO_3D
+		public T CreateUsingGUID<T>(DT_Base obj) where T : UDTO_3D
 		{
 			var dict = FindLookup<T>();
 
-			var found = CreateItem<T>(name);
-			found.uniqueGuid = Guid.NewGuid().ToString();
+			var found = CreateItem<T>(obj.name);
+			found.uniqueGuid = obj.guid;
 			dict[found.uniqueGuid] = found;
 			
 			return found;
 		}
 
-		public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(name);
-			return result.CreateCylinder(name, width, height, depth, units);
+			var result = CreateUsingGUID<UDTO_Body>(obj);
+			return result.CreateCylinder(obj.name, width, height, depth, units);
 		}	
 
-		public UDTO_Body CreateBlock(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(name);
-			return result.CreateBox(name, width, height, depth, units);
+			var result = CreateUsingGUID<UDTO_Body>(obj);
+			return result.CreateBox(obj.name, width, height, depth, units);
 		}		
 
-		public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(name);
-			return result.CreateSphere(name, width, height, depth, units);
+			var result = CreateUsingGUID<UDTO_Body>(obj);
+			return result.CreateSphere(obj.name, width, height, depth, units);
 		}	
 
-		public UDTO_Body CreateGlb(string name, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(name);
+			var result = CreateUsingGUID<UDTO_Body>(obj);
 			return result.CreateGlb(url, width, height, depth, units);
 		}
 
-		public UDTO_Label CreateLabel(string name, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Label>(name);
+			var result = CreateUsingGUID<UDTO_Label>(obj);
 			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
