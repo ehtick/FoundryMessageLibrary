@@ -21,7 +21,7 @@ namespace IoBTMessage.Models
 
 #if !UNITY
 
-		public UDTO_Platform CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
 			this.name = name;
 			boundingBox = new BoundingBox()
@@ -33,6 +33,47 @@ namespace IoBTMessage.Models
 			};
 			position = new UDTO_Position();
 			return this;
+		}
+
+		public T CreateUsingGUID<T>(string name) where T : UDTO_3D
+		{
+			var dict = FindLookup<T>();
+
+			var found = CreateItem<T>(name);
+			found.uniqueGuid = Guid.NewGuid().ToString();
+			dict[found.uniqueGuid] = found;
+			
+			return found;
+		}
+
+		public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingGUID<UDTO_Body>(name);
+			return result.CreateCylinder(name, width, height, depth, units);
+		}	
+
+		public UDTO_Body CreateBlock(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingGUID<UDTO_Body>(name);
+			return result.CreateBox(name, width, height, depth, units);
+		}		
+
+		public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingGUID<UDTO_Body>(name);
+			return result.CreateSphere(name, width, height, depth, units);
+		}	
+
+		public UDTO_Body CreateGlb(string name, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingGUID<UDTO_Body>(name);
+			return result.CreateGlb(url, width, height, depth, units);
+		}
+
+		public UDTO_Label CreateLabel(string name, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		{
+			var result = CreateUsingGUID<UDTO_Label>(name);
+			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
 		public List<UDTO_Body> bodies
