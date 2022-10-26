@@ -17,11 +17,11 @@ namespace IoBTMessage.Models
 #endif
 
 		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
-		private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
+		//private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
 
 #if !UNITY
 
-		public UDTO_Platform CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
 			this.name = name;
 			boundingBox = new BoundingBox()
@@ -33,6 +33,43 @@ namespace IoBTMessage.Models
 			};
 			position = new UDTO_Position();
 			return this;
+		}
+
+
+
+		public T CreateUsingDTBASE<T>(DT_Base obj) where T : UDTO_3D
+		{
+			return CreateUsing<T>(obj.name, obj.guid);
+		}
+
+		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateCylinder(obj.name, width, height, depth, units);
+		}	
+
+		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateBox(obj.name, width, height, depth, units);
+		}		
+
+		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateSphere(obj.name, width, height, depth, units);
+		}	
+
+		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateGlb(url, width, height, depth, units);
+		}
+
+		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Label>(obj);
+			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
 		public List<UDTO_Body> bodies
@@ -195,7 +232,7 @@ namespace IoBTMessage.Models
 
 		private void ClearLookup<T>() where T : UDTO_3D
 		{
-			var result = _lookup[typeof(T).Name] as Dictionary<string, T>;
+			var result = FindLookup<T>();
 			result.Clear();
 		}
 
@@ -206,7 +243,7 @@ namespace IoBTMessage.Models
 			found.panID = panID;
 			found.platformName = platformName;
 			found.uniqueGuid = Guid.NewGuid().ToString();
-			_guids[found.uniqueGuid] = found;
+			//_guids[found.uniqueGuid] = found;
 			return found;
 		}
 
@@ -214,6 +251,18 @@ namespace IoBTMessage.Models
 		{
 			var dict = FindLookup<T>();
 			dict.TryGetValue(name, out T found);
+			return found;
+		}
+
+		public T CreateUsing<T>(string name, string guid = null) where T : UDTO_3D
+		{
+
+			var found = FindOrCreate<T>(name,true);
+			if ( guid != null) 
+			{
+				found.uniqueGuid = guid;
+			}
+			
 			return found;
 		}
 
@@ -237,19 +286,19 @@ namespace IoBTMessage.Models
 				if (delete)
 				{
 					dict.Remove(key);
-					_guids.Remove(found.uniqueGuid);
+					//_guids.Remove(found.uniqueGuid);
 				}
 				else
 				{
 					found.CopyFrom(obj);
-					_guids[found.uniqueGuid] = found;
+					//_guids[found.uniqueGuid] = found;
 				}
 			}
 			else if (!delete)
 			{
 				dict[key] = obj;
 				found = obj;
-				_guids[found.uniqueGuid] = found;
+				//_guids[found.uniqueGuid] = found;
 			}
 			return found;
 		}

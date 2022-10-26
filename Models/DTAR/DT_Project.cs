@@ -54,6 +54,17 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
+		public override List<DT_QualityAssurance> CollectQualityAssurance(List<DT_QualityAssurance> list)
+		{
+			base.CollectQualityAssurance(list);
+
+			processPlans?.ForEach(plan =>
+			{
+				plan.CollectQualityAssurance(list);
+			});
+			return list;
+		}
+
 		public DT_Project ShallowCopy()
 		{
 			var result = (DT_Project)this.MemberwiseClone();

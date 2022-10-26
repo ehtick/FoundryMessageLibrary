@@ -189,6 +189,16 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
+		public virtual List<DT_QualityAssurance> CollectQualityAssurance(List<DT_QualityAssurance> list)
+		{
+
+			if (qualityChecks != null)
+			{
+				list.AddRange(qualityChecks);
+			}
+			return list;
+		}
+
 		public DT_QualityAssurance AddQualityCheck(DT_QualityAssurance item)
 		{
 			if (qualityChecks == null)
@@ -200,6 +210,8 @@ namespace IoBTMessage.Models
 			item.parentGuid = this.guid;
 			return item;
 		}
+
+
 #endif
 	}
 
