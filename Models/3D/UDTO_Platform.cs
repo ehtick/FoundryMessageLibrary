@@ -35,12 +35,25 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public T CreateUsingGUID<T>(DT_Base obj) where T : UDTO_3D
+		public T CreateUsing<T>(string name, string guid) where T : UDTO_3D
+		{
+			var dict = FindLookup<T>();
+
+			var found = CreateItem<T>(name);
+			found.uniqueGuid = guid;
+			found.platformName = this.platformName;
+			dict[found.uniqueGuid] = found;
+			
+			return found;
+		}
+
+		public T CreateUsingDTBASE<T>(DT_Base obj) where T : UDTO_3D
 		{
 			var dict = FindLookup<T>();
 
 			var found = CreateItem<T>(obj.name);
 			found.uniqueGuid = obj.guid;
+			found.platformName = this.platformName;
 			dict[found.uniqueGuid] = found;
 			
 			return found;
@@ -48,31 +61,31 @@ namespace IoBTMessage.Models
 
 		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(obj);
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
 			return result.CreateCylinder(obj.name, width, height, depth, units);
 		}	
 
 		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(obj);
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
 			return result.CreateBox(obj.name, width, height, depth, units);
 		}		
 
 		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(obj);
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
 			return result.CreateSphere(obj.name, width, height, depth, units);
 		}	
 
 		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Body>(obj);
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
 			return result.CreateGlb(url, width, height, depth, units);
 		}
 
 		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
 		{
-			var result = CreateUsingGUID<UDTO_Label>(obj);
+			var result = CreateUsingDTBASE<UDTO_Label>(obj);
 			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
