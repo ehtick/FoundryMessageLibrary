@@ -20,14 +20,14 @@ namespace IoBTMessage.Models
 {
 
 	[System.Serializable]
-	public class UDTO_Biometric : UDTO_Base
+	public class UDTO_Electrical  : UDTO_Base
 	{
-		public double heartRate;
+		public double voltage;
+		public double current;
+		public double resistance;
+		public double wattage;
+		public double capacitance;
 		public double temperature;
-		public double stepCount;
-		public double sleepScore;
-		public double stressCalculation;
-		public double fitnessScore;
 
 #if !UNITY
 
