@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+using System.Reflection.Emit;
+
 namespace IoBTMessage.Models
 {
 	[System.Serializable]
 	public class UDTO_Label : UDTO_3D
 	{
 		public string text;
+		public List<string> details;
 		public string targetGuid;
 		public HighResPosition position;
 
@@ -18,6 +22,7 @@ namespace IoBTMessage.Models
 
 			var label = obj as UDTO_Label;
 			this.text = label.text;
+			this.details = label.details;
 			this.targetGuid = label.targetGuid;	
 					
 			if (this.position == null)
@@ -35,6 +40,21 @@ namespace IoBTMessage.Models
 		public UDTO_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
 		{
 			this.text = text.Trim();
+			this.type = "Label";
+			position = new HighResPosition()
+			{
+				units = units,
+				xLoc = xLoc,
+				yLoc = yLoc,
+				zLoc = zLoc
+			};
+			return this;
+		}
+
+		public UDTO_Label CreateLabelAt(string text, List<string> details = null, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		{
+			this.text = text.Trim();
+			this.details = details;
 			this.type = "Label";
 			position = new HighResPosition()
 			{
