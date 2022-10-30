@@ -5,10 +5,6 @@ namespace IoBTMessage.Models
 		public string uniqueGuid;
 
 #if !UNITY
-		public override string getUniqueCode()
-		{
-			return $"{this.uniqueGuid}";
-		}
 
 		public override string compress(char d = ',')
 		{

@@ -10,29 +10,21 @@ namespace IoBTMessage.Models
 		static Guid defaultSourceGuid = Guid.NewGuid();
 		public string udtoTopic;
 		public string sourceGuid;
+		public string refGuid;
 		public string timeStamp;
 		public string panID;
 
 #if !UNITY
 		public UDTO_Base()
 		{
+			refGuid = Guid.NewGuid().ToString();
 			this.initialize(null);
 		}
 
 		public T Duplicate<T>() where T : UDTO_Base
 		{
-			var dupe = Activator.CreateInstance<T>();
-			dupe.decompress(this.compress().Split(','));
+			var dupe = this.MemberwiseClone() as T;
 			return dupe;
-		}
-
-		public string compareHash()
-		{
-			var hash = this.compress();
-			var list = hash.Split('\u002C');
-			list[2] = "NOTIME";
-			var key = string.Join('\u002C', list);
-			return key;
 		}
 
 		public virtual string compress(char d = '\u002C')
@@ -97,6 +89,10 @@ namespace IoBTMessage.Models
 			{
 				sourceGuid = UDTO_Base.defaultSourceGuid.ToString();
 			}
+			if (String.IsNullOrEmpty(refGuid))
+			{
+				refGuid = Guid.NewGuid().ToString();
+			}
 			if (String.IsNullOrEmpty(panID))
 			{
 				panID = defaultPanID;
@@ -104,14 +100,19 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public virtual string getUniqueCode()
+		public virtual string UniqueCode()
 		{
-			return $"{this.udtoTopic}{this.sourceGuid}{this.timeStamp}{this.panID}";
+			return refGuid;
 		}
+
 
 		public virtual bool matches(UDTO_Base other)
 		{
-			return this.getUniqueCode() == other.getUniqueCode();
+			return this.UniqueCode() == other.UniqueCode();
+		}
+		public virtual bool matchesPanSource(UDTO_Base other)
+		{
+			return this.panID == other.panID && this.sourceGuid == other.sourceGuid;
 		}
 #endif
 	}

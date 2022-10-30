@@ -11,10 +11,6 @@ namespace IoBTMessage.Models
 		public UDTO_Position(Location loc) : base(loc)
 		{
 		}
-		public override string getUniqueCode()
-		{
-			return $"{udtoTopic}{sourceGuid}{panID}";
-		}
 #endif
 	}
 

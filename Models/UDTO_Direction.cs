@@ -19,11 +19,6 @@ namespace IoBTMessage.Models
 			heading = IoBTMath.toDouble(data[counter++]);
 			return counter;
 		}
-
-		public override string getUniqueCode()
-		{
-			return $"{udtoTopic}{sourceGuid}{panID}";
-		}
 #endif
 	}
 }

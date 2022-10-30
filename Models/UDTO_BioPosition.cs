@@ -31,10 +31,7 @@ namespace IoBTMessage.Models
 		public HighResPosition hips;
 
 #if !UNITY
-		public override string getUniqueCode()
-		{
-			return $"{this.udtoTopic}{this.sourceGuid}{this.panID}";
-		}
+
 #endif
 	}
 }

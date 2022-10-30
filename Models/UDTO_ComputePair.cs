@@ -38,10 +38,6 @@ namespace IoBTMessage.Models
 			return counter;
 		}
 
-		public override string getUniqueCode()
-		{
-			return $"{this.udtoTopic}{this.sourceGuid}{this.panID}{this.name}{this.type}{this.container}{this.sourceURL}";
-		}
 #endif
 	}
 }
