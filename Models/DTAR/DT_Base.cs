@@ -90,7 +90,15 @@ namespace IoBTMessage.Models
 	{
 		public string title;
 		public string description;
+		
+#if !UNITY
+		public DT_Searchable() : base()
+		{
+		}
+#endif
 	}
+
+
 
 	[System.Serializable]
 	public class DT_Error : DT_Base
