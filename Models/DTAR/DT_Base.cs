@@ -86,6 +86,13 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
+	public class DT_Searchable : DT_Base
+	{
+		public string title;
+		public string description;
+	}
+
+	[System.Serializable]
 	public class DT_Error : DT_Base
 	{
 		public string error;
@@ -99,7 +106,7 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class DT_QualityAssurance : DT_Title
+	public class DT_QualityAssurance : DT_Searchable
 	{
 		public string action;
 		public string author;
@@ -113,7 +120,7 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class DT_Comment : DT_Title
+	public class DT_Comment : DT_Searchable
 	{
 		public string severity;
 		public string author;
@@ -153,10 +160,8 @@ namespace IoBTMessage.Models
 
 
 	[System.Serializable]
-	public class DT_Title : DT_Base
+	public class DT_Title : DT_Searchable
 	{
-		public string title;
-		public string description;
 		public List<DT_Comment> comments;
 		public List<DT_QualityAssurance> qualityChecks;
 
