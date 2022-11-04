@@ -7,6 +7,7 @@ namespace IoBTMessage.Models
 		public string uniqueGuid;
 		public string type;
 		public string name;
+		public string material;
 		public bool visible = true;
 
 #if !UNITY
