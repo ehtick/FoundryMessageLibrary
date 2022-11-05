@@ -47,17 +47,17 @@ namespace IoBTMessage.Models
 		public bool hasError;
 		public string message;
 
-		//public ContextWrapper()
-		//{
-		//	this.dateTime = DateTime.UtcNow;
+		public ContextWrapper()
+		{
+			this.dateTime = DateTime.UtcNow;
 
-		//	this.payloadType = typeof(T).Name;
-		//	this.payload = new List<T>() { };
-		//	this.length = this.payload.Count;
+			this.payloadType = typeof(T).Name;
+			this.payload = new List<T>() { };
+			this.length = this.payload.Count;
 
-		//	this.hasError = false;
-		//	this.message = string.Empty;
-		//}
+			this.hasError = false;
+			this.message = string.Empty;
+		}
 
 		public ContextWrapper(T obj, string error = "")
 		{
@@ -67,7 +67,7 @@ namespace IoBTMessage.Models
 			this.payload = new List<T>() { obj };
 			this.length = this.payload.Count;
 
-			this.hasError = error != string.Empty ? true : false;
+			this.hasError = error != string.Empty;
 			this.message = error != string.Empty ? error : string.Empty;
 		}
 
@@ -99,8 +99,10 @@ namespace IoBTMessage.Models
 			{
 				Message = message,
 				Status = true
-			});
-			wrap.hasError = false;
+			})
+			{
+				hasError = false
+			};
 			return wrap;
 		}
 		public static ContextWrapper<Failure> exception(string message = "")
@@ -109,8 +111,10 @@ namespace IoBTMessage.Models
 			{
 				Message = message,
 				Status = false
-			});
-			wrap.hasError = true;
+			})
+			{
+				hasError = true
+			};
 			return wrap;
 		}
 
