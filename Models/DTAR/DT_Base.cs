@@ -233,7 +233,6 @@ namespace IoBTMessage.Models
 	{
 
 		public DT_Document heroImage;
-		public DT_AssetReference primaryAsset;
 		public List<DT_AssetReference> assetReferences;
 		public List<DT_ComponentReference> componentReferences;
 
@@ -243,13 +242,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public void DeReference(DT_AssetReference assetRef)
-		{
-			if (assetRef != null)
-			{
-				this.primaryAsset = (DT_AssetReference)assetRef.ShallowCopy();
-			}
-		}
+
 
 		public T AddAssetReference<T>(T item) where T : DT_AssetReference
 		{
@@ -274,7 +267,6 @@ namespace IoBTMessage.Models
 		public virtual List<DT_Document> CollectDocuments(List<DT_Document> list)
 		{
 			list.Add(heroImage);
-			list.Add(primaryAsset?.document);
 
 			assetReferences?.ForEach(assetRef =>
 			{

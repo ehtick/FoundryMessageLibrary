@@ -27,7 +27,7 @@ namespace IoBTMessage.Models
 			result.relationships = null;
 			result.assetReferences = null;
 			result.assetReferences = null;
-			result.DeReference(this.primaryAsset);
+	
 
 			return result;
 		}

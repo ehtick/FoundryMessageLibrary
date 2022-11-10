@@ -8,6 +8,7 @@ namespace IoBTMessage.Models
 		public string type;
 		public string name;
 		public string material;
+		public string referenceDesignation;
 		public bool visible = true;
 
 #if !UNITY
@@ -20,9 +21,16 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
+		public string partName()
+		{
+			if ( string.IsNullOrEmpty(referenceDesignation))
+				return name;
+
+			return $"{name}_{referenceDesignation}";
+		}
 		public bool isDelete()
 		{
-			return this.type == "Command:DELETE" ? true : false;
+			return this.type == "Command:DELETE";
 		}
 
 		public bool isVisible()

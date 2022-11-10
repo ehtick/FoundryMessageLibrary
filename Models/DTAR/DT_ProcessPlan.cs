@@ -73,7 +73,6 @@ namespace IoBTMessage.Models
 			var result = (DT_ProcessPlan)this.MemberwiseClone();
 			result.steps = null;
 			result.assetReferences = null;
-			result.DeReference(this.primaryAsset);
 
 			return result;
 		}
