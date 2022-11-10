@@ -267,7 +267,6 @@ namespace IoBTMessage.Models
 		public virtual List<DT_Document> CollectDocuments(List<DT_Document> list)
 		{
 			list.Add(heroImage);
-			list.Add(primaryAsset?.document);
 
 			assetReferences?.ForEach(assetRef =>
 			{
