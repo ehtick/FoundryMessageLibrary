@@ -21,6 +21,13 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
+		public string partName()
+		{
+			if ( string.IsNullOrEmpty(referenceDesignation))
+				return name;
+
+			return $"{name}_{referenceDesignation}";
+		}
 		public bool isDelete()
 		{
 			return this.type == "Command:DELETE";

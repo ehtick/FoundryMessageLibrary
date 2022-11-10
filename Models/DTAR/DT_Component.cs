@@ -6,12 +6,13 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_Component : DT_Hero
 	{
-		public string serialNumber;
+		public string referenceDesignation;
 		public string partNumber;
 		public string revision;
+		public string serialNumber;
 		public string nha;
-		public string assemblyNumber;
-		public string configuration;
+		//public string assemblyNumber;
+		//public string configuration;
 
 #if !UNITY
 		public DT_Component() : base()
