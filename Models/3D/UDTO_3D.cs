@@ -23,7 +23,7 @@ namespace IoBTMessage.Models
 
 		public bool isDelete()
 		{
-			return this.type == "Command:DELETE" ? true : false;
+			return this.type == "Command:DELETE";
 		}
 
 		public bool isVisible()
