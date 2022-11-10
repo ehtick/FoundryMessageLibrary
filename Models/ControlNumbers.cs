@@ -4,12 +4,12 @@ namespace IoBTMessage.Models
 {
 
 	[System.Serializable]
-	public class DT_ControlNumbers
+	public class ControlParameters
 	{
 		public Dictionary<string,object> lookup;
 
 #if !UNITY
-		public DT_ControlNumbers() : base()
+		public ControlParameters() : base()
 		{
 		}
 		public void Establish(string key, object value)
