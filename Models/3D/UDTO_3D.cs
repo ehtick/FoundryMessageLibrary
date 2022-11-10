@@ -8,6 +8,7 @@ namespace IoBTMessage.Models
 		public string type;
 		public string name;
 		public string material;
+		public string referenceDesignation;
 		public bool visible = true;
 
 #if !UNITY

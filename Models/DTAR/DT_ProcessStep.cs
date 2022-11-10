@@ -72,7 +72,7 @@ namespace IoBTMessage.Models
 		{
 			var result = (DT_ProcessStep)this.MemberwiseClone();
 			result.assetReferences = null;
-			result.DeReference(this.primaryAsset);
+
 			result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
 
 			return result;
