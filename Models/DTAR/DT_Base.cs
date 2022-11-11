@@ -12,7 +12,7 @@ namespace IoBTMessage.Models
 
 		public string timeStamp;
 
-		public DT_ControlNumbers metadata;
+		public ControlParameters metadata;
 
 
 #if !UNITY
@@ -58,7 +58,7 @@ namespace IoBTMessage.Models
 		{
 			if (metadata == null)
 			{
-				metadata = new DT_ControlNumbers();
+				metadata = new ControlParameters();
 			}
 
 			metadata.Establish(key,value);

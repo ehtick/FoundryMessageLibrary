@@ -9,7 +9,7 @@ namespace IoBTMessage.Models
 	{
 		public UDTO_Position position;
 		public BoundingBox boundingBox;
-
+		public HighResOffset offset;
 #if UNITY
 		public List<UDTO_Body> bodies;
 		public List<UDTO_Label> labels;
@@ -32,6 +32,7 @@ namespace IoBTMessage.Models
 				depth = depth,
 			};
 			position = new UDTO_Position();
+			offset = new HighResOffset();
 			return this;
 		}
 
@@ -168,6 +169,14 @@ namespace IoBTMessage.Models
 			type = "Platform";
 		}
 
+		public UDTO_Platform Flush()
+		{
+			ClearLookup<UDTO_Body>();
+			ClearLookup<UDTO_Label>();
+			ClearLookup<UDTO_Relationship>();
+			return this;
+		}
+
 		public UDTO_Platform AsShallowCopy()
 		{
 			var platform = new UDTO_Platform()
@@ -277,6 +286,13 @@ namespace IoBTMessage.Models
 			return found;
 		}
 
+		public T Add<T>(T obj) where T : UDTO_3D
+		{
+			var dict = FindLookup<T>();
+			var key = obj.name;
+			dict[key] = obj;
+			return obj;
+		}
 		public T AddRefreshOrDelete<T>(T obj, bool delete = false) where T : UDTO_3D
 		{
 			var key = obj.name;

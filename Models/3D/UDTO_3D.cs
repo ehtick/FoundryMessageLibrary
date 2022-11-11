@@ -9,6 +9,7 @@ namespace IoBTMessage.Models
 		public string name;
 		public string material;
 		public string referenceDesignation;
+		public ControlParameters metadata;
 		public bool visible = true;
 
 #if !UNITY
