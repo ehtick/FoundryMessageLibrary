@@ -32,6 +32,30 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
+		public DT_World3D FlushPlatforms()
+		{
+			platforms.ForEach(platform => platform.Flush());
+			return this;
+		}
+
+		public List<UDTO_Platform> FillPlatforms()
+		{
+			platforms.ForEach(platform => {
+				platform.Flush();
+				var platformName = platform.platformName;
+				foreach (var body in bodies)
+				{
+					if ( platformName == body.platformName)
+						platform.Add<UDTO_Body>(body);
+				}
+				foreach (var label in labels)
+				{
+					if ( platformName == label.platformName)
+						platform.Add<UDTO_Label>(label);
+				}
+			});
+			return this.platforms;
+		}
 
 		public DT_World3D FillWorldFromPlatform(UDTO_Platform platform)
 		{
