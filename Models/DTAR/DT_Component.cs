@@ -6,6 +6,7 @@ namespace IoBTMessage.Models
 	public class DT_Component : DT_Hero
 	{
 		public DT_Part part;
+		public string parentAssembly;
 
 #if !UNITY
 		public DT_Component() : base()
@@ -15,7 +16,9 @@ namespace IoBTMessage.Models
 		public DT_Component ShallowCopy()
 		{
 			var result = (DT_Component)this.MemberwiseClone();
-			result.part = (DT_Part)part.ShallowCopy();
+			if (part != null)
+				result.part = (DT_Part)part.ShallowCopy();
+
 			return result;
 		}
 #endif

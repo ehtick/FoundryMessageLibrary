@@ -17,7 +17,18 @@ namespace IoBTMessage.Models
 		public string note;
 
 #if !UNITY
+		public UDTO_PartTransation() : base()
+		{
+		}
 
+		public UDTO_PartTransation ShallowCopy()
+		{
+			var result = (UDTO_PartTransation)this.MemberwiseClone();
+			if (part != null)
+				result.part = (DT_Part)part.ShallowCopy();
+
+			return result;
+		}
 #endif
 	}
 }

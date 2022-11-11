@@ -13,7 +13,9 @@ namespace IoBTMessage.Models
 		public DT_ComponentReference ShallowCopy()
 		{
 			var result = (DT_ComponentReference)this.MemberwiseClone();
-			result.part = (DT_Part)ShallowCopy();
+			if ( part != null )
+				result.part = (DT_Part)part.ShallowCopy();
+
 			result.component = null;
 			return result;
 		}
