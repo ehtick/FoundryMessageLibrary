@@ -22,7 +22,7 @@ namespace IoBTMessage.Models
 			if ( string.IsNullOrEmpty(serialNumber))
 				return partName();
 
-			return $"{partName()}@{serialNumber}";
+			return $"{partName()}:{serialNumber}";
 		}
 		public string partName()
 		{
@@ -38,6 +38,19 @@ namespace IoBTMessage.Models
 				return partName();
 
 			return $"{partName()}@{referenceDesignation}";
+		}
+
+		public string ComputeTitle()
+		{
+			var title = partName();
+
+			if (!string.IsNullOrEmpty(serialNumber))
+				title = $"{title}:{serialNumber}";
+
+			if ( !string.IsNullOrEmpty(referenceDesignation) )
+				title = $"{title}@{referenceDesignation}";
+
+			return title;
 		}
 	}
 
