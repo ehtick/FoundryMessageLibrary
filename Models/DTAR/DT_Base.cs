@@ -54,7 +54,7 @@ namespace IoBTMessage.Models
 			return DT_Base.asTopic(typeof(T).Name).ToLower();
 		}
 
-		public void AddMetaData(string key, string value)
+		public ControlParameters AddMetaData(string key, string value)
 		{
 			if (metadata == null)
 			{
@@ -62,6 +62,7 @@ namespace IoBTMessage.Models
 			}
 
 			metadata.Establish(key,value);
+			return metadata;
 		}
 		
 		public DT_Base initialize()
