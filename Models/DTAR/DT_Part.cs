@@ -19,14 +19,14 @@ namespace IoBTMessage.Models
 		}
 		public string serialName()
 		{
-			if ( string.IsNullOrEmpty(serialNumber))
+			if (string.IsNullOrEmpty(serialNumber))
 				return partName();
 
-			return $"{partName()}:{serialNumber}";
+			return $"{partName()} (SN:{serialNumber})";
 		}
 		public string partName()
 		{
-			if ( string.IsNullOrEmpty(revision))
+			if (string.IsNullOrEmpty(revision))
 				return partNumber;
 
 			return $"{partNumber}-{revision}";
@@ -34,21 +34,21 @@ namespace IoBTMessage.Models
 
 		public string refName()
 		{
-			if ( string.IsNullOrEmpty(referenceDesignation))
+			if (string.IsNullOrEmpty(referenceDesignation))
 				return partName();
 
-			return $"{partName()}@{referenceDesignation}";
+			return $"{partName()} ({referenceDesignation})";
 		}
 
 		public string ComputeTitle()
 		{
 			var title = partName();
 
-			if (!string.IsNullOrEmpty(serialNumber))
-				title = $"{title}:{serialNumber}";
+			if (!string.IsNullOrEmpty(referenceDesignation))
+				title = $"{title} ({referenceDesignation})";
 
-			if ( !string.IsNullOrEmpty(referenceDesignation) )
-				title = $"{title}@{referenceDesignation}";
+			if (!string.IsNullOrEmpty(serialNumber))
+				title = $"{title} (SN:{serialNumber})";
 
 			return title;
 		}
