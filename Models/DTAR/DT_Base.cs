@@ -54,14 +54,16 @@ namespace IoBTMessage.Models
 			return DT_Base.asTopic(typeof(T).Name).ToLower();
 		}
 
+
+		public ControlParameters MetaData()
+		{
+			metadata ??= new ControlParameters();
+			return metadata;
+		}
+
 		public ControlParameters AddMetaData(string key, string value)
 		{
-			if (metadata == null)
-			{
-				metadata = new ControlParameters();
-			}
-
-			metadata.Establish(key,value);
+			MetaData().Establish(key,value);
 			return metadata;
 		}
 		
@@ -84,6 +86,11 @@ namespace IoBTMessage.Models
 
 
 #endif
+	}
+
+	public interface ISystem
+	{
+
 	}
 
 	[System.Serializable]
