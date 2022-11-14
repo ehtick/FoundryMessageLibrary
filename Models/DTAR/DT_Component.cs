@@ -3,7 +3,7 @@
 namespace IoBTMessage.Models
 {
 	[System.Serializable]
-	public class DT_Component : DT_Hero
+	public class DT_Component : DT_Hero, ISystem
 	{
 		public DT_Part part;
 		public string parentAssembly;

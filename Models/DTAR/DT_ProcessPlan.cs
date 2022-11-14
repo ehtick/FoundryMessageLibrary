@@ -6,7 +6,7 @@ namespace IoBTMessage.Models
 
 
 	[System.Serializable]
-	public class DT_ProcessPlan : DT_Hero
+	public class DT_ProcessPlan : DT_Hero, ISystem
 	{
 
 		public int memberCount;

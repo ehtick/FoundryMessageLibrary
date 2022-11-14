@@ -7,7 +7,7 @@ using System.Linq;
 namespace IoBTMessage.Models
 {
 
-	public class  DT_World3D : DT_Hero
+	public class  DT_World3D : DT_Hero, ISystem
 	{
 		public string systemName;
 		public List<UDTO_Platform> platforms = new List<UDTO_Platform>();
