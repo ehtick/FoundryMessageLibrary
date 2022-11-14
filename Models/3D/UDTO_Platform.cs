@@ -215,8 +215,7 @@ namespace IoBTMessage.Models
 		{
 			var tag = $"{source.uniqueGuid}:{name}";
 			var relationship = Find<U>(tag);
-			if (relationship != null)
-				relationship.Unrelate(target.uniqueGuid);
+			relationship?.Unrelate(target.uniqueGuid);
 
 			return relationship;
 		}

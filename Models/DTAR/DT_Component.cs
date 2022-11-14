@@ -7,6 +7,7 @@ namespace IoBTMessage.Models
 	{
 		public DT_Part part;
 		public string parentAssembly;
+		public string systemName;
 
 #if !UNITY
 		public DT_Component() : base()

@@ -9,6 +9,7 @@ namespace IoBTMessage.Models
 
 	public class  DT_World3D : DT_Hero
 	{
+		public string systemName;
 		public List<UDTO_Platform> platforms = new List<UDTO_Platform>();
 		public List<UDTO_Body> bodies = new List<UDTO_Body>();
 		public List<UDTO_Label> labels = new List<UDTO_Label>();

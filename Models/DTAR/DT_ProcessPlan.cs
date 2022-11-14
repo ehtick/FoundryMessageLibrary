@@ -10,8 +10,7 @@ namespace IoBTMessage.Models
 	{
 
 		public int memberCount;
-		public string appliesTo;
-		public string distro;
+		public string systemName;
 		public List<DT_ProcessStep> steps;
 
 
