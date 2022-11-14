@@ -8,6 +8,7 @@ namespace IoBTMessage.Models
 		public string serialNumber;
 		public string revision;
 
+
 		public DT_Part() : base()
 		{
 
