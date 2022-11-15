@@ -9,7 +9,7 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
     <Copyright>Copyright © 2020</Copyright>
-    <AssemblyVersion>7.4.0.0</AssemblyVersion>
+    <AssemblyVersion>7.5.0.0</AssemblyVersion>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
