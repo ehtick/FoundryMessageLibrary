@@ -22,9 +22,4 @@
     <DefineConstants>$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
-
-  <!-- <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup> -->
-
 </Project>
