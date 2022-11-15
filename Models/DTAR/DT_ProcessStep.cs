@@ -46,13 +46,13 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public override List<DT_AssetReference> CollectAssetReference(List<DT_AssetReference> list)
+		public override List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list)
 		{
-			base.CollectComponentReferences(list);
+			base.CollectAssetReferences(list);
 			
 			details?.ForEach(step =>
 			{
-				step.CollectComponentReferences(list);
+				step.CollectAssetReferences(list);
 			});
 
 			return list;

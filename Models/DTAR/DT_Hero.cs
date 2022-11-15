@@ -49,7 +49,7 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public virtual List<DT_AssetReference> CollectAssetReference(List<DT_AssetReference> list)
+		public virtual List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list)
 		{
 
 			if ( assetReferences != null )
