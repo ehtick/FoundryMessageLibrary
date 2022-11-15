@@ -49,6 +49,16 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
+		public virtual List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list)
+		{
+
+			componentReferences?.ForEach(compRef =>
+			{
+				list.Add(compRef);
+			});
+			return list;
+		}
+
 #endif
 	}
 }

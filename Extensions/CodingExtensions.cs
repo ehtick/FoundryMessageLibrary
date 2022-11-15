@@ -97,9 +97,21 @@ namespace IoBTMessage.Models
 			}
 		}
 
+		public static void CopyNonNullFields<T>(this T source, T dest)
+		{
+			var plist = typeof(T).GetFields();
+
+			foreach (FieldInfo prop in plist)
+			{
+				var value = prop.GetValue(source);
+				if (value != null && !string.IsNullOrEmpty(value.ToString()))
+					prop.SetValue(dest, value);
+			}
+		}
+
 		public static void CopyFields<T>(this T source, T dest)
 		{
-			var plist = from prop in typeof(T).GetFields() select prop;
+			var plist = typeof(T).GetFields();
 
 			foreach (FieldInfo prop in plist)
 			{

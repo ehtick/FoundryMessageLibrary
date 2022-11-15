@@ -10,6 +10,12 @@ namespace IoBTMessage.Models
 		public DT_ComponentReference() : base()
 		{
 		}
+		public DT_Part MarkAsTemplate()
+		{
+			part ??= new DT_Part();
+			part.serialNumber = "TBD";
+			return part;
+		}
 		public DT_ComponentReference ShallowCopy()
 		{
 			var result = (DT_ComponentReference)this.MemberwiseClone();

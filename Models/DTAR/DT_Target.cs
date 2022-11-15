@@ -19,8 +19,7 @@ namespace IoBTMessage.Models
 		}
 		public DT_Part CopyFrom(DT_Part source)
 		{
-			source.CopyNonNullProperties(this.part);
-			this.title = this.part.ComputeTitle();
+			source.CopyNonNullFields(this.part);
 			return this.part;
 		}
 
