@@ -92,6 +92,7 @@ namespace IoBTMessage.Models
 
 	}
 
+
 	[System.Serializable]
 	public class DT_Searchable : DT_Base
 	{

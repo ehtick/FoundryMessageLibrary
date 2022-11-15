@@ -45,6 +45,18 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
+		public override List<DT_AssetReference> CollectAssetReference(List<DT_AssetReference> list)
+		{
+			base.CollectComponentReferences(list);
+			
+			steps?.ForEach(step =>
+			{
+				step.CollectComponentReferences(list);
+			});
+
+			return list;
+		}
+
 		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list)
 		{
 			base.CollectComponentReferences(list);

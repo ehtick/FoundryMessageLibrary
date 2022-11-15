@@ -49,6 +49,15 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
+		public virtual List<DT_AssetReference> CollectAssetReference(List<DT_AssetReference> list)
+		{
+
+			if ( assetReferences != null )
+				list.AddRange(assetReferences);
+
+			return list;
+		}
+
 		public virtual List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list)
 		{
 

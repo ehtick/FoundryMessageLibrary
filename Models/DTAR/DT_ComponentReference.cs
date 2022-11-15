@@ -4,6 +4,7 @@ namespace IoBTMessage.Models
 	public class DT_ComponentReference : DT_Title, IDT_Reference
 	{
 		public DT_Part part;
+		public DT_Promise promise;
 		public DT_Component component;
 
 #if !UNITY
@@ -16,6 +17,17 @@ namespace IoBTMessage.Models
 			part.serialNumber = "TBD";
 			return part;
 		}
+
+		public string ComputeTitle()
+		{
+			var title = part.ComputeTitle();
+
+			if (promise != null)
+				title = $"[{promise.key}|{title}]";
+
+			return title;
+		}
+
 		public DT_ComponentReference ShallowCopy()
 		{
 			var result = (DT_ComponentReference)this.MemberwiseClone();

@@ -1,13 +1,19 @@
 namespace IoBTMessage.Models
 {
 	[System.Serializable]
+	public class DT_Promise
+	{
+		public string key;
+		public string url;
+	}
+
+	[System.Serializable]
 	public class DT_Part
 	{
 		public string referenceDesignation;
 		public string partNumber;
 		public string serialNumber;
 		public string revision;
-
 
 		public DT_Part() : base()
 		{
