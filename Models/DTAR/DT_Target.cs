@@ -20,22 +20,10 @@ namespace IoBTMessage.Models
 		public DT_Part CopyFrom(DT_Part source)
 		{
 			source.CopyNonNullProperties(this.part);
-			this.title = ComputeTitle(this.part);
+			this.title = this.part.ComputeTitle();
 			return this.part;
 		}
 
-		public static string ComputeTitle(DT_Part source)
-		{
-			var title = source.partName();
-
-			if (!string.IsNullOrEmpty(source.serialNumber))
-				title = $"{title}:{source.serialNumber}";
-
-			if (!string.IsNullOrEmpty(source.referenceDesignation))
-				title = $"{title}@{source.referenceDesignation}";
-
-			return title;
-		}
 
 		public List<DT_Document> AddImage(DT_Document image)
 		{
