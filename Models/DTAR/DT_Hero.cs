@@ -24,6 +24,7 @@ namespace IoBTMessage.Models
 			{
 				assetReferences = new List<DT_AssetReference>();
 			}
+			item.heroGuid = this.guid;
 			assetReferences.Add(item);
 			return item;
 		}

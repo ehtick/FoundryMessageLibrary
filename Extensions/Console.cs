@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,16 +10,16 @@ namespace IoBTMessage.Models
 	{
 
 
-		public static string WriteLine<T>(this T entity, ConsoleColor? color = null)
-		{
-			if (color.HasValue)
-				Console.ForegroundColor = color.Value;
-			var message = entity != null ? JsonConvert.SerializeObject(entity, Formatting.Indented) : "null";
+		// public static string WriteLine<T>(this T entity, ConsoleColor? color = null)
+		// {
+		// 	if (color.HasValue)
+		// 		Console.ForegroundColor = color.Value;
+		// 	var message = entity != null ? JsonConvert.SerializeObject(entity, Formatting.Indented) : "null";
 
-			Console.WriteLine(message);
-			Console.ResetColor();
-			return message;
-		}
+		// 	Console.WriteLine(message);
+		// 	Console.ResetColor();
+		// 	return message;
+		// }
 
 		public static string WriteLine(this string message, ConsoleColor? color = null)
 		{
