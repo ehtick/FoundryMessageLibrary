@@ -1,8 +1,7 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace IoBTMessage.Models
 {
@@ -21,6 +20,24 @@ namespace IoBTMessage.Models
 		// 	return message;
 		// }
 
+    // public static string WriteLine<T>(this T entity, ConsoleColor? color = null)
+    // {
+    //     if (color.HasValue)
+    //         Console.ForegroundColor = color.Value;
+
+    //     var options = new JsonSerializerOptions()
+    //     {
+    //         IncludeFields = false,
+    //         IgnoreReadOnlyFields = true,
+    //         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    //     };
+
+    //     var message = entity != null ? JsonSerializer.Serialize(entity, options) : "null";
+
+    //     Console.WriteLine(message);
+    //     Console.ResetColor();
+    //     return message;
+    // }
 		public static string WriteLine(this string message, ConsoleColor? color = null)
 		{
 			if (color.HasValue)
