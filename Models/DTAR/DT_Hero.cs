@@ -5,7 +5,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_Hero : DT_Title
 	{
-
+		public DT_InfoCard infoCard;
 		public DT_Document heroImage;
 		public List<DT_AssetReference> assetReferences;
 		public List<DT_ComponentReference> componentReferences;
