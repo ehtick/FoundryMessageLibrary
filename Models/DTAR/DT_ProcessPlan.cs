@@ -11,6 +11,7 @@ namespace IoBTMessage.Models
 
 		public int memberCount;
 		public string systemName;
+		public string distribution;
 		public List<DT_ProcessStep> steps;
 
 
