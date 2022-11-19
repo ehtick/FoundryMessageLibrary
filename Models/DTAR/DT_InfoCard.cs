@@ -4,26 +4,17 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_InfoCard
 	{
-		public string distribution;
-		public string revision;
+		public ControlParameters targets;
 
-		public DT_InfoCard() : base()
+		public DT_InfoCard()
 		{
 
 		}
-		public DT_InfoCard ShallowCopy()
+
+		public ControlParameters SetTargets(ControlParameters source)
 		{
-			var result = (DT_InfoCard)this.MemberwiseClone();
-			return result;
-		}
-
-
-
-		public string ComputeTitle()
-		{
-			var title = $"{distribution}";
-
-			return title;
+			this.targets = source;
+			return this.targets;
 		}
 	}
 
