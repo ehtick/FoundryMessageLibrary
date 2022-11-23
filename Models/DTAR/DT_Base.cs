@@ -106,21 +106,6 @@ namespace IoBTMessage.Models
 #endif
 	}
 
-
-
-	[System.Serializable]
-	public class DT_Error : DT_Base
-	{
-		public string error;
-		public object source;
-
-#if !UNITY
-		public DT_Error() : base()
-		{
-		}
-#endif
-	}
-
 	[System.Serializable]
 	public class DT_QualityAssurance : DT_Searchable
 	{
