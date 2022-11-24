@@ -13,25 +13,37 @@
 
 #if !UNITY
 		public DT_Document() : base()
+		{	
+		}
+		public bool IsReadyToUse()
+		{
+			if ( status == "LocalCashe" ) return true;
+			return false;
+		}
+		public string MarkAsNotReferences()
 		{
 			status = "NotReferenced";
+			return status;
 		}
-
-		public void MarkAsNotFound()
+		public string MarkAsNotFound()
 		{
 			status = "NotFound";
+			return status;
 		}
-		public void MarkAsLocalCashe()
+		public string MarkAsLocalCashe()
 		{
 			status = "LocalCashe";
+			return status;
 		}
-		public void MarkAsBlobStorage()
+		public string MarkAsBlobStorage()
 		{
 			status = "BlobStorage";
+			return status;
 		}
-		public void MarkAsExternalReference()
+		public string MarkAsExternalReference()
 		{
 			status = "ExternalReference";
+			return status;
 		}
 #endif
 	}
