@@ -17,7 +17,7 @@
 		}
 		public bool IsReadyToUse()
 		{
-			if ( status == "LocalCashe" ) return true;
+			if ( status == "LocalCache" ) return true;
 			return false;
 		}
 		public string MarkAsNotReferences()
@@ -30,9 +30,9 @@
 			status = "NotFound";
 			return status;
 		}
-		public string MarkAsLocalCashe()
+		public string MarkAsLocalCache()
 		{
-			status = "LocalCashe";
+			status = "LocalCache";
 			return status;
 		}
 		public string MarkAsBlobStorage()
