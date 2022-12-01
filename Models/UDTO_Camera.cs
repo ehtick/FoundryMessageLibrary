@@ -3,6 +3,14 @@ using System.Collections.Generic;
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_Camera : SPEC_Base
+	{
+		public Dictionary<string, object> attributes { get; set; };
+		public string name { get; set; }
+		public string active { get; set; }
+		public string codec { get; set; }
+		public string url { get; set; }
+	}
 	[System.Serializable]
 	public class UDTO_Camera : UDTO_Base
 	{
@@ -12,7 +20,7 @@ namespace IoBTMessage.Models
 		public string codec;
 		public string url;
 
-#if !UNITY
+
 		public UDTO_Camera() : base()
 		{
 		}
@@ -32,6 +40,5 @@ namespace IoBTMessage.Models
 			return counter;
 		}
 
-#endif
 	}
 }

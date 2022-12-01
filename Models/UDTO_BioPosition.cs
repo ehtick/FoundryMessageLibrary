@@ -18,6 +18,16 @@ using System.Threading.Tasks;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_BioPosition : SPEC_Base
+	{
+		public HighResPosition leftHand { get; set; }
+		public HighResPosition rightHand { get; set; }
+		public HighResPosition leftFoot { get; set; }
+		public HighResPosition rightFoot { get; set; }
+		public HighResPosition head { get; set; }
+		public HighResPosition chest { get; set; }
+		public HighResPosition hips { get; set; }
+	}
 
 	[System.Serializable]
 	public class UDTO_BioPosition : UDTO_Base
@@ -29,9 +39,5 @@ namespace IoBTMessage.Models
 		public HighResPosition head;
 		public HighResPosition chest;
 		public HighResPosition hips;
-
-#if !UNITY
-
-#endif
 	}
 }

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_Relationship : SPEC_3D
+	{
+		public string relationship { get; set; }
+		public string source{ get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_Relationship : UDTO_3D
 	{
@@ -10,7 +16,7 @@ namespace IoBTMessage.Models
 		public string source;
 		public List<string> sink = new List<string>();
 
-#if !UNITY
+
 		public UDTO_Relationship() : base()
 		{
 		}
@@ -43,7 +49,6 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-#endif
 	}
 
 }

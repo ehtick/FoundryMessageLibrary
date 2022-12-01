@@ -6,6 +6,7 @@ namespace IoBTMessage.Models
 		public string fromUser { get; set; }
 		public string message { get; set; }
 	}
+	
 	[System.Serializable]
 	public class UDTO_ChatMessage : UDTO_Base
 	{

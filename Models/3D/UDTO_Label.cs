@@ -3,6 +3,14 @@ using System.Reflection.Emit;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_Label : SPEC_3D
+	{
+		public string text;
+		public List<string> details;
+		public string targetGuid;
+		public SPEC_HighResPosition position;
+	}
+	
 	[System.Serializable]
 	public class UDTO_Label : UDTO_3D
 	{
@@ -11,7 +19,7 @@ namespace IoBTMessage.Models
 		public string targetGuid;
 		public HighResPosition position;
 
-#if !UNITY
+
 		public UDTO_Label() : base()
 		{
 		}
@@ -65,7 +73,7 @@ namespace IoBTMessage.Models
 			};
 			return this;
 		}
-#endif
+
 	}
 
 }

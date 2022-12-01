@@ -10,6 +10,14 @@
 
 namespace IoBTMessage.Models
 {
+		public class SPEC_Environment : SPEC_Base
+	{
+		public double temperature { get; set; }
+		public double humidity { get; set; }
+		public double pressure { get; set; }
+		public SPEC_Direction wind { get; set; }
+
+	}
 	[System.Serializable]
 	public class UDTO_Environment : UDTO_Base
 	{

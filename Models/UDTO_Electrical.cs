@@ -19,6 +19,17 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_Electrical  : SPEC_Base
+	{
+		public double voltage { get; set; }
+		public double current { get; set; }
+		public double resistance { get; set; }
+		public double wattage { get; set; }
+		public double capacitance { get; set; }
+		public double temperature { get; set; }
+
+	}
+
 	[System.Serializable]
 	public class UDTO_Electrical  : UDTO_Base
 	{

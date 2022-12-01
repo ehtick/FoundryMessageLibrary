@@ -1,5 +1,17 @@
 namespace IoBTMessage.Models
 {
+
+	public class SPEC_3D : SPEC_Base
+	{
+		public string platformName { get; set; }
+		public string uniqueGuid { get; set; }
+		public string type { get; set; }
+		public string name { get; set; }
+		public string material { get; set; }
+		public string referenceDesignation { get; set; }
+		public ControlParameters metadata { get; set; }
+		public bool visible  { get; set; } = true;
+	}
 	[System.Serializable]
 	public class UDTO_3D : UDTO_Base
 	{
@@ -12,7 +24,6 @@ namespace IoBTMessage.Models
 		public ControlParameters metadata;
 		public bool visible = true;
 
-#if !UNITY
 		public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 		{
 			platformName = obj.platformName;
@@ -60,6 +71,5 @@ namespace IoBTMessage.Models
 			name = inputData[counter++];
 			return counter;
 		}
-#endif
 	}
 }

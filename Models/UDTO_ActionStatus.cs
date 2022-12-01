@@ -1,12 +1,18 @@
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_ActionStatus : SPEC_Base
+	{
+		public string status { get; set;  }
+		public string message { get; set;  }
+	}
+
 	public class UDTO_ActionStatus : UDTO_Base
 	{
 		public string status;
 		public string message;
 
-#if !UNITY
+
 		public UDTO_ActionStatus() : base()
 		{
 		}
@@ -23,7 +29,7 @@ namespace IoBTMessage.Models
 			this.message = data[counter++];
 			return counter;
 		}
-#endif
+
 
 		public static UDTO_ActionStatus info(string message)
 		{

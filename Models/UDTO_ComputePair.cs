@@ -1,6 +1,21 @@
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_ComputePair : SPEC_Base
+	{
+		public string type { get; set; }
+		public string name { get; set; }
+		public string active { get; set; }
+		public string version { get; set; }
+		public string info { get; set; }
+		public string container { get; set; }
+		public string sourceURL { get; set; }
+		public string targetURL { get; set; }
+		public string lastEvent { get; set; }
+		public string lastError { get; set; }
+		public string purpose { get; set; }
+	}
+	
 	[System.Serializable]
 	public class UDTO_ComputePair : UDTO_Base
 	{
@@ -16,7 +31,7 @@ namespace IoBTMessage.Models
 		public string lastError;
 		public string purpose;
 
-#if !UNITY
+
 		public UDTO_ComputePair() : base()
 		{
 		}
@@ -38,6 +53,6 @@ namespace IoBTMessage.Models
 			return counter;
 		}
 
-#endif
+
 	}
 }

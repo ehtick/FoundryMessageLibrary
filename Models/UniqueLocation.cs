@@ -1,10 +1,15 @@
 namespace IoBTMessage.Models
 {
+	public class SPEC_UniqueLocation : SPEC_Location
+	{
+		public string uniqueGuid { get; set; }
+	}
+
 	public class UniqueLocation : Location
 	{
 		public string uniqueGuid;
 
-#if !UNITY
+
 
 		public override string compress(char d = ',')
 		{
@@ -17,7 +22,7 @@ namespace IoBTMessage.Models
 			this.uniqueGuid = data[counter++];
 			return counter;
 		}
-#endif
+
 	}
 }
 

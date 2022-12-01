@@ -6,6 +6,15 @@ using System.Linq;
 namespace IoBTMessage.Models
 {
 
+
+	public partial class SPEC_Location : SPEC_Base
+
+	{
+		public double lat { get; set; }
+		public double lng { get; set; }
+		public double alt { get; set; }
+	}
+
 	public partial class Location : UDTO_Base
 
 	{
@@ -13,7 +22,7 @@ namespace IoBTMessage.Models
 		public double lng;
 		public double alt;
 
-#if !UNITY
+
 		public Location() : base()
 		{
 		}
@@ -50,8 +59,6 @@ namespace IoBTMessage.Models
 			this.alt = loc.alt;
 			return this;
 		}
-
-#endif
 	}
 }
 
