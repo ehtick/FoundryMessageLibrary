@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
-	public class DESIGN_Alarm  : DESIGN_Base
+	public class SPEC_Alarm  : SPEC_Base
 	{
 		public string status { get; set; }
 		public string note { get; set; }
