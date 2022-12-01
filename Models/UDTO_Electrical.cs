@@ -29,8 +29,5 @@ namespace IoBTMessage.Models
 		public double capacitance;
 		public double temperature;
 
-#if !UNITY
-
-#endif
 	}
 }

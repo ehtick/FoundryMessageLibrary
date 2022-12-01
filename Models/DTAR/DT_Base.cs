@@ -2,6 +2,16 @@ using System;
 
 namespace IoBTMessage.Models
 {
+	public class DESIGN_Base
+	{
+		public string guid { get; set; }
+		public string parentGuid { get; set; }
+		public string name { get; set; }
+		public string type { get; set; }
+		public string timeStamp { get; set; }
+		public ControlParameters metadata { get; set; }
+	}
+
 	public class DT_Base
 	{
 		public string guid;
@@ -14,7 +24,6 @@ namespace IoBTMessage.Models
 		public ControlParameters metadata;
 
 
-#if !UNITY
 		public DT_Base()
 		{
 			this.initialize();
@@ -83,8 +92,6 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-
-#endif
 	}
 
 	public interface ISystem
