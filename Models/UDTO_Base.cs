@@ -22,7 +22,7 @@ namespace IoBTMessage.Models
 		public string timeStamp;
 		public string panID;
 
-#if !UNITY
+
 		public UDTO_Base()
 		{
 			refGuid = Guid.NewGuid().ToString();
@@ -122,6 +122,6 @@ namespace IoBTMessage.Models
 		{
 			return this.panID == other.panID && this.sourceGuid == other.sourceGuid;
 		}
-#endif
+
 	}
 }
