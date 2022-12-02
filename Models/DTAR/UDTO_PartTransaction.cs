@@ -16,7 +16,7 @@ namespace IoBTMessage.Models
 		public double quantity;
 		public string note;
 
-#if !UNITY
+
 		public UDTO_PartTransation() : base()
 		{
 		}
@@ -29,6 +29,6 @@ namespace IoBTMessage.Models
 
 			return result;
 		}
-#endif
+
 	}
 }

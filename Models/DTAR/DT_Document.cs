@@ -11,7 +11,7 @@
 		public BoundingBox boundingbox;
 
 
-#if !UNITY
+
 		public DT_Document() : base()
 		{	
 		}
@@ -45,7 +45,7 @@
 			status = "ExternalReference";
 			return status;
 		}
-#endif
+
 	}
 
 

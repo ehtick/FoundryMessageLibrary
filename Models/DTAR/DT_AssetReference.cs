@@ -15,7 +15,7 @@ namespace IoBTMessage.Models
 		public DT_Document document;
 		public HighResPosition position;
 
-#if !UNITY
+
 		public DT_AssetReference() : base()
 		{
 		}
@@ -40,6 +40,6 @@ namespace IoBTMessage.Models
 			result.ClearDocument();
 			return result;
 		}
-#endif
+
 	}
 }

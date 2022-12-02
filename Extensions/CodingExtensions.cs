@@ -61,6 +61,8 @@ namespace IoBTMessage.Models
 				return true;
 			if (filename.EndsWith("mp3"))
 				return true;
+			if (filename.EndsWith("mov"))
+				return true;
 			return false;
 		}
 
@@ -147,5 +149,25 @@ namespace IoBTMessage.Models
 				}
 			}
 		}
+
+		public static U CreateUDTOfromSPEC<S, U>(this S source)
+		{
+			var result = Activator.CreateInstance<U>();
+
+			var plistsource = from prop1 in typeof(S).GetProperties() where prop1.CanRead select prop1;
+			var flistdest = from field1 in typeof(U).GetFields() where field1.IsPublic select field1;
+
+			foreach (FieldInfo destField in flistdest)
+			{
+				var sourceProp = plistsource.Where((p) => p.Name == destField.Name).FirstOrDefault();
+				if (sourceProp != null)
+				{
+					var value = sourceProp.GetValue(source, null);
+					destField.SetValue(result, value);
+				}
+			}
+			return result;
+		}
+
 	}
 }

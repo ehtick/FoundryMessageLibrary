@@ -31,7 +31,7 @@ namespace IoBTMessage.Models
 		}
 		public VirtualSquire(VirtualSquire source)
 		{
-#if !UNITY
+
 			if ( source.CurrentPosition != null) {
 				this.CurrentPosition = source.CurrentPosition?.Duplicate<UDTO_Position>();
 				this.CurrentPosition.panID = PanID;
@@ -46,15 +46,15 @@ namespace IoBTMessage.Models
 				this.LastBiometric = source.LastBiometric?.Duplicate<UDTO_Biometric>();
 				this.LastBiometric.panID = PanID;
 			}
-#endif
+
 		}
 
 
 		public VirtualSquire Position(UDTO_Position pos)
 		{
-#if !UNITY
+
 			this.CurrentPosition = pos.Duplicate<UDTO_Position>();
-#endif
+
 			return this;
 		}
 

@@ -4,6 +4,17 @@ using System.Linq;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_Platform : SPEC_3D
+	{
+		public SPEC_Position position { get; set; }
+		public SPEC_BoundingBox boundingBox { get; set; }
+		public SPEC_HighResOffset offset { get; set; }
+
+		public List<SPEC_Body> bodies { get; set; }
+		public List<SPEC_Label> labels { get; set; }
+		public List<SPEC_Relationship> relationships { get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_Platform : UDTO_3D
 	{

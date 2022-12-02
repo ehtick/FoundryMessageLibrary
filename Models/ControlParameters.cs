@@ -8,7 +8,7 @@ namespace IoBTMessage.Models
 	{
 		public Dictionary<string,object> lookup;
 
-#if !UNITY
+
 		public ControlParameters() : base()
 		{
 		}
@@ -23,6 +23,5 @@ namespace IoBTMessage.Models
 			return null;
 		}
 
-#endif
 	}
 }

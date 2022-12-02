@@ -6,10 +6,10 @@ namespace IoBTMessage.Models
 		public string text;
 		public object source;
 
-#if !UNITY
+
 		public DT_StatusText() : base()
 		{
 		}
-#endif
+
 	}
 }

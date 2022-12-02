@@ -106,11 +106,11 @@ namespace IoBTMessage.Models
 		public string title;
 		public string description;
 		
-#if !UNITY
+
 		public DT_Searchable() : base()
 		{
 		}
-#endif
+
 	}
 
 	[System.Serializable]
@@ -120,11 +120,11 @@ namespace IoBTMessage.Models
 		public string author;
 		public string componentGuid;
 
-#if !UNITY
+
 		public DT_QualityAssurance() : base()
 		{
 		}
-#endif
+
 	}
 
 	[System.Serializable]
@@ -133,7 +133,7 @@ namespace IoBTMessage.Models
 		public string severity;
 		public string author;
 
-#if !UNITY
+
 		public DT_Comment() : base()
 		{
 		}
@@ -162,6 +162,6 @@ namespace IoBTMessage.Models
 			severity = "Missing";
 			return this;
 		}
-#endif
+
 	}
 }

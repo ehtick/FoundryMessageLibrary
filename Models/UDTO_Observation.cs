@@ -13,7 +13,7 @@ namespace IoBTMessage.Models
 		public string target;
 		public double range;
 
-#if !UNITY
+
 		public override string compress(char d = ',')
 		{
 			return $"{base.compress(d)}{d}{target}{d}{range}";
@@ -26,7 +26,7 @@ namespace IoBTMessage.Models
 			range = IoBTMath.toDouble(data[counter++]);
 			return counter;
 		}
-#endif
+
 	}
 }
 

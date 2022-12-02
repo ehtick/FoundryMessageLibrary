@@ -11,7 +11,7 @@ namespace IoBTMessage.Models
 		public List<DT_ComponentReference> componentReferences;
 
 
-#if !UNITY
+
 		public DT_Hero() : base()
 		{
 		}
@@ -69,6 +69,6 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-#endif
+
 	}
 }

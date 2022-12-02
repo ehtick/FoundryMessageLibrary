@@ -10,7 +10,7 @@ namespace IoBTMessage.Models
 		public List<DT_ProcessPlan> processPlans;
 
 
-#if !UNITY
+
 		public DT_Project() : base()
 		{
 		}
@@ -96,7 +96,6 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-#endif
 	}
 }
 

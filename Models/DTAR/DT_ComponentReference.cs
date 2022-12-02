@@ -7,7 +7,6 @@ namespace IoBTMessage.Models
 		public DT_Promise promise;
 		public DT_Component component;
 
-#if !UNITY
 		public DT_ComponentReference() : base()
 		{
 		}
@@ -37,6 +36,6 @@ namespace IoBTMessage.Models
 			result.component = null;
 			return result;
 		}
-#endif
+
 	}
 }

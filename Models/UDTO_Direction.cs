@@ -23,7 +23,7 @@ namespace IoBTMessage.Models
 			speed = IoBTMath.toDouble(data[counter++]);
 			heading = IoBTMath.toDouble(data[counter++]);
 			return counter;
-
+		}
 	}
 }
 

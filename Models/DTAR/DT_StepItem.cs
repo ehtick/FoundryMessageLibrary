@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 	{
 		public int itemNumber;
 
-#if !UNITY
+
 		public DT_StepItem() : base()
 		{
 		}
@@ -34,7 +34,6 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-#endif
 	}
 
 }

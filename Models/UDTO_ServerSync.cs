@@ -8,7 +8,7 @@
 		public string command;  //command
 		public string history = "";  //history
 
-#if !UNITY
+
 		public UDTO_ServerSync()
 		{
 		}
@@ -59,18 +59,17 @@
 			}
 			return true;
 		}
-#endif
+
 	}
 	[System.Serializable]
 	public class UDTO_PubSubSync : UDTO_ServerSync
 	{
 		public string topic = ""; //topic
 
-#if !UNITY
 		public UDTO_PubSubSync() : base()
 		{
 		}
-#endif
+
 	}
 
 }
