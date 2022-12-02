@@ -15,7 +15,6 @@ namespace IoBTMessage.Models
 		public List<DT_ProcessStep> steps;
 
 
-#if !UNITY
 		public DT_ProcessPlan()
 		{
 		}
@@ -106,7 +105,7 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-#endif
+
 	}
 }
 

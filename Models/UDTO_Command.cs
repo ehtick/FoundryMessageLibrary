@@ -4,6 +4,13 @@ using System.Linq;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_Command : SPEC_Base
+	{
+		public string targetHashCode { get; set; }
+		public string command { get; set; }
+		public List<string> args { get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_Command : UDTO_Base
 	{
@@ -11,7 +18,7 @@ namespace IoBTMessage.Models
 		public string command;
 		public List<string> args;
 
-#if !UNITY
+
 		public override string compress(char d = ',')
 		{
 			var arglist = args == null ? "" : String.Join(";", args);
@@ -26,6 +33,6 @@ namespace IoBTMessage.Models
 			this.args = data[counter++].Split(";").ToList<string>();
 			return counter;
 		}
-#endif
+
 	}
 }

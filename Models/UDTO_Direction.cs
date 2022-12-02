@@ -1,12 +1,17 @@
 namespace IoBTMessage.Models
 {
+	public class SPEC_Direction : SPEC_Base
+	{
+		public double speed { get; set; }
+		public double heading { get; set; }
+	}
 
 	public class UDTO_Direction : UDTO_Base
 	{
 		public double speed;
 		public double heading;
 
-#if !UNITY
+
 		public override string compress(char d = ',')
 		{
 			return $"{base.compress(d)}{d}{speed}{d}{heading}";
@@ -19,7 +24,6 @@ namespace IoBTMessage.Models
 			heading = IoBTMath.toDouble(data[counter++]);
 			return counter;
 		}
-#endif
 	}
 }
 

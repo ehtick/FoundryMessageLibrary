@@ -1,5 +1,12 @@
 namespace IoBTMessage.Models
 {
+	public class SPEC_ChatMessage : SPEC_Base
+	{
+		public string toUser { get; set; }
+		public string fromUser { get; set; }
+		public string message { get; set; }
+	}
+	
 	[System.Serializable]
 	public class UDTO_ChatMessage : UDTO_Base
 	{
@@ -7,7 +14,7 @@ namespace IoBTMessage.Models
 		public string fromUser;
 		public string message;
 
-#if !UNITY
+
 		public UDTO_ChatMessage() : base()
 		{
 		}
@@ -24,7 +31,7 @@ namespace IoBTMessage.Models
 			message = data[count++];
 			return count;
 		}
-#endif
+
 	}
 }
 

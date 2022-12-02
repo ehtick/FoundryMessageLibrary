@@ -3,6 +3,14 @@ using System;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_Base
+	{
+		public string udtoTopic { get; set; }
+		public string sourceGuid { get; set; }
+		public string refGuid { get; set; }
+		public string timeStamp { get; set; }
+		public string panID { get; set; }
+	}
 
 	[System.Serializable]
 	public class UDTO_Base
@@ -14,7 +22,7 @@ namespace IoBTMessage.Models
 		public string timeStamp;
 		public string panID;
 
-#if !UNITY
+
 		public UDTO_Base()
 		{
 			refGuid = Guid.NewGuid().ToString();
@@ -114,6 +122,6 @@ namespace IoBTMessage.Models
 		{
 			return this.panID == other.panID && this.sourceGuid == other.sourceGuid;
 		}
-#endif
+
 	}
 }

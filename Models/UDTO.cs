@@ -1,5 +1,5 @@
 
-#if !UNITY
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -79,6 +79,6 @@ namespace IoBTMessage.Models
 		//	var result = JsonSerializer.Serialize(target, target.GetType());
 		//	return result;
 		//}
-#endif
+
 	}
 }

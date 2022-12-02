@@ -13,7 +13,7 @@ namespace IoBTMessage.Models
 		public List<DT_StepItem> details;
 
 
-#if !UNITY
+
 		public DT_ProcessStep() : base()
 		{
 		}
@@ -100,6 +100,6 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-#endif
+
 	}
 }

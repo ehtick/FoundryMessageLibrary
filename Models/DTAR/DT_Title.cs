@@ -9,7 +9,7 @@ namespace IoBTMessage.Models
 		public List<DT_QualityAssurance> qualityChecks;
 
 
-#if !UNITY
+
 		public DT_Title() : base()
 		{
 		}
@@ -60,6 +60,5 @@ namespace IoBTMessage.Models
 		}
 
 
-#endif
 	}
 }

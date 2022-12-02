@@ -10,7 +10,7 @@ namespace IoBTMessage.Models
 		public string systemName;
 
 
-#if !UNITY
+
 		public DT_Component() : base()
 		{
 		}
@@ -23,7 +23,7 @@ namespace IoBTMessage.Models
 
 			return result;
 		}
-#endif
+
 	}
 
 

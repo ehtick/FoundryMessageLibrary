@@ -1,7 +1,21 @@
 using System;
 namespace IoBTMessage.Models
 {
-	[System.Serializable]
+	
+
+public class SPEC_HighResPosition
+{
+	public string units { get; set; } = "m";
+	public double xLoc { get; set; } = 0;
+	public double yLoc { get; set; } = 0;
+	public double zLoc { get; set; } = 0;
+
+	public double xAng { get; set; } = 0;
+	public double yAng { get; set; } = 0;
+	public double zAng { get; set; } = 0;
+}
+
+[System.Serializable]
 	public class HighResPosition
 	{
 		public string units = "m";
@@ -13,7 +27,6 @@ namespace IoBTMessage.Models
 		public double yAng = 0;
 		public double zAng = 0;
 
-#if !UNITY
 		public HighResPosition()
 		{
 		}
@@ -77,7 +90,7 @@ namespace IoBTMessage.Models
 			this.zAng = zAng;
 			return this;
 		}
-#endif
+
 	}
 }
 

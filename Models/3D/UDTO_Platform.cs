@@ -4,22 +4,27 @@ using System.Linq;
 
 namespace IoBTMessage.Models
 {
+	public class SPEC_Platform : SPEC_3D
+	{
+		public SPEC_Position position { get; set; }
+		public SPEC_BoundingBox boundingBox { get; set; }
+		public SPEC_HighResOffset offset { get; set; }
+
+		public List<SPEC_Body> bodies { get; set; }
+		public List<SPEC_Label> labels { get; set; }
+		public List<SPEC_Relationship> relationships { get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_Platform : UDTO_3D
 	{
 		public UDTO_Position position;
 		public BoundingBox boundingBox;
 		public HighResOffset offset;
-#if UNITY
-		public List<UDTO_Body> bodies;
-		public List<UDTO_Label> labels;
-		public List<UDTO_Relationship> relationships;
-#endif
+
 
 		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
-		//private readonly Dictionary<string, UDTO_3D> _guids = new  Dictionary<string, UDTO_3D>();
 
-#if !UNITY
 
 		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
@@ -73,6 +78,9 @@ namespace IoBTMessage.Models
 			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
+#if UNITY
+		public List<UDTO_Body> bodies;
+#else
 		public List<UDTO_Body> bodies
 		{
 			get
@@ -89,7 +97,14 @@ namespace IoBTMessage.Models
 		}
 
 
+#endif
 
+
+
+
+#if UNITY
+		public List<UDTO_Label> labels;
+#else
 		public List<UDTO_Label> labels
 		{
 			get
@@ -104,8 +119,12 @@ namespace IoBTMessage.Models
 					ClearLookup<UDTO_Label>();
 			}
 		}
+#endif
 
 
+#if UNITY
+		public List<UDTO_Relationship> relationships;
+#else
 		public List<UDTO_Relationship> relationships
 		{
 			get
@@ -120,7 +139,7 @@ namespace IoBTMessage.Models
 					ClearLookup<UDTO_Relationship>();
 			}
 		}
-
+#endif
 
 		public void Merge(UDTO_Platform platform)
 		{
@@ -317,7 +336,7 @@ namespace IoBTMessage.Models
 			}
 			return found;
 		}
-#endif
+
 	}
 
 }

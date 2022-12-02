@@ -1,5 +1,12 @@
 namespace IoBTMessage.Models
 {
+	public class SPEC_Body : SPEC_3D
+	{
+		public string symbol { get; set;  }
+		public SPEC_HighResPosition position { get; set;  }
+		public SPEC_BoundingBox boundingBox { get; set;  }
+	}
+
 	[System.Serializable]
 	public class UDTO_Body : UDTO_3D
 	{
@@ -7,7 +14,7 @@ namespace IoBTMessage.Models
 		public HighResPosition position;
 		public BoundingBox boundingBox;
 
-//#if !UNITY
+
 		public UDTO_Body() : base()
 		{
 		}
@@ -77,7 +84,6 @@ namespace IoBTMessage.Models
 			this.type = "Glb";
 			return EstablishBox(width, height, depth, units);
 		}
-//#endif
 	}
 
 }

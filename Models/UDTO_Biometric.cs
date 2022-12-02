@@ -19,6 +19,17 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
+
+	public class SPEC_Biometric : SPEC_Base
+	{
+		public double heartRate { get; set; }
+		public double temperature { get; set; }
+		public double stepCount { get; set; }
+		public double sleepScore { get; set; }
+		public double stressCalculation { get; set; }
+		public double fitnessScore { get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_Biometric : UDTO_Base
 	{
@@ -28,9 +39,5 @@ namespace IoBTMessage.Models
 		public double sleepScore;
 		public double stressCalculation;
 		public double fitnessScore;
-
-#if !UNITY
-
-#endif
 	}
 }

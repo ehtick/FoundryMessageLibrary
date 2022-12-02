@@ -4,10 +4,10 @@ namespace IoBTMessage.Models
 	public class DT_Error : DT_StatusText
 	{
 
-#if !UNITY
+
 		public DT_Error() : base()
 		{
 		}
-#endif
+
 	}
 }

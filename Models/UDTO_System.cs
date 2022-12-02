@@ -19,6 +19,16 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
+	public class SPEC_System : SPEC_Base
+	{
+		public double cpuUsage { get; set; }
+		public double cpuSize { get; set; }
+		public double memoryUsage { get; set; }
+		public double memorySize { get; set; }
+		public double diskUsage { get; set; }
+		public double diskSize { get; set; }
+	}
+
 	[System.Serializable]
 	public class UDTO_System : UDTO_Base
 	{

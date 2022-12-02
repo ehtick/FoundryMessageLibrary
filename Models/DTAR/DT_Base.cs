@@ -2,6 +2,16 @@ using System;
 
 namespace IoBTMessage.Models
 {
+	public class DESIGN_Base
+	{
+		public string guid { get; set; }
+		public string parentGuid { get; set; }
+		public string name { get; set; }
+		public string type { get; set; }
+		public string timeStamp { get; set; }
+		public ControlParameters metadata { get; set; }
+	}
+
 	public class DT_Base
 	{
 		public string guid;
@@ -14,7 +24,6 @@ namespace IoBTMessage.Models
 		public ControlParameters metadata;
 
 
-#if !UNITY
 		public DT_Base()
 		{
 			this.initialize();
@@ -83,8 +92,6 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-
-#endif
 	}
 
 	public interface ISystem
@@ -99,11 +106,11 @@ namespace IoBTMessage.Models
 		public string title;
 		public string description;
 		
-#if !UNITY
+
 		public DT_Searchable() : base()
 		{
 		}
-#endif
+
 	}
 
 	[System.Serializable]
@@ -113,11 +120,11 @@ namespace IoBTMessage.Models
 		public string author;
 		public string componentGuid;
 
-#if !UNITY
+
 		public DT_QualityAssurance() : base()
 		{
 		}
-#endif
+
 	}
 
 	[System.Serializable]
@@ -126,7 +133,7 @@ namespace IoBTMessage.Models
 		public string severity;
 		public string author;
 
-#if !UNITY
+
 		public DT_Comment() : base()
 		{
 		}
@@ -155,6 +162,6 @@ namespace IoBTMessage.Models
 			severity = "Missing";
 			return this;
 		}
-#endif
+
 	}
 }
