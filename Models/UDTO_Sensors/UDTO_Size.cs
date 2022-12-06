@@ -18,6 +18,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Size : UDTO_SensorBase
 	{
-		public BoundingBox size { get; set; }
+		public BoundingBox size;
 	}
 }

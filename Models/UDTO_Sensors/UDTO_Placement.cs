@@ -18,6 +18,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Placement : UDTO_SensorBase
 	{
-		public HighResPosition placement { get; set; }
+		public HighResPosition placement;
 	}
 }
