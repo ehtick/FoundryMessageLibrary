@@ -151,6 +151,10 @@ namespace IoBTMessage.Models
 			{
 				this.boundingBox = platform.boundingBox;
 			}
+			if (platform.offset != null)
+			{
+				this.offset = platform.offset;
+			}
 
 			platform.bodies.ForEach(body =>
 			{
@@ -185,7 +189,7 @@ namespace IoBTMessage.Models
 			CreateLookup<UDTO_Relationship>();
 
 			uniqueGuid = Guid.NewGuid().ToString();
-			type = "Platform";
+			type = UDTO_Base.asTopic<UDTO_Platform>();
 		}
 
 		public UDTO_Platform Flush()
@@ -198,19 +202,9 @@ namespace IoBTMessage.Models
 
 		public UDTO_Platform AsShallowCopy()
 		{
-			var platform = new UDTO_Platform()
-			{
-				sourceGuid = this.sourceGuid,
-				timeStamp = this.timeStamp,
-				panID = this.panID,
-				platformName = this.platformName,
-				uniqueGuid = this.uniqueGuid,
-				type = this.type,
-				name = this.name,
-				position = this.position,
-				boundingBox = this.boundingBox
-			};
-			return platform;
+			var result = (UDTO_Platform)this.MemberwiseClone();
+			result.Flush();
+			return result;
 		}
 
 		public U RelateMembers<U>(UDTO_3D source, string name, UDTO_3D target) where U : UDTO_Relationship
@@ -270,7 +264,6 @@ namespace IoBTMessage.Models
 			found.panID = panID;
 			found.platformName = platformName;
 			found.uniqueGuid = Guid.NewGuid().ToString();
-			//_guids[found.uniqueGuid] = found;
 			return found;
 		}
 
@@ -283,7 +276,6 @@ namespace IoBTMessage.Models
 
 		public T CreateUsing<T>(string name, string guid = null) where T : UDTO_3D
 		{
-
 			var found = FindOrCreate<T>(name,true);
 			if ( guid != null) 
 			{
@@ -320,19 +312,16 @@ namespace IoBTMessage.Models
 				if (delete)
 				{
 					dict.Remove(key);
-					//_guids.Remove(found.uniqueGuid);
 				}
 				else
 				{
 					found.CopyFrom(obj);
-					//_guids[found.uniqueGuid] = found;
 				}
 			}
 			else if (!delete)
 			{
 				dict[key] = obj;
 				found = obj;
-				//_guids[found.uniqueGuid] = found;
 			}
 			return found;
 		}
