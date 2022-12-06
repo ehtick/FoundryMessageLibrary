@@ -45,6 +45,20 @@ namespace IoBTMessage.Models
 			return null;
 		}
 
+		public T FindReferenceDesignation<T>(string referenceDesignation) where T : UDTO_3D
+		{
+			if ( typeof(T).Name.Matches(nameof(UDTO_Body)) )
+				return bodies?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
+			
+			if ( typeof(T).Name.Matches(nameof(UDTO_Label)) )
+				return labels?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
+			
+			if ( typeof(T).Name.Matches(nameof(UDTO_Platform)) )
+				return platforms?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
+
+			return null;
+		}
+
 		public DT_World3D FlushPlatforms()
 		{
 			platforms.ForEach(platform => platform.Flush());
