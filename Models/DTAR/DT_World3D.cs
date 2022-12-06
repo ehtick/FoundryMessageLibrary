@@ -28,10 +28,21 @@ namespace IoBTMessage.Models
 			result.labels = null;
 			result.relationships = null;
 			result.assetReferences = null;
-			result.assetReferences = null;
-	
-
 			return result;
+		}
+
+		public T Find<T>(string name) where T : UDTO_3D
+		{
+			if ( typeof(T).Name.Matches(nameof(UDTO_Body)) )
+				return bodies?.FirstOrDefault(item => item.name.Matches(name)) as T;
+			
+			if ( typeof(T).Name.Matches(nameof(UDTO_Label)) )
+				return labels?.FirstOrDefault(item => item.name.Matches(name)) as T;
+			
+			if ( typeof(T).Name.Matches(nameof(UDTO_Platform)) )
+				return platforms?.FirstOrDefault(item => item.name.Matches(name)) as T;
+
+			return null;
 		}
 
 		public DT_World3D FlushPlatforms()
@@ -45,16 +56,13 @@ namespace IoBTMessage.Models
 			platforms.ForEach(platform => {
 				platform.Flush();
 				var platformName = platform.platformName;
-				foreach (var body in bodies)
-				{
-					if ( platformName == body.platformName)
-						platform.Add<UDTO_Body>(body);
-				}
-				foreach (var label in labels)
-				{
-					if ( platformName == label.platformName)
-						platform.Add<UDTO_Label>(label);
-				}
+
+				bodies.Where(obj => obj.platformName.Matches(platformName))
+						.Select(obj => platform.Add<UDTO_Body>(obj)).ToList();
+
+
+				labels.Where(obj => obj.platformName.Matches(platformName))
+						.Select(obj => platform.Add<UDTO_Label>(obj)).ToList();
 			});
 			return this.platforms;
 		}
@@ -79,7 +87,6 @@ namespace IoBTMessage.Models
 
 		public DT_World3D RemoveDuplicates()
 		{
-
 			platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
 			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
 			labels = labels.DistinctBy(i => i.uniqueGuid).ToList();
