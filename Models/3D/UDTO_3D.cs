@@ -15,11 +15,13 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_3D : UDTO_Base
 	{
-		public string platformName;
-		public string uniqueGuid;
+		
 		public string type;
 		public string name;
 		public string material;
+		public string platformName;
+		public string uniqueGuid;
+		public string parentUniqueGuid;
 		public string referenceDesignation;
 		public ControlParameters metadata;
 		public bool visible = true;
