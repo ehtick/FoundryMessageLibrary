@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace IoBTMessage.Models
 {
-	public class SPEC_BioPosition : SPEC_Base
+	public class SPEC_BioPosition : SPEC_SensorBase
 	{
 		public HighResPosition leftHand { get; set; }
 		public HighResPosition rightHand { get; set; }
@@ -30,7 +30,7 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class UDTO_BioPosition : UDTO_Base
+	public class UDTO_BioPosition : UDTO_SensorBase
 	{
 		public HighResPosition leftHand;
 		public HighResPosition rightHand;

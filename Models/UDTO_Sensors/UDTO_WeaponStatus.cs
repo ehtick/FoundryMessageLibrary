@@ -20,24 +20,36 @@ namespace IoBTMessage.Models
 {
 
 
-	public class SPEC_Biometric : SPEC_Base
+
+	[System.Serializable]
+	public class UDTO_WeaponStatus : UDTO_SensorBase
 	{
-		public double heartRate { get; set; }
-		public double temperature { get; set; }
-		public double stepCount { get; set; }
-		public double sleepScore { get; set; }
-		public double stressCalculation { get; set; }
-		public double fitnessScore { get; set; }
+		public int currentAmmoCount;
+		public string type;
+		public UDTO_IMUReading IMU;
+		public double targetDistance; //assume meters
 	}
 
 	[System.Serializable]
-	public class UDTO_Biometric : UDTO_Base
+	public class UDTO_WeaponEvent : UDTO_SensorBase
 	{
-		public double heartRate;
-		public double temperature;
-		public double stepCount;
-		public double sleepScore;
-		public double stressCalculation;
-		public double fitnessScore;
+		public string gesture;  //up , down , fired , aim
+		public string message;
+	}
+
+	public class UDTO_WeaponDefinition : UDTO_SensorBase
+	{
+		public string uniqueGuid;
+		public int ammoCapacity;
+		public string type;
+		public string ammoType;
+	}
+
+	public class UDTO_VictorStatus : UDTO_SensorBase
+	{
+		public double batteryCharge;
+		public string WeaponStatusCalculation;
+		public int shotCount;  // 240 is standard load  so 0 < X < 240 
+		public double lethalityScoreCalculation;
 	}
 }

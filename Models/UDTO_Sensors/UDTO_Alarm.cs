@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
-	public class SPEC_Alarm  : SPEC_Base
+	public class SPEC_Alarm  : SPEC_SensorBase
 	{
 		public string status { get; set; }
 		public string note { get; set; }
@@ -20,7 +20,7 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class UDTO_Alarm  : UDTO_Base
+	public class UDTO_Alarm  : UDTO_SensorBase
 	{
 		public string status;
 		public string note;

@@ -10,9 +10,21 @@
 
 namespace IoBTMessage.Models
 {
-	[System.Serializable]
-	public class UDTO_GridPosition : UDTO_Position
+		public class SPEC_Environment : SPEC_SensorBase
 	{
-		public string gridCoordinates;
+		public double temperature { get; set; }
+		public double humidity { get; set; }
+		public double pressure { get; set; }
+		public SPEC_Direction wind { get; set; }
+
+	}
+	[System.Serializable]
+	public class UDTO_Environment : UDTO_SensorBase
+	{
+		public double temperature;
+		public double humidity;
+		public double pressure;
+		public UDTO_Direction wind;
+
 	}
 }

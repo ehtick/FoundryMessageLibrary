@@ -19,24 +19,26 @@ using System.Threading.Tasks;
 namespace IoBTMessage.Models
 {
 
-	public class SPEC_System : SPEC_Base
+	public class SPEC_Electrical  : SPEC_SensorBase
 	{
-		public double cpuUsage { get; set; }
-		public double cpuSize { get; set; }
-		public double memoryUsage { get; set; }
-		public double memorySize { get; set; }
-		public double diskUsage { get; set; }
-		public double diskSize { get; set; }
+		public double voltage { get; set; }
+		public double current { get; set; }
+		public double resistance { get; set; }
+		public double wattage { get; set; }
+		public double capacitance { get; set; }
+		public double temperature { get; set; }
+
 	}
 
 	[System.Serializable]
-	public class UDTO_System : UDTO_Base
+	public class UDTO_Electrical  : UDTO_SensorBase
 	{
-		public double cpuUsage;
-		public double cpuSize;
-		public double memoryUsage;
-		public double memorySize;
-		public double diskUsage;
-		public double diskSize;
+		public double voltage;
+		public double current;
+		public double resistance;
+		public double wattage;
+		public double capacitance;
+		public double temperature;
+
 	}
 }

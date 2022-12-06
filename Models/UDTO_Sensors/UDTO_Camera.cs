@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace IoBTMessage.Models
 {
 
-	public class SPEC_Camera : SPEC_Base
+	public class SPEC_Camera : SPEC_SensorBase
 	{
 		public ControlParameters metadata { get; set; }
 		public string name { get; set; }
@@ -12,7 +12,7 @@ namespace IoBTMessage.Models
 		public string url { get; set; }
 	}
 	[System.Serializable]
-	public class UDTO_Camera : UDTO_Base
+	public class UDTO_Camera : UDTO_SensorBase
 	{
 		public ControlParameters metadata;
 		public string name;
