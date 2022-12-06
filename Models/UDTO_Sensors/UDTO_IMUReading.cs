@@ -19,7 +19,7 @@ namespace IoBTMessage.Models
 	}
 
 	[System.Serializable]
-	public class UDTO_IMUReading
+	public class UDTO_IMUReading :UDTO_SensorBase
 	{
 		public HighResVector acc;
 		public HighResVector gyro;
