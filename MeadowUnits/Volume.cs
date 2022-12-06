@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
-using Meadow.Units.Conversions;
+using IoBTUnits.Conversions;
 
-namespace Meadow.Units
+namespace IoBTUnits
 {
     /// <summary>
     /// Represents Volume

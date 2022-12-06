@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Meadow.Units.Conversions
+namespace IoBTUnits.Conversions
 {
     internal static class TempConversions
     {

@@ -1,6 +1,6 @@
 <img src="Design/banner.jpg" style="margin-bottom:10px" />
 
-# Meadow.Units
+# IoBTUnits
 
 This repo contains a strong unitization into the entire stack of Meadow. No more ambiguous `float` returns for temperature, pressure, distance, voltage, or other units. Instead sensors return strongly-typed units such as `Temperature` and `Voltage`, with properties that do automatic conversions to the various representations, such as `Celsius` or `Fahrenheit`.
 

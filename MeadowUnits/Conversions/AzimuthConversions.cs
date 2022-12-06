@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Meadow.Units.Conversions
+namespace IoBTUnits.Conversions
 {
     /// <summary>
     /// Azimuth value conversions

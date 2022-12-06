@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
-namespace Meadow.Units
+namespace IoBTUnits
 {
     /// <summary>
     /// Represents Acceleration3d

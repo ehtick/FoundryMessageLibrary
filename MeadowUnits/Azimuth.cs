@@ -1,11 +1,11 @@
-﻿using Meadow.Units.Conversions;
+﻿using IoBTUnits.Conversions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
-namespace Meadow.Units
+namespace IoBTUnits
 {
     // TODO: add DegreesMinutes type. 
 

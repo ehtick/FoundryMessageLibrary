@@ -1,4 +1,4 @@
-﻿namespace Meadow.Units.Conversions
+﻿namespace IoBTUnits.Conversions
 {
 	internal static class LengthConversions
 	{
