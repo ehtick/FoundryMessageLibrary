@@ -17,6 +17,14 @@ namespace IoBTMessage.Models
 		public string note { get; set; }
 		public string description { get; set; }
 		public string remedy { get; set; }
+
+		public static SPEC_Alarm RandomSpec() {
+			return new SPEC_Alarm()
+			{
+				status = "Info",
+				note = "Sending a Info Object"
+			};
+		}
 	}
 
 	[System.Serializable]

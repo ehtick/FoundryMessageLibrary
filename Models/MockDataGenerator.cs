@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 	/// <summary>
 	/// RandomName class, used to generate a random name.
 	/// </summary>
-	public class RandomName
+	public class MockDataGenerator
 	{
 		class NameList
 		{
@@ -25,25 +25,34 @@ namespace IoBTMessage.Models
 			}
 		}
 
-		Random rand;
-		readonly List<string> First;
-		readonly List<string> Last;
+		readonly Random rand;
+		readonly List<string> firstNames;
+		readonly List<string> lastnames;
 
-		public RandomName()
+		public MockDataGenerator()
 		{
 			this.rand = new Random();
 			var list = new NameList();
 
-			First = new List<string>(list.first);
-			Last = new List<string>(list.last);
+			firstNames = new List<string>(list.first);
+			lastnames = new List<string>(list.last);
 		}
 
 		public string GenerateName()
 		{
-			string first = First[rand.Next(First.Count)];
-			string last = Last[rand.Next(Last.Count)];
+			string first = firstNames[rand.Next(firstNames.Count)];
+			string last = lastnames[rand.Next(lastnames.Count)];
 
 			return $"{first}_{last}";
+		}
+
+		public double GenerateDouble(double min=0.0, double max=1.0)
+		{
+			return min + (max - min) * rand.NextDouble();
+		}
+		public int GenerateInt(int min=0, int max=1)
+		{
+			return rand.Next(min,max);
 		}
 	}
 }
