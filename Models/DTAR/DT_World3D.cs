@@ -45,7 +45,7 @@ namespace IoBTMessage.Models
 			return null;
 		}
 
-		public T FindReferenceDesignation<T>(string referenceDesignation) where T : UDTO_3D
+		public T FindReferenceDesignation<T>(string name) where T : UDTO_3D
 		{
 			if ( typeof(T).Name.Matches(nameof(UDTO_Body)) )
 				return bodies?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
