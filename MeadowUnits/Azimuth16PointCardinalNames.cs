@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IoBTUnits
+namespace IoBTMessage.IoBTUnits
 {
     /// <summary>
     /// Cardinal compass directions

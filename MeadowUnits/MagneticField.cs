@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
-using IoBTUnits.Conversions;
+using IoBTMessage.IoBTUnits.Conversions;
 
-namespace IoBTUnits
+namespace IoBTMessage.IoBTUnits
 {
     /// <summary>
     /// Represents MagneticField

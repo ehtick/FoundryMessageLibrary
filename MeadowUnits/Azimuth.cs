@@ -1,11 +1,11 @@
-﻿using IoBTUnits.Conversions;
+﻿using IoBTMessage.IoBTUnits.Conversions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
-namespace IoBTUnits
+namespace IoBTMessage.IoBTUnits
 {
     // TODO: add DegreesMinutes type. 
 

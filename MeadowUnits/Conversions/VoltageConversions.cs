@@ -1,4 +1,4 @@
-﻿namespace IoBTUnits.Conversions
+﻿namespace IoBTMessage.IoBTUnits.Conversions
 {
     internal static class VoltageConversions
 	{

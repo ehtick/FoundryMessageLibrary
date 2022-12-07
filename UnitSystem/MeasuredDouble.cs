@@ -46,34 +46,34 @@ namespace IoBTMessage.Models
 		inches
 	}
 
-	public class Distance : MeasuredValue<double>
+	public class DistanceU : MeasuredValue<double>
 	{
-		public Distance()
+		public DistanceU()
 		{
 			BaseUnits = new Units("m"); //meters
 			UnitCategory = new UnitFamily(this.GetType().Name);
 		}
 
 
-		public Distance Feet(double value)
+		public DistanceU Feet(double value)
 		{
 			this.Value = value / 3.28084;
 			return this;
 		}
 
-		public Distance Miles(double value)
+		public DistanceU Miles(double value)
 		{
 			this.Value = value * 1609.34;
 			return this;
 		}
 
-		public Distance MilliMeters(double value)
+		public DistanceU MilliMeters(double value)
 		{
 			this.Value = value / 1000.0;
 			return this;
 		}
 
-		public Distance KiloMeters(double value)
+		public DistanceU KiloMeters(double value)
 		{
 			this.Value = value * 1000.0;
 			return this;
@@ -89,9 +89,9 @@ namespace IoBTMessage.Models
 		days
 	}
 
-	public class Time : MeasuredValue<double>
+	public class TimeU : MeasuredValue<double>
 	{
-		public Time()
+		public TimeU()
 		{
 			BaseUnits = new Units("sec"); //seconds
 			UnitCategory = new UnitFamily(this.GetType().Name);
@@ -99,7 +99,7 @@ namespace IoBTMessage.Models
 
 
 
-		public Time SetValue(double value, TimeUnits units)
+		public TimeU SetValue(double value, TimeUnits units)
 		{
 
 			if (units == TimeUnits.days)
@@ -107,54 +107,54 @@ namespace IoBTMessage.Models
 
 			return this;
 		}
-		public Time Days(double value)
+		public TimeU Days(double value)
 		{
 			this.Value = value * 86400.0;
 			return this;
 		}
 
-		public Time Hours(double value)
+		public TimeU Hours(double value)
 		{
 			this.Value = value / 3600.0;
 			return this;
 		}
 
 
-		public Time Minutes(double value)
+		public TimeU Minutes(double value)
 		{
 			this.Value = value / 60.0;
 			return this;
 		}
-		public Time MicroSeconds(double value)
+		public TimeU MicroSeconds(double value)
 		{
 			this.Value = 1000.0 * value;
 			return this;
 		}
 	}
 
-	public class Angle : MeasuredValue<double>
+	public class AngleU : MeasuredValue<double>
 	{
-		public Angle()
+		public AngleU()
 		{
 			BaseUnits = new Units("deg"); //seconds
 			UnitCategory = new UnitFamily(this.GetType().Name);
 		}
-		public Angle Degrees(double value)
+		public AngleU Degrees(double value)
 		{
 			this.Value = value;
 			return this;
 		}
-		public Angle Radians(double value)
+		public AngleU Radians(double value)
 		{
 			return this.Degrees(value * 180.0 / Math.PI);
 		}
 
-		public Angle IncrementDegrees(double value)
+		public AngleU IncrementDegrees(double value)
 		{
 			this.Value += value;
 			return this;
 		}
-		public Angle IncrementRadians(double value)
+		public AngleU IncrementRadians(double value)
 		{
 			return this.IncrementDegrees(value * 180.0 / Math.PI);
 		}
@@ -169,28 +169,28 @@ namespace IoBTMessage.Models
 		}
 	}
 
-	public class Speed : MeasuredValue<double>
+	public class SpeedU : MeasuredValue<double>
 	{
 
-		public Speed()
+		public SpeedU()
 		{
 			BaseUnits = new Units("m/s"); //meters per second
 			UnitCategory = new UnitFamily(this.GetType().Name);
 		}
 
-		public Speed MetersPerSecond(double value)
+		public SpeedU MetersPerSecond(double value)
 		{
 			this.Value = value;
 			return this;
 		}
 
-		public Speed MilesPerHour(double value)
+		public SpeedU MilesPerHour(double value)
 		{
 			this.MetersPerSecond(value / 3600.0 * 1609.34);
 			return this;
 		}
 
-		public Speed KilometersPerHour(double value)
+		public SpeedU KilometersPerHour(double value)
 		{
 			this.MetersPerSecond(value / 3600.0 * 1000);
 			return this;

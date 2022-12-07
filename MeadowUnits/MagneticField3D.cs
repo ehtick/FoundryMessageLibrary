@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
-using IoBTUnits.Conversions;
-using MU = IoBTUnits.MagneticField.UnitType;
+using IoBTMessage.IoBTUnits.Conversions;
+using MU = IoBTMessage.IoBTUnits.MagneticField.UnitType;
 
-namespace IoBTUnits
+namespace IoBTMessage.IoBTUnits
 {
     /// <summary>
     /// Represents a 3-dimensional (X,Y,Z) magnetic field.

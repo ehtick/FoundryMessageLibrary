@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IoBTUnits.Conversions
+namespace IoBTMessage.IoBTUnits.Conversions
 {
 	internal static class AngleConversions
 	{
