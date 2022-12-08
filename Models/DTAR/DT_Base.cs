@@ -69,6 +69,20 @@ namespace IoBTMessage.Models
 			return metadata;
 		}
 
+		
+		public bool HasMetaData()
+		{
+			return metadata != null;
+		}
+
+		public bool HasMetaDataKey(string key)
+		{
+			if ( metadata != null ) {
+				return metadata.Find(key) != null;
+			}
+			return false;
+		}
+
 		public ControlParameters AddMetaData(string key, string value)
 		{
 			MetaData().Establish(key,value);
