@@ -38,7 +38,6 @@ namespace IoBTMessage.Models
 			base.CollectDocuments(list,deep);
 			if ( !deep) return list;
 
-
 			steps?.ForEach(step =>
 			{
 				step.CollectDocuments(list,deep);
