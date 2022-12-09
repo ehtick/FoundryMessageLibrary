@@ -39,7 +39,7 @@ namespace IoBTMessage.Models
 			return item;
 		}
 
-		public virtual List<DT_Document> CollectDocuments(List<DT_Document> list)
+		public virtual List<DT_Document> CollectDocuments(List<DT_Document> list, bool deep)
 		{
 			list.Add(heroImage);
 
@@ -50,7 +50,7 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public virtual List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list)
+		public virtual List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list, bool deep)
 		{
 
 			if ( assetReferences != null )
@@ -59,7 +59,7 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public virtual List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list)
+		public virtual List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
 		{
 
 			componentReferences?.ForEach(compRef =>

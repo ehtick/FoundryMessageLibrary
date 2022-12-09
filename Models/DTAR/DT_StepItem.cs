@@ -12,9 +12,9 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public override List<DT_Document> CollectDocuments(List<DT_Document> list)
+		public override List<DT_Document> CollectDocuments(List<DT_Document> list, bool deep)
 		{
-			base.CollectDocuments(list);
+			base.CollectDocuments(list,deep);
 
 			return list;
 		}
