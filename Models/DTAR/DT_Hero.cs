@@ -20,22 +20,34 @@ namespace IoBTMessage.Models
 
 		public T AddAssetReference<T>(T item) where T : DT_AssetReference
 		{
-			if (assetReferences == null)
+			assetReferences ??= new List<DT_AssetReference>();
+			
+
+			if ( assetReferences.IndexOf(item) == -1 )
 			{
-				assetReferences = new List<DT_AssetReference>();
+				item.heroGuid = this.guid;
+				assetReferences.Add(item);
+			} 
+			else
+			{
+				$"AddAssetReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
 			}
-			item.heroGuid = this.guid;
-			assetReferences.Add(item);
+
 			return item;
 		}
 
 		public T AddComponentReference<T>(T item) where T : DT_ComponentReference
 		{
-			if ( componentReferences == null)
+			componentReferences ??= new List<DT_ComponentReference>();
+
+			if (componentReferences.IndexOf(item) == -1)
 			{
-				componentReferences = new List<DT_ComponentReference>();
+				componentReferences.Add(item);
 			}
-			componentReferences.Add(item);
+			else
+			{
+				$"AddComponentReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
+			}
 			return item;
 		}
 
