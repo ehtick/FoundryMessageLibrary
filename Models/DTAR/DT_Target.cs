@@ -42,9 +42,9 @@ namespace IoBTMessage.Models
 			return models;
 		}
 
-		public List<DT_Document> CollectDocumentsFrom(DT_Hero source)
+		public List<DT_Document> CollectDocumentsFrom(DT_Hero source, bool deep)
 		{
-			var documents = source.CollectDocuments(new List<DT_Document>()).Where(obj => obj != null).ToList();
+			var documents = source.CollectDocuments(new List<DT_Document>(),deep).Where(obj => obj != null).ToList();
 			documents = documents.DistinctUsing(item => item.filename).ToList();
 
 			images ??= new List<DT_Document>();

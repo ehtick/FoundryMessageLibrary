@@ -12,6 +12,7 @@
     <AssemblyVersion>7.7.0.0</AssemblyVersion>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

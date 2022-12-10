@@ -31,36 +31,39 @@ namespace IoBTMessage.Models
 
 
 
-		public override List<DT_Document> CollectDocuments(List<DT_Document> list)
+		public override List<DT_Document> CollectDocuments(List<DT_Document> list, bool deep)
 		{
-			base.CollectDocuments(list);
+			base.CollectDocuments(list,deep);
+			if ( !deep) return list;
 
 			processPlans?.ForEach(plan =>
 			{
-				plan.CollectDocuments(list);
+				plan.CollectDocuments(list,deep);
 			});
 			return list;
 		}
 
-		public override List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list)
+		public override List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list, bool deep)
 		{
-			base.CollectAssetReferences(list);
+			base.CollectAssetReferences(list,deep);
+			if ( !deep) return list;
 			
 			processPlans?.ForEach(plan =>
 			{
-				plan.CollectAssetReferences(list);
+				plan.CollectAssetReferences(list,deep);
 			});
 
 			return list;
 		}
 
-		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list)
+		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
 		{
-			base.CollectComponentReferences(list);
+			base.CollectComponentReferences(list,deep);
+			if ( !deep) return list;
 
 			processPlans?.ForEach(plan =>
 			{
-				plan.CollectComponentReferences(list);
+				plan.CollectComponentReferences(list,deep);
 			});
 			return list;
 		}

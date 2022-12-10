@@ -12,10 +12,10 @@ namespace IoBTMessage.Models
 		public UDTO_Observation LastObservation { get; set; }
 		public UDTO_Biometric LastBiometric { get; set; }
 
-		protected Speed speed { get; set; } = new Speed();
-		protected Angle heading { get; set; } = new Angle();
-		protected Angle faceing { get; set; } = new Angle();
-		protected Angle turnAngle { get; set; } = new Angle();
+		protected SpeedU speed { get; set; } = new SpeedU();
+		protected AngleU heading { get; set; } = new AngleU();
+		protected AngleU faceing { get; set; } = new AngleU();
+		protected AngleU turnAngle { get; set; } = new AngleU();
 
 		protected bool isPaused { get; set; } = false;
 
@@ -74,7 +74,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public VirtualSquire Speed(Speed value)
+		public VirtualSquire Speed(SpeedU value)
 		{
 			speed.MetersPerSecond(value.MetersPerSecond());
 			return this;
@@ -120,7 +120,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public VirtualSquire Turn_Angle(Angle angle)
+		public VirtualSquire Turn_Angle(AngleU angle)
 		{
 			this.turnAngle.Degrees(angle.Degrees());
 			return this;
