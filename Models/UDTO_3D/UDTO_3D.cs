@@ -57,21 +57,5 @@ namespace IoBTMessage.Models
 			this.visible = visible;
 			return this;
 		}
-
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{platformName}{d}{uniqueGuid}{d}{type}{d}{name}{d}";
-		}
-
-		public override int decompress(string[] inputData)
-		{
-			var counter = base.decompress(inputData);
-
-			platformName = inputData[counter++];
-			uniqueGuid = inputData[counter++];
-			type = inputData[counter++];
-			name = inputData[counter++];
-			return counter;
-		}
 	}
 }

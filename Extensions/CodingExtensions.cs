@@ -87,6 +87,64 @@ namespace IoBTMessage.Models
 				action(element);
 		}
 
+		public static string EncodeFieldNamesAsCSV(this object source, char d = '\u002C')
+		{
+			var list = new List<string>();
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
+
+			foreach (FieldInfo field in flist)
+			{
+				list.Add(field.Name);
+			}
+			return string.Join(d,list);
+		}
+
+		public static string EncodeFieldDataAsCSV(this object source, char d = '\u002C')
+		{
+			var list = new List<string>();
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
+
+			foreach (FieldInfo field in flist)
+			{
+				var value = field.GetValue(source);
+				list.Add(value.ToString());
+			}
+			return string.Join(d,list);
+		}
+
+		public static int DecodeFieldDataAsCSV(this object source, string[] data)
+		{
+
+			int i = 0;
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
+
+			foreach (FieldInfo field in flist)
+			{
+				var value = data[i++];
+
+				if (field.FieldType == typeof(double))
+				{
+					field.SetValue(source, double.Parse(value));
+				}
+				else if (field.FieldType == typeof(int))
+				{
+					field.SetValue(source, int.Parse(value));
+				}
+				else if (field.FieldType == typeof(bool))
+				{
+					field.SetValue(source, bool.Parse(value));
+				}
+				else if (field.FieldType == typeof(string))
+				{
+					field.SetValue(source, value);
+				} else 
+				{
+					throw new ArgumentException($"Cannot DecodeFieldDataAsCSV for {field.Name}");
+				} 
+			}
+			return flist.Count();
+		}
+
 		public static void CopyNonNullProperties<T>(this T source, T dest)
 		{
 			var plist = from prop in typeof(T).GetProperties() where prop.CanRead && prop.CanWrite select prop;
@@ -119,6 +177,19 @@ namespace IoBTMessage.Models
 			{
 				var value = prop.GetValue(source);
 				prop.SetValue(dest, value);
+			}
+		}
+
+		public static void CopyFieldsTo<T,U>(this T source, U dest)
+		{
+			var flist1 = typeof(T).GetFields();
+			var flist2 = typeof(T).GetFields();
+
+			foreach (FieldInfo fld1 in flist1)
+			{
+				var value = fld1.GetValue(source);
+				var fld2 = flist2.Where(x => x.Name.Matches(fld1.Name)).FirstOrDefault();
+				fld2?.SetValue(dest, value);
 			}
 		}
 
@@ -164,6 +235,26 @@ namespace IoBTMessage.Models
 				{
 					var value = sourceProp.GetValue(source, null);
 					destField.SetValue(result, value);
+				}
+			}
+			return result;
+		}
+
+
+		public static S CreateSPECfromUDTO<U, S>(this U source)
+		{
+			var result = Activator.CreateInstance<S>();
+
+			var flistsource = from field1 in typeof(U).GetFields() where field1.IsPublic select field1;
+			var plistdest = from prop1 in typeof(S).GetProperties() where prop1.CanRead select prop1;
+
+			foreach (PropertyInfo destProp in plistdest)
+			{
+				var sourceField = flistsource.Where((f) => f.Name == destProp.Name).FirstOrDefault();
+				if (sourceField != null)
+				{
+					var value = sourceField.GetValue(source);
+					destProp.SetValue(result, value);
 				}
 			}
 			return result;

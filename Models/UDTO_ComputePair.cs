@@ -36,23 +36,5 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{this.name}{d}{this.type}{d}{this.active}{d}{this.info}{d}{this.container}{d}{this.sourceURL}";
-		}
-
-		public override int decompress(string[] data)
-		{
-			var counter = base.decompress(data);
-			this.name = data[counter++];
-			this.type = data[counter++];
-			this.active = data[counter++];
-			this.info = data[counter++];
-			this.container = data[counter++];
-			this.sourceURL = data[counter++];
-			return counter;
-		}
-
-
 	}
 }

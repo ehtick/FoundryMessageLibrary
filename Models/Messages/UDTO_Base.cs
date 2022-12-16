@@ -1,6 +1,7 @@
 
 using System;
 
+// https://khalidabuhakmeh.com/convert-a-csharp-object-to-almost-any-format
 namespace IoBTMessage.Models
 {
 	public class SPEC_Base
@@ -10,6 +11,16 @@ namespace IoBTMessage.Models
 		public string refGuid { get; set; }
 		public string timeStamp { get; set; }
 		public string panID { get; set; }
+
+		public virtual string compress(char d = '\u002C')
+		{
+			return this.EncodeFieldDataAsCSV(d);
+		}
+
+		public virtual int decompress(string[] data)
+		{
+			return this.DecodeFieldDataAsCSV(data);
+		}
 	}
 
 	[System.Serializable]
@@ -37,20 +48,12 @@ namespace IoBTMessage.Models
 
 		public virtual string compress(char d = '\u002C')
 		{
-			var g = sourceGuid;
-			var t = timeStamp;
-			var p = panID;
-			var key = udtoTopic;
-			return $"{key}{d}{g}{d}{t}{d}{p}";
+			return this.EncodeFieldDataAsCSV(d);
 		}
 
 		public virtual int decompress(string[] data)
 		{
-			int counter = 1;
-			this.sourceGuid = data[counter++];
-			this.timeStamp = data[counter++];
-			this.panID = data[counter++];
-			return counter;
+			return this.DecodeFieldDataAsCSV(data);
 		}
 
 		public string resetTimeStamp()

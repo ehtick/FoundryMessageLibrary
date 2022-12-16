@@ -1,17 +1,17 @@
 using System;
 namespace IoBTMessage.Models
 {
-	
 
-public class SPEC_HighResVector
-{
-	public string units { get; set; } = "m";
-	public double X { get; set; } = 0;
-	public double Y { get; set; } = 0;
-	public double Z { get; set; } = 0;
-}
 
-[System.Serializable]
+	public class SPEC_HighResVector
+	{
+		public string units { get; set; } = "m";
+		public double X { get; set; } = 0;
+		public double Y { get; set; } = 0;
+		public double Z { get; set; } = 0;
+	}
+
+	[System.Serializable]
 	public class HighResVector
 	{
 		public string units = "m";
@@ -23,22 +23,7 @@ public class SPEC_HighResVector
 		{
 		}
 
-		public string compress(char d = ',')
-		{
-			// 7 Fields
-			units = units == string.Empty ? "m" : units;
-			return $"{units}{d}{X}{d}{Y}{d}{Z}{d}";
-		}
 
-		public int decompress(string[] data)
-		{
-			int counter = 0;
-			units = data[counter++];
-			X = IoBTMath.toDouble(data[counter++]);
-			Y = IoBTMath.toDouble(data[counter++]);
-			Z = IoBTMath.toDouble(data[counter++]);
-			return counter;
-		}
 
 		public double distanceXZ()
 		{

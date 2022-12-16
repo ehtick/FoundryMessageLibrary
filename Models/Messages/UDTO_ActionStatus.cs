@@ -17,19 +17,6 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{this.status}{d}{this.message}";
-		}
-
-		public override int decompress(string[] data)
-		{
-			var counter = base.decompress(data);
-			this.sourceGuid = data[counter++];
-			this.message = data[counter++];
-			return counter;
-		}
-
 
 		public static UDTO_ActionStatus info(string message)
 		{

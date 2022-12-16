@@ -26,25 +26,6 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public string compress(char d = ',')
-		{
-			// 7 Fields
-			units = units == string.Empty ? "m" : units;
-			return $"{units}{d}{width}{d}{height}{d}{depth}{d}{pinX}{d}{pinY}{d}{pinZ}";
-		}
-
-		public int decompress(string[] data)
-		{
-			var counter = 0;
-			units = data[counter++];
-			width = IoBTMath.toDouble(data[counter++]);
-			height = IoBTMath.toDouble(data[counter++]);
-			depth = IoBTMath.toDouble(data[counter++]);
-			pinX = IoBTMath.toDouble(data[counter++]);
-			pinY = IoBTMath.toDouble(data[counter++]);
-			pinZ = IoBTMath.toDouble(data[counter++]);
-			return counter;
-		}
 
 		public BoundingBox copyFrom(BoundingBox pos)
 		{

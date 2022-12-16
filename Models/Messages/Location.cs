@@ -39,19 +39,7 @@ namespace IoBTMessage.Models
 			return new Location(this);
 		}
 
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{lat}{d}{lng}{d}{alt}";
-		}
 
-		public override int decompress(string[] data)
-		{
-			var counter = base.decompress(data);
-			lat = IoBTMath.toDouble(data[counter++]);
-			lng = IoBTMath.toDouble(data[counter++]);
-			alt = IoBTMath.toDouble(data[counter++]);
-			return counter;
-		}
 		public Location SetLocationTo(Location loc)
 		{
 			this.lat = loc.lat;
