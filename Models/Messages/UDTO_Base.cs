@@ -1,6 +1,7 @@
 
 using System;
 
+// https://khalidabuhakmeh.com/convert-a-csharp-object-to-almost-any-format
 namespace IoBTMessage.Models
 {
 	public class SPEC_Base

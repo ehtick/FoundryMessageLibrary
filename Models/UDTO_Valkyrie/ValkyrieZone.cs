@@ -21,6 +21,16 @@ namespace IoBTMessage.Models
 		public ValkyrieZone()
 		{
 		}
+
+        public bool IsBetween(double value, double minimum, double maximum)
+        {
+            return value >= minimum && value <= maximum;
+        }
+
+        public bool IsWithinBoundary(double Latitude, double Longitude)
+        {
+            return IsBetween(Latitude, this.minLatitude, this.maxLatitude) && IsBetween(Longitude, this.minLongitude, this.maxLongitude);
+        }
 	}
 }
 
