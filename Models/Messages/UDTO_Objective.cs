@@ -17,22 +17,6 @@ namespace IoBTMessage.Models
 		public string symbol;
 		public string note;
 
-
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{name}{d}{type}{d}{symbol}{d}{note}";
-		}
-
-		public override int decompress(string[] data)
-		{
-			var counter = base.decompress(data);
-			name = data[counter++];
-			type = data[counter++];
-			symbol = data[counter++];
-			note = data[counter++];
-			return counter;
-		}
-
 	}
 }
 

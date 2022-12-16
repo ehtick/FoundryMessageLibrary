@@ -10,19 +10,6 @@ namespace IoBTMessage.Models
 		public string uniqueGuid;
 
 
-
-		public override string compress(char d = ',')
-		{
-			return $"{base.compress(d)}{d}{this.uniqueGuid}";
-		}
-
-		public override int decompress(string[] data)
-		{
-			var counter = base.decompress(data);
-			this.uniqueGuid = data[counter++];
-			return counter;
-		}
-
 	}
 }
 

@@ -87,41 +87,40 @@ namespace IoBTMessage.Models
 				action(element);
 		}
 
-		public static string EncodeFieldNamesAsCSV<T>(this T source)
+		public static string EncodeFieldNamesAsCSV(this object source, char d = '\u002C')
 		{
 			var list = new List<string>();
-			var flist = from field in typeof(T).GetFields() where field.IsPublic select field;
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
 
 			foreach (FieldInfo field in flist)
 			{
-				_ = field.GetValue(source);
 				list.Add(field.Name);
 			}
-			return string.Join(',',list);
+			return string.Join(d,list);
 		}
 
-		public static string EncodeFieldDataAsCSV<T>(this T source)
+		public static string EncodeFieldDataAsCSV(this object source, char d = '\u002C')
 		{
 			var list = new List<string>();
-			var flist = from field in typeof(T).GetFields() where field.IsPublic select field;
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
 
 			foreach (FieldInfo field in flist)
 			{
 				var value = field.GetValue(source);
 				list.Add(value.ToString());
 			}
-			return string.Join(',',list);
+			return string.Join(d,list);
 		}
 
-		public static T DecodeFieldDataAsCSV<T>(this T source, string[] data)
+		public static int DecodeFieldDataAsCSV(this object source, string[] data)
 		{
 
-			var flist = from field in typeof(T).GetFields() where field.IsPublic select field;
-
 			int i = 0;
+			var flist = from field in source.GetType().GetFields() where field.IsPublic select field;
+
 			foreach (FieldInfo field in flist)
 			{
-				var value = data[i];
+				var value = data[i++];
 
 				if (field.FieldType == typeof(double))
 				{
@@ -141,10 +140,9 @@ namespace IoBTMessage.Models
 				} else 
 				{
 					throw new ArgumentException($"Cannot DecodeFieldDataAsCSV for {field.Name}");
-				}
-                
+				} 
 			}
-			return source;
+			return flist.Count();
 		}
 
 		public static void CopyNonNullProperties<T>(this T source, T dest)

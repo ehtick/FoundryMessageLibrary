@@ -23,22 +23,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public string compress(char d = ',')
-		{
-			// 7 Fields
-			units = units == string.Empty ? "m" : units;
-			return $"{units}{d}{X}{d}{Y}{d}{Z}{d}";
-		}
 
-		public int decompress(string[] data)
-		{
-			int counter = 0;
-			units = data[counter++];
-			X = IoBTMath.toDouble(data[counter++]);
-			Y = IoBTMath.toDouble(data[counter++]);
-			Z = IoBTMath.toDouble(data[counter++]);
-			return counter;
-		}
 
 		public double distanceXZ()
 		{
