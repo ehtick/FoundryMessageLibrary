@@ -1,17 +1,17 @@
 using System;
 namespace IoBTMessage.Models
 {
-	
 
-public class SPEC_HighResVector
-{
-	public string units { get; set; } = "m";
-	public double X { get; set; } = 0;
-	public double Y { get; set; } = 0;
-	public double Z { get; set; } = 0;
-}
 
-[System.Serializable]
+	public class SPEC_HighResVector
+	{
+		public string units { get; set; } = "m";
+		public double X { get; set; } = 0;
+		public double Y { get; set; } = 0;
+		public double Z { get; set; } = 0;
+	}
+
+	[System.Serializable]
 	public class HighResVector
 	{
 		public string units = "m";
