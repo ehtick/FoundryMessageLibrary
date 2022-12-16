@@ -1,13 +1,9 @@
 using System;
+using System.Collections.Generic;
+
 namespace IoBTMessage.Models
 {
 
-   public class ValkyrieREPLState
-    {
-
-        public List<string> hiddenThreatIds { get; set; } = new List<string>();
-
-    }
 
 	public class SPEC_ValkyrieSystem
 	{

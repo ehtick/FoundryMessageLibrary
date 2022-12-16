@@ -11,6 +11,16 @@ namespace IoBTMessage.Models
 		public string refGuid { get; set; }
 		public string timeStamp { get; set; }
 		public string panID { get; set; }
+
+		public virtual string compress(char d = '\u002C')
+		{
+			return this.EncodeFieldDataAsCSV(d);
+		}
+
+		public virtual int decompress(string[] data)
+		{
+			return this.DecodeFieldDataAsCSV(data);
+		}
 	}
 
 	[System.Serializable]
