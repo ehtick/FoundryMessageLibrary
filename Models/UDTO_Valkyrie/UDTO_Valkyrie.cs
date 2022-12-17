@@ -35,6 +35,12 @@ namespace IoBTMessage.Models
 		public ValkyrieThreats threats;
 		public ValkyrieDevices devices;
 
+		public string IsListening() 
+		{
+			system ??= new ValkyrieSystem();
+			return system.listenToThreats;
+		}
+
 		public void AddThreat(string threat) 
 		{
 			threats ??= new ValkyrieThreats();
@@ -61,6 +67,7 @@ namespace IoBTMessage.Models
 
         public bool IsWithinBoundary(double Latitude, double Longitude)
         {
+			zone ??= new ValkyrieZone();
             return zone.IsWithinBoundary(Latitude,Longitude);
         }
 		public bool IsThreatVisible(string id)
