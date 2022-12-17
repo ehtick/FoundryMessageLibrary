@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 		public string name { get; set; }
 		public string active { get; set; }
 		public string version { get; set; }
-		public int count { get; set; }
+		public int callCount { get; set; }
 		public double kbTransfered { get; set; }
 		public string info { get; set; }
 		public string container { get; set; }
@@ -25,7 +25,7 @@ namespace IoBTMessage.Models
 		public string name;
 		public string active;
 		public string version;
-		public int count;
+		public int callCount;
 		public double kbTransfered;
 		public string info;
 		public string container;
