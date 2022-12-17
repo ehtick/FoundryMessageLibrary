@@ -19,8 +19,16 @@ namespace IoBTMessage.Models
 		public ValkyrieDevices()
 		{
 		}
-
-
+		public void AddDevice(string device) 
+		{
+		}
+		public void RemoveDevice(string device) 
+		{
+		}
+		public bool IsDeviceVisible(string id)
+		{
+			return true;
+		}
 	}
 }
 

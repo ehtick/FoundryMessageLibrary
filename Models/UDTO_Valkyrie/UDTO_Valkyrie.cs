@@ -34,5 +34,47 @@ namespace IoBTMessage.Models
 		public ValkyrieSystem system;
 		public ValkyrieThreats threats;
 		public ValkyrieDevices devices;
+
+		public void AddThreat(string threat) 
+		{
+			threats ??= new ValkyrieThreats();
+			threats.AddThreat(threat);
+		}
+
+		public void RemoveThreat(string threat) 
+		{
+			threats ??= new ValkyrieThreats();
+			threats.RemoveThreat(threat);
+		}
+
+		public void AddDevice(string device) 
+		{
+			devices ??= new ValkyrieDevices();
+			devices.AddDevice(device);
+		}
+
+		public void RemoveDevice(string device) 
+		{
+			devices ??= new ValkyrieDevices();
+			devices.RemoveDevice(device);
+		}
+
+        public bool IsWithinBoundary(double Latitude, double Longitude)
+        {
+            return zone.IsWithinBoundary(Latitude,Longitude);
+        }
+		public bool IsThreatVisible(string id)
+		{
+			threats ??= new ValkyrieThreats();
+			return threats.IsThreatVisible(id);
+		}
+
+		public bool IsDeviceVisible(string id)
+		{
+			devices ??= new ValkyrieDevices();
+			return devices.IsDeviceVisible(id);
+		}
 	}
+
+
 }
