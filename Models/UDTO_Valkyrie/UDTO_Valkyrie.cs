@@ -13,6 +13,7 @@ namespace IoBTMessage.Models
 
 	public class SPEC_Valkyrie  : SPEC_Base
 	{
+		public string command { get; set; }
 		public SPEC_ValkyrieZone zone { get; set; }
 		public SPEC_ValkyrieSystem system { get; set; }
 		public SPEC_ValkyrieThreats threats { get; set; }
@@ -28,6 +29,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Valkyrie  : UDTO_Base
 	{
+		public string command;
 		public ValkyrieZone zone;
 		public ValkyrieSystem system;
 		public ValkyrieThreats threats;

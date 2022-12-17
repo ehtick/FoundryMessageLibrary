@@ -28,8 +28,10 @@ namespace IoBTMessage.Models
 		public double sleepScore { get; set; }
 		public double stressCalculation { get; set; }
 		public double fitnessScore { get; set; }
-		public static SPEC_Biometric RandomSpec() {
+		public static SPEC_Biometric RandomSpec() 
+		{
 			var gen = new MockDataGenerator();
+			
 			return new SPEC_Biometric()
 			{
 				heartRate = gen.GenerateDouble(60,90),
