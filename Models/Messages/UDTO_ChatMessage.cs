@@ -5,6 +5,15 @@ namespace IoBTMessage.Models
 		public string toUser { get; set; }
 		public string fromUser { get; set; }
 		public string message { get; set; }
+
+		public static SPEC_ChatMessage RandomSpec() {
+			return new SPEC_ChatMessage()
+			{
+				toUser = "toUser",
+				fromUser = "fromUser",
+				message = "Sending a Chat Message"
+			};
+		}
 	}
 	
 	[System.Serializable]
