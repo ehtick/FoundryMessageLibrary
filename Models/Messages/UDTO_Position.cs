@@ -7,12 +7,12 @@ namespace IoBTMessage.Models
 	{
 		public static SPEC_Position RandomSpec()
 		{
-			 //var rand = new Random();
+			 var rand = new Random();
 			return new SPEC_Position()
 			{
-				// lat = rand.NextDouble(-140,-144),
-				// lng = rand.NextDouble(34,38),
-				// alt = rand.NextDouble(10,100),
+				lat = rand.DoubleBetween(-140,-144),
+				lng = rand.DoubleBetween(34,38),
+				alt = rand.DoubleBetween(10,100),
 			};
 		}
 	}

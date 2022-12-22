@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web;
 
 namespace IoBTMessage.Models
@@ -85,6 +87,31 @@ namespace IoBTMessage.Models
 		{
 			foreach (T element in source)
 				action(element);
+		}
+
+		public static string Dehydrate<T>(T target, bool includeFields) where T : class
+		{
+			var options = new JsonSerializerOptions()
+			{
+				IncludeFields = includeFields,
+				IgnoreReadOnlyFields = true,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+			};
+
+			var result = JsonSerializer.Serialize(target, typeof(T), options);
+			return result;
+		}
+
+		public static string Dehydrate(object target, Type type, bool includeFields) 
+		{	
+			var options = new JsonSerializerOptions()
+			{
+				IncludeFields = includeFields,
+				IgnoreReadOnlyFields = true,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+			};
+			var result = JsonSerializer.Serialize(target, type, options);
+			return result;
 		}
 
 		public static string EncodeFieldNamesAsCSV(this object source, char d = '\u002C')
