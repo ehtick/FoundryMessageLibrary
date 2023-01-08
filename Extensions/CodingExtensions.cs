@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace IoBTMessage.Models
@@ -87,6 +88,14 @@ namespace IoBTMessage.Models
 		{
 			foreach (T element in source)
 				action(element);
+		}
+
+		public static async Task ForEachAsync<T>(this List<T> list, Func<T, Task> func)
+		{
+			foreach (var value in list)
+			{
+				await func(value);
+			}
 		}
 
 		public static string Dehydrate<T>(T target, bool includeFields) where T : class
