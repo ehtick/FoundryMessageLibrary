@@ -7,11 +7,12 @@ namespace IoBTMessage.Models
 		public string message { get; set; }
 
 		public static SPEC_ChatMessage RandomSpec() {
+			var gen = new MockDataGenerator();
 			return new SPEC_ChatMessage()
 			{
-				toUser = "toUser",
-				fromUser = "fromUser",
-				message = "Sending a Chat Message"
+				toUser = gen.GenerateName(),
+				fromUser = gen.GenerateName(),
+				message = gen.GenerateText(),
 			};
 		}
 	}

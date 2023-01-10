@@ -5,14 +5,18 @@ namespace IoBTMessage.Models
 
 	public class SPEC_Position : SPEC_Location
 	{
+		public new double lat { get; set; }
+		public new double lng { get; set; }
+		public new double alt { get; set; }
+
 		public static SPEC_Position RandomSpec()
 		{
-			 var rand = new Random();
+			var gen = new MockDataGenerator();
 			return new SPEC_Position()
 			{
-				lat = rand.DoubleBetween(-140,-144),
-				lng = rand.DoubleBetween(34,38),
-				alt = rand.DoubleBetween(10,100),
+				lat = gen.DoubleBetween(-140,-144),
+				lng = gen.DoubleBetween(34,38),
+				alt = gen.DoubleBetween(10,100),
 			};
 		}
 	}
