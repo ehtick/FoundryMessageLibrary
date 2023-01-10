@@ -14,9 +14,9 @@ namespace IoBTMessage.Models
 			var gen = new MockDataGenerator();
 			return new SPEC_Position()
 			{
-				lat = gen.DoubleBetween(-140,-144),
-				lng = gen.DoubleBetween(34,38),
-				alt = gen.DoubleBetween(10,100),
+				lat = gen.GenerateDouble(-140,-144),
+				lng = gen.GenerateDouble(34,38),
+				alt = gen.GenerateDouble(10,100),
 			};
 		}
 	}

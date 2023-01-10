@@ -14,7 +14,7 @@ namespace IoBTMessage.Models
 			return new SPEC_Observation()
 			{
 				target = gen.GenerateName(),
-				range = gen.DoubleBetween(10, 100),
+				range = gen.GenerateDouble(10, 100),
 				uniqueGuid = Guid.NewGuid().ToString(),
 			};
 		}

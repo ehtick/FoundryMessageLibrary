@@ -11,7 +11,7 @@ namespace IoBTMessage.Models
 		public new double yAng { get; set; } = 0;
 		public new double zAng { get; set; } = 0;
 
-		public static SPEC_HighResOffset RandomSpec()
+		public new static SPEC_HighResOffset RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_HighResOffset()

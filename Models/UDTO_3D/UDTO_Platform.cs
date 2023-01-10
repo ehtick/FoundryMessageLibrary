@@ -19,7 +19,6 @@ namespace IoBTMessage.Models
 			var gen = new MockDataGenerator();
 			return new SPEC_Platform()
 			{
-				symbol = gen.GenerateSymbol(),
 				offset = SPEC_HighResOffset.RandomSpec(),
 				position = SPEC_Position.RandomSpec(),
 				boundingBox = SPEC_BoundingBox.RandomSpec(),

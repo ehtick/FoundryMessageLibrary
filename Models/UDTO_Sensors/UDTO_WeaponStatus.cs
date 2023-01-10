@@ -25,7 +25,7 @@ namespace IoBTMessage.Models
 		public SPEC_IMUReading IMU;
 		public double targetDistance; //assume meters
 
-		public static public static SPEC_WeaponStatus RandomSpec()
+		public static SPEC_WeaponStatus RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_WeaponStatus()

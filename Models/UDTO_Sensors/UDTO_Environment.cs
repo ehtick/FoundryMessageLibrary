@@ -17,7 +17,7 @@ namespace IoBTMessage.Models
 		public double pressure { get; set; }
 		public SPEC_Direction wind { get; set; }
 
-		public static SPEC_Electrical RandomSpec()
+		public static SPEC_Environment RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_Environment()
