@@ -143,7 +143,7 @@ namespace IoBTMessage.Models
 			foreach (FieldInfo field in flist)
 			{
 				var value = field.GetValue(source);
-				list.Add(value.ToString());
+				list.Add(value?.ToString() ?? "");
 			}
 			return string.Join(d,list);
 		}
