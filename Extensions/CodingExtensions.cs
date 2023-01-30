@@ -35,7 +35,7 @@ namespace IoBTMessage.Models
 		{
 			return items.GroupBy(property).Select(x => x.First());
 		}
-		public static bool IsImage(this DT_Document doc)
+		public static bool IsImage(this DT_AssetFile doc)
 		{
 			var filename = doc.filename.ToLower();
 			if (filename.EndsWith("jpg"))
@@ -45,7 +45,7 @@ namespace IoBTMessage.Models
 			return false;
 		}
 
-		public static bool IsModel(this DT_Document doc)
+		public static bool IsModel(this DT_AssetFile doc)
 		{
 			var filename = doc.filename.ToLower();
 			if (filename.EndsWith("fbx"))
@@ -57,7 +57,7 @@ namespace IoBTMessage.Models
 			return false;
 		}
 
-		public static bool IsVideo(this DT_Document doc)
+		public static bool IsVideo(this DT_AssetFile doc)
 		{
 			var filename = doc.filename.ToLower();
 			if (filename.EndsWith("mp4"))

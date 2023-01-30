@@ -6,7 +6,7 @@ namespace IoBTMessage.Models
 	public class DT_Hero : DT_Title
 	{
 		public DT_InfoCard infoCard;
-		public DT_Document heroImage;
+		public DT_AssetFile heroImage;
 		public List<DT_AssetReference> assetReferences;
 		public List<DT_ComponentReference> componentReferences;
 
@@ -51,13 +51,13 @@ namespace IoBTMessage.Models
 			return item;
 		}
 
-		public virtual List<DT_Document> CollectDocuments(List<DT_Document> list, bool deep)
+		public virtual List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
 		{
 			list.Add(heroImage);
 
 			assetReferences?.ForEach(assetRef =>
 			{
-				list.Add(assetRef?.document);
+				list.Add(assetRef?.asset);
 			});
 			return list;
 		}
