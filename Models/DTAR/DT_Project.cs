@@ -31,14 +31,14 @@ namespace IoBTMessage.Models
 
 
 
-		public override List<DT_Document> CollectDocuments(List<DT_Document> list, bool deep)
+		public override List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
 		{
-			base.CollectDocuments(list,deep);
+			base.CollectAssetFiles(list,deep);
 			if ( !deep) return list;
 
 			processPlans?.ForEach(plan =>
 			{
-				plan.CollectDocuments(list,deep);
+				plan.CollectAssetFiles(list,deep);
 			});
 			return list;
 		}
