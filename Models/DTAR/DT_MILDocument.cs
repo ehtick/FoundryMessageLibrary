@@ -1,38 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 namespace IoBTMessage.Models
 {
 
+
 	[System.Serializable]
-	public class DT_ProcessStep : DT_Hero
+	public class DT_MILDocument : DT_Hero, ISystem
 	{
 
 		public int memberCount;
-		public int stepNumber;
+		public string systemName;
 
-		public List<DT_StepItem> details;
+		public string referenceDesignation;
+		public string itemDescription;
+		public string itemDescriptionRevision;	
+		public List<DT_MILDocument> children;
 
 
-
-		public DT_ProcessStep() : base()
+		public DT_MILDocument()
 		{
 		}
 
-		public T AddStepDetail<T>(T detail) where T : DT_StepItem
+		public DT_MILDocument AddChild(DT_MILDocument child)
 		{
-			if (details == null)
+			if (children == null)
 			{
-				details = new List<DT_StepItem>();
+				children = new List<DT_MILDocument>();
 			}
-			detail.parentGuid = this.guid;
+			child.parentGuid = this.guid;
 
-			details.Add(detail);
-			this.memberCount = details.Count;
-
-			details = details.OrderBy(x => x.itemNumber).ToList();
-			return detail;
+			children.Add(child);
+			this.memberCount = children.Count;
+			return child;
 		}
-
 
 
 		public override List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
@@ -40,7 +41,7 @@ namespace IoBTMessage.Models
 			base.CollectAssetFiles(list,deep);
 			if ( !deep) return list;
 
-			details?.ForEach(step =>
+			children?.ForEach(step =>
 			{
 				step.CollectAssetFiles(list,deep);
 			});
@@ -51,20 +52,21 @@ namespace IoBTMessage.Models
 		{
 			base.CollectAssetReferences(list,deep);
 			if ( !deep) return list;
-
-			details?.ForEach(step =>
+			
+			children?.ForEach(step =>
 			{
 				step.CollectAssetReferences(list,deep);
 			});
 
 			return list;
 		}
+
 		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
 		{
 			base.CollectComponentReferences(list,deep);
 			if ( !deep) return list;
 
-			details?.ForEach(step =>
+			children?.ForEach(step =>
 			{
 				step.CollectComponentReferences(list,deep);
 			});
@@ -75,7 +77,7 @@ namespace IoBTMessage.Models
 		{
 			base.CollectComments(list);
 
-			details?.ForEach(step =>
+			children?.ForEach(step =>
 			{
 				step.CollectComments(list);
 			});
@@ -86,23 +88,30 @@ namespace IoBTMessage.Models
 		{
 			base.CollectQualityAssurance(list);
 
-			details?.ForEach(step =>
+			children?.ForEach(step =>
 			{
 				step.CollectQualityAssurance(list);
 			});
 			return list;
 		}
 
-		public DT_ProcessStep ShallowCopy()
+		public DT_MILDocument ShallowCopy()
 		{
-			var result = (DT_ProcessStep)this.MemberwiseClone();
+			var result = (DT_MILDocument)this.MemberwiseClone();
+			result.children = null;
 			result.assetReferences = null;
 
-			result.details = result.details?.Select(obj => obj.ShallowCopy()).ToList();
+			return result;
+		}
 
+		public List<DT_MILDocument> ShallowSteps()
+		{
+			var result = children?.Select(obj => obj.ShallowCopy()).ToList();
 			return result;
 		}
 
 
 	}
 }
+
+

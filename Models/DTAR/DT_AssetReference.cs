@@ -10,9 +10,9 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_AssetReference : DT_Title, IDT_Reference
 	{
-		public string documentGuid;
+		public string assetGuid;
 		public string heroGuid;
-		public DT_Document document;
+		public DT_AssetFile asset;
 		public HighResPosition position;
 
 
@@ -20,17 +20,17 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public DT_AssetReference AttachDocument(DT_Document doc) 
+		public DT_AssetReference AttachDocument(DT_AssetFile doc) 
 		{
-			document = doc;
-			documentGuid = doc.guid;
+			asset = doc;
+			assetGuid = doc.guid;
 			return this;
 		}
 
 		public DT_AssetReference ClearDocument() 
 		{
-			documentGuid = document?.guid;
-			document = null;
+			assetGuid = asset?.guid;
+			asset = null;
 			return this;
 		}
 

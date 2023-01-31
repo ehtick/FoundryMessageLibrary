@@ -2,7 +2,7 @@
 {
 
 	[System.Serializable]
-	public class DT_Document : DT_Title
+	public class DT_AssetFile : DT_Title
 	{
 		public string status;
 		public string filename;
@@ -12,7 +12,7 @@
 
 
 
-		public DT_Document() : base()
+		public DT_AssetFile() : base()
 		{	
 		}
 		public bool IsReadyToUse()
