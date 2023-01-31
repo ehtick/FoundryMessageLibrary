@@ -12,6 +12,9 @@ namespace IoBTMessage.Models
 		public int memberCount;
 		public string systemName;
 
+		public string referenceDesignation;
+		public string itemDescription;
+		public string itemDescriptionRevision;	
 		public List<DT_MILDocument> children;
 
 
