@@ -70,6 +70,12 @@ namespace IoBTMessage.Models
 			return string.Join(" ", list);
 		}
 
+		public string GenerateWord()
+		{
+			string word = words[rand.Next(words.Count)];
+			return word;
+		}
+
 		public string GenerateSymbol()
 		{
 			string symbol = symbols[rand.Next(symbols.Count)];
