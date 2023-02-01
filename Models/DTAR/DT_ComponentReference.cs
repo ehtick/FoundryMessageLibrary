@@ -1,5 +1,12 @@
 namespace IoBTMessage.Models
 {
+	public class DO_ComponentReference : DO_Title
+	{
+		public DO_Part part { get; set; }
+		public DT_Promise promise { get; set; }
+		public DT_Component component { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_ComponentReference : DT_Title, IDT_Reference
 	{
@@ -30,7 +37,7 @@ namespace IoBTMessage.Models
 		public DT_ComponentReference ShallowCopy()
 		{
 			var result = (DT_ComponentReference)this.MemberwiseClone();
-			if ( part != null )
+			if (part != null)
 				result.part = (DT_Part)part.ShallowCopy();
 
 			result.component = null;

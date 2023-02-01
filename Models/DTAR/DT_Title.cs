@@ -2,6 +2,12 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Models
 {
+	public class DO_Title : DO_Searchable
+	{
+		public List<DO_Comment> comments { get; set; }
+		public List<DO_QualityAssurance> qualityChecks { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_Title : DT_Searchable
 	{

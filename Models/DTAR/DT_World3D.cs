@@ -7,7 +7,17 @@ using System.Linq;
 namespace IoBTMessage.Models
 {
 
-	public class  DT_World3D : DT_Hero, ISystem
+	public class DO_World3D : DO_Hero
+	{
+		public string systemName { get; set; }
+
+		public List<SPEC_Platform> platforms { get; set; } = new List<SPEC_Platform>();
+		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
+		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
+		public List<SPEC_Relationship> relationships { get; set; } = new List<SPEC_Relationship>();
+	}
+
+	public class DT_World3D : DT_Hero, ISystem
 	{
 		public string systemName;
 
@@ -33,13 +43,13 @@ namespace IoBTMessage.Models
 
 		public T Find<T>(string name) where T : UDTO_3D
 		{
-			if ( typeof(T).Name.Matches(nameof(UDTO_Body)) )
+			if (typeof(T).Name.Matches(nameof(UDTO_Body)))
 				return bodies?.FirstOrDefault(item => item.name.Matches(name)) as T;
-			
-			if ( typeof(T).Name.Matches(nameof(UDTO_Label)) )
+
+			if (typeof(T).Name.Matches(nameof(UDTO_Label)))
 				return labels?.FirstOrDefault(item => item.name.Matches(name)) as T;
-			
-			if ( typeof(T).Name.Matches(nameof(UDTO_Platform)) )
+
+			if (typeof(T).Name.Matches(nameof(UDTO_Platform)))
 				return platforms?.FirstOrDefault(item => item.name.Matches(name)) as T;
 
 			return null;
@@ -47,13 +57,13 @@ namespace IoBTMessage.Models
 
 		public T FindReferenceDesignation<T>(string name) where T : UDTO_3D
 		{
-			if ( typeof(T).Name.Matches(nameof(UDTO_Body)) )
+			if (typeof(T).Name.Matches(nameof(UDTO_Body)))
 				return bodies?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
-			
-			if ( typeof(T).Name.Matches(nameof(UDTO_Label)) )
+
+			if (typeof(T).Name.Matches(nameof(UDTO_Label)))
 				return labels?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
-			
-			if ( typeof(T).Name.Matches(nameof(UDTO_Platform)) )
+
+			if (typeof(T).Name.Matches(nameof(UDTO_Platform)))
 				return platforms?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
 
 			return null;
@@ -67,7 +77,8 @@ namespace IoBTMessage.Models
 
 		public List<UDTO_Platform> FillPlatforms()
 		{
-			platforms.ForEach(platform => {
+			platforms.ForEach(platform =>
+			{
 				platform.Flush();
 				var platformName = platform.platformName;
 

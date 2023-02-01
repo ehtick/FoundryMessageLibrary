@@ -5,6 +5,15 @@ namespace IoBTMessage.Models
 {
 
 
+	public class DO_ProcessPlan : DO_Hero
+	{
+		public int memberCount { get; set; }
+		public string systemName { get; set; }
+
+		public List<DO_ProcessStep> steps;
+
+	}
+
 	[System.Serializable]
 	public class DT_ProcessPlan : DT_Hero, ISystem
 	{
@@ -35,24 +44,24 @@ namespace IoBTMessage.Models
 
 		public override List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
 		{
-			base.CollectAssetFiles(list,deep);
-			if ( !deep) return list;
+			base.CollectAssetFiles(list, deep);
+			if (!deep) return list;
 
 			steps?.ForEach(step =>
 			{
-				step.CollectAssetFiles(list,deep);
+				step.CollectAssetFiles(list, deep);
 			});
 			return list;
 		}
 
 		public override List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list, bool deep)
 		{
-			base.CollectAssetReferences(list,deep);
-			if ( !deep) return list;
-			
+			base.CollectAssetReferences(list, deep);
+			if (!deep) return list;
+
 			steps?.ForEach(step =>
 			{
-				step.CollectAssetReferences(list,deep);
+				step.CollectAssetReferences(list, deep);
 			});
 
 			return list;
@@ -60,12 +69,12 @@ namespace IoBTMessage.Models
 
 		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
 		{
-			base.CollectComponentReferences(list,deep);
-			if ( !deep) return list;
+			base.CollectComponentReferences(list, deep);
+			if (!deep) return list;
 
 			steps?.ForEach(step =>
 			{
-				step.CollectComponentReferences(list,deep);
+				step.CollectComponentReferences(list, deep);
 			});
 			return list;
 		}

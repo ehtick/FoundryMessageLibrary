@@ -5,6 +5,15 @@ using IoBTMessage.Models;
 namespace IoBTMessage.Models
 {
 
+	public class DO_Target : DO_Searchable
+	{
+		public DO_Part part { get; set; }
+		public List<DO_AssetFile> models { get; set; }
+		public List<DO_AssetFile> images { get; set; }
+		public List<DO_Component> components { get; set; }
+		public List<DO_Hero> procedures { get; set; }
+	}
+
 	public class DT_Target : DT_Searchable
 	{
 		public DT_Part part;
@@ -44,7 +53,7 @@ namespace IoBTMessage.Models
 
 		public List<DT_AssetFile> CollectAssetFilesFrom(DT_Hero source, bool deep)
 		{
-			var assets = source.CollectAssetFiles(new List<DT_AssetFile>(),deep).Where(obj => obj != null).ToList();
+			var assets = source.CollectAssetFiles(new List<DT_AssetFile>(), deep).Where(obj => obj != null).ToList();
 			assets = assets.DistinctUsing(item => item.filename).ToList();
 
 			images ??= new List<DT_AssetFile>();
