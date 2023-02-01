@@ -135,6 +135,13 @@ namespace IoBTMessage.Models
 
 	}
 
+	public class DO_QualityAssurance : DO_Searchable
+	{
+		public string action { get; set; }
+		public string author { get; set; }
+		public string componentGuid { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_QualityAssurance : DT_Searchable
 	{
@@ -147,6 +154,12 @@ namespace IoBTMessage.Models
 		{
 		}
 
+	}
+
+	public class DO_Comment : DO_Searchable
+	{
+		public string severity { get; set; }
+		public string author { get; set; }
 	}
 
 	[System.Serializable]
