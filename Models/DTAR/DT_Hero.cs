@@ -2,6 +2,14 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Models
 {
+	public class DO_Hero : DO_Title
+	{
+		public DO_InfoCard infoCard { get; set; }
+		public DO_AssetFile heroImage { get; set; }
+		public List<DO_AssetReference> assetReferences { get; set; }
+		public List<DO_ComponentReference> componentReferences { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_Hero : DT_Title
 	{
@@ -21,13 +29,13 @@ namespace IoBTMessage.Models
 		public T AddAssetReference<T>(T item) where T : DT_AssetReference
 		{
 			assetReferences ??= new List<DT_AssetReference>();
-			
 
-			if ( assetReferences.IndexOf(item) == -1 )
+
+			if (assetReferences.IndexOf(item) == -1)
 			{
 				item.heroGuid = this.guid;
 				assetReferences.Add(item);
-			} 
+			}
 			else
 			{
 				$"AddAssetReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
@@ -65,7 +73,7 @@ namespace IoBTMessage.Models
 		public virtual List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list, bool deep)
 		{
 
-			if ( assetReferences != null )
+			if (assetReferences != null)
 				list.AddRange(assetReferences);
 
 			return list;

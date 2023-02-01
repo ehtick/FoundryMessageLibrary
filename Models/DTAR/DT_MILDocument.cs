@@ -5,6 +5,17 @@ namespace IoBTMessage.Models
 {
 
 
+	public class DO_MILDocument : DT_Hero
+	{
+		public int memberCount { get; set; }
+		public string systemName { get; set; }
+
+		public string referenceDesignation { get; set; }
+		public string itemDescription { get; set; }
+		public string itemDescriptionRevision { get; set; }
+		public List<DO_MILDocument> children { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_MILDocument : DT_Hero, ISystem
 	{
@@ -14,7 +25,7 @@ namespace IoBTMessage.Models
 
 		public string referenceDesignation;
 		public string itemDescription;
-		public string itemDescriptionRevision;	
+		public string itemDescriptionRevision;
 		public List<DT_MILDocument> children;
 
 
@@ -38,24 +49,24 @@ namespace IoBTMessage.Models
 
 		public override List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
 		{
-			base.CollectAssetFiles(list,deep);
-			if ( !deep) return list;
+			base.CollectAssetFiles(list, deep);
+			if (!deep) return list;
 
 			children?.ForEach(step =>
 			{
-				step.CollectAssetFiles(list,deep);
+				step.CollectAssetFiles(list, deep);
 			});
 			return list;
 		}
 
 		public override List<DT_AssetReference> CollectAssetReferences(List<DT_AssetReference> list, bool deep)
 		{
-			base.CollectAssetReferences(list,deep);
-			if ( !deep) return list;
-			
+			base.CollectAssetReferences(list, deep);
+			if (!deep) return list;
+
 			children?.ForEach(step =>
 			{
-				step.CollectAssetReferences(list,deep);
+				step.CollectAssetReferences(list, deep);
 			});
 
 			return list;
@@ -63,12 +74,12 @@ namespace IoBTMessage.Models
 
 		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
 		{
-			base.CollectComponentReferences(list,deep);
-			if ( !deep) return list;
+			base.CollectComponentReferences(list, deep);
+			if (!deep) return list;
 
 			children?.ForEach(step =>
 			{
-				step.CollectComponentReferences(list,deep);
+				step.CollectComponentReferences(list, deep);
 			});
 			return list;
 		}

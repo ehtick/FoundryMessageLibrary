@@ -33,9 +33,10 @@ namespace IoBTMessage.Models
 			this.name = name;
 			this.initialize();
 		}
-		public virtual T merge<T>(T obj) where T: DT_Base 
+		public virtual T merge<T>(T obj) where T : DT_Base
 		{
-			if ( this.timeStamp.CompareTo(obj.timeStamp) < 0) {
+			if (this.timeStamp.CompareTo(obj.timeStamp) < 0)
+			{
 				this.timeStamp = obj.timeStamp;
 			}
 			return this as T;
@@ -69,7 +70,7 @@ namespace IoBTMessage.Models
 			return metadata;
 		}
 
-		
+
 		public bool HasMetaData()
 		{
 			return metadata != null;
@@ -77,7 +78,8 @@ namespace IoBTMessage.Models
 
 		public bool HasMetaDataKey(string key)
 		{
-			if ( metadata != null ) {
+			if (metadata != null)
+			{
 				return metadata.Find(key) != null;
 			}
 			return false;
@@ -85,10 +87,10 @@ namespace IoBTMessage.Models
 
 		public ControlParameters AddMetaData(string key, string value)
 		{
-			MetaData().Establish(key,value);
+			MetaData().Establish(key, value);
 			return metadata;
 		}
-		
+
 		public DT_Base initialize()
 		{
 			if (String.IsNullOrEmpty(type))
@@ -114,12 +116,18 @@ namespace IoBTMessage.Models
 	}
 
 
+	public class DO_Searchable : DESIGN_Base
+	{
+		public string title { get; set; }
+		public string description { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_Searchable : DT_Base
 	{
 		public string title;
 		public string description;
-		
+
 
 		public DT_Searchable() : base()
 		{

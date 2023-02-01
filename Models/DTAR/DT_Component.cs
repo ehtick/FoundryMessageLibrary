@@ -2,6 +2,14 @@
 
 namespace IoBTMessage.Models
 {
+
+	public class DO_Component : DO_Title
+	{
+		public DO_Part part { get; set; }
+		public string parentAssembly { get; set; }
+		public string systemName { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_Component : DT_Hero, ISystem
 	{

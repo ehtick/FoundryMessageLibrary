@@ -1,5 +1,11 @@
 namespace IoBTMessage.Models
 {
+	public class DO_Promise
+	{
+		public string key { get; set; }
+		public string url { get; set; }
+	}
+
 	[System.Serializable]
 	public class DT_Promise
 	{
@@ -7,6 +13,13 @@ namespace IoBTMessage.Models
 		public string url;
 	}
 
+	public class DO_Part
+	{
+		public string referenceDesignation { get; set; }
+		public string partNumber { get; set; }
+		public string serialNumber { get; set; }
+		public string revision { get; set; }
+	}
 	[System.Serializable]
 	public class DT_Part
 	{
