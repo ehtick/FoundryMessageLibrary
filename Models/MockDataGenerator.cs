@@ -19,7 +19,7 @@ namespace IoBTMessage.Models
 			public NameList()
 			{
 				first = new string[] {
-					"Thomas", "Casen", "Eric","Steve","Greg", "Sherman","Jason","Nathan","Ward","Joe","JB"
+					"Thomas", "Casen", "Eric","Steve","Greg", "Sherman","Jason","Nathan","Ward","Ron","JB"
 				};
 				last = new string[] {
 					"North", "South", "East","West","Earth","Wind","Fire","Water"
