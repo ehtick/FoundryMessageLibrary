@@ -24,9 +24,12 @@ namespace IoBTMessage.Models
 		{
 		}
 
+		public virtual List<DT_Hero> Children()
+		{
+			return new List<DT_Hero>();
+		}
 
-
-		public T AddAssetReference<T>(T item) where T : DT_AssetReference
+	public T AddAssetReference<T>(T item) where T : DT_AssetReference
 		{
 			assetReferences ??= new List<DT_AssetReference>();
 

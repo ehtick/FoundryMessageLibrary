@@ -28,6 +28,12 @@ namespace IoBTMessage.Models
 		{
 		}
 
+		public override List<DT_Hero> Children()
+		{
+			if ( steps == null) base.Children();
+			return steps.Select(item => (DT_Hero)item).ToList();
+		}
+
 		public DT_ProcessStep AddProcessStep(DT_ProcessStep step)
 		{
 			if (steps == null)

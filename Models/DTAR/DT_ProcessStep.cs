@@ -27,6 +27,12 @@ namespace IoBTMessage.Models
 		{
 		}
 
+		public override List<DT_Hero> Children()
+		{
+			if ( details == null) base.Children();
+			return details.Select(item => (DT_Hero)item).ToList();
+		}
+
 		public T AddStepDetail<T>(T detail) where T : DT_StepItem
 		{
 			if (details == null)
