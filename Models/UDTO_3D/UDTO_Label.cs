@@ -5,10 +5,10 @@ namespace IoBTMessage.Models
 {
 	public class SPEC_Label : SPEC_3D
 	{
-		public string text;
-		public List<string> details;
-		public string targetGuid;
-		public SPEC_HighResPosition position;
+		public string text { get; set;  }
+		public List<string> details { get; set;  }
+		public string targetGuid { get; set;  }
+		public SPEC_HighResPosition position { get; set;  }
 
 		public static SPEC_Label RandomSpec()
 		{

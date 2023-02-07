@@ -12,6 +12,8 @@ namespace IoBTMessage.Models
 
 		public List<SPEC_Body> bodies { get; set; }
 		public List<SPEC_Label> labels { get; set; }
+
+		public List<SPEC_Datum> datums { get; set; }
 		public List<SPEC_Relationship> relationships { get; set; }
 
 		public static SPEC_Platform RandomSpec()
@@ -132,6 +134,25 @@ namespace IoBTMessage.Models
 		}
 #endif
 
+#if UNITY
+		public List<UDTO_Datum> datums;
+#else
+		public List<UDTO_Datum> datums
+		{
+			get
+			{
+				return FindList<UDTO_Datum>();
+			}
+			set
+			{
+				if (value != null)
+					value.ForEach(item => AddRefreshOrDelete<UDTO_Datum>(item, false));
+				else
+					ClearLookup<UDTO_Datum>();
+			}
+		}
+#endif
+
 
 #if UNITY
 		public List<UDTO_Relationship> relationships;
@@ -179,6 +200,12 @@ namespace IoBTMessage.Models
 			});
 			platform.labels = null;
 
+			platform.datums.ForEach(datum =>
+			{
+				AddRefreshOrDelete<UDTO_Datum>(datum);
+			});
+			platform.datums = null;
+
 			platform.relationships.ForEach(relationship =>
 			{
 				AddRefreshOrDelete<UDTO_Relationship>(relationship);
@@ -197,6 +224,7 @@ namespace IoBTMessage.Models
 		{
 			CreateLookup<UDTO_Body>();
 			CreateLookup<UDTO_Label>();
+			CreateLookup<UDTO_Datum>();
 			CreateLookup<UDTO_Relationship>();
 
 			uniqueGuid = Guid.NewGuid().ToString();
@@ -207,6 +235,7 @@ namespace IoBTMessage.Models
 		{
 			ClearLookup<UDTO_Body>();
 			ClearLookup<UDTO_Label>();
+			ClearLookup<UDTO_Datum>();
 			ClearLookup<UDTO_Relationship>();
 			return this;
 		}
