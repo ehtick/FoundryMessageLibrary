@@ -1,0 +1,10 @@
+nuget locals all -list
+nuget locals global-packages -list
+
+nuget locals global-packages -clear
+
+https://dev.azure.com/iobt/IoBTNuGet/_artifacts/feed/IoBTMessageLibrary
+
+dotnet pack
+nuget.exe restore
+nuget.exe push -Source "IoBTMessageLibrary" -ApiKey az bin\Release\IoBTMessageLibrary.7.7.0.nupkg
