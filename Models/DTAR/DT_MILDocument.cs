@@ -46,6 +46,11 @@ namespace IoBTMessage.Models
 			return child;
 		}
 
+		public override List<DT_Hero> Children()
+		{
+			if ( children == null) base.Children();
+			return children.Select(item => (DT_Hero)item).ToList();
+		}
 
 		public override List<DT_AssetFile> CollectAssetFiles(List<DT_AssetFile> list, bool deep)
 		{
