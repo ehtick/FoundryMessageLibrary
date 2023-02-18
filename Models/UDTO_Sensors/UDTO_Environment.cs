@@ -15,7 +15,6 @@ namespace IoBTMessage.Models
 		public double temperature { get; set; }
 		public double humidity { get; set; }
 		public double pressure { get; set; }
-		public SPEC_Direction wind { get; set; }
 
 		public static SPEC_Environment RandomSpec()
 		{
@@ -35,7 +34,5 @@ namespace IoBTMessage.Models
 		public double temperature;
 		public double humidity;
 		public double pressure;
-		public UDTO_Direction wind;
-
 	}
 }
