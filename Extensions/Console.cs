@@ -3,7 +3,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace IoBTMessage.Models
+namespace IoBTMessage.Extensions
 {
 	public static class ConsoleHelpers
 	{

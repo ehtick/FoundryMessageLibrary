@@ -9,7 +9,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace IoBTMessage.Models
+
+namespace IoBTMessage.Extensions
 {
 
 	public static class CodingExtensions
@@ -35,44 +36,7 @@ namespace IoBTMessage.Models
 		{
 			return items.GroupBy(property).Select(x => x.First());
 		}
-		public static bool IsImage(this DT_AssetFile doc)
-		{
-			var filename = doc.filename.ToLower();
-			if (filename.EndsWith("jpg"))
-				return true;
-			if (filename.EndsWith("png"))
-				return true;
-			return false;
-		}
 
-		public static bool IsModel(this DT_AssetFile doc)
-		{
-			var filename = doc.filename.ToLower();
-			if (filename.EndsWith("fbx"))
-				return true;
-			if (filename.EndsWith("glb"))
-				return true;
-			if (filename.EndsWith("obj"))
-				return true;
-			return false;
-		}
-
-		public static bool IsVideo(this DT_AssetFile doc)
-		{
-			var filename = doc.filename.ToLower();
-			if (filename.EndsWith("mp4"))
-				return true;
-			if (filename.EndsWith("mp3"))
-				return true;
-			if (filename.EndsWith("mov"))
-				return true;
-			return false;
-		}
-
-		public static void WriteTrace(this String str)
-		{
-			$"... {str}".WriteLine(ConsoleColor.DarkMagenta);
-		}
 
 		public static String UrlEncode(this String str)
 		{

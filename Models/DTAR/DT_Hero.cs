@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using IoBTMessage.Extensions;
 namespace IoBTMessage.Models
 {
 	public class DO_Hero : DO_Title
