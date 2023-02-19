@@ -8,6 +8,10 @@ namespace IoBTMessage.Models
 	public static class ConsoleHelpers
 	{
 
+		public static void WriteTrace(this String str)
+		{
+			$"... {str}".WriteLine(ConsoleColor.DarkMagenta);
+		}
 		public static void WriteLine<T>(this T entity, ConsoleColor? color = null)
 		{
 			if (color.HasValue)
