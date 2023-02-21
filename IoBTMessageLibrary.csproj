@@ -10,6 +10,7 @@
     <Company>SAIC IoBT team</Company>
     <Copyright>Copyright © 2020</Copyright>
     <Version>7.9.0.0</Version>
+    <IsPackable>true</IsPackable>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>9.0</LangVersion>
