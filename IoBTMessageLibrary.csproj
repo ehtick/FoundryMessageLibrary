@@ -8,8 +8,8 @@
         
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
-    <Copyright>Copyright © 2020</Copyright>
-    <Version>7.9.0.0</Version>
+    <Copyright>Copyright © 2023</Copyright>
+    <Version>7.9.3</Version>
     <IsPackable>true</IsPackable>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
