@@ -6,11 +6,11 @@ using IoBTMessage.Models;
 
 namespace IoBTMessage.Extensions
 {
-    public static class ModelExtensions
-    {
- 		public static bool IsImage(this DT_AssetFile doc)
+	public static class ModelExtensions
+	{
+		public static bool IsImage(this DT_AssetFile doc)
 		{
-			var filename = doc.filename.ToLower();
+			var filename = doc.filename.ToLower().Trim();
 			if (filename.EndsWith("jpg"))
 				return true;
 			if (filename.EndsWith("png"))
@@ -20,7 +20,7 @@ namespace IoBTMessage.Extensions
 
 		public static bool IsModel(this DT_AssetFile doc)
 		{
-			var filename = doc.filename.ToLower();
+			var filename = doc.filename.ToLower().Trim();
 			if (filename.EndsWith("fbx"))
 				return true;
 			if (filename.EndsWith("glb"))
@@ -28,10 +28,10 @@ namespace IoBTMessage.Extensions
 			if (filename.EndsWith("obj"))
 				return true;
 			return false;
-		}   
+		}
 		public static bool IsVideo(this DT_AssetFile doc)
 		{
-			var filename = doc.filename.ToLower();
+			var filename = doc.filename.ToLower().Trim();
 			if (filename.EndsWith("mp4"))
 				return true;
 			if (filename.EndsWith("mp3"))
@@ -39,6 +39,6 @@ namespace IoBTMessage.Extensions
 			if (filename.EndsWith("mov"))
 				return true;
 			return false;
-		}    
-    }
+		}
+	}
 }
