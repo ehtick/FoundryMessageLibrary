@@ -30,7 +30,7 @@ namespace IoBTMessage.Models
 		public override List<DT_Hero> Children()
 		{
 			if ( details == null) base.Children();
-			return details.Select(item => (DT_Hero)item).ToList();
+			return details.Cast<DT_Hero>().ToList();
 		}
 
 		public T AddStepDetail<T>(T detail) where T : DT_StepItem
