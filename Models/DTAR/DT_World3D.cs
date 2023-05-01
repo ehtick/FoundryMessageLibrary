@@ -39,6 +39,8 @@ namespace IoBTMessage.Models
 			result.labels = null;
 			result.relationships = null;
 			result.assetReferences = null;
+			result.heroImage = this.heroImage;
+
 			return result;
 		}
 

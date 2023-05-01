@@ -30,7 +30,7 @@ namespace IoBTMessage.Models
 
 		public override List<DT_Hero> Children()
 		{
-			if ( steps == null) base.Children();
+			if (steps == null) base.Children();
 			return steps.Select(item => (DT_Hero)item).ToList();
 		}
 
@@ -112,6 +112,7 @@ namespace IoBTMessage.Models
 			var result = (DT_ProcessPlan)this.MemberwiseClone();
 			result.steps = null;
 			result.assetReferences = null;
+			result.heroImage = this.heroImage;
 
 			return result;
 		}

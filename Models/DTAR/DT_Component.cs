@@ -28,6 +28,7 @@ namespace IoBTMessage.Models
 			var result = (DT_Component)this.MemberwiseClone();
 			if (part != null)
 				result.part = (DT_Part)part.ShallowCopy();
+			result.heroImage = this.heroImage;
 
 			return result;
 		}

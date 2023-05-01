@@ -48,7 +48,7 @@ namespace IoBTMessage.Models
 
 		public override List<DT_Hero> Children()
 		{
-			if ( children == null) base.Children();
+			if (children == null) base.Children();
 			return children.Cast<DT_Hero>().ToList();
 		}
 
@@ -116,6 +116,7 @@ namespace IoBTMessage.Models
 			var result = (DT_MILDocument)this.MemberwiseClone();
 			result.children = null;
 			result.assetReferences = null;
+			result.heroImage = this.heroImage;
 
 			return result;
 		}

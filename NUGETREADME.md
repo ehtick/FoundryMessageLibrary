@@ -11,7 +11,7 @@ set environment variables for
 
 dotnet pack
 nuget.exe restore
-nuget.exe push -Source "IoBTMessageLibrary" -ApiKey OUR_API_KEY bin\Release\IoBTMessageLibrary.7.9.6.nupkg
+nuget.exe push -Source "IoBTMessageLibrary" -ApiKey OUR_API_KEY bin\Release\IoBTMessageLibrary.7.9.7.nupkg
 
-copy bin\Release\IoBTMessageLibrary.7.9.6.nupkg D:\Users\gtful\local.nuget
+copy bin\Release\IoBTMessageLibrary.7.9.7.nupkg D:\Users\gtful\local.nuget
 
