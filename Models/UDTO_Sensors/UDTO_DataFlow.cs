@@ -16,11 +16,12 @@ namespace IoBTMessage.Models
 		public string units { get; set; }
 
 
-		public static SPEC_DataBlob RandomSpec()
+		public static SPEC_DataFlow RandomSpec()
 		{
 			var gen = new MockDataGenerator();
-			return new SPEC_DataBlob()
+			return new SPEC_DataFlow()
 			{
+
 			};
 		}
 	}
