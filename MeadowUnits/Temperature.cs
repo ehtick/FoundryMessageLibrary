@@ -13,10 +13,10 @@ namespace IoBTMessage.IoBTUnits
     /// is the source of the occurrence of heat, a flow of energy, when a body
     /// is in contact with another that is colder or hotter.
     /// </summary>
-    [Serializable]
-    [ImmutableObject(true)]
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Temperature :
+    // [Serializable]
+    // [ImmutableObject(true)]
+    // [StructLayout(LayoutKind.Sequential)]
+    public class Temperature :
         IComparable, IFormattable, IConvertible,
         IEquatable<double>, IComparable<double>
     {

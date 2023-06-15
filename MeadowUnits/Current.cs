@@ -46,13 +46,8 @@ namespace IoBTMessage.IoBTUnits
         /// </summary>
         public enum UnitType
         {
-            /// <summary>
-            /// Amperes
-            /// </summary>
+
             Amps,
-            /// <summary>
-            /// Milliamperes
-            /// </summary>
             Milliamps,
             /// <summary>
             /// Microamperes
