@@ -21,6 +21,11 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
+		public static Length FromKilometers(int v)
+		{
+			return new Length(v, "km");
+		}
+
 		public static Length FromMeters(double v)
 		{
 			return new Length(v, "m");

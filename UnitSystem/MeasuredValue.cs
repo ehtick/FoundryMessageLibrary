@@ -1,6 +1,9 @@
+using System;
+using System.Globalization;
+
 namespace IoBTMessage.Units
 {
-	public class MeasuredValue<T>
+	public class MeasuredValue<T> : IFormattable
 	{
 
 		public T V;
@@ -37,6 +40,12 @@ namespace IoBTMessage.Units
 			return AsString(Units());
 		}
 
+		public string ToString(string format, IFormatProvider provider)
+		{
+			var value = As(Units());
+			return $"{value} {Units()}";
+		}
+
 		public string AsString(string units)
 		{
 			return $"{As(units)} {units}";
@@ -46,5 +55,7 @@ namespace IoBTMessage.Units
 		{
 			return $"{Value()}({Internal()}) {Units()}";
 		}
+
+
 	}
 }

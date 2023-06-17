@@ -26,6 +26,11 @@ namespace IoBTMessage.Units
 			return new Angle(v, "D");
 		}
 
+		public static Angle FromRadians(double v)
+		{
+			return new Angle(v, "r");
+		}
+
 		public override double As(string units)
 		{
 			return Category().ConvertTo(units, V);
