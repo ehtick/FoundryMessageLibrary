@@ -9,6 +9,7 @@ namespace IoBTMessage.Units
 		None,
 		Length,
 		Time,
+		Duration,
 		Mass,
 		Angle,
 		Quanity,

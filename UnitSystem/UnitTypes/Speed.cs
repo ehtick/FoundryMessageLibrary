@@ -21,7 +21,10 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
-
+		public static Speed FromMetersPerSecond(double v)
+		{
+			return new Speed(v, "m/s");
+		}
 
 		public override double As(string units)
 		{

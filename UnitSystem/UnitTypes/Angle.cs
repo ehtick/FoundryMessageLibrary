@@ -8,7 +8,7 @@ namespace IoBTMessage.Units
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
-			return new UnitCategory("Speed");
+			return new UnitCategory("Angle");
 		};
 
 
@@ -21,7 +21,10 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
-
+		public static Angle FromDegrees(double v)
+		{
+			return new Angle(v, "D");
+		}
 
 		public override double As(string units)
 		{

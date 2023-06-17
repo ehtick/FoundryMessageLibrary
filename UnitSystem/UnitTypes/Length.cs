@@ -21,7 +21,10 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
-
+		public static Length FromMeters(double v)
+		{
+			return new Length(v, "m");
+		}
 
 		public override double As(string units)
 		{
