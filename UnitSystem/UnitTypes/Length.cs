@@ -21,6 +21,27 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
+		public Length Assign(double value, string? units = null)
+		{
+			if ( units == I )
+			{
+				V = value;
+			}
+			else
+			{
+				var cat = Category();
+				I = cat.BaseUnits().Name();
+				U = units ?? I;
+				V = cat.ConvertFrom(U, value);
+			}
+			return this;
+		}
+
+		public Length Copy()
+		{
+			return new Length(Value(), Internal());
+		}
+
 		public double Diff(Length other)
 		{
 			return Value() - other.Value();

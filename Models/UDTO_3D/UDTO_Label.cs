@@ -59,13 +59,8 @@ namespace IoBTMessage.Models
 		{
 			this.text = text.Trim();
 			this.type = "Label";
-			position = new HighResPosition()
-			{
-				units = units,
-				xLoc = xLoc,
-				yLoc = yLoc,
-				zLoc = zLoc
-			};
+			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+
 			return this;
 		}
 
@@ -74,13 +69,8 @@ namespace IoBTMessage.Models
 			this.text = text.Trim();
 			this.details = details;
 			this.type = "Label";
-			position = new HighResPosition()
-			{
-				units = units,
-				xLoc = xLoc,
-				yLoc = yLoc,
-				zLoc = zLoc
-			};
+
+			position = new HighResPosition(xLoc, yLoc, zLoc, units);
 			return this;
 		}
 

@@ -1,4 +1,6 @@
 using System;
+using IoBTMessage.Units;
+
 namespace IoBTMessage.Models
 {
 	
@@ -30,26 +32,33 @@ public class SPEC_HighResPosition
 	public class HighResPosition
 	{
 		public string units = "m";
-		public double xLoc = 0;
-		public double yLoc = 0;
-		public double zLoc = 0;
+		public Length xLoc = new(0);
+		public Length yLoc = new(0);
+		public Length zLoc = new(0);
 
-		public double xAng = 0;
-		public double yAng = 0;
-		public double zAng = 0;
+		public Angle xAng = new(0);
+		public Angle yAng = new(0);
+		public Angle zAng = new(0);
 
 		public HighResPosition()
 		{
 		}
+		public HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m")
+		{
+			this.units = units;
+			this.xLoc = new(xLoc, units);
+			this.yLoc = new(yLoc, units);
+			this.zLoc = new(zLoc, units);
+		}
 
 		public double distanceXZ()
 		{
-			return Math.Sqrt(this.xLoc * this.xLoc + this.zLoc * this.zLoc);
+			return Math.Sqrt(this.xLoc.V * this.xLoc.V + this.zLoc.V * this.zLoc.V);
 		}
 
 		public double bearingXZ()
 		{
-			return Math.Atan2(this.xLoc, this.zLoc);
+			return Math.Atan2(this.xLoc.V, this.zLoc.V);
 		}
 
 
@@ -57,28 +66,28 @@ public class SPEC_HighResPosition
 		public HighResPosition copyFrom(HighResPosition pos)
 		{
 			this.units = pos.units;
-			this.xLoc = pos.xLoc;
-			this.yLoc = pos.yLoc;
-			this.zLoc = pos.zLoc;
-			this.xAng = pos.xAng;
-			this.yAng = pos.yAng;
-			this.zAng = pos.zAng;
+			this.xLoc = pos.xLoc.Copy();
+			this.yLoc = pos.yLoc.Copy();
+			this.zLoc = pos.zLoc.Copy();
+			this.xAng = pos.xAng.Copy();
+			this.yAng = pos.yAng.Copy();
+			this.zAng = pos.zAng.Copy();
 			return this;
 		}
 		public HighResPosition Loc(double xLoc, double yLoc, double zLoc, string units = "m")
 		{
 			this.units = units;
-			this.xLoc = xLoc;
-			this.yLoc = yLoc;
-			this.zLoc = zLoc;
+			this.xLoc = new(xLoc, units);
+			this.yLoc = new(yLoc, units);
+			this.zLoc = new(zLoc, units);
 			return this;
 		}
 		public HighResPosition Ang(double xAng, double yAng, double zAng, string units = "m")
 		{
 			this.units = units;
-			this.xAng = xAng;
-			this.yAng = yAng;
-			this.zAng = zAng;
+			this.xAng = new(xAng, units);
+			this.yAng = new(yAng, units);
+			this.zAng = new(zAng, units);
 			return this;
 		}
 

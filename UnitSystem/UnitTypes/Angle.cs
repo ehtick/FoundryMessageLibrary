@@ -21,6 +21,11 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
+		public Angle Copy()
+		{
+			return new Angle(Value(), Internal());
+		}
+		
 		public static Angle FromDegrees(double v)
 		{
 			return new Angle(v, "D");
