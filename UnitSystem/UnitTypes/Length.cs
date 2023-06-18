@@ -75,15 +75,15 @@ namespace IoBTMessage.Units
 			return Category().ConvertTo(units, V);
 		}
 
-		public static Length operator +(Length left, int right) => new(left.Value() + right, left.Internal());
-		public static Length operator -(Length left, int right) => new(left.Value() - right, left.Internal());
+		public static Length operator +(Length left, double right) => new(left.Value() + right, left.Internal());
+		public static Length operator -(Length left, double right) => new(left.Value() - right, left.Internal());
 
 		public static Length operator +(Length left, Length right) => new(left.Value() + right.Value(), left.Internal());
 		public static Length operator -(Length left, Length right) => new(left.Value() - right.Value(), left.Internal());
 
-		public static Area operator *(Length left, Length right) => new(left.Value() * right.Value(), "m2");
+		public static Area operator *(Length left, Length right) => new(left.Value() * right.Value(), left.extra("2"));
 
-		public static Volume operator *(Area left, Length right) => new(left.Value() * right.Value(), "m3");
-		public static Volume operator *(Length left, Area right) => new(left.Value() * right.Value(), "m3");
+		public static Volume operator *(Area left, Length right) => new(left.Value() * right.Value(), left.extra("3"));
+		public static Volume operator *(Length left, Area right) => new(left.Value() * right.Value(), left.extra("3"));
 	}
 }

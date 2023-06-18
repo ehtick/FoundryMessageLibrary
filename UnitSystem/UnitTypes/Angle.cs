@@ -21,6 +21,22 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
+		public Angle Assign(double value, string? units = null)
+		{
+			if (units == I)
+			{
+				V = value;
+			}
+			else
+			{
+				var cat = Category();
+				I = cat.BaseUnits().Name();
+				U = units ?? I;
+				V = cat.ConvertFrom(U, value);
+			}
+			return this;
+		}
+
 		public Angle Copy()
 		{
 			return new Angle(Value(), Internal());

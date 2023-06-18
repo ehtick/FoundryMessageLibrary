@@ -9,8 +9,9 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
     <Copyright>Copyright © 2023</Copyright>
-    <Version>7.9.7</Version>
+    <AssemblyVersion>9.0.0.0</AssemblyVersion>
     <IsPackable>true</IsPackable>
+    <Nullable>enable</Nullable>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>9.0</LangVersion>

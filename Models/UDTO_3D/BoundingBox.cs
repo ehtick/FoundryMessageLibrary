@@ -39,12 +39,27 @@ namespace IoBTMessage.Models
 		{
 		}
 
+		public BoundingBox(BoundingBox source)
+		{
+			copyFrom(source);
+		}
+
 		public BoundingBox(double width, double height, double depth, string units = "m")
 		{
 			this.units = units;
 			this.width = new(width, units);
 			this.height = new(height, units);
 			this.depth = new(depth, units);
+		}
+
+		public FoVector3D BoxAsVector3D()
+		{
+			return new FoVector3D(width.Value(), height.Value(), depth.Value());
+		}
+
+		public FoVector3D PinAsVector3D()
+		{
+			return new FoVector3D(pinX.Value(), pinY.Value(), pinZ.Value());
 		}
 
 		public BoundingBox copyFrom(BoundingBox pos)

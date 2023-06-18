@@ -43,12 +43,26 @@ public class SPEC_HighResPosition
 		public HighResPosition()
 		{
 		}
+		public HighResPosition(HighResPosition source)
+		{
+			copyFrom(source);
+		}
 		public HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m")
 		{
 			this.units = units;
 			this.xLoc = new(xLoc, units);
 			this.yLoc = new(yLoc, units);
 			this.zLoc = new(zLoc, units);
+		}
+
+		public FoVector3D LocAsVector3D()
+		{
+			return new FoVector3D(xLoc.Value(), yLoc.Value(), zLoc.Value());
+		}
+
+		public FoVector3D AngAsVector3D()
+		{
+			return new FoVector3D(xAng.Value(), yAng.Value(), zAng.Value());
 		}
 
 		public double distanceXZ()
