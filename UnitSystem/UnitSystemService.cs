@@ -165,11 +165,11 @@ namespace IoBTMessage.Units
 				.Units("Days", "Days")
 				.Conversion(24, "Hrs", 1, "Days")
 				.Units("Wdays", "WorkDays")
-				.Conversion(5, "Days", 1, "Wdays")
+				.Conversion(5.0, "Days", 1.0, "Wdays")
 				.Units("Wks", "Weeks")
-				.Conversion(7, "Days", 1, "Wks")
+				.Conversion(7.0, "Days", 1.0, "Wks")
 				.Units("Mins", "Minutes")
-				.Conversion(60, "Hrs", 1, "Mins");
+				.Conversion(60.0, "Hrs", 1.0, "Mins");
 
 			UnitCategories.Category(worktime);
 			return true;

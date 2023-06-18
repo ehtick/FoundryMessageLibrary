@@ -21,7 +21,25 @@ namespace IoBTMessage.Units
 			V = cat.ConvertFrom(U, value);
 		}
 
-		public static Length FromKilometers(int v)
+		public double Diff(Length other)
+		{
+			return Value() - other.Value();
+		}
+		public double Diff(double other)
+		{
+			return Value() - other;
+		}
+		public double Sum(Length other)
+		{
+			return Value() + other.Value();
+		}
+
+		public double Sum(double other)
+		{
+			return Value() + other;
+		}
+
+		public static Length FromKilometers(double v)
 		{
 			return new Length(v, "km");
 		}
@@ -36,6 +54,8 @@ namespace IoBTMessage.Units
 			return Category().ConvertTo(units, V);
 		}
 
+		public static Length operator +(Length left, int right) => new(left.Value() + right, left.Internal());
+		public static Length operator -(Length left, int right) => new(left.Value() - right, left.Internal());
 
 		public static Length operator +(Length left, Length right) => new(left.Value() + right.Value(), left.Internal());
 		public static Length operator -(Length left, Length right) => new(left.Value() - right.Value(), left.Internal());

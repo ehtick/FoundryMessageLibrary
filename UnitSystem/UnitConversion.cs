@@ -14,5 +14,6 @@ namespace IoBTMessage.Units
 		public string Name() { return name; }
 
 		public double Convert(double v1) { return convert.Invoke(v1); }
+		public int Convert(int v1) { return (int)convert.Invoke(v1); }
 	}
 }
