@@ -105,6 +105,15 @@ namespace IoBTMessage.Units
 			UnitCategories.Category(length);
 			Length.Category = () => length;
 
+			var angle = new UnitCategory("Angle", new UnitSpec("r", "radians", UnitFamilyName.Angle))
+				.Units("d", "degrees")
+				.Conversion("d", "r", v => Math.PI * v / 180.0 )
+				.Conversion("r", "d", v => 180.0 * v / Math.PI );
+
+
+			UnitCategories.Category(angle);
+			Angle.Category = () => angle;
+
 			var area = new UnitCategory("Area", new UnitSpec("m2", "sq meters", UnitFamilyName.Area))
 				.Units("cm2", "sq centimeters")
 				.Conversion(Square(100), "cm2", 1, "m2")

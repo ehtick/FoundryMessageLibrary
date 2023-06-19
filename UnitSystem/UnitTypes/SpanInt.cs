@@ -11,6 +11,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("SpanInt");
 		};
 
+		public SpanInt() :
+			base(UnitFamilyName.SpanInt)
+		{
+		}
 
 		public SpanInt(int value, string? units = null) :
 			base(UnitFamilyName.SpanInt)

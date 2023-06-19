@@ -4,7 +4,6 @@ namespace IoBTMessage.Models
 {
 	public class SPEC_BoundingBox
 	{
-		public string units { get; set; } = "m";
 		public Length width{ get; set; }
 		public Length height { get; set; }
 		public Length depth { get; set; }
@@ -26,7 +25,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class BoundingBox
 	{
-		public string units = "m";
 		public Length width;
 		public Length height;
 		public Length depth;
@@ -37,6 +35,12 @@ namespace IoBTMessage.Models
 
 		public BoundingBox()
 		{
+			width = new(0);
+			height = new(0);
+			depth = new(0);
+			pinX = new(0);
+			pinY = new(0);
+			pinZ = new(0);
 		}
 
 		public BoundingBox(BoundingBox source)
@@ -46,7 +50,6 @@ namespace IoBTMessage.Models
 
 		public BoundingBox(double width, double height, double depth, string units = "m")
 		{
-			this.units = units;
 			this.width = new(width, units);
 			this.height = new(height, units);
 			this.depth = new(depth, units);
@@ -64,7 +67,6 @@ namespace IoBTMessage.Models
 
 		public BoundingBox copyFrom(BoundingBox pos)
 		{
-			this.units = pos.units;
 			this.width = pos.width.Copy();
 			this.height = pos.height.Copy();
 			this.depth = pos.depth.Copy();
@@ -76,7 +78,6 @@ namespace IoBTMessage.Models
 
 		public BoundingBox Box(double width, double height, double depth, string units="m")
 		{
-			this.units = units;
 			this.width = new(width, units);
 			this.height = new(height, units);
 			this.depth = new(depth, units);
@@ -84,7 +85,6 @@ namespace IoBTMessage.Models
 		}
 		public BoundingBox Pin(double pinX, double pinY, double pinZ, string units = "m")
 		{
-			this.units = units;
 			this.pinX = new(pinX, units);
 			this.pinY = new(pinY, units);
 			this.pinZ = new(pinZ, units);

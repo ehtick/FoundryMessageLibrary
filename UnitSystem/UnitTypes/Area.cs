@@ -13,6 +13,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Area");
 		};
 
+		public Area() :
+			base(UnitFamilyName.Area)
+		{
+		}
 
 		public Area(double value, string? units = null) :
 			base(UnitFamilyName.Area)

@@ -11,6 +11,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Speed");
 		};
 
+		public Speed() :
+			base(UnitFamilyName.Speed)
+		{
+		}
 
 		public Speed(double value, string? units = null) :
 			base(UnitFamilyName.Speed)

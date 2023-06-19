@@ -11,6 +11,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Duration");
 		};
 
+		public Duration() :
+			base(UnitFamilyName.Duration)
+		{
+		}
 
 		public Duration(double value, string? units = null) :
 			base(UnitFamilyName.Duration)

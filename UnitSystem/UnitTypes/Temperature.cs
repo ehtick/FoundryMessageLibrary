@@ -12,6 +12,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Temperature");
 		};
 
+		public Temperature() :
+			base(UnitFamilyName.Temperature)
+		{
+		}
 
 		public Temperature(double value, string? units = null) :
 			base(UnitFamilyName.Temperature)

@@ -11,6 +11,11 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Angle");
 		};
 
+		public Angle() :
+			base(UnitFamilyName.Angle)
+		{
+		}
+
 
 		public Angle(double value, string? units = null) :
 			base(UnitFamilyName.Angle)

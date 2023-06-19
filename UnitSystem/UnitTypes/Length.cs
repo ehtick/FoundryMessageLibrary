@@ -11,8 +11,12 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Length");
 		};
 
+		public Length():
+			base(UnitFamilyName.Length)
+		{
+		}
 
-		public Length(double value, string? units = null) :
+		public Length(double value, string? units = null):
 			base(UnitFamilyName.Length)
 		{
 			var cat = Category();

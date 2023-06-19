@@ -11,6 +11,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Volume");
 		};
 
+		public Volume() :
+			base(UnitFamilyName.Volume)
+		{
+		}
 
 		public Volume(double value, string? units = null) :
 			base(UnitFamilyName.Volume)

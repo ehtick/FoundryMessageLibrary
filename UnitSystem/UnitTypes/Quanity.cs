@@ -11,6 +11,10 @@ namespace IoBTMessage.Units
 			return new UnitCategory("Quanity");
 		};
 
+		public Quanity() :
+			base(UnitFamilyName.Quanity)
+		{
+		}
 
 		public Quanity(double value, string? units = null) :
 			base(UnitFamilyName.Quanity)

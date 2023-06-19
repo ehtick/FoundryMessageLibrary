@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Units
 {
@@ -89,34 +90,61 @@ namespace IoBTMessage.Units
 
 		public double Convert(string u1, string u2, double v1)
 		{
-			var found = ConversionLookup[$"{u1}|{u2}"] as UnitConversion;
-			return found.Convert(v1);
+			var key = $"{u1}|{u2}";
+			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
+			{
+				return found.Convert(v1);
+			}
+			$"Convert: No Conversion found for {key}".WriteLine();
+			return v1;
 		}
 
 		public double ConvertFrom(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			var found = ConversionLookup[$"{u2}|{u1}"] as UnitConversion;
-			return found.Convert(v1);
-		}
+			var key = $"{u2}|{u1}";
 
+			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
+			{
+				return found.Convert(v1);
+			}
+			$"ConvertFrom: No Conversion found for {key}".WriteLine();
+			return v1;
+		}
 		public int ConvertFrom(string u1, int v1)
 		{
 			var u2 = BaseUnit.Name();
-			var found = ConversionLookup[$"{u2}|{u1}"] as UnitConversion;
-			return found.Convert(v1);
+			var key = $"{u2}|{u1}";
+
+			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
+			{
+				return found.Convert(v1);
+			}
+			$"ConvertFrom: No Conversion found for {key}".WriteLine();
+			return v1;
 		}
+
 		public double ConvertTo(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			var found = ConversionLookup[$"{u1}|{u2}"] as UnitConversion;
-			return found.Convert(v1);
+			var key = $"{u1}|{u2}";
+			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
+			{
+				return found.Convert(v1);
+			}
+			$"ConvertTo: No Conversion found for {key}".WriteLine();
+			return v1;
 		}
 		public int ConvertTo(string u1, int v1)
 		{
 			var u2 = BaseUnit.Name();
-			var found = ConversionLookup[$"{u1}|{u2}"] as UnitConversion;
-			return found.Convert(v1);
+			var key = $"{u1}|{u2}";
+			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
+			{
+				return found.Convert(v1);
+			}
+			$"ConvertTo: No Conversion found for {key}".WriteLine();
+			return v1;
 		}
 		public List<UnitSpec> Units()
 		{
