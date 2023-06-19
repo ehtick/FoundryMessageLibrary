@@ -23,8 +23,6 @@ namespace IoBTMessage.Units
 		public string Units() { return U; }
 		public string Internal() { return I; }
 
-		public string extra(string ex) { return $"{I}{ex}"; }
-
 
 
 
