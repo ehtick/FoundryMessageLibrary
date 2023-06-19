@@ -36,19 +36,13 @@ namespace IoBTMessage.Models
 		public HighResOffset offset;
 
 
-		private readonly Dictionary<string, object> _lookup = new Dictionary<string, object>();
+		private readonly Dictionary<string, object> _lookup = new();
 
 
 		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
 			this.name = name;
-			boundingBox = new BoundingBox()
-			{
-				units = units,
-				width = width,
-				height = height,
-				depth = depth,
-			};
+			boundingBox = new BoundingBox(width,height,depth,units);
 			position = new UDTO_Position();
 			offset = new HighResOffset();
 			return this;

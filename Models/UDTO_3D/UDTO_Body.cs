@@ -35,7 +35,7 @@ namespace IoBTMessage.Models
 			base.CopyFrom(obj);
 
 			var body = obj as UDTO_Body;
-			this.symbol = body.symbol;
+			this.symbol = body!.symbol;
 			
 			if (this.position == null)
 			{
@@ -57,13 +57,18 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
+		public UDTO_Body EstablishLoc(double x = 0.0, double y = 0.0, double z = 0.0, string units = "m")
+		{
+			position ??= new HighResPosition();
+
+			position.Loc(x, y, z, units);
+			return this;
+		}
+
 		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
-			if (boundingBox == null)
-			{
-				boundingBox = new BoundingBox();
-			}
-	
+			boundingBox ??= new BoundingBox();
+
 			boundingBox.Box(width, height, depth, units);
 			return this;
 		}

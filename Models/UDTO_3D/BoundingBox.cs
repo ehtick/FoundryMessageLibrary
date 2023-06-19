@@ -1,69 +1,93 @@
+using IoBTMessage.Units;
+
 namespace IoBTMessage.Models
 {
 	public class SPEC_BoundingBox
 	{
-		public string units { get; set; } = "m";
-		public double width{ get; set; }
-		public double height{ get; set; }
-		public double depth{ get; set; }
-		public double pinX{ get; set; }
-		public double pinY{ get; set; }
-		public double pinZ{ get; set; }
+		public Length width{ get; set; }
+		public Length height { get; set; }
+		public Length depth { get; set; }
+		public Length pinX { get; set; }
+		public Length pinY { get; set; }
+		public Length pinZ { get; set; }
 
 		public static SPEC_BoundingBox RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_BoundingBox()
 			{
-				width = gen.GenerateDouble(10, 90),
-				height = gen.GenerateDouble(10, 90),
-				depth = gen.GenerateDouble(10, 90),
+				width = new(gen.GenerateDouble(10, 90)),
+				height = new(gen.GenerateDouble(10, 90)),
+				depth = new(gen.GenerateDouble(10, 90)),
 			};
 		}
 	}
 	[System.Serializable]
 	public class BoundingBox
 	{
-		public string units = "m";
-		public double width;
-		public double height;
-		public double depth;
-		public double pinX;
-		public double pinY;
-		public double pinZ;
+		public Length width;
+		public Length height;
+		public Length depth;
+		public Length pinX;
+		public Length pinY;
+		public Length pinZ;
 
 
 		public BoundingBox()
 		{
+			width = new(0);
+			height = new(0);
+			depth = new(0);
+			pinX = new(0);
+			pinY = new(0);
+			pinZ = new(0);
 		}
 
+		public BoundingBox(BoundingBox source)
+		{
+			copyFrom(source);
+		}
+
+		public BoundingBox(double width, double height, double depth, string units = "m")
+		{
+			this.width = new(width, units);
+			this.height = new(height, units);
+			this.depth = new(depth, units);
+		}
+
+		public FoVector3D BoxAsVector3D()
+		{
+			return new FoVector3D(width.Value(), height.Value(), depth.Value());
+		}
+
+		public FoVector3D PinAsVector3D()
+		{
+			return new FoVector3D(pinX.Value(), pinY.Value(), pinZ.Value());
+		}
 
 		public BoundingBox copyFrom(BoundingBox pos)
 		{
-			this.units = pos.units;
-			this.width = pos.width;
-			this.height = pos.height;
-			this.depth = pos.depth;
-			this.pinX = pos.pinX;
-			this.pinY = pos.pinY;
-			this.pinZ = pos.pinZ;
+			this.width = pos.width.Copy();
+			this.height = pos.height.Copy();
+			this.depth = pos.depth.Copy();
+			this.pinX = pos.pinX.Copy();
+			this.pinY = pos.pinY.Copy();
+			this.pinZ = pos.pinZ.Copy();
 			return this;
 		}
 
 		public BoundingBox Box(double width, double height, double depth, string units="m")
 		{
-			this.units = units;
-			this.width = width;
-			this.height = height;
-			this.depth = depth;
+			this.width = new(width, units);
+			this.height = new(height, units);
+			this.depth = new(depth, units);
 			return this;
 		}
 		public BoundingBox Pin(double pinX, double pinY, double pinZ, string units = "m")
 		{
-			this.units = units;
-			this.pinX = pinX;
-			this.pinY = pinY;
-			this.pinZ = pinZ;
+			this.pinX = new(pinX, units);
+			this.pinY = new(pinY, units);
+			this.pinZ = new(pinZ, units);
 			return this;
 		}
 	}

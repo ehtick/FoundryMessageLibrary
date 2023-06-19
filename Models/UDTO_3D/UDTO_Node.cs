@@ -77,13 +77,8 @@ namespace IoBTMessage.Models
 		{
 			this.text = text.Trim();
 			this.type = "Datum";
-			position = new HighResPosition()
-			{
-				units = units,
-				xLoc = xLoc,
-				yLoc = yLoc,
-				zLoc = zLoc
-			};
+			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+
 			return this;
 		}
 
@@ -92,13 +87,9 @@ namespace IoBTMessage.Models
 			this.text = text.Trim();
 			this.details = details;
 			this.type = "Datum";
-			position = new HighResPosition()
-			{
-				units = units,
-				xLoc = xLoc,
-				yLoc = yLoc,
-				zLoc = zLoc
-			};
+
+			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+
 			return this;
 		}
 		public UDTO_Datum EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
