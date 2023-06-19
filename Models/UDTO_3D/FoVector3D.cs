@@ -5,7 +5,6 @@ namespace IoBTMessage.Models
 {
 	public class FoVector3D
 	{
-		public string units = "m";
 		public double X = 0;
 		public double Y = 0;
 		public double Z = 0;
@@ -13,12 +12,11 @@ namespace IoBTMessage.Models
 		public FoVector3D()
 		{
 		}
-		public FoVector3D(double xLoc, double yLoc, double zLoc)
+		public FoVector3D(double x, double y, double z)
 		{
-			this.X = xLoc;
-			this.Y = yLoc;
-			this.Z = zLoc;
+			Set(x, y, z);
 		}
+
 
 
 		public double DistanceXZ()
@@ -34,19 +32,17 @@ namespace IoBTMessage.Models
 
 		public FoVector3D CopyFrom(FoVector3D pos)
 		{
-			this.units = pos.units;
 			this.X = pos.X;
 			this.Y = pos.Y;
 			this.Z = pos.Z;
 
 			return this;
 		}
-		public FoVector3D Loc(double xLoc, double yLoc, double zLoc, string units = "m")
+		public FoVector3D Set(double x, double y, double z)
 		{
-			this.units = units;
-			this.X = xLoc;
-			this.Y = yLoc;
-			this.Z = zLoc;
+			this.X = x;
+			this.Y = y;
+			this.Z = z;
 			return this;
 		}
 	}
