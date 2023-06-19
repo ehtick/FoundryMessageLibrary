@@ -1,6 +1,7 @@
 using System;
 using IoBTMessage.Units;
 
+
 namespace IoBTMessage.Models
 {
 	
@@ -27,7 +28,7 @@ public class SPEC_HighResPosition
 	}
 }
 
-[System.Serializable]
+	[System.Serializable]
 	public class HighResPosition
 	{
 		public Length xLoc;
@@ -59,15 +60,7 @@ public class SPEC_HighResPosition
 			this.zLoc = new(zLoc, units);
 		}
 
-		public FoVector3D LocAsVector3D()
-		{
-			return new FoVector3D(xLoc.Value(), yLoc.Value(), zLoc.Value());
-		}
 
-		public FoVector3D AngAsVector3D()
-		{
-			return new FoVector3D(xAng.Value(), yAng.Value(), zAng.Value());
-		}
 
 		public double distanceXZ()
 		{

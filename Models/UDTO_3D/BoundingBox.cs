@@ -55,15 +55,7 @@ namespace IoBTMessage.Models
 			this.depth = new(depth, units);
 		}
 
-		public FoVector3D BoxAsVector3D()
-		{
-			return new FoVector3D(width.Value(), height.Value(), depth.Value());
-		}
 
-		public FoVector3D PinAsVector3D()
-		{
-			return new FoVector3D(pinX.Value(), pinY.Value(), pinZ.Value());
-		}
 
 		public BoundingBox copyFrom(BoundingBox pos)
 		{
