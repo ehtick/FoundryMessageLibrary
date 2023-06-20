@@ -42,6 +42,22 @@ namespace IoBTMessage.Units
 			return this;
 		}
 
+		public Angle Assign(Angle source)
+		{
+			if (source.I == I)
+			{
+				V = source.Value();
+			}
+			else
+			{
+				var cat = Category();
+				I = cat.BaseUnits().Name();
+				U = source.U ?? I;
+				V = cat.ConvertFrom(U, source.Value());
+			}
+			return this;
+		}
+
 		public Angle Copy()
 		{
 			return new Angle(Value(), Internal());

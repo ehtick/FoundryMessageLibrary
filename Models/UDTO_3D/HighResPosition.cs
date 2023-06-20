@@ -49,15 +49,13 @@ public class SPEC_HighResPosition
 			yAng = new(0);
 			zAng = new(0);
 		}
-		public HighResPosition(HighResPosition source)
+		public HighResPosition(HighResPosition source): this()
 		{
 			copyFrom(source);
 		}
-		public HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m")
+		public HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m") : this()
 		{
-			this.xLoc = new(xLoc, units);
-			this.yLoc = new(yLoc, units);
-			this.zLoc = new(zLoc, units);
+			this.Loc(xLoc, yLoc, zLoc, units);
 		}
 
 
@@ -76,12 +74,12 @@ public class SPEC_HighResPosition
 
 		public HighResPosition copyFrom(HighResPosition pos)
 		{
-			this.xLoc = pos.xLoc.Copy();
-			this.yLoc = pos.yLoc.Copy();
-			this.zLoc = pos.zLoc.Copy();
-			this.xAng = pos.xAng.Copy();
-			this.yAng = pos.yAng.Copy();
-			this.zAng = pos.zAng.Copy();
+			this.xLoc.Assign(pos.xLoc);
+			this.yLoc.Assign(pos.yLoc);
+			this.zLoc.Assign(pos.zLoc);
+			this.xAng.Assign(pos.xAng);
+			this.yAng.Assign(pos.yAng);
+			this.zAng.Assign(pos.zAng);
 			return this;
 		}
 		public HighResPosition Loc(double xLoc, double yLoc, double zLoc, string units = "m")

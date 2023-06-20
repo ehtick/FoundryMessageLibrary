@@ -35,6 +35,10 @@ namespace IoBTMessage.Units
 			return Category().ConvertTo(units, V);
 		}
 
+		public void MilesPerHour(double value)
+		{
+			throw new NotImplementedException();
+		}
 
 		public static Speed operator +(Speed left, Speed right) => new(left.Value() + right.Value(), left.Internal());
 		public static Speed operator -(Speed left, Speed right) => new(left.Value() - right.Value(), left.Internal());

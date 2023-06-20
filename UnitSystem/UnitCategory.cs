@@ -10,6 +10,7 @@ namespace IoBTMessage.Units
 		None,
 		SpanInt,
 		Length,
+		Distance,
 		Time,
 		Duration,
 		Mass,

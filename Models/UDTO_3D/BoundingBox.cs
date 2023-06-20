@@ -43,43 +43,41 @@ namespace IoBTMessage.Models
 			pinZ = new(0);
 		}
 
-		public BoundingBox(BoundingBox source)
+		public BoundingBox(BoundingBox source) : this()
 		{
 			copyFrom(source);
 		}
 
-		public BoundingBox(double width, double height, double depth, string units = "m")
+		public BoundingBox(double width, double height, double depth, string units = "m") : this()
 		{
-			this.width = new(width, units);
-			this.height = new(height, units);
-			this.depth = new(depth, units);
+			this.Box(width ,height, depth, units);
 		}
 
 
 
 		public BoundingBox copyFrom(BoundingBox pos)
 		{
-			this.width = pos.width.Copy();
-			this.height = pos.height.Copy();
-			this.depth = pos.depth.Copy();
-			this.pinX = pos.pinX.Copy();
-			this.pinY = pos.pinY.Copy();
-			this.pinZ = pos.pinZ.Copy();
+			this.width.Assign(pos.width);
+			this.height.Assign(pos.height);
+			this.depth.Assign(pos.depth);
+			this.pinX.Assign(pos.pinX);
+			this.pinY.Assign(pos.pinY);
+			this.pinZ.Assign(pos.pinZ);
 			return this;
 		}
 
 		public BoundingBox Box(double width, double height, double depth, string units="m")
 		{
-			this.width = new(width, units);
-			this.height = new(height, units);
-			this.depth = new(depth, units);
+			this.width = this.width == null ? new(width, units) : this.width.Assign(width, units);
+			this.height = this.height == null ? new(height, units) : this.height.Assign(height, units);
+			this.depth = this.depth == null ? new(depth, units) : this.depth.Assign(depth, units);
 			return this;
 		}
 		public BoundingBox Pin(double pinX, double pinY, double pinZ, string units = "m")
 		{
-			this.pinX = new(pinX, units);
-			this.pinY = new(pinY, units);
-			this.pinZ = new(pinZ, units);
+			this.pinX = this.pinX == null ? new(pinX, units) : this.pinX.Assign(pinX, units);
+			this.pinY = this.pinY == null ? new(pinY, units) : this.pinY.Assign(pinY, units);
+			this.pinZ = this.pinZ == null ? new(pinZ, units) : this.pinZ.Assign(pinZ, units);
 			return this;
 		}
 	}

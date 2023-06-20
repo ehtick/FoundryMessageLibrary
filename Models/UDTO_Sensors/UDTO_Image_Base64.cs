@@ -10,12 +10,12 @@ namespace IoBTMessage.Models
 		public string DataURL { get; set; }
 
 		//https://stackoverflow.com/questions/60797390/generate-random-image-by-url
-		public static SPEC_Image RandomSpec()
+		public static SPEC_Image_Base64 RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			var width = 50 * gen.GenerateInt(0, 11);
 			var height = 50 * gen.GenerateInt(0, 11);
-			return new SPEC_Image()
+			return new SPEC_Image_Base64()
 			{
 				url = $"https://picsum.photos/{width}/{height}",
 				width = width,
