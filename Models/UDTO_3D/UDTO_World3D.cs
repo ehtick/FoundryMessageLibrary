@@ -18,7 +18,7 @@ namespace IoBTMessage.Models
 		public List<SPEC_Relationship> relationships { get; set; } = new List<SPEC_Relationship>();
 	}
 
-	public class DT_World3D : DT_Hero, ISystem
+	public class UDTO_World : DT_Hero, ISystem
 	{
 		public string systemName;
 
@@ -27,13 +27,13 @@ namespace IoBTMessage.Models
 		public List<UDTO_Label> labels = new List<UDTO_Label>();
 		public List<UDTO_Relationship> relationships = new List<UDTO_Relationship>();
 
-		public DT_World3D()
+		public UDTO_World()
 		{
 		}
 
-		public DT_World3D ShallowCopy()
+		public UDTO_World ShallowCopy()
 		{
-			var result = (DT_World3D)this.MemberwiseClone();
+			var result = (UDTO_World)this.MemberwiseClone();
 			result.platforms = null;
 			result.bodies = null;
 			result.labels = null;
@@ -72,7 +72,7 @@ namespace IoBTMessage.Models
 			return null;
 		}
 
-		public DT_World3D FlushPlatforms()
+		public UDTO_World FlushPlatforms()
 		{
 			platforms.ForEach(platform => platform.Flush());
 			return this;
@@ -95,7 +95,7 @@ namespace IoBTMessage.Models
 			return this.platforms;
 		}
 
-		public DT_World3D FillWorldFromPlatform(UDTO_Platform platform)
+		public UDTO_World FillWorldFromPlatform(UDTO_Platform platform)
 		{
 			platforms.Add(platform);
 			bodies.AddRange(platform.bodies);
@@ -104,7 +104,7 @@ namespace IoBTMessage.Models
 			return RemoveDuplicates();
 		}
 
-		public DT_World3D FillWorldFromWorld(DT_World3D world)
+		public UDTO_World FillWorldFromWorld(UDTO_World world)
 		{
 			platforms.AddRange(world.platforms);
 			bodies.AddRange(world.bodies);
@@ -113,7 +113,7 @@ namespace IoBTMessage.Models
 			return RemoveDuplicates();
 		}
 
-		public DT_World3D RemoveDuplicates()
+		public UDTO_World RemoveDuplicates()
 		{
 			platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
 			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();

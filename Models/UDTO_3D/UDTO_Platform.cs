@@ -35,8 +35,11 @@ namespace IoBTMessage.Models
 		public BoundingBox boundingBox;
 		public HighResOffset offset;
 
+		public List<UDTO_Platform> platforms = new List<UDTO_Platform>();
+		public List<UDTO_Body> bodies = new List<UDTO_Body>();
+		public List<UDTO_Label> labels = new List<UDTO_Label>();
+		public List<UDTO_Relationship> relationships = new List<UDTO_Relationship>();
 
-		private readonly Dictionary<string, object> _lookup = new();
 
 
 		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
@@ -85,87 +88,9 @@ namespace IoBTMessage.Models
 			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
 
-#if UNITY
-		public List<UDTO_Body> bodies;
-#else
-		public List<UDTO_Body> bodies
-		{
-			get
-			{
-				return FindList<UDTO_Body>();
-			}
-			set
-			{
-				if (value != null)
-					value.ForEach(item => AddRefreshOrDelete<UDTO_Body>(item, false));
-				else
-					ClearLookup<UDTO_Body>();
-			}
-		}
-
-
-#endif
 
 
 
-
-#if UNITY
-		public List<UDTO_Label> labels;
-#else
-		public List<UDTO_Label> labels
-		{
-			get
-			{
-				return FindList<UDTO_Label>();
-			}
-			set
-			{
-				if (value != null)
-					value.ForEach(item => AddRefreshOrDelete<UDTO_Label>(item, false));
-				else
-					ClearLookup<UDTO_Label>();
-			}
-		}
-#endif
-
-#if UNITY
-		public List<UDTO_Datum> datums;
-#else
-		public List<UDTO_Datum> datums
-		{
-			get
-			{
-				return FindList<UDTO_Datum>();
-			}
-			set
-			{
-				if (value != null)
-					value.ForEach(item => AddRefreshOrDelete<UDTO_Datum>(item, false));
-				else
-					ClearLookup<UDTO_Datum>();
-			}
-		}
-#endif
-
-
-#if UNITY
-		public List<UDTO_Relationship> relationships;
-#else
-		public List<UDTO_Relationship> relationships
-		{
-			get
-			{
-				return FindList<UDTO_Relationship>();
-			}
-			set
-			{
-				if (value != null)
-					value.ForEach(item => AddRefreshOrDelete<UDTO_Relationship>(item, false));
-				else
-					ClearLookup<UDTO_Relationship>();
-			}
-		}
-#endif
 
 		public void Merge(UDTO_Platform platform)
 		{
