@@ -26,7 +26,21 @@ public class SPEC_HighResPosition
 			zLoc = new(gen.GenerateDouble(10, 90)),
 		};
 	}
-}
+		public SPEC_HighResPosition() {
+			
+		}
+		public SPEC_HighResPosition Loc(double xLoc, double yLoc, double zLoc, string units = "m")
+		{
+			this.xLoc = this.xLoc == null ? new(xLoc, units) : this.xLoc.Assign(xLoc, units);
+			this.yLoc = this.yLoc == null ? new(yLoc, units) : this.yLoc.Assign(yLoc, units);
+			this.zLoc = this.zLoc == null ? new(zLoc, units) : this.zLoc.Assign(zLoc, units);
+			return this;
+		}
+		public SPEC_HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m") 
+		{
+			this.Loc(xLoc, yLoc, zLoc, units);
+		}
+	}
 
 	[System.Serializable]
 	public class HighResPosition

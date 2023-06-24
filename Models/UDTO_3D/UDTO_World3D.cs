@@ -15,7 +15,38 @@ namespace IoBTMessage.Models
 		public List<SPEC_Platform> platforms { get; set; } = new List<SPEC_Platform>();
 		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
 		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
-		public List<SPEC_Relationship> relationships { get; set; } = new List<SPEC_Relationship>();
+
+
+
+		private List<T>? FindLookup<T>() where T : SPEC_3D
+		{
+			if (typeof(T) == typeof(SPEC_Body)) return bodies as List<T>;
+			if (typeof(T) == typeof(SPEC_Label)) return labels as List<T>;
+
+			if (typeof(T) == typeof(SPEC_Platform)) return platforms as List<T>;
+			return null;
+		}
+
+		private T CreateItem<T>(string name) where T : SPEC_3D
+		{
+			var found = Activator.CreateInstance<T>() as T;
+			found.name = name;
+			found.panID = panID;
+			found.platformName = platformName;
+			found.uniqueGuid = Guid.NewGuid().ToString();
+			return found;
+		}
+		public T? FindOrCreate<T>(string name, bool create = true) where T : SPEC_3D
+		{
+			var list = FindLookup<T>();
+			var found = list?.FirstOrDefault(item => item.name.Matches(name));
+			if (found == null && create)
+			{
+				found = CreateItem<T>(name);
+				list?.Add(found);
+			}
+			return found;
+		}
 	}
 
 	public class UDTO_World : UDTO_3D, ISystem

@@ -19,6 +19,15 @@ namespace IoBTMessage.Models
 				position = SPEC_HighResPosition.RandomSpec(),
 			};
 		}
+
+		public SPEC_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		{
+			this.text = text.Trim();
+			this.type = "Label";
+			position = new SPEC_HighResPosition(xLoc, yLoc, zLoc, units);
+
+			return this;
+		}
 	}
 	
 	[System.Serializable]

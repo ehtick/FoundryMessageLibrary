@@ -21,6 +21,15 @@ namespace IoBTMessage.Models
 				depth = new(gen.GenerateDouble(10, 90)),
 			};
 		}
+
+
+		public SPEC_BoundingBox Box(double width, double height, double depth, string units = "m")
+		{
+			this.width = this.width == null ? new(width, units) : this.width.Assign(width, units);
+			this.height = this.height == null ? new(height, units) : this.height.Assign(height, units);
+			this.depth = this.depth == null ? new(depth, units) : this.depth.Assign(depth, units);
+			return this;
+		}
 	}
 	[System.Serializable]
 	public class BoundingBox
