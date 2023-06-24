@@ -6,14 +6,12 @@ namespace IoBTMessage.Models
 {
 	public class SPEC_Platform : SPEC_3D
 	{
-		public SPEC_Position position { get; set; }
-		public SPEC_BoundingBox boundingBox { get; set; }
-		public SPEC_HighResOffset offset { get; set; }
-		public List<SPEC_Body> bodies { get; set; }
-		public List<SPEC_Label> labels { get; set; }
+		public SPEC_Position position { get; set; } = new SPEC_Position();
+		public SPEC_BoundingBox boundingBox { get; set; } = new SPEC_BoundingBox();
+		public SPEC_HighResOffset offset { get; set; } = new SPEC_HighResOffset();
+		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
+		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
 
-		public List<SPEC_Datum> datums { get; set; }
-		public List<SPEC_Relationship> relationships { get; set; }
 
 		public static SPEC_Platform RandomSpec()
 		{
@@ -37,8 +35,15 @@ namespace IoBTMessage.Models
 		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
 		public List<UDTO_Label> labels = new();
-		public List<UDTO_Relationship> relationships = new();
 
+		public UDTO_Platform() : base()
+		{
+			uniqueGuid = Guid.NewGuid().ToString();
+			type = UDTO_Base.asTopic<UDTO_Platform>();
+			position = new UDTO_Position();
+			offset = new HighResOffset();
+			boundingBox = new BoundingBox();
+		}
 
 
 		public UDTO_Platform EstablishBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
@@ -52,11 +57,7 @@ namespace IoBTMessage.Models
 
 
 
-		public UDTO_Platform() : base()
-		{
-			uniqueGuid = Guid.NewGuid().ToString();
-			type = UDTO_Base.asTopic<UDTO_Platform>();
-		}
+
 
 
 

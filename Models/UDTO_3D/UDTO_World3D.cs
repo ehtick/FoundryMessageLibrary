@@ -9,7 +9,7 @@ using IoBTMessage.Extensions;
 namespace IoBTMessage.Models
 {
 
-	public class DO_World3D : DO_Hero
+	public classSPEC_World3D : SPEC_3D
 	{
 		public string systemName { get; set; }
 
@@ -80,7 +80,12 @@ namespace IoBTMessage.Models
 
 
 
-
+		public UDTO_World AsShallowCopy()
+		{
+			var result = (UDTO_World)this.MemberwiseClone();
+			result.Flush();
+			return result;
+		}
 
 
 
@@ -93,38 +98,9 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		//public UDTO_World ShallowCopy()
-		//{
-		//	var result = (UDTO_World)this.MemberwiseClone();
-		//	result.platforms = null;
-		//	result.bodies = null;
-		//	result.labels = null;
-		//	result.relationships = null;
-		//	result.assetReferences = null;
-		//	result.heroImage = this.heroImage;
-
-		//	return result;
-		//}
 
 
 
-
-		public UDTO_World FlushPlatforms()
-		{
-			platforms.ForEach(platform => platform.Flush());
-			return this;
-		}
-
-
-
-		public UDTO_World FillWorldFromPlatform(UDTO_Platform platform)
-		{
-			platforms.Add(platform);
-			bodies.AddRange(platform.bodies);
-			labels.AddRange(platform.labels);
-			relationships.AddRange(platform.relationships);
-			return RemoveDuplicates();
-		}
 
 		public UDTO_World FillWorldFromWorld(UDTO_World world)
 		{

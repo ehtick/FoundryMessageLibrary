@@ -8,22 +8,22 @@ namespace IoBTMessage.Models
 
 public class SPEC_HighResPosition
 {
-	public double xLoc { get; set; } = 0;
-	public double yLoc { get; set; } = 0;
-	public double zLoc { get; set; } = 0;
+	public Length xLoc { get; set; } = 0;
+	public Length yLoc { get; set; } = 0;
+	public Length zLoc { get; set; } = 0;
 
-	public double xAng { get; set; } = 0;
-	public double yAng { get; set; } = 0;
-	public double zAng { get; set; } = 0;
+	public Angle xAng { get; set; } = 0;
+	public Angle yAng { get; set; } = 0;
+	public Angle zAng { get; set; } = 0;
 
 	public static SPEC_HighResPosition RandomSpec()
 	{
 		var gen = new MockDataGenerator();
 		return new SPEC_HighResPosition()
 		{
-			xLoc = gen.GenerateDouble(10, 90),
-			yLoc = gen.GenerateDouble(10, 90),
-			zLoc = gen.GenerateDouble(10, 90),
+			xLoc = new(gen.GenerateDouble(10, 90)),
+			yLoc = new(gen.GenerateDouble(10, 90)),
+			zLoc = new(gen.GenerateDouble(10, 90)),
 		};
 	}
 }

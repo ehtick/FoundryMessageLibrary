@@ -39,6 +39,18 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
+		public DT_Hero AsHero()
+		{
+
+			var hero = new DT_Hero()
+			{
+				guid = uniqueGuid,
+				name = name,
+				title = partName()
+			};
+			return hero;
+		}
+
 		public string partName()
 		{
 			if ( string.IsNullOrEmpty(referenceDesignation))
