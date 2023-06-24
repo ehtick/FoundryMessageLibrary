@@ -5,11 +5,10 @@ using System.Linq;
 using IoBTMessage.Extensions;
 
 
-
 namespace IoBTMessage.Models
 {
 
-	public classSPEC_World3D : SPEC_3D
+	public class SPEC_World3D : SPEC_3D
 	{
 		public string systemName { get; set; }
 

@@ -26,8 +26,9 @@ namespace IoBTMessage.Models
 	public class BoundingBox
 	{
 		public Length width = new(10);
-		public Length height  = new(10);
-		public Length depth  = new(10);
+		public Length height  = new(20);
+		public Length depth  = new(30);
+
 		public Length pinX  = new(0);
 		public Length pinY  = new(0);
 		public Length pinZ  = new(0);

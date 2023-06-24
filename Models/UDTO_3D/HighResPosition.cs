@@ -8,13 +8,13 @@ namespace IoBTMessage.Models
 
 public class SPEC_HighResPosition
 {
-	public Length xLoc { get; set; } = 0;
-	public Length yLoc { get; set; } = 0;
-	public Length zLoc { get; set; } = 0;
+	public Length xLoc { get; set; }
+	public Length yLoc { get; set; }
+	public Length zLoc { get; set; }
 
-	public Angle xAng { get; set; } = 0;
-	public Angle yAng { get; set; } = 0;
-	public Angle zAng { get; set; } = 0;
+	public Angle xAng { get; set; }
+	public Angle yAng { get; set; }
+	public Angle zAng { get; set; }
 
 	public static SPEC_HighResPosition RandomSpec()
 	{

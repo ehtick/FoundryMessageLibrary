@@ -115,7 +115,6 @@ namespace IoBTMessage.Models
 			platforms.Clear();
 			bodies.Clear();
 			labels.Clear();
-			relationships.Clear();
 			return this;
 		}
 
