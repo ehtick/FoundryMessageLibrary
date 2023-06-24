@@ -64,7 +64,13 @@ namespace IoBTMessage.Models
 			position.Loc(x, y, z, units);
 			return this;
 		}
+		public UDTO_Body EstablishAng(double x = 0.0, double y = 0.0, double z = 0.0, string units = "r")
+		{
+			position ??= new HighResPosition();
 
+			position.Ang(x, y, z, units);
+			return this;
+		}
 		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
 		{
 			boundingBox ??= new BoundingBox();

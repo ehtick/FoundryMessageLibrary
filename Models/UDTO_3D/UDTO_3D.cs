@@ -26,6 +26,10 @@ namespace IoBTMessage.Models
 		public ControlParameters metadata;
 		public bool visible = true;
 
+		public UDTO_3D(): base()
+		{
+		}
+		
 		public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 		{
 			platformName = obj.platformName;

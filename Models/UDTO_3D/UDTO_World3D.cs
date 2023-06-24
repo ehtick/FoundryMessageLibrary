@@ -1,4 +1,5 @@
 // this is a tool to load/unload knowledge modules that define projects
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IoBTMessage.Extensions;
@@ -18,59 +19,95 @@ namespace IoBTMessage.Models
 		public List<SPEC_Relationship> relationships { get; set; } = new List<SPEC_Relationship>();
 	}
 
-	public class UDTO_World : DT_Hero, ISystem
+	public class UDTO_World : UDTO_3D, ISystem
 	{
-		public string systemName;
+		public string? systemName;
 
-		public List<UDTO_Platform> platforms = new List<UDTO_Platform>();
-		public List<UDTO_Body> bodies = new List<UDTO_Body>();
-		public List<UDTO_Label> labels = new List<UDTO_Label>();
-		public List<UDTO_Relationship> relationships = new List<UDTO_Relationship>();
+		public List<UDTO_Platform> platforms = new();
+		public List<UDTO_Body> bodies = new();
+		public List<UDTO_Label> labels = new();
+		public List<UDTO_Datum> datums = new();
+		public List<UDTO_Relationship> relationships = new();
 
-		public UDTO_World()
+		public UDTO_World(): base()
 		{
 		}
 
-		public UDTO_World ShallowCopy()
+		private List<T>? FindLookup<T>() where T : UDTO_3D
 		{
-			var result = (UDTO_World)this.MemberwiseClone();
-			result.platforms = null;
-			result.bodies = null;
-			result.labels = null;
-			result.relationships = null;
-			result.assetReferences = null;
-			result.heroImage = this.heroImage;
-
-			return result;
-		}
-
-		public T Find<T>(string name) where T : UDTO_3D
-		{
-			if (typeof(T).Name.Matches(nameof(UDTO_Body)))
-				return bodies?.FirstOrDefault(item => item.name.Matches(name)) as T;
-
-			if (typeof(T).Name.Matches(nameof(UDTO_Label)))
-				return labels?.FirstOrDefault(item => item.name.Matches(name)) as T;
-
-			if (typeof(T).Name.Matches(nameof(UDTO_Platform)))
-				return platforms?.FirstOrDefault(item => item.name.Matches(name)) as T;
+			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
+			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
+			if (typeof(T) == typeof(UDTO_Datum)) return datums as List<T>;
+			if (typeof(T) == typeof(UDTO_Platform)) return platforms as List<T>;
+			if (typeof(T) == typeof(UDTO_Relationship)) return relationships as List<T>;
 
 			return null;
 		}
-
-		public T FindReferenceDesignation<T>(string name) where T : UDTO_3D
+		public T? FindOrCreate<T>(string name, bool create = false) where T : UDTO_3D
 		{
-			if (typeof(T).Name.Matches(nameof(UDTO_Body)))
-				return bodies?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
-
-			if (typeof(T).Name.Matches(nameof(UDTO_Label)))
-				return labels?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
-
-			if (typeof(T).Name.Matches(nameof(UDTO_Platform)))
-				return platforms?.FirstOrDefault(item => item.referenceDesignation.Matches(name)) as T;
-
-			return null;
+			var list = FindLookup<T>();
+			var found = list?.FirstOrDefault(item => item.name.Matches(name));
+			if (found == null && create)
+			{
+				found = CreateItem<T>(name);
+				list?.Add(found);
+			}
+			return found;
 		}
+
+		public T CreateUsing<T>(string name, string? guid = null) where T : UDTO_3D
+		{
+			var found = FindOrCreate<T>(name, true);
+			if (guid != null)
+			{
+				found!.uniqueGuid = guid;
+			}
+			return found!;
+		}
+
+
+		private T CreateItem<T>(string name) where T : UDTO_3D
+		{
+			var found = Activator.CreateInstance<T>() as T;
+			found.name = name;
+			found.panID = panID;
+			found.platformName = platformName;
+			found.uniqueGuid = Guid.NewGuid().ToString();
+			return found;
+		}
+
+
+
+
+
+
+
+
+
+		public UDTO_World Flush()
+		{
+			platforms.Clear();
+			bodies.Clear();
+			labels.Clear();
+			relationships.Clear();
+			return this;
+		}
+
+		//public UDTO_World ShallowCopy()
+		//{
+		//	var result = (UDTO_World)this.MemberwiseClone();
+		//	result.platforms = null;
+		//	result.bodies = null;
+		//	result.labels = null;
+		//	result.relationships = null;
+		//	result.assetReferences = null;
+		//	result.heroImage = this.heroImage;
+
+		//	return result;
+		//}
+
+
+
 
 		public UDTO_World FlushPlatforms()
 		{
@@ -78,22 +115,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public List<UDTO_Platform> FillPlatforms()
-		{
-			platforms.ForEach(platform =>
-			{
-				platform.Flush();
-				var platformName = platform.platformName;
 
-				bodies.Where(obj => obj.platformName.Matches(platformName))
-						.Select(obj => platform.Add<UDTO_Body>(obj)).ToList();
-
-
-				labels.Where(obj => obj.platformName.Matches(platformName))
-						.Select(obj => platform.Add<UDTO_Label>(obj)).ToList();
-			});
-			return this.platforms;
-		}
 
 		public UDTO_World FillWorldFromPlatform(UDTO_Platform platform)
 		{
@@ -126,5 +148,44 @@ namespace IoBTMessage.Models
 			// relationships = relationships.GroupBy(i => i.uniqueGuid).Select(g => g.First()).ToList();
 			return this;
 		}
+
+
+		public T CreateUsingDTBASE<T>(DT_Base obj) where T : UDTO_3D
+		{
+			return CreateUsing<T>(obj.name, obj.guid);
+		}
+
+
+		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateCylinder(obj.name, width, height, depth, units);
+		}
+
+		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateBox(obj.name, width, height, depth, units);
+		}
+
+		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateSphere(obj.name, width, height, depth, units);
+		}
+
+		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Body>(obj);
+			return result.CreateGlb(url, width, height, depth, units);
+		}
+
+		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		{
+			var result = CreateUsingDTBASE<UDTO_Label>(obj);
+			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
+		}
+
+
 	}
 }
