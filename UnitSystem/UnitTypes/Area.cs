@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace IoBTMessage.Units
 {
 
-	public class Area : MeasuredValue<double>
+	public class Area : MeasuredValue
 	{
 
 
@@ -18,18 +18,15 @@ namespace IoBTMessage.Units
 		{
 		}
 
-		public Area(double value, string? units = null) :
+		public Area(double value, string units = null) :
 			base(UnitFamilyName.Area)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public static Area operator +(Area left, Area right) => new(left.Value() + right.Value(), left.Internal());

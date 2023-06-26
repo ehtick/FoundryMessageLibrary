@@ -4,39 +4,33 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Units
 {
-	public class Distance : MeasuredValue<double>
+	public class Distance : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
 			return new UnitCategory("Distance");
 		};
 
-		public Distance():
+		public Distance() :
 			base(UnitFamilyName.Length)
 		{
 		}
 
-		public Distance(double value, string? units = null):
+		public Distance(double value, string units = null) :
 			base(UnitFamilyName.Length)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
-		public Distance Assign(double value, string? units = null)
+		public Distance Assign(double value, string units = null)
 		{
-			if ( units == I )
+			if (units == I)
 			{
 				V = value;
 			}
 			else
 			{
-				var cat = Category();
-				I = cat.BaseUnits().Name();
-				U = units ?? I;
-				V = cat.ConvertFrom(U, value);
+				Init(Category(), value, units);
 			}
 			return this;
 		}
@@ -68,7 +62,7 @@ namespace IoBTMessage.Units
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public static Distance operator +(Distance left, double right) => new(left.Value() + right, left.Internal());

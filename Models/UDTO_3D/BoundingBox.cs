@@ -21,26 +21,36 @@ namespace IoBTMessage.Models
 				depth = new(gen.GenerateDouble(10, 90)),
 			};
 		}
+
+
+		public SPEC_BoundingBox Box(double width, double height, double depth, string units = "m")
+		{
+			this.width = this.width == null ? new(width, units) : this.width.Assign(width, units);
+			this.height = this.height == null ? new(height, units) : this.height.Assign(height, units);
+			this.depth = this.depth == null ? new(depth, units) : this.depth.Assign(depth, units);
+			return this;
+		}
 	}
 	[System.Serializable]
 	public class BoundingBox
 	{
-		public Length width;
-		public Length height;
-		public Length depth;
-		public Length pinX;
-		public Length pinY;
-		public Length pinZ;
+		public Length width = new(10);
+		public Length height  = new(20);
+		public Length depth  = new(30);
+
+		public Length pinX  = new(0);
+		public Length pinY  = new(0);
+		public Length pinZ  = new(0);
 
 
 		public BoundingBox()
 		{
-			width = new(0);
-			height = new(0);
-			depth = new(0);
-			pinX = new(0);
-			pinY = new(0);
-			pinZ = new(0);
+			//width = new(0);
+			//height = new(0);
+			//depth = new(0);
+			//pinX = new(0);
+			//pinY = new(0);
+			//pinZ = new(0);
 		}
 
 		public BoundingBox(BoundingBox source) : this()

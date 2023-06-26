@@ -1,13 +1,28 @@
+using IoBTMessage.Extensions;
 using System;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace IoBTMessage.Units
 {
-	public class MeasuredValue<T> : IFormattable
-	{
 
-		public T V;
-		public string I = "";      //internal storage units
+	public interface IMeasuredValue
+	{
+		void SetValue(double value);
+		void SetDisplayUnits(string units);
+		string Debug();
+		string AsString(string units);
+		string ToString(string format, IFormatProvider provider);
+		string ToString();
+	}
+
+
+	//[JsonConverter(typeof(MeasuredValueJsonConverter))]
+	public class MeasuredValue : IMeasuredValue
+	{
+		public double V = 0.0;
+		public string I="";      //internal storage units
 		protected string U = "";  //reporting  input and output units
 		protected UnitFamilyName F = UnitFamilyName.None;
 
@@ -19,11 +34,35 @@ namespace IoBTMessage.Units
 			F = unitFamily;
 		}
 
-		public T Value() { return V; }
+
+		public double Init(UnitCategory cat, double value, string units)
+		{
+			I = cat.BaseUnits().Name();
+			U = units ?? I;
+			V = value;
+			if (I != U)
+				 V = cat.ConvertToBaseUnits(U, value);
+			return V;
+		}
+
+		public double ConvertAs(UnitCategory cat, string units)
+		{
+			return cat.ConvertFromBaseUnits(units, V);
+		}
+
+		public double Value() { return V; }
 		public string Units() { return U; }
 		public string Internal() { return I; }
 
+		public void SetInternal(string units)
+		{
+			I = units;
+		}
 
+		public void SetValue(double value)
+		{
+			V = value;
+		}
 
 
 		public void SetDisplayUnits(string units)
@@ -31,7 +70,7 @@ namespace IoBTMessage.Units
 			U = units;
 		}
 
-		public virtual T As(string units)
+		public virtual double As(string units)
 		{
 			return default!;
 		}
@@ -57,5 +96,55 @@ namespace IoBTMessage.Units
 		}
 
 
+
+	}
+
+
+	public class MeasuredValueJsonConverter : JsonConverter<MeasuredValue>
+	{
+		public override MeasuredValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			double value = 0;
+			string units = "";
+			string internalUnits = "";
+
+			$"typeToConvert {typeToConvert} ".WriteLine();
+
+			while (reader!.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+				{
+					var result = Activator.CreateInstance(typeToConvert, value, internalUnits) as MeasuredValue;
+					result!.SetDisplayUnits(units);
+					return result;
+				}
+
+				var propertyName = reader!.GetString();
+
+				reader.Read();
+
+				switch (propertyName)
+				{
+					case "I":
+					case "i":
+						internalUnits = reader!.GetString();
+						break;
+					case "U":
+					case "u":
+						units = reader!.GetString();
+						break;
+					case "V":
+					case "v":
+						value = reader!.GetDouble();
+						break;
+				}
+			}
+			return Activator.CreateInstance(typeToConvert, value, internalUnits) as MeasuredValue;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MeasuredValue dataValue, JsonSerializerOptions options)
+		{
+			//dataValue.V = 200;
+		}
 	}
 }

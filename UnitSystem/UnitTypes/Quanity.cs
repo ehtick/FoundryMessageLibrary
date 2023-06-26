@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Units
 {
-	public class Quanity : MeasuredValue<double>
+	public class Quanity : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
@@ -16,20 +16,17 @@ namespace IoBTMessage.Units
 		{
 		}
 
-		public Quanity(double value, string? units = null) :
+		public Quanity(double value, string units = null) :
 			base(UnitFamilyName.Quanity)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
 
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 

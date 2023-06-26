@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace IoBTMessage.Units
 {
 
-	public class Temperature : MeasuredValue<double>
+	public class Temperature : MeasuredValue
 	{
 
 		public static Func<UnitCategory> Category = () =>
@@ -17,18 +17,15 @@ namespace IoBTMessage.Units
 		{
 		}
 
-		public Temperature(double value, string? units = null) :
+		public Temperature(double value, string units = null) :
 			base(UnitFamilyName.Temperature)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public static Temperature operator +(Temperature left, Temperature right) => new(left.Value() + right.Value(), left.Internal());

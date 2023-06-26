@@ -26,6 +26,10 @@ namespace IoBTMessage.Models
 		public ControlParameters metadata;
 		public bool visible = true;
 
+		public UDTO_3D(): base()
+		{
+		}
+		
 		public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 		{
 			platformName = obj.platformName;
@@ -33,6 +37,18 @@ namespace IoBTMessage.Models
 			type = obj.type;
 			name = obj.name;
 			return this;
+		}
+
+		public DT_Hero AsHero()
+		{
+
+			var hero = new DT_Hero()
+			{
+				guid = uniqueGuid,
+				name = name,
+				title = partName()
+			};
+			return hero;
 		}
 
 		public string partName()

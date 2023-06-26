@@ -8,25 +8,39 @@ namespace IoBTMessage.Models
 
 public class SPEC_HighResPosition
 {
-	public double xLoc { get; set; } = 0;
-	public double yLoc { get; set; } = 0;
-	public double zLoc { get; set; } = 0;
+	public Length xLoc { get; set; }
+	public Length yLoc { get; set; }
+	public Length zLoc { get; set; }
 
-	public double xAng { get; set; } = 0;
-	public double yAng { get; set; } = 0;
-	public double zAng { get; set; } = 0;
+	public Angle xAng { get; set; }
+	public Angle yAng { get; set; }
+	public Angle zAng { get; set; }
 
 	public static SPEC_HighResPosition RandomSpec()
 	{
 		var gen = new MockDataGenerator();
 		return new SPEC_HighResPosition()
 		{
-			xLoc = gen.GenerateDouble(10, 90),
-			yLoc = gen.GenerateDouble(10, 90),
-			zLoc = gen.GenerateDouble(10, 90),
+			xLoc = new(gen.GenerateDouble(10, 90)),
+			yLoc = new(gen.GenerateDouble(10, 90)),
+			zLoc = new(gen.GenerateDouble(10, 90)),
 		};
 	}
-}
+		public SPEC_HighResPosition() {
+			
+		}
+		public SPEC_HighResPosition Loc(double xLoc, double yLoc, double zLoc, string units = "m")
+		{
+			this.xLoc = this.xLoc == null ? new(xLoc, units) : this.xLoc.Assign(xLoc, units);
+			this.yLoc = this.yLoc == null ? new(yLoc, units) : this.yLoc.Assign(yLoc, units);
+			this.zLoc = this.zLoc == null ? new(zLoc, units) : this.zLoc.Assign(zLoc, units);
+			return this;
+		}
+		public SPEC_HighResPosition(double xLoc, double yLoc, double zLoc, string units = "m") 
+		{
+			this.Loc(xLoc, yLoc, zLoc, units);
+		}
+	}
 
 	[System.Serializable]
 	public class HighResPosition
