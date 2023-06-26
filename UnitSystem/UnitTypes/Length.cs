@@ -107,43 +107,7 @@ namespace IoBTMessage.Units
 	{
 		public override Length Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			double value = 0;
-			string units = "";
-			string internalUnits = "";
-
-			$"typeToConvert {typeToConvert} ".WriteLine();
-
-			while (reader!.Read())
-			{
-				if (reader.TokenType == JsonTokenType.EndObject)
-				{
-					var result = new Length(value, internalUnits);
-					if (!string.IsNullOrEmpty(units))
-						result!.SetDisplayUnits(units);
-					return result;
-				}
-
-				var propertyName = reader!.GetString();
-
-				reader.Read();
-
-				switch (propertyName)
-				{
-					case "I":
-					case "i":
-						internalUnits = reader!.GetString();
-						break;
-					case "U":
-					case "u":
-						units = reader!.GetString();
-						break;
-					case "V":
-					case "v":
-						value = reader!.GetDouble();
-						break;
-				}
-			}
-			return new Length(value, internalUnits);
+			return MeasuredValue.ReadJSON<Length>(ref reader, typeToConvert);
 		}
 
 		public override void Write(Utf8JsonWriter writer, Length dataValue, JsonSerializerOptions options)

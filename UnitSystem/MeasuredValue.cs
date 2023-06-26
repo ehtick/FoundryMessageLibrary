@@ -95,14 +95,7 @@ namespace IoBTMessage.Units
 			return $"{Value()}({Internal()}) {Units()}";
 		}
 
-
-
-	}
-
-
-	public class MeasuredValueJsonConverter : JsonConverter<MeasuredValue>
-	{
-		public override MeasuredValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public static T ReadJSON<T>(ref Utf8JsonReader reader, Type typeToConvert) where T : MeasuredValue
 		{
 			double value = 0;
 			string units = "";
@@ -114,8 +107,10 @@ namespace IoBTMessage.Units
 			{
 				if (reader.TokenType == JsonTokenType.EndObject)
 				{
-					var result = Activator.CreateInstance(typeToConvert, value, internalUnits) as MeasuredValue;
-					result!.SetDisplayUnits(units);
+					var result = Activator.CreateInstance(typeToConvert, value, internalUnits) as T;
+					if (!string.IsNullOrEmpty(units))
+						result!.SetDisplayUnits(units);
+
 					return result;
 				}
 
@@ -139,7 +134,17 @@ namespace IoBTMessage.Units
 						break;
 				}
 			}
-			return Activator.CreateInstance(typeToConvert, value, internalUnits) as MeasuredValue;
+			return Activator.CreateInstance(typeToConvert, value, internalUnits) as T;
+		}
+
+	}
+
+
+	public class MeasuredValueJsonConverter : JsonConverter<MeasuredValue>
+	{
+		public override MeasuredValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			return MeasuredValue.ReadJSON<MeasuredValue>(ref reader, typeToConvert);
 		}
 
 		public override void Write(Utf8JsonWriter writer, MeasuredValue dataValue, JsonSerializerOptions options)

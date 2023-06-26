@@ -142,10 +142,10 @@ namespace IoBTMessage.Units
 
 			var temp = new UnitCategory("Temperature", new UnitSpec("C", "Celsius", UnitFamilyName.Temperature))
 				.Units("F", "Fahrenheit")
-				.Conversion("C", "F", v => (v - 32) * 5 / 9)
+				.Conversion("C", "F", v => v * 9 / 5 + 32.0)
 				.Units("K", "Kelvin")
-				.Conversion("C", "K", v => v + 273.15)
-				.Conversion("F", "C", v => v * 9 / 5 + 32);
+				.Conversion("C", "K", v => v + 273.15)  //v => (v - 32) * 5 / 9
+				.Conversion("F", "C", v => (v - 32.0) * 5 / 9);
 
 			UnitCategories.Category(temp);
 			Temperature.Category = () => temp;

@@ -66,10 +66,10 @@ namespace IoBTMessage.Units
 
 		public UnitCategory Conversion(double v1, string u1, double v2, string u2)
 		{
-			var found = new UnitConversion($"{u1}|{u2}", (v) => (v * v1) / v2);
+			var found = new UnitConversion($"{u1}|{u2}", (v) => (v * v2) / v1);
 			ConversionLookup.Add(found.Name(), found);
 
-			found = new UnitConversion($"{u2}|{u1}", (v) => (v * v2) / v1);
+			found = new UnitConversion($"{u2}|{u1}", (v) => (v * v1) / v2);
 			ConversionLookup.Add(found.Name(), found);
 			return this;
 		}
@@ -96,14 +96,16 @@ namespace IoBTMessage.Units
 		public double ConvertFromBaseUnits(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			return Convert(u2, u1, v1);
+			var result = Convert(u2, u1, v1);
+			return result;
 		}
 
 
 		public double ConvertToBaseUnits(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			return Convert(u1, u2, v1);
+			var result = Convert(u1, u2, v1);
+			return result;
 		}
 
 		public List<UnitSpec> Units()
