@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
-
+using IoBTMessage.Units;
 
 namespace IoBTMessage.Extensions
 {
@@ -62,28 +62,57 @@ namespace IoBTMessage.Extensions
 			}
 		}
 
+		public static T Hydrate<T>(this string target, bool includeFields) where T : class
+		{
+			using var stream = new MemoryStream();
+			using var writer = new Utf8JsonWriter(stream);
+			var node = JsonNode.Parse(target);
+			node?.WriteTo(writer);
+			writer.Flush();
+
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
+			var result = JsonSerializer.Deserialize<T>(stream.ToArray(), options) as T;
+
+			return result!;
+		}
+
+
+		public static List<T> HydrateList<T>(string target, bool includeFields) where T : class
+		{
+			using var stream = new MemoryStream();
+			using var writer = new Utf8JsonWriter(stream);
+			var node = JsonNode.Parse(target);
+			node?.WriteTo(writer);
+			writer.Flush();
+
+
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
+			var result = JsonSerializer.Deserialize<List<T>>(stream.ToArray(), options) as List<T>;
+
+			return result!;
+		}
+
 		public static string Dehydrate<T>(T target, bool includeFields) where T : class
 		{
-			var options = new JsonSerializerOptions()
-			{
-				IncludeFields = includeFields,
-				IgnoreReadOnlyFields = true,
-				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-			};
 
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
 			var result = JsonSerializer.Serialize(target, typeof(T), options);
 			return result;
 		}
 
-		public static string Dehydrate(object target, Type type, bool includeFields) 
-		{	
-			var options = new JsonSerializerOptions()
-			{
-				IncludeFields = includeFields,
-				IgnoreReadOnlyFields = true,
-				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-			};
+		public static string Dehydrate(object target, Type type, bool includeFields)
+		{
+
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
 			var result = JsonSerializer.Serialize(target, type, options);
+			return result;
+		}
+
+		public static string DehydrateList<T>(List<T> target, bool includeFields) where T : class
+		{
+
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
+			var result = JsonSerializer.Serialize(target, options);
 			return result;
 		}
 
@@ -96,7 +125,7 @@ namespace IoBTMessage.Extensions
 			{
 				list.Add(field.Name);
 			}
-			return string.Join(d,list);
+			return string.Join(d, list);
 		}
 
 		public static string EncodeFieldDataAsCSV(this object source, char d = '\u002C')
@@ -109,7 +138,7 @@ namespace IoBTMessage.Extensions
 				var value = field.GetValue(source);
 				list.Add(value?.ToString() ?? "");
 			}
-			return string.Join(d,list);
+			return string.Join(d, list);
 		}
 
 		public static int DecodeFieldDataAsCSV(this object source, string[] data)
@@ -137,10 +166,11 @@ namespace IoBTMessage.Extensions
 				else if (field.FieldType == typeof(string))
 				{
 					field.SetValue(source, value);
-				} else 
+				}
+				else
 				{
 					throw new ArgumentException($"Cannot DecodeFieldDataAsCSV for {field.Name}");
-				} 
+				}
 			}
 			return flist.Count();
 		}
@@ -180,7 +210,7 @@ namespace IoBTMessage.Extensions
 			}
 		}
 
-		public static void CopyFieldsTo<T,U>(this T source, U dest)
+		public static void CopyFieldsTo<T, U>(this T source, U dest)
 		{
 			var flist1 = typeof(T).GetFields();
 			var flist2 = typeof(T).GetFields();

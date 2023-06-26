@@ -105,10 +105,10 @@ namespace IoBTMessage.Units
 			UnitCategories.Category(length);
 			Length.Category = () => length;
 
-			var angle = new UnitCategory("Angle", new UnitSpec("r", "radians", UnitFamilyName.Angle))
-				.Units("d", "degrees")
-				.Conversion("d", "r", v => Math.PI * v / 180.0 )
-				.Conversion("r", "d", v => 180.0 * v / Math.PI );
+			var angle = new UnitCategory("Angle", new UnitSpec("rad", "radians", UnitFamilyName.Angle))
+				.Units("deg", "degrees")
+				.Conversion("deg", "rad", v => Math.PI * v / 180.0 )
+				.Conversion("rad", "deg", v => 180.0 * v / Math.PI );
 
 
 			UnitCategories.Category(angle);

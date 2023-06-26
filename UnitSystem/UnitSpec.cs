@@ -1,3 +1,6 @@
+using System.Text.Json.Serialization;
+using System.Text.Json;
+
 namespace IoBTMessage.Units
 {
 
@@ -24,6 +27,24 @@ namespace IoBTMessage.Units
 		public string Title() { return title; }
 		public string Name() { return name; }
 		public UnitFamilyName UnitFamily() { return family; }
+
+		public static JsonSerializerOptions JsonHydrateOptions(bool includeFields = false)
+		{
+			var options = new JsonSerializerOptions()
+			{
+				IncludeFields = includeFields,
+				IgnoreReadOnlyFields = true,
+				AllowTrailingCommas = true,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+				Converters =
+				{
+					new MeasuredValueJsonConverter(),
+					new LengthJsonConverter(),
+					new AngleJsonConverter()
+				}
+			};
+			return options;
+		}
 	}
 }
 
