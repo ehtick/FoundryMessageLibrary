@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using IoBTMessage.Extensions;
 
+#nullable enable
 
 namespace IoBTMessage.Models
 {
 
-	public class SPEC_World3D : SPEC_3D
+	public class SPEC_World : SPEC_3D
 	{
-		public string systemName { get; set; }
+		public string? systemName { get; set; }
 
 		public List<SPEC_Platform> platforms { get; set; } = new List<SPEC_Platform>();
 		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
@@ -59,7 +60,7 @@ namespace IoBTMessage.Models
 		public List<UDTO_Datum> datums = new();
 		public List<UDTO_Relationship> relationships = new();
 
-		public UDTO_World(): base()
+		public UDTO_World() : base()
 		{
 		}
 
@@ -73,7 +74,7 @@ namespace IoBTMessage.Models
 
 			return null;
 		}
-		public T? FindOrCreate<T>(string name, bool create = false) where T : UDTO_3D
+		public T FindOrCreate<T>(string name, bool create = false) where T : UDTO_3D
 		{
 			var list = FindLookup<T>();
 			var found = list?.FirstOrDefault(item => item.name.Matches(name));
@@ -82,13 +83,13 @@ namespace IoBTMessage.Models
 				found = CreateItem<T>(name);
 				list?.Add(found);
 			}
-			return found;
+			return found!;
 		}
 
-		public T CreateUsing<T>(string name, string? guid = null) where T : UDTO_3D
+		public T CreateUsing<T>(string name, string guid = "") where T : UDTO_3D
 		{
 			var found = FindOrCreate<T>(name, true);
-			if (guid != null)
+			if (!string.IsNullOrEmpty(guid))
 			{
 				found!.uniqueGuid = guid;
 			}

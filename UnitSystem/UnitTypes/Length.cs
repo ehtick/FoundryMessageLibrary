@@ -1,42 +1,41 @@
+using IoBTMessage.Extensions;
 using System;
 using System.Collections.Generic;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace IoBTMessage.Units
 {
-	public class Length : MeasuredValue<double>
+	//[JsonConverter(typeof(LengthJsonConverter))]
+	public class Length : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
 			return new UnitCategory("Length");
 		};
 
-		public Length():
+		public Length() :
 			base(UnitFamilyName.Length)
 		{
+
 		}
 
-		public Length(double value, string? units = null):
+		public Length(double value, string units = null) :
 			base(UnitFamilyName.Length)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
-		public Length Assign(double value, string? units = null)
+		public Length Assign(double value, string units = null)
 		{
-			if ( units == I )
+			if (units == I)
 			{
 				V = value;
 			}
 			else
 			{
-				var cat = Category();
-				I = cat.BaseUnits().Name();
-				U = units ?? I;
-				V = cat.ConvertFrom(U, value);
+				Init(Category(), value, units);
 			}
 			return this;
 		}
@@ -49,10 +48,7 @@ namespace IoBTMessage.Units
 			}
 			else
 			{
-				var cat = Category();
-				I = cat.BaseUnits().Name();
-				U = source.U ?? I;
-				V = cat.ConvertFrom(U, source.Value());
+				Init(Category(), source.Value(), source.U);
 			}
 			return this;
 		}
@@ -92,7 +88,7 @@ namespace IoBTMessage.Units
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public static Length operator +(Length left, double right) => new(left.Value() + right, left.Internal());
@@ -106,4 +102,54 @@ namespace IoBTMessage.Units
 		public static Volume operator *(Area left, Length right) => new(left.Value() * right.Value(), "m3");
 		public static Volume operator *(Length left, Area right) => new(left.Value() * right.Value(), "m3");
 	}
+
+	public class LengthJsonConverter : JsonConverter<Length>
+	{
+		public override Length Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			double value = 0;
+			string units = "";
+			string internalUnits = "";
+
+			$"typeToConvert {typeToConvert} ".WriteLine();
+
+			while (reader!.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+				{
+					var result = new Length(value, internalUnits);
+					if (!string.IsNullOrEmpty(units))
+						result!.SetDisplayUnits(units);
+					return result;
+				}
+
+				var propertyName = reader!.GetString();
+
+				reader.Read();
+
+				switch (propertyName)
+				{
+					case "I":
+					case "i":
+						internalUnits = reader!.GetString();
+						break;
+					case "U":
+					case "u":
+						units = reader!.GetString();
+						break;
+					case "V":
+					case "v":
+						value = reader!.GetDouble();
+						break;
+				}
+			}
+			return new Length(value, internalUnits);
+		}
+
+		public override void Write(Utf8JsonWriter writer, Length dataValue, JsonSerializerOptions options)
+		{
+			//dataValue.V = 200;
+		}
+	}
+
 }

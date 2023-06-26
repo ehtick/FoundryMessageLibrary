@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Units
 {
-	public class Speed : MeasuredValue<double>
+	public class Speed : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
@@ -16,13 +16,10 @@ namespace IoBTMessage.Units
 		{
 		}
 
-		public Speed(double value, string? units = null) :
+		public Speed(double value, string units = null) :
 			base(UnitFamilyName.Speed)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
 		public static Speed FromMetersPerSecond(double v)
@@ -32,7 +29,7 @@ namespace IoBTMessage.Units
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public void MilesPerHour(double value)

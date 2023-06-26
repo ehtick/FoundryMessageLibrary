@@ -1,10 +1,13 @@
+using IoBTMessage.Extensions;
 using System;
 using System.Collections.Generic;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace IoBTMessage.Units
 {
-	public class Angle : MeasuredValue<double>
+	//[JsonConverter(typeof(AngleJsonConverter))]
+	public class Angle : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
@@ -17,16 +20,13 @@ namespace IoBTMessage.Units
 		}
 
 
-		public Angle(double value, string? units = null) :
+		public Angle(double value, string units = null) :
 			base(UnitFamilyName.Angle)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
-		public Angle Assign(double value, string? units = null)
+		public Angle Assign(double value, string units = null)
 		{
 			if (units == I)
 			{
@@ -34,10 +34,7 @@ namespace IoBTMessage.Units
 			}
 			else
 			{
-				var cat = Category();
-				I = cat.BaseUnits().Name();
-				U = units ?? I;
-				V = cat.ConvertFrom(U, value);
+				Init(Category(), value, units);
 			}
 			return this;
 		}
@@ -50,10 +47,7 @@ namespace IoBTMessage.Units
 			}
 			else
 			{
-				var cat = Category();
-				I = cat.BaseUnits().Name();
-				U = source.U ?? I;
-				V = cat.ConvertFrom(U, source.Value());
+				Init(Category(), source.Value(), source.U);
 			}
 			return this;
 		}
@@ -62,7 +56,7 @@ namespace IoBTMessage.Units
 		{
 			return new Angle(Value(), Internal());
 		}
-		
+
 		public static Angle FromDegrees(double v)
 		{
 			return new Angle(v, "D");
@@ -75,13 +69,13 @@ namespace IoBTMessage.Units
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 		public Angle Degrees(double value)
 		{
 			var cat = Category();
-			V = cat.ConvertFrom("D", value);
+			V = cat.ConvertToBaseUnits("d", value);
 			return this;
 		}
 
@@ -89,4 +83,54 @@ namespace IoBTMessage.Units
 		public static Angle operator -(Angle left, Angle right) => new(left.Value() - right.Value(), left.Internal());
 
 	}
+
+	public class AngleJsonConverter : JsonConverter<Angle>
+	{
+		public override Angle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			double value = 0;
+			string units = "";
+			string internalUnits = "";
+
+			$"typeToConvert {typeToConvert} ".WriteLine();
+
+			while (reader!.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+				{
+					var result = new Angle(value, internalUnits);
+					if (!string.IsNullOrEmpty(units))
+						result!.SetDisplayUnits(units);
+					return result;
+				}
+
+				var propertyName = reader!.GetString();
+
+				reader.Read();
+
+				switch (propertyName)
+				{
+					case "I":
+					case "i":
+						internalUnits = reader!.GetString();
+						break;
+					case "U":
+					case "u":
+						units = reader!.GetString();
+						break;
+					case "V":
+					case "v":
+						value = reader!.GetDouble();
+						break;
+				}
+			}
+			return new Angle(value, internalUnits);
+		}
+
+		public override void Write(Utf8JsonWriter writer, Angle dataValue, JsonSerializerOptions options)
+		{
+			//dataValue.V = 200;
+		}
+	}
+
 }

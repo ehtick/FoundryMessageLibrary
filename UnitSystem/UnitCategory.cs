@@ -73,15 +73,7 @@ namespace IoBTMessage.Units
 			ConversionLookup.Add(found.Name(), found);
 			return this;
 		}
-		public UnitCategory Conversion(int v1, string u1, int v2, string u2)
-		{
-			var found = new UnitConversion($"{u1}|{u2}", (v) => (v * v1) / v2);
-			ConversionLookup.Add(found.Name(), found);
 
-			found = new UnitConversion($"{u2}|{u1}", (v) => (v * v2) / v1);
-			ConversionLookup.Add(found.Name(), found);
-			return this;
-		}
 		public UnitCategory Conversion(string u1, string u2, Func<double, double> convert)
 		{
 			var found = new UnitConversion($"{u1}|{u2}", convert);
@@ -100,53 +92,20 @@ namespace IoBTMessage.Units
 			return v1;
 		}
 
-		public double ConvertFrom(string u1, double v1)
+
+		public double ConvertFromBaseUnits(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			var key = $"{u2}|{u1}";
-
-			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
-			{
-				return found.Convert(v1);
-			}
-			$"ConvertFrom: No Conversion found for {key}".WriteLine();
-			return v1;
-		}
-		public int ConvertFrom(string u1, int v1)
-		{
-			var u2 = BaseUnit.Name();
-			var key = $"{u2}|{u1}";
-
-			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
-			{
-				return found.Convert(v1);
-			}
-			$"ConvertFrom: No Conversion found for {key}".WriteLine();
-			return v1;
+			return Convert(u2, u1, v1);
 		}
 
-		public double ConvertTo(string u1, double v1)
+
+		public double ConvertToBaseUnits(string u1, double v1)
 		{
 			var u2 = BaseUnit.Name();
-			var key = $"{u1}|{u2}";
-			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
-			{
-				return found.Convert(v1);
-			}
-			$"ConvertTo: No Conversion found for {key}".WriteLine();
-			return v1;
+			return Convert(u1, u2, v1);
 		}
-		public int ConvertTo(string u1, int v1)
-		{
-			var u2 = BaseUnit.Name();
-			var key = $"{u1}|{u2}";
-			if (ConversionLookup.TryGetValue(key, out UnitConversion found))
-			{
-				return found.Convert(v1);
-			}
-			$"ConvertTo: No Conversion found for {key}".WriteLine();
-			return v1;
-		}
+
 		public List<UnitSpec> Units()
 		{
 			return UnitLookup.Values.ToList();

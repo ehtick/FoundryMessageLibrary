@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Units
 {
-	public class Duration : MeasuredValue<double>
+	public class Duration : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
 		{
@@ -16,16 +16,13 @@ namespace IoBTMessage.Units
 		{
 		}
 
-		public Duration(double value, string? units = null) :
+		public Duration(double value, string units = null) :
 			base(UnitFamilyName.Duration)
 		{
-			var cat = Category();
-			I = cat.BaseUnits().Name();
-			U = units ?? I;
-			V = cat.ConvertFrom(U, value);
+			Init(Category(), value, units);
 		}
 
-		public static Duration Zero { get { return new Duration(0,"s"); } }
+		public static Duration Zero { get { return new Duration(0, "s"); } }
 
 		public static Duration FromDays(double v)
 		{
@@ -39,7 +36,7 @@ namespace IoBTMessage.Units
 
 		public override double As(string units)
 		{
-			return Category().ConvertTo(units, V);
+			return ConvertAs(Category(), units);
 		}
 
 
