@@ -53,6 +53,11 @@ namespace IoBTMessage.Units
 			return this;
 		}
 
+		public int AsPixels()
+		{
+			return (int)ConvertAs(Category(), "px");
+		}
+
 		public Length Copy()
 		{
 			return new Length(Value(), Internal());

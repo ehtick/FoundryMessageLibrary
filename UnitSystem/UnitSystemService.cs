@@ -94,13 +94,20 @@ namespace IoBTMessage.Units
 		public bool EstablishCommonUnit()
 		{
 
+			var PixelsPerInch = 50; // 70; pixels per in or SRS machine
+
 			var length = new UnitCategory("Length", new UnitSpec("m", "meters", UnitFamilyName.Length))
-				.Units("cm", "centimeters")
-				.Conversion(100, "cm", 1, "m")
-				.Units("km", "kilometers")
-				.Conversion(1, "km", 1000, "m")
-				.Units("mm", "millimeters")
-				.Conversion(1000, "mm", 1, "m");
+					.Units("cm", "centimeters")
+					.Conversion(100, "cm", 1, "m")
+					.Units("km", "kilometers")
+					.Conversion(1, "km", 1000, "m")
+					.Units("mm", "millimeters")
+					.Conversion(1000, "mm", 1, "m")
+					.Units("in", "inches")
+					.Conversion(39.3701, "in", 1, "m")
+					.Units("px", "pixels")
+					.Conversion(39.3701 * PixelsPerInch, "px", 1, "m");
+			
 
 			UnitCategories.Category(length);
 			Length.Category = () => length;
