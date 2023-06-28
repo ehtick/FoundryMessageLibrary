@@ -5,9 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
+using IoBTMessage.Models;
 using IoBTMessage.Units;
 
 namespace IoBTMessage.Extensions
@@ -60,6 +62,54 @@ namespace IoBTMessage.Extensions
 			{
 				await func(value);
 			}
+		}
+
+		public static object HydrateObject(Type type, string payload)
+		{
+			var node = JsonNode.Parse(payload);
+			if (node == null) return null;
+
+			using var stream = new MemoryStream();
+			using var writer = new Utf8JsonWriter(stream);
+			node.WriteTo(writer);
+			writer.Flush();
+
+			var options = UnitSpec.JsonHydrateOptions(true);
+			var result = JsonSerializer.Deserialize(stream.ToArray(), type, options);
+			return result;
+		}
+
+		public static object HydrateObject(string payloadType, string payload, Assembly assembly)
+		{
+
+			Type type = assembly.DefinedTypes.FirstOrDefault(item => item.Name == payloadType);
+			if (type == null) return null;
+
+			var node = JsonNode.Parse(payload);
+			if (node == null) return null;
+
+			using var stream = new MemoryStream();
+			using var writer = new Utf8JsonWriter(stream);
+			node.WriteTo(writer);
+			writer.Flush();
+
+			var options = UnitSpec.JsonHydrateOptions(true);
+			var result = JsonSerializer.Deserialize(stream.ToArray(), type, options);
+			return result;
+		}
+
+		public static ContextWrapper<T> HydrateWrapper<T>(string target, bool includeFields) where T : class
+		{
+			using var stream = new MemoryStream();
+			using var writer = new Utf8JsonWriter(stream);
+			var node = JsonNode.Parse(target);
+			node?.WriteTo(writer);
+			writer.Flush();
+
+			var options = UnitSpec.JsonHydrateOptions(includeFields);
+			var result = JsonSerializer.Deserialize<ContextWrapper<T>>(stream.ToArray(), options) as ContextWrapper<T>;
+
+			return result;
 		}
 
 		public static T Hydrate<T>(this string target, bool includeFields) where T : class

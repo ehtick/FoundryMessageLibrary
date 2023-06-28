@@ -12,6 +12,7 @@ namespace IoBTMessage.Extensions
 		{
 			$"... {str}".WriteLine(ConsoleColor.DarkMagenta);
 		}
+
 		public static void WriteLine<T>(this T entity, ConsoleColor? color = null)
 		{
 			if (color.HasValue)
