@@ -103,7 +103,7 @@ public class SPEC_HighResPosition
 			this.zLoc = this.zLoc == null ? new(zLoc, units) : this.zLoc.Assign(zLoc, units);
 			return this;
 		}
-		public HighResPosition Ang(double xAng, double yAng, double zAng, string units = "r")
+		public HighResPosition Ang(double xAng, double yAng, double zAng, string units = "rad")
 		{
 			this.xAng = this.xAng == null ? new(xAng, units) : this.xAng.Assign(xAng, units);
 			this.yAng = this.yAng == null ? new(yAng, units) : this.yAng.Assign(yAng, units);
