@@ -79,6 +79,9 @@ namespace IoBTMessage.Units
 			return this;
 		}
 
+		public static bool operator <(Angle left, Angle right) => left.Value() < right.Value();
+		public static bool operator >(Angle left, Angle right) => left.Value() > right.Value();
+
 		public static Angle operator +(Angle left, Angle right) => new(left.Value() + right.Value(), left.Internal());
 		public static Angle operator -(Angle left, Angle right) => new(left.Value() - right.Value(), left.Internal());
 
