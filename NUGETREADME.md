@@ -1,17 +1,9 @@
-https://dev.azure.com/iobt/IoBTNuGet/
-
-nuget locals all -list
-nuget locals global-packages -list
-
-nuget locals global-packages -clear
-
-https://dev.azure.com/iobt/IoBTNuGet/_artifacts/feed/IoBTMessageLibrary
-
-set environment variables for 
-
 dotnet pack
-nuget.exe restore
-nuget.exe push -Source "IoBTMessageLibrary" -ApiKey OUR_API_KEY bin\Release\IoBTMessageLibrary.7.9.7.nupkg
 
-copy bin\Release\IoBTMessageLibrary.7.9.7.nupkg D:\Users\gtful\local.nuget
+Login to nuget.org
 
+Click Upload
+
+In File Explorer Locate .\bin\Release\IoBTMessageLibrary.<version>.nupkg
+
+Upload to nuget.org
