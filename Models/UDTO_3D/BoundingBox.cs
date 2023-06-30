@@ -4,7 +4,7 @@ namespace IoBTMessage.Models
 {
 	public class SPEC_BoundingBox
 	{
-		public Length width{ get; set; }
+		public Length width { get; set; }
 		public Length height { get; set; }
 		public Length depth { get; set; }
 		public Length pinX { get; set; }
@@ -35,12 +35,12 @@ namespace IoBTMessage.Models
 	public class BoundingBox
 	{
 		public Length width = new(10);
-		public Length height  = new(20);
-		public Length depth  = new(30);
+		public Length height = new(20);
+		public Length depth = new(30);
 
-		public Length pinX  = new(0);
-		public Length pinY  = new(0);
-		public Length pinZ  = new(0);
+		public Length pinX = new(0);
+		public Length pinY = new(0);
+		public Length pinZ = new(0);
 
 
 		public BoundingBox()
@@ -60,7 +60,7 @@ namespace IoBTMessage.Models
 
 		public BoundingBox(double width, double height, double depth, string units = "m") : this()
 		{
-			this.Box(width ,height, depth, units);
+			this.Box(width, height, depth, units);
 		}
 
 
@@ -76,18 +76,18 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public BoundingBox Box(double width, double height, double depth, string units="m")
+		public BoundingBox Box(double w, double h, double d, string units = "m")
 		{
-			this.width = this.width == null ? new(width, units) : this.width.Assign(width, units);
-			this.height = this.height == null ? new(height, units) : this.height.Assign(height, units);
-			this.depth = this.depth == null ? new(depth, units) : this.depth.Assign(depth, units);
+			this.width = this.width == null ? new(w, units) : this.width.Assign(w, units);
+			this.height = this.height == null ? new(h, units) : this.height.Assign(h, units);
+			this.depth = this.depth == null ? new(d, units) : this.depth.Assign(d, units);
 			return this;
 		}
-		public BoundingBox Pin(double pinX, double pinY, double pinZ, string units = "m")
+		public BoundingBox Pin(double x, double y, double z, string units = "m")
 		{
-			this.pinX = this.pinX == null ? new(pinX, units) : this.pinX.Assign(pinX, units);
-			this.pinY = this.pinY == null ? new(pinY, units) : this.pinY.Assign(pinY, units);
-			this.pinZ = this.pinZ == null ? new(pinZ, units) : this.pinZ.Assign(pinZ, units);
+			this.pinX = this.pinX == null ? new(x, units) : this.pinX.Assign(x, units);
+			this.pinY = this.pinY == null ? new(y, units) : this.pinY.Assign(y, units);
+			this.pinZ = this.pinZ == null ? new(z, units) : this.pinZ.Assign(z, units);
 			return this;
 		}
 	}

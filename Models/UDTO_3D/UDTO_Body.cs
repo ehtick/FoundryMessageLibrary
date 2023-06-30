@@ -3,8 +3,8 @@ namespace IoBTMessage.Models
 	public class SPEC_Body : SPEC_3D
 	{
 		public string symbol { get; set; } = "";
-		public SPEC_HighResPosition position { get; set;  }
-		public SPEC_BoundingBox boundingBox { get; set;  }
+		public SPEC_HighResPosition position { get; set; }
+		public SPEC_BoundingBox boundingBox { get; set; }
 
 		public static SPEC_Body RandomSpec()
 		{
@@ -50,7 +50,7 @@ namespace IoBTMessage.Models
 
 			var body = obj as UDTO_Body;
 			this.symbol = body!.symbol;
-			
+
 			if (this.position == null)
 			{
 				this.position = body.position;
@@ -90,6 +90,14 @@ namespace IoBTMessage.Models
 			boundingBox ??= new BoundingBox();
 
 			boundingBox.Box(width, height, depth, units);
+			return this;
+		}
+
+		public UDTO_Body EstablishPiv(double px = 0.0, double py = 0.0, double pz = 0.0, string units = "m")
+		{
+			boundingBox ??= new BoundingBox();
+
+			boundingBox.Pin(px, py, pz, units);
 			return this;
 		}
 
