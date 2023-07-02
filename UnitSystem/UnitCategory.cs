@@ -8,7 +8,6 @@ namespace IoBTMessage.Units
 	public enum UnitFamilyName
 	{
 		None,
-		SpanInt,
 		Length,
 		Distance,
 		Time,
@@ -67,9 +66,15 @@ namespace IoBTMessage.Units
 		public UnitCategory Conversion(double v1, string u1, double v2, string u2)
 		{
 			var found = new UnitConversion($"{u1}|{u2}", (v) => (v * v2) / v1);
+			if ( ConversionLookup.ContainsKey(found.Name()) )
+				ConversionLookup.Remove(found.Name());
+
 			ConversionLookup.Add(found.Name(), found);
 
 			found = new UnitConversion($"{u2}|{u1}", (v) => (v * v1) / v2);
+			if (ConversionLookup.ContainsKey(found.Name()))
+				ConversionLookup.Remove(found.Name());
+
 			ConversionLookup.Add(found.Name(), found);
 			return this;
 		}
@@ -77,6 +82,8 @@ namespace IoBTMessage.Units
 		public UnitCategory Conversion(string u1, string u2, Func<double, double> convert)
 		{
 			var found = new UnitConversion($"{u1}|{u2}", convert);
+			if (ConversionLookup.ContainsKey(found.Name()))
+				ConversionLookup.Remove(found.Name());
 			ConversionLookup.Add(found.Name(), found);
 			return this;
 		}

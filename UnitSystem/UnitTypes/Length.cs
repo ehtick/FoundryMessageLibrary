@@ -105,7 +105,10 @@ namespace IoBTMessage.Units
 		public static bool operator <(Length left, Length right) => left.Value() < right.Value();
 		public static bool operator >(Length left, Length right) => left.Value() > right.Value();
 
+		public static Length operator *(double left, Length right) => new(left * right.Value(), right.Internal());
 		public static Area operator *(Length left, Length right) => new(left.Value() * right.Value(), "m2");
+
+		public static double operator /(Length left, Length right) => left.Value() /  right.Value();
 
 		public static Volume operator *(Area left, Length right) => new(left.Value() * right.Value(), "m3");
 		public static Volume operator *(Length left, Area right) => new(left.Value() * right.Value(), "m3");

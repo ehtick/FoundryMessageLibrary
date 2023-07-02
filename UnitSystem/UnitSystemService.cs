@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 namespace IoBTMessage.Units
@@ -37,6 +38,11 @@ namespace IoBTMessage.Units
 
 	public class UnitSystem : IUnitSystem
 	{
+		public UnitCategory length { get;  set;}
+		public UnitCategory angle { get;  set;}
+		public UnitCategory storage { get;  set;}
+		public UnitCategory worktime { get; set; }
+
 		public UnitCategoryService UnitCategories { get; set; } = new();
 
 		public List<UnitCategory> Categories()
@@ -91,12 +97,17 @@ namespace IoBTMessage.Units
 			return EstablishCommonUnit();
 		}
 
+		public void SetPixelsPerMeter(double pixelsPerMeter)
+		{
+			length?.Conversion(pixelsPerMeter, "px", 1.0, "m");
+		}
+
 		public bool EstablishCommonUnit()
 		{
 
-			var PixelsPerInch = 50; // 70; pixels per in or SRS machine
+			//var PixelsPerInch = 40; // 70; pixels per in or SRS machine
 
-			var length = new UnitCategory("Length", new UnitSpec("m", "meters", UnitFamilyName.Length))
+			length = new UnitCategory("Length", new UnitSpec("m", "meters", UnitFamilyName.Length))
 					.Units("cm", "centimeters")
 					.Conversion(100, "cm", 1, "m")
 					.Units("km", "kilometers")
@@ -106,13 +117,13 @@ namespace IoBTMessage.Units
 					.Units("in", "inches")
 					.Conversion(39.3701, "in", 1, "m")
 					.Units("px", "pixels")
-					.Conversion(39.3701 * PixelsPerInch, "px", 1, "m");
+					.Conversion(5000, "px", 1, "m");
 			
 
 			UnitCategories.Category(length);
 			Length.Category = () => length;
 
-			var angle = new UnitCategory("Angle", new UnitSpec("rad", "radians", UnitFamilyName.Angle))
+			angle = new UnitCategory("Angle", new UnitSpec("rad", "radians", UnitFamilyName.Angle))
 				.Units("deg", "degrees")
 				.Conversion("deg", "rad", v => Math.PI * v / 180.0 )
 				.Conversion("rad", "deg", v => 180.0 * v / Math.PI );
@@ -159,7 +170,7 @@ namespace IoBTMessage.Units
 
 
 
-			var storage = new UnitCategory("Storage", new UnitSpec("KB", "KiloBytes", UnitFamilyName.Storage))
+			storage = new UnitCategory("Storage", new UnitSpec("KB", "KiloBytes", UnitFamilyName.Storage))
 				.Units("GB", "GigaBytes")
 				.Conversion(1000, "KB", 1, "GB")
 				.Units("TB", "TeraBytes")
@@ -177,7 +188,7 @@ namespace IoBTMessage.Units
 
 			UnitCategories.Category(transfer);
 
-			var worktime = new UnitCategory("WorkTime", new UnitSpec("Hrs", "Hours", UnitFamilyName.WorkTime))
+			worktime = new UnitCategory("WorkTime", new UnitSpec("Hrs", "Hours", UnitFamilyName.WorkTime))
 				.Units("Days", "Days")
 				.Conversion(24, "Hrs", 1, "Days")
 				.Units("Wdays", "WorkDays")
