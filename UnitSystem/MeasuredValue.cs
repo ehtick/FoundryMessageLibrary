@@ -13,7 +13,7 @@ namespace IoBTMessage.Units
 		void SetDisplayUnits(string units);
 		string Debug();
 		string AsString(string units);
-		string ToString(string format, IFormatProvider provider);
+		string Format(string format);
 		string ToString();
 	}
 
@@ -50,6 +50,7 @@ namespace IoBTMessage.Units
 			return cat.ConvertFromBaseUnits(units, V);
 		}
 
+		public int ValueAsInt() { return (int)V; }
 		public double Value() { return V; }
 		public string Units() { return U; }
 		public string Internal() { return I; }
@@ -79,10 +80,10 @@ namespace IoBTMessage.Units
 			return AsString(Units());
 		}
 
-		public string ToString(string format, IFormatProvider provider)
+		public string Format(string format)
 		{
 			var value = As(Units());
-			return $"{value} {Units()}";
+			return $"{value.ToString(format, CultureInfo.CurrentCulture)} {Units()}";
 		}
 
 		public string AsString(string units)

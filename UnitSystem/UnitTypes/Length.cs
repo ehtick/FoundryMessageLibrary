@@ -29,7 +29,7 @@ namespace IoBTMessage.Units
 
 		public Length Assign(double value, string units = null)
 		{
-			if (units == I)
+			if (units == I || units == null)
 			{
 				V = value;
 			}
@@ -56,6 +56,23 @@ namespace IoBTMessage.Units
 		public int AsPixels()
 		{
 			return (int)ConvertAs(Category(), "px");
+		}
+
+		public double FromPixels(int pixels)
+		{
+			return Value() * pixels / AsPixels();
+		}
+
+		public Length Sqrt()
+		{
+			this.V = Math.Sqrt(V);
+			return this;
+		}
+
+		public Length Sq()
+		{
+			this.V = V * V;
+			return this;
 		}
 
 		public Length Copy()
@@ -109,6 +126,7 @@ namespace IoBTMessage.Units
 		public static Area operator *(Length left, Length right) => new(left.Value() * right.Value(), "m2");
 
 		public static double operator /(Length left, Length right) => left.Value() /  right.Value();
+		public static Length operator /(Length left, double right) => new(left.Value()/ right, left.Internal());
 
 		public static Volume operator *(Area left, Length right) => new(left.Value() * right.Value(), "m3");
 		public static Volume operator *(Length left, Area right) => new(left.Value() * right.Value(), "m3");

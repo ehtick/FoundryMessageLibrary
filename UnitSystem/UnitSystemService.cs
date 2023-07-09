@@ -34,6 +34,7 @@ namespace IoBTMessage.Units
 	{
 		List<UnitCategory> Categories();
 		bool Apply(UnitSystemType type);
+		void SetPixelsPerMeter(double pixelsPerMeter);
 	}
 
 	public class UnitSystem : IUnitSystem
