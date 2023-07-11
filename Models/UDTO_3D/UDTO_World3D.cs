@@ -16,6 +16,7 @@ namespace IoBTMessage.Models
 		public List<SPEC_Platform> platforms { get; set; } = new List<SPEC_Platform>();
 		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
 		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
+		public List<SPEC_Pathway> pathways { get; set; } = new List<SPEC_Pathway>();
 
 
 
@@ -23,7 +24,7 @@ namespace IoBTMessage.Models
 		{
 			if (typeof(T) == typeof(SPEC_Body)) return bodies as List<T>;
 			if (typeof(T) == typeof(SPEC_Label)) return labels as List<T>;
-
+			if (typeof(T) == typeof(SPEC_Pathway)) return pathways as List<T>;
 			if (typeof(T) == typeof(SPEC_Platform)) return platforms as List<T>;
 			return null;
 		}
@@ -56,6 +57,7 @@ namespace IoBTMessage.Models
 
 		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
+		public List<UDTO_Pathway> pathways = new();
 		public List<UDTO_Label> labels = new();
 		public List<UDTO_Datum> datums = new();
 		public List<UDTO_Relationship> relationships = new();
@@ -68,6 +70,7 @@ namespace IoBTMessage.Models
 		{
 			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
 			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
+			if (typeof(T) == typeof(UDTO_Pathway)) return pathways as List<T>;
 			if (typeof(T) == typeof(UDTO_Datum)) return datums as List<T>;
 			if (typeof(T) == typeof(UDTO_Platform)) return platforms as List<T>;
 			if (typeof(T) == typeof(UDTO_Relationship)) return relationships as List<T>;
@@ -124,6 +127,8 @@ namespace IoBTMessage.Models
 		{
 			platforms.Clear();
 			bodies.Clear();
+			pathways.Clear();
+			datums.Clear();
 			labels.Clear();
 			relationships.Clear();
 			return this;
@@ -131,12 +136,11 @@ namespace IoBTMessage.Models
 
 
 
-
-
 		public UDTO_World FillWorldFromWorld(UDTO_World world)
 		{
 			platforms.AddRange(world.platforms);
 			bodies.AddRange(world.bodies);
+			pathways.AddRange(world.pathways);
 			labels.AddRange(world.labels);
 			relationships.AddRange(world.relationships);
 			return RemoveDuplicates();
@@ -146,6 +150,7 @@ namespace IoBTMessage.Models
 		{
 			platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
 			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
+			pathways = pathways.DistinctBy(i => i.uniqueGuid).ToList();
 			labels = labels.DistinctBy(i => i.uniqueGuid).ToList();
 			relationships = relationships.DistinctBy(i => i.uniqueGuid).ToList();
 
@@ -192,7 +197,12 @@ namespace IoBTMessage.Models
 			var result = CreateUsingDTBASE<UDTO_Label>(obj);
 			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
 		}
-
+		public UDTO_Pathway CreatePathway(DT_Base obj, List<UDTO_Datum> datums)
+		{
+			var result = CreateUsingDTBASE<UDTO_Pathway>(obj);
+			result.datums = datums;
+			return result;
+		}
 
 	}
 }
