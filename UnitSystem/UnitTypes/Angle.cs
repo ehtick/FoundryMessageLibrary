@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace IoBTMessage.Units
 {
-	//[JsonConverter(typeof(AngleJsonConverter))]
+	[System.Serializable]
 	public class Angle : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>

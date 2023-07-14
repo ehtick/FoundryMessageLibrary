@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace IoBTMessage.Units
 {
-	//[JsonConverter(typeof(LengthJsonConverter))]
+	[System.Serializable]
 	public class Length : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>

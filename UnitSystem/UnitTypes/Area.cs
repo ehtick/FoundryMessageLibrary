@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace IoBTMessage.Units
 {
 
+	[System.Serializable]
 	public class Area : MeasuredValue
 	{
 

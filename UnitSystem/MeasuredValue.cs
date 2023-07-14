@@ -18,7 +18,7 @@ namespace IoBTMessage.Units
 	}
 
 
-	//[JsonConverter(typeof(MeasuredValueJsonConverter))]
+	[System.Serializable]
 	public class MeasuredValue : IMeasuredValue
 	{
 		public double V = 0.0;

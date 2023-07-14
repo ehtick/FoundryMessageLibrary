@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace IoBTMessage.Units
 {
+	[System.Serializable]
 	public class Quanity : MeasuredValue
 	{
 		public static Func<UnitCategory> Category = () =>
