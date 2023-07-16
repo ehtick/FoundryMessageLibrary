@@ -102,7 +102,7 @@ namespace IoBTMessage.Units
 			string units = "";
 			string internalUnits = "";
 
-			$"typeToConvert {typeToConvert} ".WriteLine();
+			//$"typeToConvert {typeToConvert} ".WriteLine();
 
 			while (reader!.Read())
 			{
