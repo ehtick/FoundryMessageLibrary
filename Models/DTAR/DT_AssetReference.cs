@@ -21,6 +21,7 @@ namespace IoBTMessage.Models
 		public string assetGuid;
 		public string heroGuid;
 		public DT_AssetFile asset;
+		public DT_Thread thread;
 		public HighResPosition position;
 
 

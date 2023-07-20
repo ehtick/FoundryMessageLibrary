@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IoBTMessage.Extensions;
@@ -13,7 +14,8 @@ namespace IoBTMessage.Models
 		public string controlNumber { get; set; }
 		public string serialNumber { get; set; }
 		public string revision { get; set; }
-	}
+
+ 	}
 
 
 	public class DO_Target : DO_Searchable
