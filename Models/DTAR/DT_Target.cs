@@ -15,6 +15,17 @@ namespace IoBTMessage.Models
 		public string serialNumber { get; set; }
 		public string revision { get; set; }
 
+		private DT_Searchable source;
+
+		public DT_Searchable GetSource() 
+		{
+			return source;
+		}
+		public DT_Searchable SetSource(DT_Searchable item) 
+		{
+			source = item;
+			return source;
+		}
  	}
 
 

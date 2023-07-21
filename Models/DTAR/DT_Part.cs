@@ -26,7 +26,7 @@ namespace IoBTMessage.Models
 		public string referenceDesignation;
 		public string partNumber;
 		public string serialNumber;
-		public string revision;
+		public string version;
 
 		public DT_Part() : base()
 		{
@@ -46,10 +46,10 @@ namespace IoBTMessage.Models
 		}
 		public string partName()
 		{
-			if (string.IsNullOrEmpty(revision))
+			if (string.IsNullOrEmpty(version))
 				return partNumber;
 
-			return $"{partNumber}-{revision}";
+			return $"{partNumber}-{version}";
 		}
 
 		public string refName()
