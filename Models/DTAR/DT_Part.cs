@@ -32,6 +32,14 @@ namespace IoBTMessage.Models
 		{
 
 		}
+		public bool IsEmpty()
+		{
+			if (!string.IsNullOrEmpty(referenceDesignation)) return false;
+			if (!string.IsNullOrEmpty(partNumber)) return false;
+			if (!string.IsNullOrEmpty(serialNumber)) return false;
+			if (!string.IsNullOrEmpty(version)) return false;
+			return true;
+		}
 		public DT_Part ShallowCopy()
 		{
 			var result = (DT_Part)this.MemberwiseClone();
