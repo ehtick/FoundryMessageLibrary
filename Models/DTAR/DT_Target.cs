@@ -13,7 +13,7 @@ namespace IoBTMessage.Models
 		public string resDes { get; set; }
 		public string controlNumber { get; set; }
 		public string serialNumber { get; set; }
-		public string revision { get; set; }
+		public string version { get; set; }
 
 		private DT_Searchable source;
 
