@@ -1,20 +1,14 @@
 namespace IoBTMessage.Models
 {
-	public class DO_ComponentReference : DO_Title
-	{
-		public DO_Part part { get; set; }
-		public DT_Promise promise { get; set; }
-		public DT_Component component { get; set; }
-	}
 
 	[System.Serializable]
-	public class DT_ComponentReference : DT_Title, IDT_Reference
+	public class DT_HeroReference : DT_Title, IDT_Reference
 	{
 		public DT_Part part;
 		public DT_Promise promise;
-		public DT_Component component;
+		public DT_Hero hero;
 
-		public DT_ComponentReference() : base()
+		public DT_HeroReference() : base()
 		{
 		}
 		public DT_Part MarkAsTemplate()
@@ -34,13 +28,13 @@ namespace IoBTMessage.Models
 			return title;
 		}
 
-		public DT_ComponentReference ShallowCopy()
+		public DT_HeroReference ShallowCopy()
 		{
-			var result = (DT_ComponentReference)this.MemberwiseClone();
+			var result = (DT_HeroReference)this.MemberwiseClone();
 			if (part != null)
 				result.part = (DT_Part)part.ShallowCopy();
 
-			result.component = null;
+			result.hero = null;
 			return result;
 		}
 

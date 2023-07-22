@@ -6,46 +6,17 @@ using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Models
 {
-	public class DT_Thread : DT_Searchable
-	{
-		public string sheetname { get; set; }
-		public string thread { get; set; }
-		public string resDes { get; set; }
-		public string controlNumber { get; set; }
-		public string serialNumber { get; set; }
-		public string version { get; set; }
 
-		private DT_Hero source;
-
-		public DT_Hero GetSource() 
-		{
-			return source;
-		}
-		public DT_Hero SetSource(DT_Hero item) 
-		{
-			source = item;
-			return source;
-		}
- 	}
-
-
-	public class DO_Target : DO_Searchable
-	{
-		public DO_Part part { get; set; }
-		public List<DO_AssetFile> models { get; set; }
-		public List<DO_AssetFile> images { get; set; }
-		public List<DO_Component> components { get; set; }
-		public List<DO_Hero> procedures { get; set; }
-	}
 
 	public class DT_Target : DT_Searchable
 	{
+		public string controlNumber;
+		public string targetType;
 		public DT_Part part;
+		public DT_HeroReference heroReference;
 		public List<DT_Thread> threads;
-		public List<DT_AssetFile> models;
-		public List<DT_AssetFile> images;
-		public List<DT_Component> components;
-		public List<DT_Hero> procedures;
+		public List<DT_Target> targets;  //might need a ref to advoid circular json
+
 
 		public DT_Target()
 		{
@@ -66,49 +37,14 @@ namespace IoBTMessage.Models
 			return threads;
 		}
 
-		public List<DT_AssetFile> AddImage(DT_AssetFile image)
+		public List<DT_Target> AddTarget(DT_Target target)
 		{
-			images ??= new List<DT_AssetFile>();
-			if (image != null)
-				images.Add(image);
+			targets ??= new List<DT_Target>();
+			if (target != null)
+				targets.Add(target);
 
-			return images;
+			return targets;
 		}
 
-		public List<DT_AssetFile> AddModel(DT_AssetFile model)
-		{
-			models ??= new List<DT_AssetFile>();
-			if (model != null)
-				models.Add(model);
-
-			return models;
-		}
-
-		public List<DT_AssetFile> CollectAssetFilesFrom(DT_Hero source, bool deep)
-		{
-			var assets = source.CollectAssetFiles(new List<DT_AssetFile>(), deep).Where(obj => obj != null).ToList();
-			assets = assets.DistinctUsing(item => item.filename).ToList();
-
-			images ??= new List<DT_AssetFile>();
-			models ??= new List<DT_AssetFile>();
-
-			var justImages = assets.Where(item => item.IsImage()).ToList();
-			images.AddRange(justImages);
-
-
-			var justModels = assets.Where(item => item.IsModel()).ToList();
-			models.AddRange(justModels);
-
-			return assets;
-		}
-
-		public void RemoveDuplicates()
-		{
-			images ??= new List<DT_AssetFile>();
-			images = images.DistinctUsing(item => item.filename).ToList();
-
-			models ??= new List<DT_AssetFile>();
-			models = models.DistinctUsing(item => item.filename).ToList();
-		}
 	}
 }

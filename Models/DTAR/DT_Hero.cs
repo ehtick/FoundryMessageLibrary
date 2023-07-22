@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 		public DO_InfoCard infoCard { get; set; }
 		public DO_AssetFile heroImage { get; set; }
 		public List<DO_AssetReference> assetReferences { get; set; }
-		public List<DO_ComponentReference> componentReferences { get; set; }
+		public List<DT_HeroReference> heroReferences { get; set; }
 	}
 
 	[System.Serializable]
@@ -16,7 +16,7 @@ namespace IoBTMessage.Models
 		public DT_InfoCard infoCard;
 		public DT_AssetFile heroImage;
 		public List<DT_AssetReference> assetReferences;
-		public List<DT_ComponentReference> componentReferences;
+		public List<DT_HeroReference> heroReferences;
 
 
 
@@ -47,17 +47,17 @@ namespace IoBTMessage.Models
 			return item;
 		}
 
-		public T AddComponentReference<T>(T item) where T : DT_ComponentReference
+		public T AddHeroReference<T>(T item) where T : DT_HeroReference
 		{
-			componentReferences ??= new List<DT_ComponentReference>();
+			heroReferences ??= new List<DT_HeroReference>();
 
-			if (componentReferences.IndexOf(item) == -1)
+			if (heroReferences.IndexOf(item) == -1)
 			{
-				componentReferences.Add(item);
+				heroReferences.Add(item);
 			}
 			else
 			{
-				$"AddComponentReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
+				$"AddHeroReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
 			}
 			return item;
 		}
@@ -82,10 +82,10 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public virtual List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
+		public virtual List<DT_HeroReference> CollectHeroReferences(List<DT_HeroReference> list, bool deep)
 		{
 
-			componentReferences?.ForEach(compRef =>
+			heroReferences?.ForEach(compRef =>
 			{
 				list.Add(compRef);
 			});

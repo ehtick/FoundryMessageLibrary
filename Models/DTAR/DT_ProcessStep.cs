@@ -74,14 +74,14 @@ namespace IoBTMessage.Models
 
 			return list;
 		}
-		public override List<DT_ComponentReference> CollectComponentReferences(List<DT_ComponentReference> list, bool deep)
+		public override List<DT_HeroReference> CollectHeroReferences(List<DT_HeroReference> list, bool deep)
 		{
-			base.CollectComponentReferences(list, deep);
+			base.CollectHeroReferences(list, deep);
 			if (!deep) return list;
 
 			details?.ForEach(step =>
 			{
-				step.CollectComponentReferences(list, deep);
+				step.CollectHeroReferences(list, deep);
 			});
 			return list;
 		}
