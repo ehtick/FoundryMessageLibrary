@@ -15,16 +15,19 @@ namespace IoBTMessage.Models
 		public string serialNumber { get; set; }
 		public string version { get; set; }
 
-		private DT_Hero source;
+		private DT_HeroReference heroReference;
 
 		public DT_Hero GetSource() 
 		{
+			//this should resolve the heroReference to a hero
+			var source = heroReference.hero;
 			return source;
 		}
 		public DT_Hero SetSource(DT_Hero item) 
 		{
-			source = item;
-			return source;
+			heroReference ??= new DT_HeroReference();
+			heroReference.hero = item;
+			return item;
 		}
  	}
 

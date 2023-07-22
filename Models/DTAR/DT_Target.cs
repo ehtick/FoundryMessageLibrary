@@ -15,7 +15,8 @@ namespace IoBTMessage.Models
 		public DT_Part part;
 		public DT_HeroReference heroReference;
 		public List<DT_Thread> threads;
-		public List<DT_Target> targets;  //might need a ref to advoid circular json
+		public List<string> targetGUIDs;
+		private List<DT_Target> targets;  //might need a ref to advoid circular json
 
 
 		public DT_Target()
