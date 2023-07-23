@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Models
 {
@@ -39,6 +40,18 @@ namespace IoBTMessage.Models
 
 			return targets;
 		}
+		public List<DT_Target> Targets()
+		{
+			targets ??= new List<DT_Target>();
+			return targets.ToList();
+		}
+
+		public DT_Target FindTarget(string type, string controlNumber)
+		{
+			var found  = targets?.FirstOrDefault(t => t.targetType.Matches(type)  && t.controlNumber.Matches(controlNumber));
+			return found
+		}
+
 
 		public List<DT_TargetLink> AddLink(DT_TargetLink link)
 		{
@@ -47,6 +60,12 @@ namespace IoBTMessage.Models
 				links.Add(link);
 
 			return links;
+		}
+
+		public List<DT_TargetLink> Links()
+		{
+			links ??= new List<DT_TargetLink>();
+			return links.ToList();
 		}
 	}
 }
