@@ -7,16 +7,35 @@ using IoBTMessage.Extensions;
 namespace IoBTMessage.Models
 {
 
+	public class DT_TargetLink: DT_Base
+	{
+		public string sourceGuid;
+		public string sinkGuid;
+
+		public DT_TargetLink()
+		{
+			this.type = "DT_TargetLink";
+		}
+
+		public DT_TargetLink Link(DT_Target from, DT_Target to)
+		{
+			this.sourceGuid = from.guid;
+			this.sinkGuid = to.guid;
+			this.name = from.controlNumber + " -> " + to.controlNumber;
+			this.type = "DT_TargetLink";
+			return this;
+		}
+
+	}
 
 	public class DT_Target : DT_Searchable
 	{
 		public string controlNumber;
 		public string targetType;
+		public string sourceType;
 		public DT_Part part;
 		public DT_HeroReference heroReference;
 		public List<DT_Thread> threads;
-		public List<string> targetGUIDs;
-		private List<DT_Target> targets;  //might need a ref to advoid circular json
 
 
 		public DT_Target()
@@ -38,14 +57,7 @@ namespace IoBTMessage.Models
 			return threads;
 		}
 
-		public List<DT_Target> AddTarget(DT_Target target)
-		{
-			targets ??= new List<DT_Target>();
-			if (target != null)
-				targets.Add(target);
 
-			return targets;
-		}
 
 	}
 }

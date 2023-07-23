@@ -5,14 +5,6 @@ namespace IoBTMessage.Models
 {
 
 
-	public class DO_System : DO_Hero
-	{
-		public int memberCount { get; set; }
-		public string systemName { get; set; }
-
-		public List<DO_ProcessStep> steps;
-
-	}
 
 	[System.Serializable]
 	public class DT_System : DT_Hero, ISystem
@@ -22,7 +14,7 @@ namespace IoBTMessage.Models
 		public string systemName;
 
 		public List<DT_Target> targets;
-
+		public List<DT_TargetLink> links;
 
 		public DT_System()
 		{
@@ -32,15 +24,30 @@ namespace IoBTMessage.Models
 		{
 			var result = (DT_System)this.MemberwiseClone();
 			result.targets = null;
+			result.links = null;
 			result.assetReferences = null;
 			result.heroImage = this.heroImage;
 
 			return result;
 		}
 
-	
+		public List<DT_Target> AddTarget(DT_Target target)
+		{
+			targets ??= new List<DT_Target>();
+			if (target != null)
+				targets.Add(target);
 
+			return targets;
+		}
 
+		public List<DT_TargetLink> AddLink(DT_TargetLink link)
+		{
+			links ??= new List<DT_TargetLink>();
+			if (link != null)
+				links.Add(link);
+
+			return links;
+		}
 	}
 }
 

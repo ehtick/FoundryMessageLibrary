@@ -17,8 +17,12 @@ namespace IoBTMessage.Models
 
 		private DT_HeroReference heroReference;
 
+
+
 		public DT_Hero GetSource() 
 		{
+			if (heroReference == null)
+				return null;
 			//this should resolve the heroReference to a hero
 			var source = heroReference.hero;
 			return source;
