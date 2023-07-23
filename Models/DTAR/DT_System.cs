@@ -31,7 +31,11 @@ namespace IoBTMessage.Models
 
 			return result;
 		}
-
+		public void Flush()
+		{
+			targets = new();
+			links = new();
+		}
 		public List<DT_Target> AddTarget(DT_Target target)
 		{
 			targets ??= new List<DT_Target>();
@@ -43,15 +47,20 @@ namespace IoBTMessage.Models
 		public List<DT_Target> Targets()
 		{
 			targets ??= new List<DT_Target>();
-			return targets.ToList();
+			return targets;
 		}
 
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
 			var found  = targets?.FirstOrDefault(t => t.targetType.Matches(type)  && t.controlNumber.Matches(controlNumber));
-			return found
+			return found;
 		}
-
+		public (DT_Target, DT_Target)  ResolveLink(DT_TargetLink link)
+		{
+			var source = targets?.FirstOrDefault(t => link.sourceGuid.Matches(t.guid));
+			var sink = targets?.FirstOrDefault(t => link.sinkGuid.Matches(t.guid));
+			return (source, sink);
+		}
 
 		public List<DT_TargetLink> AddLink(DT_TargetLink link)
 		{
@@ -65,7 +74,7 @@ namespace IoBTMessage.Models
 		public List<DT_TargetLink> Links()
 		{
 			links ??= new List<DT_TargetLink>();
-			return links.ToList();
+			return links;
 		}
 	}
 }

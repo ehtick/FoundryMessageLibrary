@@ -7,7 +7,7 @@ using IoBTMessage.Extensions;
 namespace IoBTMessage.Models
 {
 
-	public class DT_TargetLink: DT_Base
+	public class DT_TargetLink: DT_Searchable
 	{
 		public string sourceGuid;
 		public string sinkGuid;
@@ -21,7 +21,8 @@ namespace IoBTMessage.Models
 		{
 			this.sourceGuid = from.guid;
 			this.sinkGuid = to.guid;
-			this.name = from.controlNumber + " -> " + to.controlNumber;
+			this.name = $"{from.controlNumber} -- {to.controlNumber}";
+			this.title = $"{from.GetKey()} == {to.GetKey()}";
 			this.type = "DT_TargetLink";
 			return this;
 		}
@@ -46,6 +47,11 @@ namespace IoBTMessage.Models
 		{
 			source.CopyNonNullFields(this.part);
 			return this.part;
+		}
+
+		public string GetKey()
+		{
+			return $"{targetType}:{controlNumber}";
 		}
 
 		public List<DT_Thread> AddThread(DT_Thread thread)
