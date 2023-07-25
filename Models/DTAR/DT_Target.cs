@@ -41,7 +41,7 @@ namespace IoBTMessage.Models
 		public DT_Part part;
 		public DT_HeroReference heroReference;
 		public DT_AssetFile asset;
-		public List<DT_Thread> threads;
+		public List<string> threads;
 
 
 		public DT_Target()
@@ -60,9 +60,9 @@ namespace IoBTMessage.Models
 			return $"{targetType}:{controlNumber}";
 		}
 
-		public List<DT_Thread> AddThread(DT_Thread thread)
+		public List<string> AddThread(string thread)
 		{
-			threads ??= new List<DT_Thread>();
+			threads ??= new List<string>();
 			if (thread != null)
 				threads.Add(thread);
 
