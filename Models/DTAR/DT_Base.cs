@@ -91,6 +91,11 @@ namespace IoBTMessage.Models
 			return metadata;
 		}
 
+		public object GetMetaData(string key)
+		{
+			return metadata.Find(key);
+		}
+
 		public DT_Base initialize()
 		{
 			if (String.IsNullOrEmpty(type))

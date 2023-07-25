@@ -34,6 +34,7 @@ namespace IoBTMessage.Models
 		public string controlNumber;
 		public string targetType;
 		public string sourceType;
+		public int linkCount;
 		public DT_Part part;
 		public DT_HeroReference heroReference;
 		public List<DT_Thread> threads;
@@ -42,6 +43,7 @@ namespace IoBTMessage.Models
 		public DT_Target()
 		{
 			part = new DT_Part();
+			linkCount = 0;
 		}
 		public DT_Part CopyFrom(DT_Part source)
 		{

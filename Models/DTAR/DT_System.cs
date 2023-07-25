@@ -49,6 +49,11 @@ namespace IoBTMessage.Models
 			targets ??= new List<DT_Target>();
 			return targets;
 		}
+		public List<DT_TargetLink> Links()
+		{
+			links ??= new List<DT_TargetLink>();
+			return links;
+		}
 
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
@@ -71,11 +76,7 @@ namespace IoBTMessage.Models
 			return links;
 		}
 
-		public List<DT_TargetLink> Links()
-		{
-			links ??= new List<DT_TargetLink>();
-			return links;
-		}
+
 	}
 }
 
