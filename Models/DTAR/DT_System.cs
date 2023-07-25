@@ -44,6 +44,27 @@ namespace IoBTMessage.Models
 
 			return targets;
 		}
+		public List<DT_Target> RemoveUnlinkedTargets()
+		{
+			var unlinked = Targets().Where(t => t.linkCount == 0).ToList();
+			foreach (var item in unlinked)
+			{
+				$"Unlinked: {item.GetKey()}".WriteLine(System.ConsoleColor.DarkYellow);
+			} 
+			var linked = Targets().Where(t => t.linkCount > 0).ToList();
+			foreach (var item in linked)
+			{
+				$"Linked: {item.GetKey()} {item.linkCount}".WriteLine(System.ConsoleColor.DarkGreen);				
+			} 
+
+			foreach (var item in  Links())
+			{
+				$"Edge: {item.title}".WriteLine(System.ConsoleColor.Green);				
+			}
+			targets = linked;
+			return targets;
+		}
+
 		public List<DT_Target> Targets()
 		{
 			targets ??= new List<DT_Target>();
@@ -75,6 +96,8 @@ namespace IoBTMessage.Models
 
 			return links;
 		}
+
+
 
 
 	}

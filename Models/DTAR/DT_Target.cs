@@ -19,6 +19,9 @@ namespace IoBTMessage.Models
 
 		public DT_TargetLink Link(DT_Target from, DT_Target to)
 		{
+			from.linkCount++;
+			to.linkCount++;
+			
 			this.sourceGuid = from.guid;
 			this.sinkGuid = to.guid;
 			this.name = $"{from.controlNumber} -- {to.controlNumber}";
@@ -37,6 +40,7 @@ namespace IoBTMessage.Models
 		public int linkCount;
 		public DT_Part part;
 		public DT_HeroReference heroReference;
+		public DT_AssetFile asset;
 		public List<DT_Thread> threads;
 
 
