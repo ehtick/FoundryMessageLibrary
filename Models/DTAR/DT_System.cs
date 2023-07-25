@@ -11,9 +11,7 @@ namespace IoBTMessage.Models
 	public class DT_System : DT_Hero, ISystem
 	{
 
-		public int memberCount;
-		public string systemName;
-
+		public List<DT_Thread> threads;
 		public List<DT_Target> targets;
 		public List<DT_TargetLink> links;
 
@@ -24,6 +22,7 @@ namespace IoBTMessage.Models
 		public DT_System ShallowCopy()
 		{
 			var result = (DT_System)this.MemberwiseClone();
+			result.threads = null;
 			result.targets = null;
 			result.links = null;
 			result.assetReferences = null;
@@ -31,6 +30,19 @@ namespace IoBTMessage.Models
 
 			return result;
 		}
+
+		public void Merge(DT_System obj)
+		{
+			foreach (var target in obj.Targets()) 
+			{ 
+				AddTarget(target);
+			}
+			foreach (var link in obj.Links())
+			{
+				AddLink(link);
+			}
+		}
+
 		public void Flush()
 		{
 			targets = new();
@@ -75,6 +87,16 @@ namespace IoBTMessage.Models
 			links ??= new List<DT_TargetLink>();
 			return links;
 		}
+		public List<DT_Thread> Threads()
+		{
+			threads ??= new List<DT_Thread>();
+			return threads;
+		}
+		public DT_Target FindTarget(string key)
+		{
+			var found = targets?.FirstOrDefault(t => t.GetKey().Matches(key));
+			return found;
+		}
 
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
@@ -97,7 +119,14 @@ namespace IoBTMessage.Models
 			return links;
 		}
 
+		public List<DT_Thread> AddThread(DT_Thread link)
+		{
+			threads ??= new List<DT_Thread>();
+			if (link != null)
+				threads.Add(link);
 
+			return threads;
+		}
 
 
 	}
