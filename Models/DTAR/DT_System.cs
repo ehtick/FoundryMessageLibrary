@@ -15,6 +15,8 @@ namespace IoBTMessage.Models
 		public List<DT_Target> targets;
 		public List<DT_TargetLink> links;
 
+		public Dictionary<string,DT_Target> lookup = new();
+
 		public DT_System()
 		{
 		}
@@ -31,7 +33,7 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-		public void Merge(DT_System obj)
+		public void MergeMembers(DT_System obj)
 		{
 			foreach (var target in obj.Targets()) 
 			{ 
@@ -48,14 +50,15 @@ namespace IoBTMessage.Models
 			targets = new();
 			links = new();
 		}
-		public List<DT_Target> AddTarget(DT_Target target)
+		public DT_Target AddTarget(DT_Target target)
 		{
 			targets ??= new List<DT_Target>();
 			if (target != null)
 				targets.Add(target);
 
-			return targets;
+			return target;
 		}
+
 		public List<DT_Target> RemoveUnlinkedTargets()
 		{
 			var unlinked = Targets().Where(t => t.linkCount == 0).ToList();
@@ -92,6 +95,12 @@ namespace IoBTMessage.Models
 			threads ??= new List<DT_Thread>();
 			return threads;
 		}
+		public DT_Target LookupTarget(string key)
+		{
+			lookup.TryGetValue(key, out DT_Target found);
+			return found;
+		}
+
 		public DT_Target FindTarget(string key)
 		{
 			var found = targets?.FirstOrDefault(t => t.GetKey().Matches(key));
@@ -100,9 +109,10 @@ namespace IoBTMessage.Models
 
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
-			var found  = targets?.FirstOrDefault(t => t.targetType.Matches(type)  && t.controlNumber.Matches(controlNumber));
+			var found  = targets?.FirstOrDefault(t => t.domain.Matches(type)  && t.address.Matches(controlNumber));
 			return found;
 		}
+
 		public (DT_Target, DT_Target)  ResolveLink(DT_TargetLink link)
 		{
 			var source = targets?.FirstOrDefault(t => link.sourceGuid.Matches(t.guid));
@@ -110,22 +120,54 @@ namespace IoBTMessage.Models
 			return (source, sink);
 		}
 
-		public List<DT_TargetLink> AddLink(DT_TargetLink link)
+		public DT_Target CreateTarget(string type, string address)
+		{
+			var target = new DT_Target()
+			{
+				address = address,
+				domain = type,
+				guid = System.Guid.NewGuid().ToString()
+			};
+			AddTarget(target);
+
+			AddToLookup(target);
+
+			return target;
+		}
+
+		private DT_Target AddToLookup(DT_Target target)
+		{
+			if ( lookup.ContainsKey(target.GetKey()) ) {
+				lookup.Remove(target.GetKey());
+			}
+			lookup.Add(target.GetKey(), target);
+			return target;
+		}
+
+
+		public DT_TargetLink CreateLink(DT_Target t1, DT_Target t2)
+		{
+			var link = DT_TargetLink.Create(t1, t2);
+			AddLink(link);
+			return link;
+		}
+
+		public DT_TargetLink AddLink(DT_TargetLink link)
 		{
 			links ??= new List<DT_TargetLink>();
 			if (link != null)
 				links.Add(link);
 
-			return links;
+			return link;
 		}
 
-		public List<DT_Thread> AddThread(DT_Thread link)
+		public DT_Thread AddThread(DT_Thread thread)
 		{
 			threads ??= new List<DT_Thread>();
-			if (link != null)
-				threads.Add(link);
+			if (thread != null)
+				threads.Add(thread);
 
-			return threads;
+			return thread;
 		}
 
 

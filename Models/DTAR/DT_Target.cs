@@ -17,6 +17,12 @@ namespace IoBTMessage.Models
 			this.type = "DT_TargetLink";
 		}
 
+		public static DT_TargetLink Create(DT_Target from, DT_Target to)
+		{
+			var link = new DT_TargetLink();
+			return link.Link(from, to);
+		}
+
 		public DT_TargetLink Link(DT_Target from, DT_Target to)
 		{
 			from.linkCount++;
@@ -24,7 +30,7 @@ namespace IoBTMessage.Models
 			
 			this.sourceGuid = from.guid;
 			this.sinkGuid = to.guid;
-			this.name = $"{from.controlNumber} -- {to.controlNumber}";
+			this.name = $"{from.address} -- {to.address}";
 			this.title = $"{from.GetKey()} == {to.GetKey()}";
 			this.type = "DT_TargetLink";
 			return this;
@@ -34,10 +40,10 @@ namespace IoBTMessage.Models
 
 	public class DT_Target : DT_Searchable
 	{
-		public string controlNumber;
-		public string targetType;
-		public string sourceType;
+		public string address;
+		public string domain;
 		public int linkCount;
+		
 		public DT_Part part;
 		public DT_HeroReference heroReference;
 		public DT_AssetFile asset;
@@ -57,7 +63,7 @@ namespace IoBTMessage.Models
 
 		public string GetKey()
 		{
-			return $"{targetType}:{controlNumber}";
+			return $"{domain}:{address}";
 		}
 
 		public List<string> AddThread(string thread)
