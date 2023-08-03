@@ -36,6 +36,7 @@ namespace IoBTMessage.Units
 				IgnoreReadOnlyFields = true,
 				AllowTrailingCommas = true,
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+				WriteIndented = true
 				// Converters =
 				// {
 				// 	new MeasuredValueJsonConverter(),
