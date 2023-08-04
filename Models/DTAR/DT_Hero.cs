@@ -13,6 +13,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_Hero : DT_Title
 	{
+		public bool IsExpanded = true;
 		public DT_InfoCard infoCard;
 		public DT_AssetFile heroImage;
 		public List<DT_AssetReference> assetReferences;
