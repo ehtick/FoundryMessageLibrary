@@ -52,7 +52,7 @@ namespace IoBTMessage.Models
 
 		public DT_Target()
 		{
-			part = new DT_Part();
+			type = "DT_Target";
 			linkCount = 0;
 		}
 		public DT_Part CopyFrom(DT_Part source)
@@ -61,9 +61,26 @@ namespace IoBTMessage.Models
 			return this.part;
 		}
 
+		public DT_Part GetPart()
+		{
+			part ??= new DT_Part() { partNumber = address };
+			return part;
+		}
+
 		public string GetKey()
 		{
 			return $"{domain}:{address}";
+		}
+
+		public bool MatchPart(DT_Part other)
+		{
+			if (other == null) return false;
+			var part = GetPart();
+			if (part.partNumber != other.partNumber) return false;
+			if (part.serialNumber != other.serialNumber) return false;
+			if (part.version != other.version) return false;
+			if (part.referenceDesignation != other.referenceDesignation) return false;
+			return true;
 		}
 
 		public List<string> AddThread(string thread)
