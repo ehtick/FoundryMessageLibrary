@@ -32,8 +32,11 @@ namespace IoBTMessage.Models
 			this.sinkGuid = to.guid;
 			this.name = $"{from.address} -- {to.address}";
 			this.title = $"{from.GetKey()} == {to.GetKey()}";
-			this.type = "DT_TargetLink";
 			return this;
+		}
+		public bool IsValid()
+		{
+			return sourceGuid != null && sinkGuid != null;
 		}
 
 	}
@@ -70,6 +73,13 @@ namespace IoBTMessage.Models
 		public string GetKey()
 		{
 			return $"{domain}:{address}";
+		}
+
+		
+		public string FullKey()
+		{
+			var part = GetPart();
+			return $"{domain}:{part.ComputeTitle()}";
 		}
 
 		public bool MatchPart(DT_Part other)

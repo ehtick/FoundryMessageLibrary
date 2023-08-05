@@ -80,6 +80,13 @@ namespace IoBTMessage.Models
 			return targets;
 		}
 
+		public List<DT_TargetLink> RemoveInvalidLinks()
+		{
+			var validLinks = Links().Where(l => l.IsValid()).ToList();
+
+			links = validLinks;
+			return validLinks;
+		}
 		public List<DT_Target> Targets()
 		{
 			targets ??= new List<DT_Target>();
