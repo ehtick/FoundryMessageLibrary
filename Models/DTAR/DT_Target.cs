@@ -52,6 +52,10 @@ namespace IoBTMessage.Models
 		public DT_AssetFile asset;
 		public List<string> threads;
 
+		public int x;
+		public int y;
+		public int z;
+
 
 		public DT_Target()
 		{
