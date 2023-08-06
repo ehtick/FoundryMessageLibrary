@@ -113,7 +113,11 @@ namespace IoBTMessage.Models
 			var found = targets?.FirstOrDefault(t => t.GetKey().Matches(key));
 			return found;
 		}
-
+		public DT_Target FindTargetGuid(string guid)
+		{
+			var found = targets?.FirstOrDefault(t => t.guid == guid);
+			return found;
+		}
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
 			var found = targets?.FirstOrDefault(t => t.domain.Matches(type) && t.address.Matches(controlNumber));
@@ -189,30 +193,40 @@ namespace IoBTMessage.Models
 			ExtractSubSystemLinks(target, system);
 
 			foreach (var item in system.Targets())
-				item.name = label;
+				item.system = label;
 
 			foreach (var item in system.Links())
-				item.name = label;
+				item.system = label;
+
 			return system;
 		}
 
 		private void ExtractSubSystemLinks(DT_Target target, DT_System system)
 		{
-			if (target.IsVisited)
+			if (target == null || target.IsVisited)
 				return;
 
 			target.IsVisited = true;
 			system.AddTarget(target);
 
-			var links = Links().Where(link => link.IncludesTarget(target) && !link.IsVisited).ToList();
+			var links = Links().Where(link => link.IncludesTarget(target)).ToList();
 
 			foreach (var link in links)
 			{
+				if ( link.IsVisited) 
+					continue;
+
 				link.IsVisited = true;
+				var found = system.Links().FirstOrDefault(l => l.guid == link.guid);
+				if ( found != null) 
+					continue;
+
 				system.AddLink(link);
 				var otherguid = link.OtherTarget(target);
-				var otherTarget = LookupTarget(otherguid);
-				ExtractSubSystemLinks(otherTarget, system);
+
+				var otherTarget = FindTargetGuid(otherguid);
+				if (otherTarget != null)
+					ExtractSubSystemLinks(otherTarget, system);
 			}
 		}
 	}
