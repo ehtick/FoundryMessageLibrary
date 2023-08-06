@@ -15,7 +15,7 @@ namespace IoBTMessage.Models
 		public List<DT_Target> targets;
 		public List<DT_TargetLink> links;
 
-		public Dictionary<string,DT_Target> lookup = new();
+		public Dictionary<string, DT_Target> lookup = new();
 
 		public DT_System()
 		{
@@ -35,8 +35,8 @@ namespace IoBTMessage.Models
 
 		public void MergeMembers(DT_System obj)
 		{
-			foreach (var target in obj.Targets()) 
-			{ 
+			foreach (var target in obj.Targets())
+			{
 				AddTarget(target);
 			}
 			foreach (var link in obj.Links())
@@ -65,16 +65,16 @@ namespace IoBTMessage.Models
 			foreach (var item in unlinked)
 			{
 				$"Unlinked: {item.GetKey()}".WriteLine(System.ConsoleColor.DarkYellow);
-			} 
+			}
 			var linked = Targets().Where(t => t.linkCount > 0).ToList();
 			foreach (var item in linked)
 			{
-				$"Linked: {item.GetKey()} {item.linkCount}".WriteLine(System.ConsoleColor.DarkGreen);				
-			} 
+				$"Linked: {item.GetKey()} {item.linkCount}".WriteLine(System.ConsoleColor.DarkGreen);
+			}
 
-			foreach (var item in  Links())
+			foreach (var item in Links())
 			{
-				$"Edge: {item.title}".WriteLine(System.ConsoleColor.Green);				
+				$"Edge: {item.title}".WriteLine(System.ConsoleColor.Green);
 			}
 			targets = linked;
 			return targets;
@@ -116,11 +116,11 @@ namespace IoBTMessage.Models
 
 		public DT_Target FindTarget(string type, string controlNumber)
 		{
-			var found  = targets?.FirstOrDefault(t => t.domain.Matches(type)  && t.address.Matches(controlNumber));
+			var found = targets?.FirstOrDefault(t => t.domain.Matches(type) && t.address.Matches(controlNumber));
 			return found;
 		}
 
-		public (DT_Target, DT_Target)  ResolveLink(DT_TargetLink link)
+		public (DT_Target, DT_Target) ResolveLink(DT_TargetLink link)
 		{
 			var source = targets?.FirstOrDefault(t => link.sourceGuid.Matches(t.guid));
 			var sink = targets?.FirstOrDefault(t => link.sinkGuid.Matches(t.guid));
@@ -136,15 +136,14 @@ namespace IoBTMessage.Models
 				guid = System.Guid.NewGuid().ToString()
 			};
 			AddTarget(target);
-
 			AddToLookup(target);
-
 			return target;
 		}
 
 		private DT_Target AddToLookup(DT_Target target)
 		{
-			if ( lookup.ContainsKey(target.GetKey()) ) {
+			if (lookup.ContainsKey(target.GetKey()))
+			{
 				lookup.Remove(target.GetKey());
 			}
 			lookup.Add(target.GetKey(), target);
@@ -178,6 +177,44 @@ namespace IoBTMessage.Models
 		}
 
 
+		public DT_System ExtractSubSystem(DT_Target target, string label)
+		{
+			foreach (var item in Targets())
+				item.IsVisited = false;
+
+			foreach (var item in Links())
+				item.IsVisited = false;
+
+			var system = new DT_System();
+			ExtractSubSystemLinks(target, system);
+
+			foreach (var item in system.Targets())
+				item.name = label;
+
+			foreach (var item in system.Links())
+				item.name = label;
+			return system;
+		}
+
+		private void ExtractSubSystemLinks(DT_Target target, DT_System system)
+		{
+			if (target.IsVisited)
+				return;
+
+			target.IsVisited = true;
+			system.AddTarget(target);
+
+			var links = Links().Where(link => link.IncludesTarget(target) && !link.IsVisited).ToList();
+
+			foreach (var link in links)
+			{
+				link.IsVisited = true;
+				system.AddLink(link);
+				var otherguid = link.OtherTarget(target);
+				var otherTarget = LookupTarget(otherguid);
+				ExtractSubSystemLinks(otherTarget, system);
+			}
+		}
 	}
 }
 

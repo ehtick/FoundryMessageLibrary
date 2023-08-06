@@ -6,8 +6,13 @@ using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Models
 {
+	public abstract class DT_NetworkItem: DT_Searchable
+	{
+		public string system;
+		public bool IsVisited = false;
+	}
 
-	public class DT_TargetLink: DT_Searchable
+	public class DT_TargetLink: DT_NetworkItem
 	{
 		public string sourceGuid;
 		public string sinkGuid;
@@ -38,10 +43,25 @@ namespace IoBTMessage.Models
 		{
 			return sourceGuid != null && sinkGuid != null;
 		}
+		public bool IncludesTarget(DT_Target target)
+		{
+			if ( IsValid()) 
+				return sourceGuid == target.guid || sinkGuid == target.guid;
+			return false;
+		}
+
+		public string OtherTarget(DT_Target target)
+		{
+			if (sourceGuid == target.guid) 
+				return sinkGuid;
+			if (sinkGuid == target.guid) 
+				return sourceGuid;
+			return null;
+		}
 
 	}
 
-	public class DT_Target : DT_Searchable
+	public class DT_Target : DT_NetworkItem
 	{
 		public string address;
 		public string domain;
