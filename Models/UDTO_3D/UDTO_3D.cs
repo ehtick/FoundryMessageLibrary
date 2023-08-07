@@ -18,6 +18,7 @@ namespace IoBTMessage.Models
 		
 		public string type;
 		public string name;
+		public string address;
 		public string material;
 		public string platformName;
 		public string uniqueGuid;
@@ -36,6 +37,7 @@ namespace IoBTMessage.Models
 			uniqueGuid = obj.uniqueGuid;
 			type = obj.type;
 			name = obj.name;
+			address = obj.address;
 			return this;
 		}
 
