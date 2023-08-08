@@ -180,6 +180,16 @@ namespace IoBTMessage.Models
 			return thread;
 		}
 
+		public DT_System ExtractSubSystem(string domain, string address, string label)
+		{
+			var target = FindTarget(domain, address);
+			if ( target == null)
+			{
+				$"Target not found: {domain} {address}".WriteLine(System.ConsoleColor.Red);
+				return null;
+			}
+			return ExtractSubSystem(target, label);
+		}
 
 		public DT_System ExtractSubSystem(DT_Target target, string label)
 		{
