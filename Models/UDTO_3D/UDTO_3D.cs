@@ -25,7 +25,7 @@ namespace IoBTMessage.Models
 		public string uniqueGuid;
 		public string parentUniqueGuid;
 		public string referenceDesignation;
-		public DT_System system;
+		public DT_System subSystem;
 		public ControlParameters metadata;
 
 		public UDTO_3D(): base()
