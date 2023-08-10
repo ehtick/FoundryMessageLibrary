@@ -22,7 +22,7 @@ namespace IoBTMessage.Units
 	public class MeasuredValue : IMeasuredValue
 	{
 		public double V = 0.0;
-		public string I="";      //internal storage units
+		public string I = "";      //internal storage units
 		protected string U = "";  //reporting  input and output units
 		protected UnitFamilyName F = UnitFamilyName.None;
 
@@ -41,7 +41,7 @@ namespace IoBTMessage.Units
 			U = units ?? I;
 			V = value;
 			if (I != U)
-				 V = cat.ConvertToBaseUnits(U, value);
+				V = cat.ConvertToBaseUnits(U, value);
 			return V;
 		}
 
@@ -102,7 +102,7 @@ namespace IoBTMessage.Units
 			string units = "";
 			string internalUnits = "";
 
-			//$"typeToConvert {typeToConvert} ".WriteLine();
+			// $"typeToConvert {typeToConvert} ".WriteLine();
 
 			while (reader!.Read())
 			{
