@@ -5,8 +5,6 @@ using IoBTMessage.Extensions;
 namespace IoBTMessage.Models
 {
 
-
-
 	[System.Serializable]
 	public class DT_System : DT_Hero, ISystem
 	{

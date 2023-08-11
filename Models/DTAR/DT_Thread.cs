@@ -6,6 +6,7 @@ using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Models
 {
+	[System.Serializable]
 	public class DT_Thread : DT_Searchable
 	{
 		public string sheetname { get; set; }

@@ -6,12 +6,14 @@ using IoBTMessage.Extensions;
 
 namespace IoBTMessage.Models
 {
+	[System.Serializable]
 	public abstract class DT_NetworkItem: DT_Searchable
 	{
 		public string system;
 		public bool IsVisited = false;
 	}
 
+	[System.Serializable]
 	public class DT_TargetLink: DT_NetworkItem
 	{
 		public string sourceGuid;
@@ -61,6 +63,7 @@ namespace IoBTMessage.Models
 
 	}
 
+	[System.Serializable]
 	public class DT_Target : DT_NetworkItem
 	{
 		public string address;
