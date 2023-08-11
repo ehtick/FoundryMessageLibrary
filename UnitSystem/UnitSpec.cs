@@ -36,13 +36,13 @@ namespace IoBTMessage.Units
 				IgnoreReadOnlyFields = true,
 				AllowTrailingCommas = true,
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-				WriteIndented = true
-				// Converters =
-				// {
-				// 	new MeasuredValueJsonConverter(),
-				// 	new LengthJsonConverter(),
-				// 	new AngleJsonConverter()
-				// }
+				WriteIndented = true,
+				Converters =
+				{
+					new MeasuredValueJsonConverter(),
+					new LengthJsonConverter(),
+					new AngleJsonConverter()
+				}
 			};
 			return options;
 		}
