@@ -42,15 +42,12 @@ namespace IoBTMessage.Models
 		public Length pinY = new(0);
 		public Length pinZ = new(0);
 
+		public double scaleX = 1;
+		public double scaleY = 1;
+		public double scaleZ = 1;
 
 		public BoundingBox()
 		{
-			//width = new(0);
-			//height = new(0);
-			//depth = new(0);
-			//pinX = new(0);
-			//pinY = new(0);
-			//pinZ = new(0);
 		}
 
 		public BoundingBox(BoundingBox source) : this()
@@ -64,7 +61,6 @@ namespace IoBTMessage.Models
 		}
 
 
-
 		public BoundingBox copyFrom(BoundingBox pos)
 		{
 			this.width.Assign(pos.width);
@@ -73,6 +69,25 @@ namespace IoBTMessage.Models
 			this.pinX.Assign(pos.pinX);
 			this.pinY.Assign(pos.pinY);
 			this.pinZ.Assign(pos.pinZ);
+			this.scaleX = pos.scaleX;
+			this.scaleY = pos.scaleY;
+			this.scaleZ = pos.scaleZ;
+
+			return this;
+		}
+
+		public BoundingBox Scale(double scaleX, double scaleY, double scaleZ)
+		{
+			this.scaleX = scaleX;
+			this.scaleY = scaleY;
+			this.scaleZ = scaleZ;
+			return this;
+		}
+		public BoundingBox Scale(double scale)
+		{
+			this.scaleX = scale;
+			this.scaleY = scale;
+			this.scaleZ = scale;
 			return this;
 		}
 
