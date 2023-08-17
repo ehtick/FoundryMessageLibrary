@@ -11,6 +11,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class DT_Title : DT_Searchable
 	{
+		public bool IsExpanded = true;
 		public List<DT_Comment> comments;
 		public List<DT_QualityAssurance> qualityChecks;
 
