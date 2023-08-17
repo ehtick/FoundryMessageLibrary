@@ -5,7 +5,7 @@ namespace IoBTMessage.Models
 {
 
 
-	public class DO_MILDocument : DT_Hero
+	public class DO_Document : DT_Hero
 	{
 		public int memberCount { get; set; }
 		public string systemName { get; set; }
@@ -13,11 +13,11 @@ namespace IoBTMessage.Models
 		public string referenceDesignation { get; set; }
 		public string itemDescription { get; set; }
 		public string itemDescriptionRevision { get; set; }
-		public List<DO_MILDocument> children { get; set; }
+		public List<DO_Document> children { get; set; }
 	}
 
 	[System.Serializable]
-	public class DT_MILDocument : DT_Hero, ISystem
+	public class DT_Document : DT_Hero, ISystem
 	{
 
 		public int memberCount;
@@ -26,16 +26,16 @@ namespace IoBTMessage.Models
 		public string referenceDesignation;
 		public string itemDescription;
 		public string itemDescriptionRevision;
-		public List<DT_MILDocument> children;
+		public List<DT_Document> children;
 
 
-		public DT_MILDocument()
+		public DT_Document()
 		{
 		}
 
-		public DT_MILDocument AddChild(DT_MILDocument child)
+		public DT_Document AddChild(DT_Document child)
 		{
-			children ??= new List<DT_MILDocument>();
+			children ??= new List<DT_Document>();
 			child.parentGuid = this.guid;
 
 			children.Add(child);
@@ -108,9 +108,9 @@ namespace IoBTMessage.Models
 			return list;
 		}
 
-		public DT_MILDocument ShallowCopy()
+		public DT_Document ShallowCopy()
 		{
-			var result = (DT_MILDocument)this.MemberwiseClone();
+			var result = (DT_Document)this.MemberwiseClone();
 			result.children = null;
 			result.assetReferences = null;
 			result.heroImage = this.heroImage;
@@ -118,7 +118,7 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-		public List<DT_MILDocument> ShallowSteps()
+		public List<DT_Document> ShallowSteps()
 		{
 			var result = children?.Select(obj => obj.ShallowCopy()).ToList();
 			return result;
