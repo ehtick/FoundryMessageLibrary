@@ -34,16 +34,13 @@ namespace IoBTMessage.Models
 
 		public override List<DT_Hero> Children()
 		{
-			if (details == null) base.Children();
+			if (details == null) return base.Children();
 			return details.Select(item => (DT_Hero)item).ToList();
 		}
 
 		public DT_Requirement AddDetail(DT_Requirement detail)
 		{
-			if (details == null)
-			{
-				details = new List<DT_Requirement>();
-			}
+			details ??= new List<DT_Requirement>();
 			detail.parentGuid = this.guid;
 
 			details.Add(detail);

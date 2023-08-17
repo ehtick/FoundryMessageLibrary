@@ -35,10 +35,7 @@ namespace IoBTMessage.Models
 
 		public DT_MILDocument AddChild(DT_MILDocument child)
 		{
-			if (children == null)
-			{
-				children = new List<DT_MILDocument>();
-			}
+			children ??= new List<DT_MILDocument>();
 			child.parentGuid = this.guid;
 
 			children.Add(child);
@@ -48,7 +45,7 @@ namespace IoBTMessage.Models
 
 		public override List<DT_Hero> Children()
 		{
-			if (children == null) base.Children();
+			if (children == null) return base.Children();
 			return children.Cast<DT_Hero>().ToList();
 		}
 

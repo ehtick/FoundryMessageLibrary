@@ -30,16 +30,13 @@ namespace IoBTMessage.Models
 
 		public override List<DT_Hero> Children()
 		{
-			if (steps == null) base.Children();
+			if (steps == null) return base.Children();
 			return steps.Select(item => (DT_Hero)item).ToList();
 		}
 
 		public DT_ProcessStep AddProcessStep(DT_ProcessStep step)
 		{
-			if (steps == null)
-			{
-				steps = new List<DT_ProcessStep>();
-			}
+			steps ??= new List<DT_ProcessStep>();
 			step.parentGuid = this.guid;
 
 			steps.Add(step);

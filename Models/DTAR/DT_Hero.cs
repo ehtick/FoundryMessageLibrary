@@ -34,7 +34,6 @@ namespace IoBTMessage.Models
 		{
 			assetReferences ??= new List<DT_AssetReference>();
 
-
 			if (assetReferences.IndexOf(item) == -1)
 			{
 				item.heroGuid = this.guid;
