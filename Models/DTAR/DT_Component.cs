@@ -33,6 +33,16 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
+		public DT_Part GetPart()
+		{
+			part ??= new DT_Part() { partNumber = name };
+			return part;
+		}
+		public string ComputeTitle()
+		{
+			var title = GetPart().ComputeTitle();
+			return title;
+		}
 	}
 
 
