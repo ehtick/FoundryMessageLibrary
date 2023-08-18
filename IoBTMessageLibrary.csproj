@@ -7,8 +7,8 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
     <Copyright>Copyright © 2023</Copyright>
-    <AssemblyVersion>9.5.1.0</AssemblyVersion>
-    <Version>9.5.1</Version>
+    <AssemblyVersion>9.5.2.0</AssemblyVersion>
+    <Version>9.5.2</Version>
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
     <Title>IoBT Message Library</Title>
