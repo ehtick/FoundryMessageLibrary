@@ -173,7 +173,6 @@ namespace IoBTMessage.Models
 		public string severity;
 		public string author;
 
-
 		public DT_Comment() : base()
 		{
 		}

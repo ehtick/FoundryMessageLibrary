@@ -7,6 +7,7 @@
 		public string filename { get; set; }
 		public string docType { get; set; }
 		public string url { get; set; }
+        public string source;
 		public BoundingBox boundingbox { get; set; }
 	}
 
