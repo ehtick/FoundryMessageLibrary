@@ -15,6 +15,7 @@ namespace IoBTMessage.Models
 		public string resDes { get; set; }
 		public string address { get; set; }
 		public string serialNumber { get; set; }
+		public string addressAsset { get; set; }
 		public string version { get; set; }
 
 		public string GetKey()
