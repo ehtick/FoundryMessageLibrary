@@ -8,6 +8,7 @@ namespace IoBTMessage.Models
 		public string parentGuid { get; set; }
 		public string name { get; set; }
 		public string type { get; set; }
+		public string url { get; set; }
 		public string timeStamp { get; set; }
 		public ControlParameters metadata { get; set; }
 	}
@@ -18,6 +19,7 @@ namespace IoBTMessage.Models
 		public string parentGuid;
 		public string name;
 		public string type;
+		public string url;
 
 		public string timeStamp;
 
