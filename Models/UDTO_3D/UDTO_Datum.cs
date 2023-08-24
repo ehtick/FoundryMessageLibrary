@@ -1,35 +1,10 @@
+using FoundryRulesAndUnits.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace IoBTMessage.Models
 {
-	public class SPEC_Datum : SPEC_3D
-	{
-		public string shape { get; set;  }
-		public string text { get; set;  }
-		public List<string> details { get; set;  }
-		public string targetGuid { get; set;  }
-		public SPEC_HighResPosition position { get; set;  }
 
-		public SPEC_BoundingBox boundingBox { get; set;  }
-
-		public static SPEC_Datum RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			var list = new List<string>();
-			for (var i = 0; i < 4; i++)
-			{
-				list.Add(gen.GenerateText());
-			};
-			return new SPEC_Datum()
-				{
-					text = gen.GenerateText(),
-					details = list,
-					position = SPEC_HighResPosition.RandomSpec(),
-					boundingBox = SPEC_BoundingBox.RandomSpec(),
-				};
-		}
-	}
 	
 	[System.Serializable]
 	public class UDTO_Datum : UDTO_3D

@@ -1,34 +1,10 @@
+using FoundryRulesAndUnits.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace IoBTMessage.Models
 {
-	public class SPEC_Label : SPEC_3D
-	{
-		public string text { get; set;  }
-		public List<string> details { get; set;  }
-		public string targetGuid { get; set;  }
-		public SPEC_HighResPosition position { get; set;  }
 
-		public static SPEC_Label RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			return new SPEC_Label()
-			{
-				text = gen.GenerateText(),
-				position = SPEC_HighResPosition.RandomSpec(),
-			};
-		}
-
-		public SPEC_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
-		{
-			this.text = text.Trim();
-			this.type = "Label";
-			position = new SPEC_HighResPosition(xLoc, yLoc, zLoc, units);
-
-			return this;
-		}
-	}
 	
 	[System.Serializable]
 	public class UDTO_Label : UDTO_3D

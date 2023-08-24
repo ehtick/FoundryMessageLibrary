@@ -1,4 +1,6 @@
-﻿namespace IoBTMessage.Models
+﻿using FoundryRulesAndUnits.Models;
+
+namespace IoBTMessage.Models
 {
 
 	public class DO_AssetFile : DO_Title

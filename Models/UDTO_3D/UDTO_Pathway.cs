@@ -1,24 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IoBTMessage.Extensions;
+using FoundryRulesAndUnits.Extensions;
+using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models
 {
-	public class SPEC_Pathway : SPEC_3D
-	{
-		public List<SPEC_Datum> datums { get; set; } = new List<SPEC_Datum>();
 
-		public static SPEC_Pathway RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			var result = new SPEC_Pathway()
-			{
-				datums = new List<SPEC_Datum>()
-			};
-			return result;
-		}
-	}
 
 	[System.Serializable]
 	public class UDTO_Pathway : UDTO_3D

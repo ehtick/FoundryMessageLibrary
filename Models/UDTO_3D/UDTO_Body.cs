@@ -1,36 +1,8 @@
+using FoundryRulesAndUnits.Models;
+
 namespace IoBTMessage.Models
 {
-	public class SPEC_Body : SPEC_3D
-	{
-		public string symbol { get; set; } = "";
-		public SPEC_HighResPosition position { get; set; }
-		public SPEC_BoundingBox boundingBox { get; set; }
 
-		public static SPEC_Body RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			return new SPEC_Body()
-			{
-				symbol = gen.GenerateSymbol(),
-				position = SPEC_HighResPosition.RandomSpec(),
-				boundingBox = SPEC_BoundingBox.RandomSpec(),
-			};
-		}
-
-		public SPEC_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
-		{
-			boundingBox ??= new SPEC_BoundingBox();
-
-			boundingBox.Box(width, height, depth, units);
-			return this;
-		}
-		public SPEC_Body CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
-		{
-			this.type = "Box";
-			this.name = name;
-			return EstablishBox(width, height, depth, units);
-		}
-	}
 
 	[System.Serializable]
 	public class UDTO_Body : UDTO_3D

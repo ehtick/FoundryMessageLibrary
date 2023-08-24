@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-
+    <!--<TargetFramework>netstandard2.1</TargetFramework>-->
+    <TargetFramework>net7.0</TargetFramework>
         
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
@@ -26,5 +26,9 @@
     
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\FoundryRulesAndUnits\FoundryRulesAndUnits.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-using IoBTMessage.Extensions;
+using FoundryRulesAndUnits.Extensions;
+
 namespace IoBTMessage.Models
 {
 	public class SPEC_CommandResponse : SPEC_Command
