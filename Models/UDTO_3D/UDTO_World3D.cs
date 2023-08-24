@@ -11,7 +11,7 @@ namespace IoBTMessage.Models
 
 	public class UDTO_World : UDTO_3D, ISystem
 	{
-		public string? systemName;
+		public string systemName;
 
 		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
@@ -24,7 +24,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		private List<T>? FindLookup<T>() where T : UDTO_3D
+		private List<T> FindLookup<T>() where T : UDTO_3D
 		{
 			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
 			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
