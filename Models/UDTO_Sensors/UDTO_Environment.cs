@@ -10,6 +10,7 @@
 
 
 
+using FoundryRulesAndUnits.Models;
 using FoundryRulesAndUnits.Units;
 
 namespace IoBTMessage.Models
