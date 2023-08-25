@@ -8,7 +8,7 @@ namespace IoBTMessage.Models
 	public class UDTO_Body : UDTO_3D
 	{
 		public string symbol;
-		public HighResPosition position;
+		public UDTO_HighResPosition position;
 		public UDTO_BoundingBox boundingBox;
 
 
@@ -29,7 +29,7 @@ namespace IoBTMessage.Models
 			}
 			else if (body.position != null)
 			{
-				this.position.copyFrom(body.position);
+				this.position.copyOther(body.position);
 			}
 
 			if (this.boundingBox == null)
@@ -43,24 +43,21 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public UDTO_Body EstablishLoc(double x = 0.0, double y = 0.0, double z = 0.0, string units = "m")
+		public UDTO_Body EstablishLoc(double x = 0.0, double y = 0.0, double z = 0.0)
 		{
-			position ??= new HighResPosition();
-
-			position.Loc(x, y, z, units);
+			position ??= new UDTO_HighResPosition();
+			position.Loc(x, y, z);
 			return this;
 		}
-		public UDTO_Body EstablishAng(double x = 0.0, double y = 0.0, double z = 0.0, string units = "r")
+		public UDTO_Body EstablishAng(double x = 0.0, double y = 0.0, double z = 0.0)
 		{
-			position ??= new HighResPosition();
-
-			position.Ang(x, y, z, units);
+			position ??= new UDTO_HighResPosition();
+			position.Ang(x, y, z);
 			return this;
 		}
 		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			boundingBox ??= new UDTO_BoundingBox();
-
 			boundingBox.Box(width, height, depth);
 			return this;
 		}

@@ -13,8 +13,8 @@ namespace IoBTMessage.Models
 		public string text;
 		public List<string> details;
 		public string targetGuid;
-		public HighResPosition position;
-		public BoundingBox boundingBox;
+		public UDTO_HighResPosition position;
+		public UDTO_BoundingBox boundingBox;
 
 		public UDTO_Datum() : base()
 		{
@@ -35,7 +35,7 @@ namespace IoBTMessage.Models
 			}
 			else if (node.position != null)
 			{
-				this.position.copyFrom(node.position);
+				this.position.copyOther(node.position);
 			}
 			if (this.boundingBox == null)
 			{
@@ -43,45 +43,42 @@ namespace IoBTMessage.Models
 			}
 			else if (node.boundingBox != null)
 			{
-				this.boundingBox.copyFrom(node.boundingBox);
+				this.boundingBox.copyOther(node.boundingBox);
 			}
 			return this;
 		}
 
-		public UDTO_Datum CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Datum CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			this.text = text.Trim();
 			this.type = "Datum";
-			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+			position = new UDTO_HighResPosition(xLoc, yLoc, zLoc);
 
 			return this;
 		}
 
-		public UDTO_Datum CreateLabelAt(string text, List<string> details = null, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Datum CreateLabelAt(string text, List<string> details = null, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			this.text = text.Trim();
 			this.details = details;
 			this.type = "Datum";
 
-			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+			position = new UDTO_HighResPosition(xLoc, yLoc, zLoc);
 
 			return this;
 		}
-		public UDTO_Datum EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Datum EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
-			if (boundingBox == null)
-			{
-				boundingBox = new BoundingBox();
-			}
+			boundingBox ??= new UDTO_BoundingBox();
 	
-			boundingBox.Box(width, height, depth, units);
+			boundingBox.Box(width, height, depth);
 			return this;
 		}
 
-		public UDTO_Datum CreateShape(string shape, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Datum CreateShape(string shape, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			this.shape = shape;
-			return EstablishBox(width, height, depth, units);
+			return EstablishBox(width, height, depth);
 		}
 	}
 

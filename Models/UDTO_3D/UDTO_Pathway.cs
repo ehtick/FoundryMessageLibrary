@@ -26,14 +26,14 @@ namespace IoBTMessage.Models
 			return found;
 		}
 
-		public UDTO_Datum EstablishDatum(string name, double x = 0.0, double y = 0.0, double z = 0.0, string units = "m")
+		public UDTO_Datum EstablishDatum(string name, double x = 0.0, double y = 0.0, double z = 0.0)
 		{
 			var datum = FindDatum(name);
 			if (datum == null)
 			{
 				datum = new UDTO_Datum() {
 					name = name,
-					position = new HighResPosition(x,y,z,units),
+					position = new UDTO_HighResPosition(x,y,z),
 				};
 				datums.Add(datum);
 			}
