@@ -9,7 +9,7 @@ namespace IoBTMessage.Models
 	{
 		public string symbol;
 		public HighResPosition position;
-		public BoundingBox boundingBox;
+		public UDTO_BoundingBox boundingBox;
 
 
 		public UDTO_Body() : base()
@@ -38,7 +38,7 @@ namespace IoBTMessage.Models
 			}
 			else if (body.boundingBox != null)
 			{
-				this.boundingBox.copyFrom(body.boundingBox);
+				this.boundingBox.copyOther(body.boundingBox);
 			}
 			return this;
 		}
@@ -57,48 +57,48 @@ namespace IoBTMessage.Models
 			position.Ang(x, y, z, units);
 			return this;
 		}
-		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
-			boundingBox ??= new BoundingBox();
+			boundingBox ??= new UDTO_BoundingBox();
 
-			boundingBox.Box(width, height, depth, units);
+			boundingBox.Box(width, height, depth);
 			return this;
 		}
 
-		public UDTO_Body EstablishPiv(double px = 0.0, double py = 0.0, double pz = 0.0, string units = "m")
+		public UDTO_Body EstablishPiv(double px = 0.0, double py = 0.0, double pz = 0.0)
 		{
-			boundingBox ??= new BoundingBox();
+			boundingBox ??= new UDTO_BoundingBox();
 
-			boundingBox.Pin(px, py, pz, units);
+			boundingBox.Pin(px, py, pz);
 			return this;
 		}
 
-		public UDTO_Body CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			this.type = "Box";
 			this.name = name;
-			return EstablishBox(width, height, depth, units);
+			return EstablishBox(width, height, depth);
 		}
 
-		public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			this.type = "Cylinder";
 			this.name = name;
-			return EstablishBox(width, height, depth, units);
+			return EstablishBox(width, height, depth);
 		}
 
-		public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			this.type = "Sphere";
 			this.name = name;
-			return EstablishBox(width, height, depth, units);
+			return EstablishBox(width, height, depth);
 		}
 
-		public UDTO_Body CreateGlb(string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateGlb(string url, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			symbol = url;
 			this.type = "Glb";
-			return EstablishBox(width, height, depth, units);
+			return EstablishBox(width, height, depth);
 		}
 	}
 

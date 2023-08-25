@@ -12,6 +12,8 @@ namespace IoBTMessage.Models
 	public class UDTO_World : UDTO_3D, ISystem
 	{
 		public string systemName;
+		public string lengthUnits = "m";
+		public string angleUnits = "r";
 
 		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
@@ -126,34 +128,34 @@ namespace IoBTMessage.Models
 		}
 
 
-		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateCylinder(obj.name, width, height, depth, units);
+			return result.CreateCylinder(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateBox(obj.name, width, height, depth, units);
+			return result.CreateBox(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateSphere(obj.name, width, height, depth, units);
+			return result.CreateSphere(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateGlb(url, width, height, depth, units);
+			return result.CreateGlb(url, width, height, depth);
 		}
 
-		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Label>(obj);
-			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
+			return result.CreateTextAt(text, xLoc, yLoc, zLoc);
 		}
 		public UDTO_Pathway CreatePathway(DT_Base obj, List<UDTO_Datum> datums)
 		{
