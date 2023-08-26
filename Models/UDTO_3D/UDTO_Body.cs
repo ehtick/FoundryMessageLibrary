@@ -43,6 +43,13 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
+		public UDTO_Body EstablishLoc(HighResPosition pos)
+		{
+			position ??= new UDTO_HighResPosition();
+			position.copyFrom(pos);
+			return this;
+		}
+
 		public UDTO_Body EstablishLoc(double x = 0.0, double y = 0.0, double z = 0.0)
 		{
 			position ??= new UDTO_HighResPosition();
@@ -55,6 +62,13 @@ namespace IoBTMessage.Models
 			position.Ang(x, y, z);
 			return this;
 		}
+		public UDTO_Body EstablishBox(BoundingBox box)
+		{
+			boundingBox ??= new UDTO_BoundingBox();
+			boundingBox.copyFrom(box);
+			return this;
+		}
+
 		public UDTO_Body EstablishBox(double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			boundingBox ??= new UDTO_BoundingBox();
