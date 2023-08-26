@@ -4,7 +4,14 @@ using System.Reflection.Emit;
 
 namespace IoBTMessage.Models
 {
-
+	[System.Serializable]
+	public class SPEC_Label : SPEC_3D
+	{
+		public string text	{ get; set; }
+		public List<string> details { get; set; }
+		public string targetGuid { get; set; }
+		public UDTO_HighResPosition position { get; set; }
+	}
 	
 	[System.Serializable]
 	public class UDTO_Label : UDTO_3D

@@ -43,45 +43,45 @@ namespace IoBTMessage.Models
 
 
 
-		//public void Merge(UDTO_Platform platform)
-		//{
-		//	if (platform.position != null)
-		//	{
-		//		this.position = platform.position;
-		//	}
-		//	if (platform.boundingBox != null)
-		//	{
-		//		this.boundingBox = platform.boundingBox;
-		//	}
-		//	if (platform.offset != null)
-		//	{
-		//		this.offset = platform.offset;
-		//	}
+		public void Merge(UDTO_Platform platform)
+		{
+			if (platform.position != null)
+			{
+				this.position = platform.position;
+			}
+			if (platform.boundingBox != null)
+			{
+				this.boundingBox = platform.boundingBox;
+			}
+			if (platform.offset != null)
+			{
+				this.offset = platform.offset;
+			}
 
-		//	platform.bodies.ForEach(body =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Body>(body);
-		//	});
-		//	platform.bodies = null;
+			// platform.bodies.ForEach(body =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Body>(body);
+			// });
+			// platform.bodies = null;
 
-		//	platform.labels.ForEach(label =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Label>(label);
-		//	});
-		//	platform.labels = null;
+			// platform.labels.ForEach(label =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Label>(label);
+			// });
+			// platform.labels = null;
 
-		//	platform.datums.ForEach(datum =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Datum>(datum);
-		//	});
-		//	platform.datums = null;
+			// platform.datums.ForEach(datum =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Datum>(datum);
+			// });
+			// platform.datums = null;
 
-		//	platform.relationships.ForEach(relationship =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Relationship>(relationship);
-		//	});
-		//	platform.relationships = null;
-		//}
+			// platform.relationships.ForEach(relationship =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Relationship>(relationship);
+			// });
+			// platform.relationships = null;
+		}
 
 
 		public UDTO_Platform SetPositionTo(UDTO_Position loc)

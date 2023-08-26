@@ -5,6 +5,14 @@ namespace IoBTMessage.Models
 
 
 	[System.Serializable]
+	public class SPEC_Body : SPEC_3D
+	{
+		public string symbol { get; set; }
+		public UDTO_HighResPosition position { get; set; }
+		public UDTO_BoundingBox boundingBox { get; set; }
+	}
+
+	[System.Serializable]
 	public class UDTO_Body : UDTO_3D
 	{
 		public string symbol;
