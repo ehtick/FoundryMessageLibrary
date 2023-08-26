@@ -5,7 +5,6 @@ using System.Collections.Generic;
 namespace IoBTMessage.Models;
 
 
-
 public class ModuleDefinition : DT_Title
 {
     private bool _IsUnsaved;
