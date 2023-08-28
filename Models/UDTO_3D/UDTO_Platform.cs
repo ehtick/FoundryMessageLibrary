@@ -1,4 +1,5 @@
 using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,37 @@ namespace IoBTMessage.Models
 
 
 
+		private List<T> FindLookup<T>() where T : UDTO_3D
+		{
+			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
+			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
+			if (typeof(T) == typeof(UDTO_Platform)) return platforms as List<T>;
 
+			return null;
+		}
+
+
+		private T CreateItem<T>(string name) where T : UDTO_3D
+		{
+			var found = Activator.CreateInstance<T>() as T;
+			found.name = name;
+			found.panID = panID;
+			found.platformName = platformName;
+			found.uniqueGuid = Guid.NewGuid().ToString();
+			return found;
+		}
+
+		public T FindOrCreate<T>(string name, bool create = false) where T : UDTO_3D
+		{
+			var list = FindLookup<T>();
+			var found = list?.FirstOrDefault(item => item.name.Matches(name));
+			if (found == null && create)
+			{
+				found = CreateItem<T>(name);
+				list?.Add(found);
+			}
+			return found!;
+		}
 
 
 
