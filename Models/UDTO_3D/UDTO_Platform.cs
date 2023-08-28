@@ -1,29 +1,11 @@
+using FoundryRulesAndUnits.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace IoBTMessage.Models
 {
-	public class SPEC_Platform : SPEC_3D
-	{
-		public SPEC_Position position { get; set; } = new SPEC_Position();
-		public SPEC_BoundingBox boundingBox { get; set; } = new SPEC_BoundingBox();
-		public SPEC_HighResOffset offset { get; set; } = new SPEC_HighResOffset();
-		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
-		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
 
-
-		public static SPEC_Platform RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			return new SPEC_Platform()
-			{
-				offset = SPEC_HighResOffset.RandomSpec(),
-				position = SPEC_Position.RandomSpec(),
-				boundingBox = SPEC_BoundingBox.RandomSpec(),
-			};
-		}
-	}
 
 	[System.Serializable]
 	public class UDTO_Platform : UDTO_3D
@@ -61,45 +43,45 @@ namespace IoBTMessage.Models
 
 
 
-		//public void Merge(UDTO_Platform platform)
-		//{
-		//	if (platform.position != null)
-		//	{
-		//		this.position = platform.position;
-		//	}
-		//	if (platform.boundingBox != null)
-		//	{
-		//		this.boundingBox = platform.boundingBox;
-		//	}
-		//	if (platform.offset != null)
-		//	{
-		//		this.offset = platform.offset;
-		//	}
+		public void Merge(UDTO_Platform platform)
+		{
+			if (platform.position != null)
+			{
+				this.position = platform.position;
+			}
+			if (platform.boundingBox != null)
+			{
+				this.boundingBox = platform.boundingBox;
+			}
+			if (platform.offset != null)
+			{
+				this.offset = platform.offset;
+			}
 
-		//	platform.bodies.ForEach(body =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Body>(body);
-		//	});
-		//	platform.bodies = null;
+			// platform.bodies.ForEach(body =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Body>(body);
+			// });
+			// platform.bodies = null;
 
-		//	platform.labels.ForEach(label =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Label>(label);
-		//	});
-		//	platform.labels = null;
+			// platform.labels.ForEach(label =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Label>(label);
+			// });
+			// platform.labels = null;
 
-		//	platform.datums.ForEach(datum =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Datum>(datum);
-		//	});
-		//	platform.datums = null;
+			// platform.datums.ForEach(datum =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Datum>(datum);
+			// });
+			// platform.datums = null;
 
-		//	platform.relationships.ForEach(relationship =>
-		//	{
-		//		AddRefreshOrDelete<UDTO_Relationship>(relationship);
-		//	});
-		//	platform.relationships = null;
-		//}
+			// platform.relationships.ForEach(relationship =>
+			// {
+			// 	AddRefreshOrDelete<UDTO_Relationship>(relationship);
+			// });
+			// platform.relationships = null;
+		}
 
 
 		public UDTO_Platform SetPositionTo(UDTO_Position loc)

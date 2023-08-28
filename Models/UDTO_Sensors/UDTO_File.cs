@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models
 {

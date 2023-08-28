@@ -2,58 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IoBTMessage.Extensions;
+using FoundryRulesAndUnits.Extensions;
 
-#nullable enable
 
 namespace IoBTMessage.Models
 {
 
-	public class SPEC_World : SPEC_3D
-	{
-		public string? systemName { get; set; }
-
-		public List<SPEC_Platform> platforms { get; set; } = new List<SPEC_Platform>();
-		public List<SPEC_Body> bodies { get; set; } = new List<SPEC_Body>();
-		public List<SPEC_Label> labels { get; set; } = new List<SPEC_Label>();
-		public List<SPEC_Pathway> pathways { get; set; } = new List<SPEC_Pathway>();
-
-
-
-		private List<T>? FindLookup<T>() where T : SPEC_3D
-		{
-			if (typeof(T) == typeof(SPEC_Body)) return bodies as List<T>;
-			if (typeof(T) == typeof(SPEC_Label)) return labels as List<T>;
-			if (typeof(T) == typeof(SPEC_Pathway)) return pathways as List<T>;
-			if (typeof(T) == typeof(SPEC_Platform)) return platforms as List<T>;
-			return null;
-		}
-
-		private T CreateItem<T>(string name) where T : SPEC_3D
-		{
-			var found = Activator.CreateInstance<T>() as T;
-			found.name = name;
-			found.panID = panID;
-			found.platformName = platformName;
-			found.uniqueGuid = Guid.NewGuid().ToString();
-			return found;
-		}
-		public T? FindOrCreate<T>(string name, bool create = true) where T : SPEC_3D
-		{
-			var list = FindLookup<T>();
-			var found = list?.FirstOrDefault(item => item.name.Matches(name));
-			if (found == null && create)
-			{
-				found = CreateItem<T>(name);
-				list?.Add(found);
-			}
-			return found;
-		}
-	}
 
 	public class UDTO_World : UDTO_3D, ISystem
 	{
-		public string? systemName;
+		public string systemName;
+		public string lengthUnits = "m";
+		public string angleUnits = "r";
 
 		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
@@ -66,7 +26,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		private List<T>? FindLookup<T>() where T : UDTO_3D
+		private List<T> FindLookup<T>() where T : UDTO_3D
 		{
 			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
 			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
@@ -168,34 +128,34 @@ namespace IoBTMessage.Models
 		}
 
 
-		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateCylinder(obj.name, width, height, depth, units);
+			return result.CreateCylinder(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateBox(obj.name, width, height, depth, units);
+			return result.CreateBox(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateSphere(obj.name, width, height, depth, units);
+			return result.CreateSphere(obj.name, width, height, depth);
 		}
 
-		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0, string units = "m")
+		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateGlb(url, width, height, depth, units);
+			return result.CreateGlb(url, width, height, depth);
 		}
 
-		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Label>(obj);
-			return result.CreateTextAt(text, xLoc, yLoc, zLoc, units);
+			return result.CreateTextAt(text, xLoc, yLoc, zLoc);
 		}
 		public UDTO_Pathway CreatePathway(DT_Base obj, List<UDTO_Datum> datums)
 		{

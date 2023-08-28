@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using IoBTMessage.Extensions;
+using FoundryRulesAndUnits.Extensions;
+
 namespace IoBTMessage.Models
 {
 	public class DO_Hero : DO_Title

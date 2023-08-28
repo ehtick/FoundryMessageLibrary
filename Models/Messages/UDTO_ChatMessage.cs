@@ -1,3 +1,5 @@
+using FoundryRulesAndUnits.Models;
+
 namespace IoBTMessage.Models
 {
 	public class SPEC_ChatMessage : SPEC_Base

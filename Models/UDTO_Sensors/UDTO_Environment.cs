@@ -8,7 +8,10 @@
 // Estimated range to target (I want to try to calculate where that target goes on my COP)
 // Recognition data from the target after a shot (what did we just hit? DID we hit?)
 
-using IoBTMessage.Units;
+
+
+using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Units;
 
 namespace IoBTMessage.Models
 {

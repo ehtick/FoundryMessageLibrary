@@ -1,33 +1,16 @@
+using FoundryRulesAndUnits.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace IoBTMessage.Models
 {
+	[System.Serializable]
 	public class SPEC_Label : SPEC_3D
 	{
-		public string text { get; set;  }
-		public List<string> details { get; set;  }
-		public string targetGuid { get; set;  }
-		public SPEC_HighResPosition position { get; set;  }
-
-		public static SPEC_Label RandomSpec()
-		{
-			var gen = new MockDataGenerator();
-			return new SPEC_Label()
-			{
-				text = gen.GenerateText(),
-				position = SPEC_HighResPosition.RandomSpec(),
-			};
-		}
-
-		public SPEC_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
-		{
-			this.text = text.Trim();
-			this.type = "Label";
-			position = new SPEC_HighResPosition(xLoc, yLoc, zLoc, units);
-
-			return this;
-		}
+		public string text	{ get; set; }
+		public List<string> details { get; set; }
+		public string targetGuid { get; set; }
+		public UDTO_HighResPosition position { get; set; }
 	}
 	
 	[System.Serializable]
@@ -36,7 +19,7 @@ namespace IoBTMessage.Models
 		public string text;
 		public List<string> details;
 		public string targetGuid;
-		public HighResPosition position;
+		public UDTO_HighResPosition position;
 
 
 		public UDTO_Label() : base()
@@ -58,28 +41,28 @@ namespace IoBTMessage.Models
 			}
 			else if (label.position != null)
 			{
-				this.position.copyFrom(label.position);
+				this.position.copyOther(label.position);
 			}
 
 			return this;
 		}
 
-		public UDTO_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Label CreateTextAt(string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			this.text = text.Trim();
 			this.type = "Label";
-			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+			position = new UDTO_HighResPosition(xLoc, yLoc, zLoc);
 
 			return this;
 		}
 
-		public UDTO_Label CreateLabelAt(string text, List<string> details = null, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0, string units = "m")
+		public UDTO_Label CreateLabelAt(string text, List<string> details = null, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
 		{
 			this.text = text.Trim();
 			this.details = details;
 			this.type = "Label";
 
-			position = new HighResPosition(xLoc, yLoc, zLoc, units);
+			position = new UDTO_HighResPosition(xLoc, yLoc, zLoc);
 			return this;
 		}
 

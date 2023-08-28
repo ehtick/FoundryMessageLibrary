@@ -1,4 +1,5 @@
 
+using FoundryRulesAndUnits.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,10 @@ namespace IoBTMessage.Models
 {
 
 
+	[System.Serializable]
 	public class SPEC_Size : SPEC_SensorBase
 	{
-		public SPEC_BoundingBox size { get; set; }
-
-		public static SPEC_Size RandomSpec()
-		{
-			return new SPEC_Size()
-			{
-				size = SPEC_BoundingBox.RandomSpec(),
-			};
-		}
+		public BoundingBox size { get; set; }
 	}
 
 	[System.Serializable]

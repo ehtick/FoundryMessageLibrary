@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-
+    <!--<TargetFramework>netstandard2.1</TargetFramework>-->
+    <TargetFramework>net7.0</TargetFramework>
         
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>SAIC IoBT team</Company>
     <Copyright>Copyright © 2023</Copyright>
-    <AssemblyVersion>9.5.4.0</AssemblyVersion>
-    <Version>9.5.4</Version>
+    <AssemblyVersion>10.0.0</AssemblyVersion>
+    <Version>10.0.0</Version>
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
     <Title>IoBT Message Library</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,5 +26,10 @@
     
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <!-- <ProjectReference Include="..\FoundryRulesAndUnits\FoundryRulesAndUnits.csproj" /> -->
+    <PackageReference Include="FoundryRulesAndUnits" Version="1.0.1" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using System.Threading.Tasks;
+using FoundryRulesAndUnits.Models;
 
 
 // What do I always want to know about the weapon?
