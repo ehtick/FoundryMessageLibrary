@@ -5,8 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoBTMessageLibrary", "IoBTMessageLibrary.csproj", "{9A28231D-454E-4E98-ACD2-4C2975F105D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoundryRulesAndUnits", "..\FoundryRulesAndUnits\FoundryRulesAndUnits.csproj", "{E460D193-BF2F-466F-AE10-1901630C0B04}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
