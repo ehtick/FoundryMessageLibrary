@@ -1,15 +1,17 @@
+using FoundryRulesAndUnits.Units;
+
 namespace IoBTMessage.Models
 {
 	public class SPEC_Direction : SPEC_SensorBase
 	{
-		public double speed { get; set; }
-		public double heading { get; set; }
+		public Speed speed { get; set; }
+		public Heading heading { get; set; }
 	}
 
 	public class UDTO_Direction : UDTO_SensorBase
 	{
-		public double speed;
-		public double heading;
+		public Speed speed;
+		public Heading heading;
 
 	}
 }

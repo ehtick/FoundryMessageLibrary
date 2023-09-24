@@ -5,6 +5,7 @@ using System.Linq;
 
 using System.Threading.Tasks;
 using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Units;
 
 
 // What do I always want to know about the weapon?
@@ -23,8 +24,8 @@ namespace IoBTMessage.Models
 
 	public class SPEC_Biometric : SPEC_SensorBase
 	{
-		public double heartRate { get; set; }
-		public double temperature { get; set; }
+		public Frequency heartRate { get; set; }
+		public Temperature temperature { get; set; }
 		public double stepCount { get; set; }
 		public double sleepScore { get; set; }
 		public double stressCalculation { get; set; }
@@ -34,8 +35,8 @@ namespace IoBTMessage.Models
 			var gen = new MockDataGenerator();
 			return new SPEC_Biometric()
 			{
-				heartRate = gen.GenerateDouble(60,90),
-				temperature = gen.GenerateDouble(97.8,99.3),
+				heartRate = new Frequency(gen.GenerateDouble(60,90)),
+				temperature = new Temperature(gen.GenerateDouble(97.8,99.3)),
 				stepCount = gen.GenerateDouble(1260,9010),
 				sleepScore = gen.GenerateDouble(60, 90),
 				stressCalculation = gen.GenerateDouble(97.8, 99.3),
@@ -47,8 +48,8 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Biometric : UDTO_SensorBase
 	{
-		public double heartRate;
-		public double temperature;
+		public Frequency heartRate;
+		public Temperature temperature;
 		public double stepCount;
 		public double sleepScore;
 		public double stressCalculation;

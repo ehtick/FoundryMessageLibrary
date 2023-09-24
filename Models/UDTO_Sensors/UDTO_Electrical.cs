@@ -5,6 +5,7 @@ using System.Linq;
 
 using System.Threading.Tasks;
 using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Units;
 
 
 // What do I always want to know about the weapon?
@@ -22,24 +23,24 @@ namespace IoBTMessage.Models
 
 	public class SPEC_Electrical  : SPEC_SensorBase
 	{
-		public double voltage { get; set; }
-		public double current { get; set; }
-		public double resistance { get; set; }
-		public double wattage { get; set; }
-		public double capacitance { get; set; }
-		public double temperature { get; set; }
+		public Voltage voltage { get; set; }
+		public Current current { get; set; }
+		public Resistance resistance { get; set; }
+		public Power wattage { get; set; }
+		public Capacitance capacitance { get; set; }
+		public Temperature temperature { get; set; }
 
 		public static SPEC_Electrical RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_Electrical()
 			{
-				voltage = gen.GenerateDouble(60, 90),
-				current = gen.GenerateDouble(97.8, 99.3),
-				resistance = gen.GenerateDouble(1260, 9010),
-				wattage = gen.GenerateDouble(60, 90),
-				capacitance = gen.GenerateDouble(97.8, 99.3),
-				temperature = gen.GenerateDouble(1260, 9010),
+				voltage = new Voltage(gen.GenerateDouble(60, 90)),
+				current = new Current(gen.GenerateDouble(97.8, 99.3)),
+				resistance = new Resistance(gen.GenerateDouble(1260, 9010)),
+				wattage = new Power(gen.GenerateDouble(60, 90)),
+				capacitance = new Capacitance(gen.GenerateDouble(97.8, 99.3)),
+				temperature = new Temperature(gen.GenerateDouble(1260, 9010)),
 			};
 		}
 
@@ -48,12 +49,12 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Electrical  : UDTO_SensorBase
 	{
-		public double voltage;
-		public double current;
-		public double resistance;
-		public double wattage;
-		public double capacitance;
-		public double temperature;
+		public Voltage voltage;
+		public Current current;
+		public Resistance resistance;
+		public Power wattage;
+		public Capacitance capacitance;
+		public Temperature temperature;
 
 	}
 }

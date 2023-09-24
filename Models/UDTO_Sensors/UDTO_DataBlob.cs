@@ -5,14 +5,14 @@ using System.Linq;
 
 using System.Threading.Tasks;
 using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Units;
 
 namespace IoBTMessage.Models
 {
 
 	public class SPEC_DataBlob : SPEC_SensorBase
 	{
-		public double size { get; set; }
-		public string units { get; set; }
+		public DataStorage size { get; set; }
 
 
 		public static SPEC_DataBlob RandomSpec()
@@ -20,6 +20,7 @@ namespace IoBTMessage.Models
 			var gen = new MockDataGenerator();
 			return new SPEC_DataBlob()
 			{
+				size = new DataStorage(gen.GenerateDouble(60, 90)),
 			};
 		}
 	}
@@ -27,7 +28,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_DataBlob : UDTO_SensorBase
 	{
-		public double size;
-		public string units;
+		public DataStorage size;
 	}
 }

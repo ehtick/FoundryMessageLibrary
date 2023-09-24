@@ -5,6 +5,7 @@ using System.Linq;
 
 using System.Threading.Tasks;
 using FoundryRulesAndUnits.Models;
+using FoundryRulesAndUnits.Units;
 
 
 // What do I always want to know about the weapon?
@@ -22,24 +23,24 @@ namespace IoBTMessage.Models
 
 	public class SPEC_System : SPEC_SensorBase
 	{
-		public double cpuUsage { get; set; }
+		public Percent cpuUsage { get; set; }
 		public double cpuSize { get; set; }
-		public double memoryUsage { get; set; }
-		public double memorySize { get; set; }
-		public double diskUsage { get; set; }
-		public double diskSize { get; set; }
+		public Percent memoryUsage { get; set; }
+		public DataStorage memorySize { get; set; }
+		public Percent diskUsage { get; set; }
+		public DataStorage diskSize { get; set; }
 
 		public static SPEC_System RandomSpec()
 		{
 			var gen = new MockDataGenerator();
 			return new SPEC_System()
 			{
-				cpuUsage = gen.GenerateDouble(0, 100),
+				cpuUsage = new Percent(gen.GenerateDouble(0, 100)),
 				cpuSize = gen.GenerateDouble(0, 1),
-				memoryUsage = gen.GenerateDouble(0,100),
-				memorySize = gen.GenerateDouble(0, 1),
-				diskUsage = gen.GenerateDouble(0, 100),
-				diskSize = gen.GenerateDouble(0, 1),
+				memoryUsage = new Percent(gen.GenerateDouble(0, 100)),
+				memorySize = new DataStorage(gen.GenerateDouble(0, 1)),
+				diskUsage = new Percent(gen.GenerateDouble(0, 100)),
+				diskSize = new DataStorage(gen.GenerateDouble(0, 1)),
 			};
 		}
 	}
@@ -47,11 +48,11 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_System : UDTO_SensorBase
 	{
-		public double cpuUsage;
+		public Percent cpuUsage;
 		public double cpuSize;
-		public double memoryUsage;
-		public double memorySize;
-		public double diskUsage;
-		public double diskSize;
+		public Percent memoryUsage;
+		public DataStorage memorySize;
+		public Percent diskUsage;
+		public DataStorage diskSize;
 	}
 }

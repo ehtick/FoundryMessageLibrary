@@ -27,8 +27,8 @@ namespace IoBTMessage.Models
 			LastBiometric = new UDTO_Biometric()
 			{
 				panID = PanID,
-				temperature = 98.6,
-				heartRate = 60,
+				temperature = new Temperature(98.6),
+				heartRate = new Frequency(1),
 				stepCount = 0
 			};
 		}
