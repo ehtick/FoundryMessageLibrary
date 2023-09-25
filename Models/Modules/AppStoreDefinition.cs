@@ -50,7 +50,9 @@ public class AppStoreDefinition : DT_Hero
     public AppStoreDefinition RefreshFromHero(DT_Hero hero, string prefix)
     {
         this.name = hero.name;
-        this.title = $"{prefix} {hero.title.Replace("_", " ")}".Trim();
+		var title = hero.title ?? hero.name;
+
+		this.title = $"{prefix} {title.Replace("_", " ")}".Trim();
         this.heroImage = hero.heroImage;
 
         return this;
