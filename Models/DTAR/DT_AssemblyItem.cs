@@ -34,6 +34,16 @@ namespace IoBTMessage.Models
 			var title = GetPart().ComputeTitle();
 			return title;
 		}
+
+		public  DT_AssemblyItem ShallowCopy()
+		{
+			var result = (DT_AssemblyItem)this.MemberwiseClone();
+			if (part != null)
+				result.part = (DT_Part)part.ShallowCopy();
+			result.heroImage = this.heroImage;
+
+			return result;
+		}
 	}
 
 
