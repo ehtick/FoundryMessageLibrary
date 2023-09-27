@@ -3,21 +3,13 @@
 namespace IoBTMessage.Models
 {
 
-	public class DO_Component : DO_Title
+	public class DO_Component : DO_AssemblyItem
 	{
-		public DO_Part part { get; set; }
-		public string parentAssembly { get; set; }
-		public string systemName { get; set; }
 	}
 
 	[System.Serializable]
-	public class DT_Component : DT_Hero, ISystem
+	public class DT_Component : DT_AssemblyItem
 	{
-		public DT_Part part;
-		public string parentAssembly;
-		public string systemName;
-
-
 
 		public DT_Component() : base()
 		{
@@ -33,21 +25,6 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-		public DT_Part GetPart()
-		{
-			part ??= new DT_Part() { partNumber = name };
-			return part;
-		}
-		public string ComputeTitle()
-		{
-			var title = GetPart().ComputeTitle();
-			return title;
-		}
 	}
-
-
-
-
-
 
 }
