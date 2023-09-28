@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
+
 
 namespace IoBTMessage.Models
 {
@@ -10,14 +11,14 @@ namespace IoBTMessage.Models
 		public string systemName { get; set; }
 	}
 
+	[JsonDerivedType(typeof(DT_Component))]
+	[JsonDerivedType(typeof(DT_Sensor))]
 	[System.Serializable]
-	public abstract class DT_AssemblyItem : DT_Hero, ISystem
+	public class DT_AssemblyItem : DT_Hero, ISystem
 	{
 		public DT_Part part;
 		public string parentAssembly;
 		public string systemName;
-
-
 
 		public DT_AssemblyItem() : base()
 		{
@@ -35,7 +36,7 @@ namespace IoBTMessage.Models
 			return title;
 		}
 
-		public  DT_AssemblyItem ShallowCopy()
+		public virtual DT_AssemblyItem ShallowCopy()
 		{
 			var result = (DT_AssemblyItem)this.MemberwiseClone();
 			if (part != null)

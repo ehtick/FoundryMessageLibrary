@@ -15,7 +15,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public new DT_Component ShallowCopy()
+		public override DT_Component ShallowCopy()
 		{
 			var result = (DT_Component)this.MemberwiseClone();
 			if (part != null)

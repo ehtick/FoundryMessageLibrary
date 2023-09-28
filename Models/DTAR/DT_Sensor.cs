@@ -17,7 +17,7 @@ namespace IoBTMessage.Models
 		{
 		}
 
-		public new DT_Sensor ShallowCopy()
+		public override DT_Sensor ShallowCopy()
 		{
 			var result = (DT_Sensor)this.MemberwiseClone();
 			if (part != null)
