@@ -16,6 +16,7 @@ namespace IoBTMessage.Models
 		public string topic;
 		public string sourceGuid;
 
+		public string data;  //place holder for raw data
 
 		public List<DT_Sensor> members;
 
