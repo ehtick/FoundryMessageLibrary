@@ -21,8 +21,15 @@ namespace IoBTMessage.Models
 		{
 		}
 
-
-
+		public string GetTitle()
+		{
+			return title ?? "No Title";
+		}
+		public string SetTitle(string value)
+		{
+			title = value;
+			return GetTitle();
+		}
 		public DT_Comment AddComment(DT_Comment item)
 		{
 			if (comments == null)
