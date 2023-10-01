@@ -5,14 +5,19 @@
     <TargetFramework>net7.0</TargetFramework>
         
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <Company>SAIC IoBT team</Company>
-    <Copyright>Copyright © 2023</Copyright>
-    <AssemblyVersion>10.0.1</AssemblyVersion>
-    <Version>10.0.1</Version>
+    <Authors>Stephen Strong</Authors>
+    <Company>Stephen Strong</Company>
+    <Copyright>Copyright © 2020</Copyright>
+    <AssemblyVersion>10.0.4</AssemblyVersion>
+    <Version>10.0.4</Version>
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
-    <Title>IoBT Message Library</Title>
+    <Title>Apprentice Foundry Message Library</Title>
+    <RepositoryUrl>https://github.com/ApprenticeFoundry/FoundryRulesAndUnits</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageId>ApprenticeFoundryMessageLibrary</PackageId>
     <PlatformTarget>AnyCPU</PlatformTarget>
+
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>
 
