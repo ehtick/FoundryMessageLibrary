@@ -13,12 +13,16 @@
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
     <Title>Apprentice Foundry Message Library</Title>
-    <RepositoryUrl>https://github.com/ApprenticeFoundry/FoundryRulesAndUnits</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ApprenticeFoundry/FoundryMessageLibrary</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>ApprenticeFoundryMessageLibrary</PackageId>
     <PlatformTarget>AnyCPU</PlatformTarget>
 
     <LangVersion>11.0</LangVersion>
+
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+    <PackageProjectUrl>https://apprenticefoundry.github.io/</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -30,11 +34,12 @@
   </PropertyGroup>
     
   <ItemGroup>
+    <PackageReference Include="ApprenticeFoundryRulesAndUnits" Version="1.0.5" />
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
     
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\FoundryRulesAndUnits\FoundryRulesAndUnits.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>
