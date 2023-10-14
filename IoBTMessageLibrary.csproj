@@ -8,8 +8,8 @@
     <Authors>Stephen Strong</Authors>
     <Company>Stephen Strong</Company>
     <Copyright>Copyright © 2020</Copyright>
-    <AssemblyVersion>10.0.5</AssemblyVersion>
-    <Version>10.0.5</Version>
+    <AssemblyVersion>10.0.6</AssemblyVersion>
+    <Version>10.0.6</Version>
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
     <Title>Apprentice Foundry Message Library</Title>
@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>ApprenticeFoundryMessageLibrary</PackageId>
     <PlatformTarget>AnyCPU</PlatformTarget>
-
+ 
     <LangVersion>11.0</LangVersion>
 
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>

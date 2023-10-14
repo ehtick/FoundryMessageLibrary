@@ -9,13 +9,14 @@ namespace IoBTMessage.Models
 	{
 		public string topic { get; set; }
 		public string sourceGuid { get; set; }
+		public string sourceURL{ get; set; }
 	}
 
 	public class DT_Sensor : DT_AssemblyItem
 	{
 		public string topic;
 		public string sourceGuid;
-
+		public string sourceURL;
 		public string data;  //place holder for raw data
 
 		public List<DT_Sensor> members;
