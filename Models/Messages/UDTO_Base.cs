@@ -33,7 +33,7 @@ namespace IoBTMessage.Models
 		public string refGuid;
 		public string timeStamp;
 		public string panID;
-
+		public ControlParameters metadata;
 
 		public UDTO_Base()
 		{
@@ -126,5 +126,36 @@ namespace IoBTMessage.Models
 			return this.panID == other.panID && this.sourceGuid == other.sourceGuid;
 		}
 
+		public ControlParameters MetaData()
+		{
+			metadata ??= new ControlParameters();
+			return metadata;
+		}
+
+
+		public bool HasMetaData()
+		{
+			return metadata != null;
+		}
+
+		public bool HasMetaDataKey(string key)
+		{
+			if (metadata != null)
+			{
+				return metadata.Find(key) != null;
+			}
+			return false;
+		}
+
+		public ControlParameters AddMetaData(string key, string value)
+		{
+			MetaData().Establish(key, value);
+			return metadata;
+		}
+
+		public object GetMetaData(string key)
+		{
+			return metadata.Find(key);
+		}
 	}
 }
