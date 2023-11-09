@@ -9,5 +9,6 @@ namespace IoBTMessage.Models
 		public string username; 
 		public string password;  
 		public string database;  
+		public bool isconnected = false;  
 	}
 }
