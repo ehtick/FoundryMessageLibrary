@@ -21,6 +21,7 @@ namespace IoBTMessage.Models
 		public string name;
 		public string address;
 		public string material;
+		public string size;  //for fonts and other things
 		public string platformName;
 		public string uniqueGuid;
 		public string parentUniqueGuid;
