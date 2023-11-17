@@ -7,7 +7,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class SPEC_Body : SPEC_3D
 	{
-		public string sourceURL { get; set; }
 		public UDTO_HighResPosition position { get; set; }
 		public UDTO_BoundingBox boundingBox { get; set; }
 	}
@@ -15,7 +14,6 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Body : UDTO_3D
 	{
-		public string sourceURL;
 		public UDTO_HighResPosition position;
 		public UDTO_BoundingBox boundingBox;
 

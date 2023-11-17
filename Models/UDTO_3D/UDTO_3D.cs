@@ -10,6 +10,7 @@ namespace IoBTMessage.Models
 		public string name { get; set; }
 		public string material { get; set; }
 		public string referenceDesignation { get; set; }
+		public string sourceURL { get; set; }
 		public ControlParameters metadata { get; set; }
 	}
 	[System.Serializable]
@@ -25,7 +26,8 @@ namespace IoBTMessage.Models
 		public string platformName;
 		public string uniqueGuid;
 		public string parentUniqueGuid;
-		public string referenceDesignation;
+		public string referenceDesignation;	
+		public string sourceURL;
 		public DT_System subSystem;
 
 
