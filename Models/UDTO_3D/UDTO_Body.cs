@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class SPEC_Body : SPEC_3D
 	{
-		public string symbol { get; set; }
+		public string sourceURL { get; set; }
 		public UDTO_HighResPosition position { get; set; }
 		public UDTO_BoundingBox boundingBox { get; set; }
 	}
@@ -15,7 +15,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Body : UDTO_3D
 	{
-		public string symbol;
+		public string sourceURL;
 		public UDTO_HighResPosition position;
 		public UDTO_BoundingBox boundingBox;
 
@@ -29,7 +29,7 @@ namespace IoBTMessage.Models
 			base.CopyFrom(obj);
 
 			var body = obj as UDTO_Body;
-			this.symbol = body!.symbol;
+			this.sourceURL = body!.sourceURL;
 
 			if (this.position == null)
 			{
@@ -115,7 +115,7 @@ namespace IoBTMessage.Models
 
 		public UDTO_Body CreateGlb(string url, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
-			symbol = url;
+			sourceURL = url;
 			this.type = "Glb";
 			return EstablishBox(width, height, depth);
 		}
