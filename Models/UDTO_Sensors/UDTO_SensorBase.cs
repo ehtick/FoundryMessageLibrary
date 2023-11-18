@@ -15,11 +15,13 @@ namespace IoBTMessage.Models
 	{
 		public string referenceDesignation { get; set; }
 		public string path { get; set; }
+		public string sourceURL { get; set; }
 	}
 
 	[System.Serializable]
 	public class UDTO_SensorBase  : UDTO_Base
 	{	public string referenceDesignation;
 		public string path;
+		public string sourceURL;
 	}
 }
