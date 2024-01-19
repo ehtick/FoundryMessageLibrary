@@ -14,6 +14,7 @@ public class VersionInfo : DT_Base
         public string change;
         public string status; // PUBLISHED, FOR_REVIEW, IN_DRAFT
         public string author;
+        public string knowledgecenter;
         public string versionInfo;  //read from the spread sheet  {{revID}}/n{{change}}/n{{asOf}}/n
         public string approvedBy;
         public string filename;
