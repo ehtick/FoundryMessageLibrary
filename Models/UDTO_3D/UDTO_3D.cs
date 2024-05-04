@@ -1,3 +1,5 @@
+using FoundryRulesAndUnits.Models;
+
 namespace IoBTMessage.Models
 {
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FoundryRulesAndUnits.Extensions;
+using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models;
 
