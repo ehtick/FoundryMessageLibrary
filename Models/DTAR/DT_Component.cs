@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
 namespace IoBTMessage.Models
@@ -9,6 +10,7 @@ namespace IoBTMessage.Models
 	{
 	}
 
+	[JsonDerivedType(typeof(DT_Signal))]
 	[System.Serializable]
 	public class DT_Component : DT_AssemblyItem
 	{
