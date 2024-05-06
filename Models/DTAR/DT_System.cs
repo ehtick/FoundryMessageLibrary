@@ -187,7 +187,7 @@ namespace IoBTMessage.Models
 			var target = FindTarget(domain, address);
 			if ( target == null)
 			{
-				$"Target not found: {domain} {address}".WriteLine(System.ConsoleColor.Red);
+				$"ExtractSubSystem Target not found: {domain} {address}".WriteError();
 				return null;
 			}
 			return ExtractSubSystem(target, label);
