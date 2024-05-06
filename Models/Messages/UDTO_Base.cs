@@ -1,5 +1,6 @@
 using System;
 using FoundryRulesAndUnits.Extensions;
+using FoundryRulesAndUnits.Models;
 using IoBTMessage.Extensions;
 
 // https://khalidabuhakmeh.com/convert-a-csharp-object-to-almost-any-format

@@ -40,7 +40,7 @@ namespace IoBTMessage.Models
 			}
 			else
 			{
-				$"AddAssetReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
+				$"AddAssetReference Duplicate Item".WriteSuccess();
 			}
 
 			return item;
@@ -56,7 +56,7 @@ namespace IoBTMessage.Models
 			}
 			else
 			{
-				$"AddHeroReference Duplicate Item".WriteLine(System.ConsoleColor.Green);
+				$"AddHeroReference Duplicate Item".WriteSuccess();
 			}
 			return item;
 		}
