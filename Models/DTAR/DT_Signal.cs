@@ -5,6 +5,7 @@ namespace IoBTMessage.Models
 {
 	public enum SignalElementType
 	{
+		Unknown,
 		Equipment,
 		Port,
 		Link,
@@ -14,7 +15,7 @@ namespace IoBTMessage.Models
 	public class DO_Signal : DT_Component
 	{
 		public string signal { get; set; }
-		public SignalElementType signalElementType { get; set; }
+		public SignalElementType signalElementType { get; set; } = SignalElementType.Unknown;
 
 		public string StartPortReference { get; set; }
 		public string FinishPortReference { get; set; }
@@ -24,7 +25,7 @@ namespace IoBTMessage.Models
 	public class DT_Signal : DT_Component, ISystem
 	{
 		public string signal;
-		public SignalElementType signalElementType;
+		public SignalElementType signalElementType = SignalElementType.Unknown;
 
 		public string StartPortReference;
 		public string FinishPortReference;
@@ -39,6 +40,50 @@ namespace IoBTMessage.Models
 			var result = (DT_Signal)this.MemberwiseClone();
 
 			return result;
+		}
+
+		public DT_Signal MarkAsEquipment()
+		{
+			signalElementType = SignalElementType.Equipment;
+			return this;
+		}
+
+		public DT_Signal MarkAsPort()
+		{
+			signalElementType = SignalElementType.Port;
+			return this;
+		}
+
+		public DT_Signal MarkAsLink()
+		{
+			signalElementType = SignalElementType.Link;
+			return this;
+		}
+
+		public DT_Signal MarkAsHarness()
+		{
+			signalElementType = SignalElementType.Harness;
+			return this;
+		}
+
+		public bool IsEquipment()
+		{
+			return signalElementType == SignalElementType.Equipment;
+		}
+
+		public bool IsPort()
+		{
+			return signalElementType == SignalElementType.Port;
+		}
+
+		public bool IsLink()
+		{
+			return signalElementType == SignalElementType.Link;
+		}
+
+		public bool IsHarness()
+		{
+			return signalElementType == SignalElementType.Harness;
 		}
 
 	}
