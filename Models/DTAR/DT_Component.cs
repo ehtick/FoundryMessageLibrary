@@ -21,7 +21,10 @@ namespace IoBTMessage.Models
 		{
 		}
 
-
+		public void ClearMembers()
+		{
+			members = null;
+		}
 		public override List<DT_Hero> Children()
 		{
 			if (members == null) return base.Children();

@@ -18,9 +18,9 @@ public class ModuleDefinition : DT_Title
     public List<DT_Component> components;
     public List<DT_Component> subs;
     public List<DT_Sensor> sensors;
-	public List<DT_Signal> equipment;
-	public List<DT_Signal> cables;
-    public List<DT_AssetFile> assetfiles;
+	public List<DT_Signal> netlistNodes;
+	public List<DT_Signal> netlistLinks;
+    public List<DT_AssetFile> assetFiles;
     public List<DT_AssetReference> assetRefs;
     public DT_System system;
     public UDTO_World world;
@@ -32,7 +32,7 @@ public class ModuleDefinition : DT_Title
     public ModuleDefinition AfterCreation()
     {
         info.stepCount = steps == null ? 0 : steps.Count;
-        info.documentCount =  assetfiles == null ? 0 : assetfiles.Count;
+        info.documentCount =  assetFiles == null ? 0 : assetFiles.Count;
 
         if (process != null) {
             var list = process.CollectComments(new List<DT_Comment>());
