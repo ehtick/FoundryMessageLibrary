@@ -44,7 +44,7 @@ namespace IoBTMessage.Models
 		{
 			children ??= new List<DT_Signal>();
 			child.parentGuid = this.guid;
-			members.Add(child);
+			children.Add(child);
 			return child;
 		}
 
