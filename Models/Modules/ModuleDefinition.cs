@@ -18,8 +18,8 @@ public class ModuleDefinition : DT_Title
     public List<DT_Component> components;
     public List<DT_Component> subs;
     public List<DT_Sensor> sensors;
-	public List<DT_Signal> netlistNodes;
-	public List<DT_Signal> netlistLinks;
+	public List<DT_Component> netlistNodes;
+	public List<DT_Component> netlistLinks;
     public List<DT_AssetFile> assetFiles;
     public List<DT_AssetReference> assetRefs;
     public DT_System system;

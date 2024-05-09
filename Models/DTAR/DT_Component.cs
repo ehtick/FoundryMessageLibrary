@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
+using FoundryRulesAndUnits.Extensions;
 
 namespace IoBTMessage.Models
 {
@@ -10,25 +11,29 @@ namespace IoBTMessage.Models
 	{
 	}
 
-	[JsonDerivedType(typeof(DT_Signal))]
 	[System.Serializable]
 	public class DT_Component : DT_AssemblyItem
 	{
-
+		public string category;
 		public List<DT_Component> members;
 
 		public DT_Component() : base()
 		{
+		}
+		public override List<DT_Hero> Children()
+		{
+			if (members == null) return base.Children();
+			return members.Select(item => (DT_Hero)item).ToList();
 		}
 
 		public void ClearMembers()
 		{
 			members = null;
 		}
-		public override List<DT_Hero> Children()
+		public List<DT_Component> GetMembers()
 		{
-			if (members == null) return base.Children();
-			return members.Select(item => (DT_Hero)item).ToList();
+			members ??= new List<DT_Component>();
+			return members;
 		}
 
 		public DT_Component AddMember(DT_Component child)
@@ -53,6 +58,16 @@ namespace IoBTMessage.Models
 		{
 			var result = members?.Select(obj => obj.ShallowCopy()).ToList();
 			return result;
+		}
+
+		public string SetCatagory(string elementType)
+		{
+			category = elementType.ToUpper();
+			return category;
+		}
+		public bool IsCatagory(string elementType)
+		{
+			return category.Matches(elementType);
 		}
 
 	}
