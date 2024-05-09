@@ -5,18 +5,6 @@ using FoundryRulesAndUnits.Extensions;
 
 namespace IoBTMessage.Models
 {
-	// public enum SignalElementType
-	// {
-	// 	Unknown,
-	// 	Rack,
-	// 	Equipment,
-	// 	Tee,
-	// 	Port,
-	// 	Cable,
-	// 	Wire,
-	// 	Harness
-	// }
-
 	public class DO_Signal : DT_Component
 	{
 		public string signal { get; set; }
@@ -36,8 +24,38 @@ namespace IoBTMessage.Models
 		public string startPortReference;
 		public string finishPortReference;
 
+		public List<DT_Signal> children;
+
 		public DT_Signal()
 		{
+		}
+
+		public void ClearChildren()
+		{
+			children = null;
+		}
+		public List<DT_Signal> GetChildren()
+		{
+			children ??= new List<DT_Signal>();
+			return children;
+		}
+
+		public DT_Signal AddChild(DT_Signal child)
+		{
+			children ??= new List<DT_Signal>();
+			child.parentGuid = this.guid;
+			members.Add(child);
+			return child;
+		}
+
+		public string SetElement(string elementType)
+		{
+			signalElementType = elementType.ToUpper();
+			return signalElementType;
+		}
+		public bool IsElement(string elementType)
+		{
+			return signalElementType.Matches(elementType);
 		}
 
 
@@ -90,15 +108,7 @@ namespace IoBTMessage.Models
 			SetElement("Harness");
 			return this;
 		}
-		public string SetElement(string elementType)
-		{
-			signalElementType = elementType.ToUpper();
-			return signalElementType;
-		}
-		public bool IsElement(string elementType)
-		{
-			return signalElementType.Matches(elementType);
-		}
+
 
 
 		public bool IsPort()
