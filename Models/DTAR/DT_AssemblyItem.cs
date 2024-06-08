@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using FoundryRulesAndUnits.Models;
 
 
 namespace IoBTMessage.Models
@@ -6,7 +7,7 @@ namespace IoBTMessage.Models
 
 	public class DO_AssemblyItem : DO_Title
 	{
-		public DO_Part part { get; set; }
+		//public DO_Part part { get; set; }
 		public string parentAssembly { get; set; }
 		public string systemName { get; set; }
 	}

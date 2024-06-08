@@ -1,6 +1,7 @@
 // this is a tool to load/unload knowledge modules that define projects
 
 using System.Collections.Generic;
+using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models;
 

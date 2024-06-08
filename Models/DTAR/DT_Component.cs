@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
 using FoundryRulesAndUnits.Extensions;
+using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models
 {

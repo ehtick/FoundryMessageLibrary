@@ -1,3 +1,5 @@
+using FoundryRulesAndUnits.Models;
+
 namespace IoBTMessage.Models
 {
 
@@ -5,7 +7,7 @@ namespace IoBTMessage.Models
 	public class DT_HeroReference : DT_Title, IDT_Reference
 	{
 		public DT_Part part;
-		public DT_Promise promise;
+		//public DT_Promise promise;
 		public DT_Hero hero;
 
 		public DT_HeroReference() : base()
@@ -22,8 +24,8 @@ namespace IoBTMessage.Models
 		{
 			var title = part.ComputeTitle();
 
-			if (promise != null)
-				title = $"[{promise.key}|{title}]";
+			// if (promise != null)
+			// 	title = $"[{promise.key}|{title}]";
 
 			return title;
 		}

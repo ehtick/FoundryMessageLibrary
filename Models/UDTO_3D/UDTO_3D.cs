@@ -31,6 +31,7 @@ namespace IoBTMessage.Models
 		public string referenceDesignation;	
 		public string sourceURL;
 		public DT_System subSystem;
+		public DT_Part part;
 
 
 		public UDTO_3D(): base()
@@ -44,6 +45,7 @@ namespace IoBTMessage.Models
 			type = obj.type;
 			name = obj.name;
 			address = obj.address;
+			part = obj.part;
 			return this;
 		}
 

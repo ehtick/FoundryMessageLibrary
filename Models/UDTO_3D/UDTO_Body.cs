@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FoundryRulesAndUnits.Models;
 
 namespace IoBTMessage.Models
@@ -17,11 +18,34 @@ namespace IoBTMessage.Models
 		public UDTO_HighResPosition position;
 		public UDTO_BoundingBox boundingBox;
 
+		public string category;
+		public List<UDTO_Body> members;
 
 		public UDTO_Body() : base()
 		{
 		}
 
+		public bool HasMembers()
+		{
+			return members != null && members.Count > 0;
+		}
+		public void ClearMembers()
+		{
+			members = null;
+		}
+		public List<UDTO_Body> GetMembers()
+		{
+			members ??= new List<UDTO_Body>();
+			return members;
+		}
+
+		public UDTO_Body AddMember(UDTO_Body child)
+		{
+			members ??= new List<UDTO_Body>();
+			child.parentUniqueGuid = this.address;
+			members.Add(child);
+			return child;
+		}
 		public override UDTO_3D CopyFrom(UDTO_3D obj)
 		{
 			base.CopyFrom(obj);
