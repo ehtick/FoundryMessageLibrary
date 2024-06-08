@@ -42,7 +42,7 @@ namespace IoBTMessage.Models
 		public UDTO_Body AddMember(UDTO_Body child)
 		{
 			members ??= new List<UDTO_Body>();
-			child.parentUniqueGuid = this.address;
+			child.parentUniqueGuid = this.uniqueGuid;
 			members.Add(child);
 			return child;
 		}

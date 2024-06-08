@@ -22,13 +22,12 @@ namespace IoBTMessage.Models
 		public bool visible = true;
 		public string type;
 		public string name;
-		public string address;
 		public string material;
 		public string size;  //for fonts and other things
 		public string platformName;
 		public string uniqueGuid;
 		public string parentUniqueGuid;
-		public string referenceDesignation;	
+
 		public string sourceURL;
 		public DT_System subSystem;
 		public DT_Part part;
@@ -44,14 +43,21 @@ namespace IoBTMessage.Models
 			uniqueGuid = obj.uniqueGuid;
 			type = obj.type;
 			name = obj.name;
-			address = obj.address;
 			part = obj.part;
 			return this;
 		}
 
+		public DT_Part GetPart()
+		{
+			part ??= new DT_Part() {
+					partNumber = name,
+					version = "1.0"
+				};
+			return part;
+		}
+
 		public DT_Hero AsHero()
 		{
-
 			var hero = new DT_Hero()
 			{
 				guid = uniqueGuid,
@@ -63,10 +69,10 @@ namespace IoBTMessage.Models
 
 		public string partName()
 		{
-			if ( string.IsNullOrEmpty(referenceDesignation))
+			if ( part == null)
 				return name;
 
-			return $"{name}_{referenceDesignation}";
+			return $"{name}_{part.structureReference}";
 		}
 		public bool isDelete()
 		{
