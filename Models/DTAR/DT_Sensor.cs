@@ -6,14 +6,14 @@ using FoundryRulesAndUnits.Models;
 namespace IoBTMessage.Models
 {
 
-	public class DO_Sensor : DO_AssemblyItem
+	public class DO_Sensor : DO_Ingredient
 	{
 		public string topic { get; set; }
 		public string sourceGuid { get; set; }
 		public string sourceURL{ get; set; }
 	}
 
-	public class DT_Sensor : DT_AssemblyItem
+	public class DT_Sensor : DT_Ingredient
 	{
 		public string topic;
 		public string sourceGuid;

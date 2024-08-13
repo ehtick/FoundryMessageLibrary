@@ -8,14 +8,13 @@ using FoundryRulesAndUnits.Models;
 namespace IoBTMessage.Models
 {
 
-	public class DO_Component : DO_AssemblyItem
+	public class DO_Component : DO_Ingredient
 	{
 	}
 
 	[System.Serializable]
-	public class DT_Component : DT_AssemblyItem
+	public class DT_Component : DT_Ingredient
 	{
-		public string category;
 		public List<DT_Component> members;
 
 		public DT_Component() : base()
@@ -61,15 +60,7 @@ namespace IoBTMessage.Models
 			return result;
 		}
 
-		public string SetCatagory(string elementType)
-		{
-			category = elementType.ToUpper();
-			return category;
-		}
-		public bool IsCatagory(string elementType)
-		{
-			return category.Matches(elementType);
-		}
+
 
 	}
 

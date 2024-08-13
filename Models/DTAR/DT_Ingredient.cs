@@ -1,27 +1,28 @@
 ﻿using System.Text.Json.Serialization;
 using FoundryRulesAndUnits.Models;
-
+using FoundryRulesAndUnits.Extensions;
 
 namespace IoBTMessage.Models
 {
 
-	public class DO_AssemblyItem : DO_Title
+	public class DO_Ingredient : DT_Hero
 	{
 		//public DO_Part part { get; set; }
-		public string parentAssembly { get; set; }
+		public string parentName { get; set; }
 		public string systemName { get; set; }
 	}
 
 	[JsonDerivedType(typeof(DT_Component))]
 	[JsonDerivedType(typeof(DT_Sensor))]
 	[System.Serializable]
-	public class DT_AssemblyItem : DT_Hero, ISystem
+	public class DT_Ingredient : DT_Hero, ISystem
 	{
 		public DT_Part part;
-		public string parentAssembly;
+		public string parentName;
 		public string systemName;
+		public string category;
 
-		public DT_AssemblyItem() : base()
+		public DT_Ingredient() : base()
 		{
 		}
 
@@ -37,14 +38,24 @@ namespace IoBTMessage.Models
 			return title;
 		}
 
-		public virtual DT_AssemblyItem ShallowCopy()
+		public virtual DT_Ingredient ShallowCopy()
 		{
-			var result = (DT_AssemblyItem)this.MemberwiseClone();
+			var result = (DT_Ingredient)this.MemberwiseClone();
 			if (part != null)
 				result.part = (DT_Part)part.ShallowCopy();
 			result.heroImage = this.heroImage;
 
 			return result;
+		}
+
+		public string SetCatagory(string elementType)
+		{
+			category = elementType.ToUpper();
+			return category;
+		}
+		public bool IsCatagory(string elementType)
+		{
+			return category.Matches(elementType);
 		}
 	}
 

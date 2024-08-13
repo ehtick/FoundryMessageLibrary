@@ -9,7 +9,7 @@ using FoundryRulesAndUnits.Extensions;
 
 namespace IoBTMessage.Models;
 
-public class DT_ComponentTree<V> : DT_Title where V : DT_AssemblyItem
+public class DT_ComponentTree<V> : DT_Title where V : DT_Ingredient
 {
     public V? item = null;
     public List<DT_ComponentTree<V>>? children = null;
@@ -147,7 +147,7 @@ public class DT_ComponentTree<V> : DT_Title where V : DT_AssemblyItem
             if ( newestChild != null)
             {
                 newestChild.guid = Guid.NewGuid().ToString();
-                newestChild.parentAssembly = this.item?.part.partNumber;
+                newestChild.parentName = this.item?.part.partNumber;
 
 				var more = root.SourceChildren(false);
                 var node = new DT_ComponentTree<V>(newestChild, more!, children.Count + 1, level + 1);
