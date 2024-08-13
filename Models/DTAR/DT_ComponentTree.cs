@@ -74,6 +74,7 @@ public class DT_ComponentTree<V> : DT_Title where V : DT_Ingredient
         var myPart = item?.part;
         var otherPart = node.item?.part;
 		if ( myPart == null || otherPart == null) return false;
+		if ( myPart.partNumber == null || otherPart.partNumber == null) return false;
 
         return myPart.partNumber.Matches(otherPart.partNumber);
     }
