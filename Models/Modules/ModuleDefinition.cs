@@ -21,6 +21,8 @@ public class ModuleDefinition : DT_Title
     public List<DT_Sensor> sensors;
 	public List<DT_Component> netlistNodes;
 	public List<DT_Component> netlistLinks;
+    public List<DT_Component> circuitBlocks;
+    public List<DT_Component> urls;
     public List<DT_AssetFile> assetFiles;
     public List<DT_AssetReference> assetRefs;
     public DT_System system;

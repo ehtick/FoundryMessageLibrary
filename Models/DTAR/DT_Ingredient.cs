@@ -43,7 +43,11 @@ namespace IoBTMessage.Models
 			var result = (DT_Ingredient)this.MemberwiseClone();
 			if (part != null)
 				result.part = (DT_Part)part.ShallowCopy();
+				
 			result.heroImage = this.heroImage;
+			result.parentName = this.parentName;
+			result.systemName = this.systemName;
+			result.category = this.category;
 
 			return result;
 		}
