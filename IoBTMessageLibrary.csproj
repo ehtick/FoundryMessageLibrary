@@ -8,8 +8,8 @@
     <Authors>Stephen Strong</Authors>
     <Company>Stephen Strong</Company>
     <Copyright>Copyright © 2020</Copyright>
-    <AssemblyVersion>15.0.0</AssemblyVersion>
-    <Version>15.0.0</Version>
+    <AssemblyVersion>15.3.0</AssemblyVersion>
+    <Version>15.3.0</Version>
     <IsPackable>true</IsPackable>
     <Nullable>disable</Nullable>
     <Title>Apprentice Foundry Message Library</Title>
@@ -34,7 +34,7 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="ApprenticeFoundryRulesAndUnits" Version="4.0.0" />
+    <PackageReference Include="ApprenticeFoundryRulesAndUnits" Version="4.4.0" />
      <!-- <ProjectReference Include="..\FoundryRulesAndUnits\FoundryRulesAndUnits.csproj" />  -->
     <!-- <PackageReference Include="System.Text.Json" Version="8.0.4" /> -->
   </ItemGroup>
