@@ -25,6 +25,8 @@ namespace IoBTMessage.Models
 	{
 		public string title { get; set; }
 		public string description { get; set; }
+		public string displayName { get; set; }
+		public string commonName { get; set; }
 	}
 
 	[System.Serializable]
@@ -32,7 +34,8 @@ namespace IoBTMessage.Models
 	{
 		public string title;
 		public string description;
-
+		public string displayName;
+		public string commonName;
 
 		public DT_Searchable() : base()
 		{
