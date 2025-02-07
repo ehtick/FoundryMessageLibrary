@@ -23,8 +23,6 @@ namespace IoBTMessage.Models
 		public string type;
 		public string name;
 		public string material;
-		public string size;  //for fonts and other things
-		public string platformName;
 		public string uniqueGuid;
 		public string parentUniqueGuid;
 
@@ -39,7 +37,6 @@ namespace IoBTMessage.Models
 		
 		public virtual UDTO_3D CopyFrom(UDTO_3D obj)
 		{
-			platformName = obj.platformName;
 			uniqueGuid = obj.uniqueGuid;
 			type = obj.type;
 			name = obj.name;

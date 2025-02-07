@@ -16,7 +16,7 @@ namespace IoBTMessage.Models
 		public UDTO_Pathway() : base()
 		{
 			uniqueGuid = Guid.NewGuid().ToString();
-			type = UDTO_Base.asTopic<UDTO_Platform>();
+			type = UDTO_Base.asTopic<UDTO_Pathway>();
 		}
 
 

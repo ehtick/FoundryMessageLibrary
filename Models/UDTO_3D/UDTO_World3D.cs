@@ -16,7 +16,6 @@ namespace IoBTMessage.Models
 		public string lengthUnits = "m";
 		public string angleUnits = "r";
 
-		public List<UDTO_Platform> platforms = new();
 		public List<UDTO_Body> bodies = new();
 		public List<UDTO_Pathway> pathways = new();
 		public List<UDTO_Label> labels = new();
@@ -33,7 +32,6 @@ namespace IoBTMessage.Models
 			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
 			if (typeof(T) == typeof(UDTO_Pathway)) return pathways as List<T>;
 			if (typeof(T) == typeof(UDTO_Datum)) return datums as List<T>;
-			if (typeof(T) == typeof(UDTO_Platform)) return platforms as List<T>;
 			if (typeof(T) == typeof(UDTO_Relationship)) return relationships as List<T>;
 
 			return null;
@@ -66,7 +64,6 @@ namespace IoBTMessage.Models
 			var found = Activator.CreateInstance<T>() as T;
 			found.name = name;
 			found.panID = panID;
-			found.platformName = platformName;
 			found.uniqueGuid = Guid.NewGuid().ToString();
 			return found;
 		}
@@ -86,7 +83,6 @@ namespace IoBTMessage.Models
 
 		public UDTO_World Flush()
 		{
-			platforms.Clear();
 			bodies.Clear();
 			pathways.Clear();
 			datums.Clear();
@@ -99,7 +95,6 @@ namespace IoBTMessage.Models
 
 		public UDTO_World FillWorldFromWorld(UDTO_World world)
 		{
-			platforms.AddRange(world.platforms);
 			bodies.AddRange(world.bodies);
 			pathways.AddRange(world.pathways);
 			labels.AddRange(world.labels);
@@ -109,7 +104,6 @@ namespace IoBTMessage.Models
 
 		public UDTO_World RemoveDuplicates()
 		{
-			platforms = platforms.DistinctBy(i => i.uniqueGuid).ToList();
 			bodies = bodies.DistinctBy(i => i.uniqueGuid).ToList();
 			pathways = pathways.DistinctBy(i => i.uniqueGuid).ToList();
 			labels = labels.DistinctBy(i => i.uniqueGuid).ToList();

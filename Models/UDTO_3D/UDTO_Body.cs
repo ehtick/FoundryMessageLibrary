@@ -15,6 +15,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Body : UDTO_3D
 	{
+		public string text;
 		public UDTO_HighResPosition position;
 		public UDTO_BoundingBox boundingBox;
 
