@@ -7,7 +7,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class SPEC_Label : SPEC_Body
 	{
-
+		public string size { get; set; }
 		public List<string> details { get; set; }
 		public string targetGuid { get; set; }
 	}
@@ -15,7 +15,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Label : UDTO_Body
 	{
-
+		public string size;
 		public List<string> details;
 		public string targetGuid;
 
@@ -29,7 +29,8 @@ namespace IoBTMessage.Models
 			base.CopyFrom(obj);
 
 			var label = obj as UDTO_Label;
-			this.text = label.text;
+
+			this.size = label.size;
 			this.details = label.details;
 			this.targetGuid = label.targetGuid;	
 					

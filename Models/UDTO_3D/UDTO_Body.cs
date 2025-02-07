@@ -53,6 +53,7 @@ namespace IoBTMessage.Models
 
 			var body = obj as UDTO_Body;
 			this.sourceURL = body!.sourceURL;
+			this.text = body.text;
 
 			if (this.position == null)
 			{
