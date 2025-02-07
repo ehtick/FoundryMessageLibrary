@@ -11,7 +11,7 @@ namespace IoBTMessage.Models
 	[System.Serializable]
 	public class UDTO_Pathway : UDTO_3D
 	{
-		public List<UDTO_Datum> datums = new();
+		public List<UDTO_Body> datums = new();
 
 		public UDTO_Pathway() : base()
 		{
@@ -20,18 +20,18 @@ namespace IoBTMessage.Models
 		}
 
 
-		public UDTO_Datum FindDatum(string name)
+		public UDTO_Body FindDatum(string name)
 		{
 			var found = datums.Where( obj => obj.name.Matches(name)).FirstOrDefault();
 			return found;
 		}
 
-		public UDTO_Datum EstablishDatum(string name, double x = 0.0, double y = 0.0, double z = 0.0)
+		public UDTO_Body EstablishDatum(string name, double x = 0.0, double y = 0.0, double z = 0.0)
 		{
 			var datum = FindDatum(name);
 			if (datum == null)
 			{
-				datum = new UDTO_Datum() {
+				datum = new UDTO_Body() {
 					name = name,
 					position = new UDTO_HighResPosition(x,y,z),
 				};

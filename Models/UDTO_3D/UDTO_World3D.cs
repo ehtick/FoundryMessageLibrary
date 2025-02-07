@@ -19,7 +19,6 @@ namespace IoBTMessage.Models
 		public List<UDTO_Body> bodies = new();
 		public List<UDTO_Pathway> pathways = new();
 		public List<UDTO_Label> labels = new();
-		public List<UDTO_Datum> datums = new();
 		public List<UDTO_Relationship> relationships = new();
 
 		public UDTO_World() : base()
@@ -31,7 +30,6 @@ namespace IoBTMessage.Models
 			if (typeof(T) == typeof(UDTO_Body)) return bodies as List<T>;
 			if (typeof(T) == typeof(UDTO_Label)) return labels as List<T>;
 			if (typeof(T) == typeof(UDTO_Pathway)) return pathways as List<T>;
-			if (typeof(T) == typeof(UDTO_Datum)) return datums as List<T>;
 			if (typeof(T) == typeof(UDTO_Relationship)) return relationships as List<T>;
 
 			return null;
@@ -85,7 +83,6 @@ namespace IoBTMessage.Models
 		{
 			bodies.Clear();
 			pathways.Clear();
-			datums.Clear();
 			labels.Clear();
 			relationships.Clear();
 			return this;
@@ -123,41 +120,13 @@ namespace IoBTMessage.Models
 		}
 
 
-		public UDTO_Body CreateCylinder(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
+
+		public UDTO_Body CreateBoundingBox(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
 		{
 			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateCylinder(obj.name, width, height, depth);
+			return result.EstablishBox(width, height, depth);
 		}
 
-		public UDTO_Body CreateBlock(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateBox(obj.name, width, height, depth);
-		}
-
-		public UDTO_Body CreateSphere(DT_Base obj, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateSphere(obj.name, width, height, depth);
-		}
-
-		public UDTO_Body CreateGlb(DT_Base obj, string url, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			var result = CreateUsingDTBASE<UDTO_Body>(obj);
-			return result.CreateGlb(url, width, height, depth);
-		}
-
-		public UDTO_Label CreateLabel(DT_Base obj, string text, double xLoc = 0.0, double yLoc = 0.0, double zLoc = 0.0)
-		{
-			var result = CreateUsingDTBASE<UDTO_Label>(obj);
-			return result.CreateTextAt(text, xLoc, yLoc, zLoc);
-		}
-		public UDTO_Pathway CreatePathway(DT_Base obj, List<UDTO_Datum> datums)
-		{
-			var result = CreateUsingDTBASE<UDTO_Pathway>(obj);
-			result.datums = datums;
-			return result;
-		}
 
 	}
 }

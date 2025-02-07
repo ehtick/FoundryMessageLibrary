@@ -107,7 +107,7 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public UDTO_Body EstablishPiv(double px = 0.0, double py = 0.0, double pz = 0.0)
+		public UDTO_Body EstablishPivot(double px = 0.0, double py = 0.0, double pz = 0.0)
 		{
 			boundingBox ??= new UDTO_BoundingBox();
 
@@ -115,33 +115,6 @@ namespace IoBTMessage.Models
 			return this;
 		}
 
-		public UDTO_Body CreateBox(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			this.type = "Box";
-			this.name = name;
-			return EstablishBox(width, height, depth);
-		}
-
-		public UDTO_Body CreateCylinder(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			this.type = "Cylinder";
-			this.name = name;
-			return EstablishBox(width, height, depth);
-		}
-
-		public UDTO_Body CreateSphere(string name, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			this.type = "Sphere";
-			this.name = name;
-			return EstablishBox(width, height, depth);
-		}
-
-		public UDTO_Body CreateGlb(string url, double width = 1.0, double height = 1.0, double depth = 1.0)
-		{
-			sourceURL = url;
-			this.type = "Glb";
-			return EstablishBox(width, height, depth);
-		}
 	}
 
 }
