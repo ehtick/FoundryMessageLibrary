@@ -10,11 +10,18 @@ namespace IoBTMessage.Models
 
 	public class DO_Component : DO_Ingredient
 	{
+		public string text { get; set; }
+		public HighResPosition position { get; set; }
+		public BoundingBox boundingBox { get; set; }
 	}
 
 	[System.Serializable]
 	public class DT_Component : DT_Ingredient
 	{
+		public string text;
+		public HighResPosition position;
+		public BoundingBox boundingBox;
+
 		public List<DT_Component> members;
 
 		public DT_Component() : base()
