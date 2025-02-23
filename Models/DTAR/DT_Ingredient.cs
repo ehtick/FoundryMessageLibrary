@@ -12,7 +12,7 @@ namespace IoBTMessage.Models
 		public string systemName { get; set; }
 	}
 
-	[JsonDerivedType(typeof(DT_Geometry))]
+	//[JsonDerivedType(typeof(DT_Geometry))]
 	[JsonDerivedType(typeof(DT_Component))]
 	[JsonDerivedType(typeof(DT_Sensor))]
 	[System.Serializable]
